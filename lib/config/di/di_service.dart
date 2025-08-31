@@ -45,78 +45,78 @@ import 'package:magic_rewards/features/top_users/data/repository/top_users_repos
 import 'package:magic_rewards/features/top_users/domain/repository/top_users_repository.dart';
 import 'package:magic_rewards/features/top_users/presentation/blocs/top_users_bloc/top_users_bloc.dart';
 
-final sl = GetIt.instance;
+final di = GetIt.instance;
 
-/// This class [ServicesLocator] is define to inject values and variables (Objects) into memory when the application is opened,
+/// This class [DIServices] is define to inject values and variables (Objects) into memory when the application is opened,
 /// those values will remain stored and preserved for direct access in randomaccess memory according to the specified conditions
 /// and situations.
 ///
 /// The concept of injection depends on dependency injection, using the get_it library to provide this type of service,
 ///
-/// it is necessary You have to call [ServicesLocator.init] in main.dart, main finction, before [runApp]
+/// it is necessary You have to call [DIServices.init] in main.dart, main finction, before [runApp]
 ///
 /// 1- to inject Your Bloc object use [registerFactory] function
-///    Ex:   sl.registerFactory(() => YourBloc(sl()));
+///    Ex:   di.registerFactory(() => YourBloc(di()));
 /// 2- to inject Your Repository, Data Source object use [registerLazySingleton] function
-///    Ex:   sl.registerLazySingleton(() => YourDataSource());
-///    Ex:   sl.registerLazySingleton(() => YourDataSource());
+///    Ex:   di.registerLazySingleton(() => YourDataSource());
+///    Ex:   di.registerLazySingleton(() => YourDataSource());
 ///
-/// you can get any Object you inject by call [sl]
-///    Ex: sl<YourBloc>();
+/// you can get any Object you inject by call [di]
+///    Ex: di<YourBloc>();
 
 // TODO: add (BLOCs , REPOSITORIES , DATA SOURCES)
-class ServicesLocator {
-  static ServicesLocator? _instance;
+class DIServices {
+  static DIServices? _instance;
 
-  ServicesLocator._();
+  DIServices._();
 
-  factory ServicesLocator() => _instance ??= ServicesLocator._();
+  factory DIServices() => _instance ??= DIServices._();
 
   void init() {
     //// BLOCS
-    sl.registerFactory(() => LoginBloc(sl()));
-    sl.registerFactory(() => RegisterBloc(sl()));
-    sl.registerFactory(() => HomeBloc(sl()));
-    sl.registerFactory(() => LiveOffersBloc(sl()));
-    sl.registerFactory(() => PayoutsBloc(sl()));
-    sl.registerFactory(() => RedeemBloc(sl()));
-    sl.registerFactory(() => OrdersBloc(sl()));
-    sl.registerFactory(() => TransactionsBloc(sl()));
-    sl.registerFactory(() => TopUsersBloc(sl()));
-    sl.registerFactory(() => ProfileBloc(sl()));
-    sl.registerFactory(() => DeleteAccountBloc(sl()));
-    sl.registerFactory(() => CheckEmailBloc(sl()));
-    sl.registerFactory(() => TasksBloc(sl()));
-    sl.registerFactory(() => CommentsBloc(sl()));
-    sl.registerFactory(() => DoTaskBloc(sl()));
-    sl.registerFactory(() => TasksOrdersBloc(sl()));
+    di.registerFactory(() => LoginBloc(di()));
+    di.registerFactory(() => RegisterBloc(di()));
+    di.registerFactory(() => HomeBloc(di()));
+    di.registerFactory(() => LiveOffersBloc(di()));
+    di.registerFactory(() => PayoutsBloc(di()));
+    di.registerFactory(() => RedeemBloc(di()));
+    di.registerFactory(() => OrdersBloc(di()));
+    di.registerFactory(() => TransactionsBloc(di()));
+    di.registerFactory(() => TopUsersBloc(di()));
+    di.registerFactory(() => ProfileBloc(di()));
+    di.registerFactory(() => DeleteAccountBloc(di()));
+    di.registerFactory(() => CheckEmailBloc(di()));
+    di.registerFactory(() => TasksBloc(di()));
+    di.registerFactory(() => CommentsBloc(di()));
+    di.registerFactory(() => DoTaskBloc(di()));
+    di.registerFactory(() => TasksOrdersBloc(di()));
 
-    sl.registerLazySingleton(() => AppConfigBloc());
+    di.registerLazySingleton(() => AppConfigBloc());
 
     //// REPOSITORIES
-    sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(sl()));
-    sl.registerLazySingleton<HomeRepository>(() => HomeRepositoryImp(sl()));
-    sl.registerLazySingleton<LiveOffersRepository>(
-        () => LiveOffersRepositoryImp(sl()));
-    sl.registerLazySingleton<RewardsRepository>(
-        () => RewardsRepositoryImp(sl()));
-    sl.registerLazySingleton<TopUsersRepository>(
-        () => TopUsersRepositoryImp(sl()));
-    sl.registerLazySingleton<ProfileRepository>(
-        () => ProfileRepositoryImp(sl()));
-    sl.registerLazySingleton<TasksRepository>(() => TasksRepositoryImp(sl()));
+    di.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(di()));
+    di.registerLazySingleton<HomeRepository>(() => HomeRepositoryImp(di()));
+    di.registerLazySingleton<LiveOffersRepository>(
+        () => LiveOffersRepositoryImp(di()));
+    di.registerLazySingleton<RewardsRepository>(
+        () => RewardsRepositoryImp(di()));
+    di.registerLazySingleton<TopUsersRepository>(
+        () => TopUsersRepositoryImp(di()));
+    di.registerLazySingleton<ProfileRepository>(
+        () => ProfileRepositoryImp(di()));
+    di.registerLazySingleton<TasksRepository>(() => TasksRepositoryImp(di()));
 
     //// DATA SOURCES
-    sl.registerLazySingleton<AuthDataSource>(() => AuthRemoteDataSourceImp());
-    sl.registerLazySingleton<HomeDataSource>(() => HomeRemoteDataSourceImp());
-    sl.registerLazySingleton<LiveOffersDataSource>(
+    di.registerLazySingleton<AuthDataSource>(() => AuthRemoteDataSourceImp());
+    di.registerLazySingleton<HomeDataSource>(() => HomeRemoteDataSourceImp());
+    di.registerLazySingleton<LiveOffersDataSource>(
         () => LiveOffersRemoteDataSourceImp());
-    sl.registerLazySingleton<RewardsDataSource>(
+    di.registerLazySingleton<RewardsDataSource>(
         () => RewardsRemoteDataSourceImp());
-    sl.registerLazySingleton<TopUsersDataSource>(
+    di.registerLazySingleton<TopUsersDataSource>(
         () => TopUsersRemoteDataSourceImp());
-    sl.registerLazySingleton<ProfileDataSource>(
+    di.registerLazySingleton<ProfileDataSource>(
         () => ProfileRemoteDataSourceImp());
-    sl.registerLazySingleton<TasksDataSource>(() => TasksRemoteDataSourceImp());
+    di.registerLazySingleton<TasksDataSource>(() => TasksRemoteDataSourceImp());
   }
 }

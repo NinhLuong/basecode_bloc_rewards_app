@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/config/enums/app_languages.dart';
 import 'package:magic_rewards/config/enums/app_state.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/config/translations/app_local.dart';
+import 'package:magic_rewards/config/languages/app_local.dart';
 
 part 'app_config_event.dart';
 

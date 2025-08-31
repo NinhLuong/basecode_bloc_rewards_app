@@ -58,7 +58,7 @@ class _DoTaskScreenState extends State<DoTaskScreen> {
         withBack: true,
       ),
       body: BlocProvider(
-        create: (_) => sl<DoTaskBloc>(),
+        create: (_) => di<DoTaskBloc>(),
         child: BlocListener<DoTaskBloc, BaseState<void>>(
           listener: (context, state) {
             if (state.isError) {

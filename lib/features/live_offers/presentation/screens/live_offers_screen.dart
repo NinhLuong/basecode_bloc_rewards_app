@@ -24,7 +24,7 @@ class LiveOffersScreen extends StatelessWidget {
         titleText: S.of(context).liveOffers,
       ),
       body: BlocProvider(
-        create: (context) => sl<LiveOffersBloc>(),
+        create: (context) => di<LiveOffersBloc>(),
         child: BlocBuilder<LiveOffersBloc, BaseState<LiveOffersEntity>>(
           builder: (context, state) {
             if (state.isInit) getLiveOffers(context);

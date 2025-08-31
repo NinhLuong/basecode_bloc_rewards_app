@@ -18,7 +18,7 @@ class OrdersSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<OrdersBloc>(),
+      create: (context) => di<OrdersBloc>(),
       child: BlocBuilder<OrdersBloc, BaseState<OrdersEntity>>(
         builder: (context, state) {
           if (state.isInit) getOrders(context);

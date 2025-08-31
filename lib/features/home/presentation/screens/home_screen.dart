@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<HomeBloc>(),
+      create: (context) => di<HomeBloc>(),
       child: BlocBuilder<HomeBloc, BaseState<HomeEntity>>(
         builder: (context, state) {
           if (state.isInit) _getHome(context);

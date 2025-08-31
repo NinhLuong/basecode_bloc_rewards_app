@@ -24,7 +24,7 @@ class TaskDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<CommentsBloc>(),
+      create: (_) => di<CommentsBloc>(),
       child: Scaffold(
         backgroundColor: AppColors.white1,
         appBar: CustomAppBar(

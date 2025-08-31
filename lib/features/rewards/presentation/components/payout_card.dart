@@ -84,7 +84,7 @@ class PayoutCard extends StatelessWidget {
   Widget buildRedeemDialog(
       GlobalKey<FormState> formKey, TextEditingController textController) {
     return BlocProvider(
-      create: (context) => sl<RedeemBloc>(),
+      create: (context) => di<RedeemBloc>(),
       child:
           BlocBuilder<RedeemBloc, BaseState<void>>(builder: (context, state) {
         if (state.isSuccess) {

@@ -13,10 +13,10 @@ class RegisterRoute {
     path: name,
     builder: (context, state) => MultiBlocProvider(providers: [
       BlocProvider(
-        create: (context) => sl<RegisterBloc>(),
+        create: (context) => di<RegisterBloc>(),
       ),
       BlocProvider(
-        create: (context) => sl<CheckEmailBloc>(),
+        create: (context) => di<CheckEmailBloc>(),
       ),
     ], child: const RegisterScreen()),
   );

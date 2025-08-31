@@ -19,7 +19,7 @@ class RedeemSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => sl<PayoutsBloc>(),
+        create: (context) => di<PayoutsBloc>(),
         child: BlocBuilder<PayoutsBloc, BaseState<PayoutsEntity>>(
           builder: (context, state) {
             if (state.isInit) getPayouts(context);

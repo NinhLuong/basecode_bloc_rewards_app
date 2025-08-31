@@ -15,7 +15,7 @@ class TransactionsRoute {
       return null;
     },
     builder: (context, state) => BlocProvider(
-        create: (context) => sl<TransactionsBloc>(),
+        create: (context) => di<TransactionsBloc>(),
         child: TransactionsScreen()),
   );
 }

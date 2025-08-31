@@ -10,6 +10,6 @@ class LoginRoute {
   static GoRoute route = GoRoute(
     path: name,
     builder: (context, state) => BlocProvider(
-        create: (context) => sl<LoginBloc>(), child: const LogInScreen()),
+        create: (context) => di<LoginBloc>(), child: const LogInScreen()),
   );
 }

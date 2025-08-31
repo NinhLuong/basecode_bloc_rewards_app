@@ -23,7 +23,7 @@ class TopUsersTap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<TopUsersBloc>(),
+      create: (_) => di<TopUsersBloc>(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: BlocBuilder<TopUsersBloc, BaseState<TopUsersEntity>>(

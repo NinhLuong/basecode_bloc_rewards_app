@@ -2,10 +2,6 @@
 
 Magic Rewards is a mobile application developed and maintained by Mohammad Aeoub. It was live from **March 2023** until **October 2024**, serving a broad user base with reward-based features and seamless user experience.
 
-### 📱 Download Link
-
-https://magic-rewards.com/magic-rewards.apk
-
 ---
 
 ## 📂 Project Structure
@@ -84,8 +80,7 @@ Additionally, the application features **high-quality UI components** that are m
 
 For further inquiries or collaboration opportunities, feel free to reach out:
 
-* **Email:** mhd.aeoub.mhd@gmail.com
-* **Website:** https://mhdaeoubmhd.com
+* **Email:** ninhluongvh.dev@gmail.com
 
 ---
 

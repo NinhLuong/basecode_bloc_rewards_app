@@ -77,10 +77,10 @@ class _MainScreenState extends State<MainScreen> {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => sl<ProfileBloc>(),
+          create: (context) => di<ProfileBloc>(),
         ),
         BlocProvider(
-          create: (_) => sl<DeleteAccountBloc>(),
+          create: (_) => di<DeleteAccountBloc>(),
         ),
       ],
       child: ProfileScreen(),

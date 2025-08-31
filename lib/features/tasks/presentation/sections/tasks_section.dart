@@ -18,7 +18,7 @@ class TasksSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => sl<TasksBloc>(),
+        create: (context) => di<TasksBloc>(),
         child: BlocBuilder<TasksBloc, BaseState<TasksEntity>>(
           builder: (context, state) {
             if (state.isInit) getTasks(context);
