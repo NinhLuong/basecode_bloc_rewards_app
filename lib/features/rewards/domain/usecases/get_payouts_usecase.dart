@@ -1,0 +1,17 @@
+import 'package:dartz/dartz.dart';
+import 'package:magic_rewards/core/data/errors/failure.dart';
+import 'package:magic_rewards/core/domain/usecases/usecase.dart';
+import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
+import 'package:magic_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
+import 'package:magic_rewards/features/rewards/domain/repository/rewards_repository.dart';
+
+class GetPayoutsUsecase extends UseCase<PayoutsEntity, PayoutsParameters> {
+  final RewardsRepository rewardsRepository;
+
+  GetPayoutsUsecase(this.rewardsRepository);
+
+  @override
+  Future<Either<Failure, PayoutsEntity>> call({required PayoutsParameters params}) async {
+    return await rewardsRepository.getPayouts(params);
+  }
+}

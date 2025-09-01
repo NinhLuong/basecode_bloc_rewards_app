@@ -5,15 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
 import 'package:magic_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/repository/rewards_repository.dart';
+import 'package:magic_rewards/features/rewards/domain/usecases/get_transactions_usecase.dart';
 
 part 'transactions_event.dart';
 
 class TransactionsBloc
     extends Bloc<TransactionsEvent, BaseState<TransactionsEntity>> {
-  final RewardsRepository rewardsRepository;
+  final GetTransactionsUsecase getTransactionsUsecase;
 
-  TransactionsBloc(this.rewardsRepository)
+  TransactionsBloc(this.getTransactionsUsecase)
       : super(const BaseState<TransactionsEntity>()) {
     on<FetchTransactionsEvent>(_getTransactions);
   }
@@ -21,7 +21,7 @@ class TransactionsBloc
   FutureOr<void> _getTransactions(FetchTransactionsEvent event, emit) async {
     emit(state.loading());
     final result =
-        await rewardsRepository.getTransactions(TransactionsParameters());
+        await getTransactionsUsecase.call(params: TransactionsParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

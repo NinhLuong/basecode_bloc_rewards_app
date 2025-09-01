@@ -5,21 +5,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
 import 'package:magic_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/repository/rewards_repository.dart';
+import 'package:magic_rewards/features/rewards/domain/usecases/get_payouts_usecase.dart';
 
 part 'payouts_event.dart';
 
 class PayoutsBloc extends Bloc<PayoutsEvent, BaseState<PayoutsEntity>> {
-  final RewardsRepository rewardsRepository;
+  final GetPayoutsUsecase getPayoutsUsecase;
 
-  PayoutsBloc(this.rewardsRepository)
+  PayoutsBloc(this.getPayoutsUsecase)
       : super(const BaseState<PayoutsEntity>()) {
     on<FetchPayoutsEvent>(_getPayouts);
   }
 
   FutureOr<void> _getPayouts(FetchPayoutsEvent event, emit) async {
     emit(state.loading());
-    final result = await rewardsRepository.getPayouts(PayoutsParameters());
+    final result = await getPayoutsUsecase.call(params: PayoutsParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

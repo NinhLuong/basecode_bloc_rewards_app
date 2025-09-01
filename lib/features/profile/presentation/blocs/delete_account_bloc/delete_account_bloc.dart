@@ -4,14 +4,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/profile/domain/parameters/delete_account_parameters.dart';
-import 'package:magic_rewards/features/profile/domain/repository/profile_repository.dart';
+import 'package:magic_rewards/features/profile/domain/usecases/delete_account_usecase.dart';
 
 part 'delete_account_event.dart';
 
 class DeleteAccountBloc extends Bloc<DeleteAccountEvent, BaseState<void>> {
-  final ProfileRepository profileRepository;
+  final DeleteAccountUsecase deleteAccountUsecase;
 
-  DeleteAccountBloc(this.profileRepository) : super(const BaseState<void>()) {
+  DeleteAccountBloc(this.deleteAccountUsecase) : super(const BaseState<void>()) {
     on<DeleteAccountButtonPressedEvent>(_deleteAccount);
   }
 
@@ -19,7 +19,7 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, BaseState<void>> {
       DeleteAccountButtonPressedEvent event, emit) async {
     emit(state.loading());
     final result =
-        await profileRepository.deleteAccount(DeleteAccountParameters());
+        await deleteAccountUsecase.call(params: DeleteAccountParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/tasks_orders_entity.dart';
-import 'package:magic_rewards/features/tasks/dmain/parameters/tasks_orders_parameters.dart';
-import 'package:magic_rewards/features/tasks/dmain/repository/tasks_repository.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/parameters/tasks_orders_parameters.dart';
+import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.dart';
 
 part 'tasks_orders_event.dart';
 

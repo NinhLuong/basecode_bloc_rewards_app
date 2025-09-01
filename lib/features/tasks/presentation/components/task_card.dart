@@ -5,7 +5,7 @@ import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/app_network_image.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/tasks_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/routes/task_details_route.dart';
 
 class TaskCard extends StatelessWidget {

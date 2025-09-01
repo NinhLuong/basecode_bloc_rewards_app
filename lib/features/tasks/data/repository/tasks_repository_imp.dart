@@ -2,14 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:magic_rewards/core/data/errors/errors_handler.dart';
 import 'package:magic_rewards/core/data/errors/failure.dart';
 import 'package:magic_rewards/features/tasks/data/data_source/tasks_data_source.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/reserve_comment_entity.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/tasks_entity.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/tasks_orders_entity.dart';
-import 'package:magic_rewards/features/tasks/dmain/parameters/add_task_order_parameters.dart';
-import 'package:magic_rewards/features/tasks/dmain/parameters/reserve_comment_parameters.dart';
-import 'package:magic_rewards/features/tasks/dmain/parameters/tasks_orders_parameters.dart';
-import 'package:magic_rewards/features/tasks/dmain/parameters/tasks_parameters.dart';
-import 'package:magic_rewards/features/tasks/dmain/repository/tasks_repository.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/parameters/add_task_order_parameters.dart';
+import 'package:magic_rewards/features/tasks/domain/parameters/reserve_comment_parameters.dart';
+import 'package:magic_rewards/features/tasks/domain/parameters/tasks_orders_parameters.dart';
+import 'package:magic_rewards/features/tasks/domain/parameters/tasks_parameters.dart';
+import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.dart';
 
 class TasksRepositoryImp extends TasksRepository {
   final TasksDataSource tasksDataSource;

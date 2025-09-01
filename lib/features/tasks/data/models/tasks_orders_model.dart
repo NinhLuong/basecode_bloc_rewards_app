@@ -1,6 +1,6 @@
 import 'package:magic_rewards/shared/extensions/string_extensions/string_to_order_status.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/tasks_orders_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
 
 class TasksOrdersModel extends BaseModel<TasksOrdersEntity> {
   TasksOrdersModel({

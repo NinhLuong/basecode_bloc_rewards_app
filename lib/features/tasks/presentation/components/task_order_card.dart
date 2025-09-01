@@ -5,7 +5,7 @@ import 'package:magic_rewards/shared/widgets/components/status_sticker.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/utils/app_date_formatter.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/tasks_orders_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
 
 class TaskOrderCard extends StatelessWidget {
   final TaskOrderEntity order;

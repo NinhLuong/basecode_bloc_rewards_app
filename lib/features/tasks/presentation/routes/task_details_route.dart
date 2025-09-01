@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/tasks_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/screens/task_details_screen.dart';
 
 class TaskDetailsRoute {

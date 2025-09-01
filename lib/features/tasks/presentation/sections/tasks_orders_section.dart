@@ -5,7 +5,7 @@ import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/config/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/tasks/dmain/entities/tasks_orders_entity.dart';
+import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/blocs/tasks_orders_bloc/tasks_orders_bloc.dart';
 import 'package:magic_rewards/features/tasks/presentation/components/task_order_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
