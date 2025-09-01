@@ -1,4 +1,4 @@
-import 'package:magic_rewards/core/models/models/base_model.dart';
+import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/home/domin/entities/home_entity.dart';
 
 class HomeModel extends BaseModel<HomeEntity> {

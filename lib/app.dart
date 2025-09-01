@@ -6,7 +6,7 @@ import 'package:magic_rewards/config/di/di_service.dart';
 import 'package:magic_rewards/config/languages/app_local.dart';
 import 'package:magic_rewards/config/themes/app_theme.dart';
 import 'package:magic_rewards/core/presentation/routes/app_routes.dart';
-import 'package:magic_rewards/features/home/presentation/blocs/app_config_bloc/app_config_bloc.dart';
+import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
 import 'package:magic_rewards/shared/extensions/language_extensions/app_languages_extenstion.dart';

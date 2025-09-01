@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/core/presentation/bloc/base_state.dart';
+import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 import 'package:magic_rewards/features/top_users/domain/parameters/top_users_parameters.dart';
 import 'package:magic_rewards/features/top_users/domain/repository/top_users_repository.dart';

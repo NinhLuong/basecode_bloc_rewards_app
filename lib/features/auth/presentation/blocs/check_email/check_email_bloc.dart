@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
 
-import '../../../../../core/presentation/bloc/base_state.dart';
+import '../../../../../core/presentation/bloc/base/base_state.dart';
 import '../../../domain/repository/auth_repository.dart';
 
 part 'check_email_event.dart';

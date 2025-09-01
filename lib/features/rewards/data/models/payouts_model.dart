@@ -1,4 +1,4 @@
-import 'package:magic_rewards/core/models/models/base_model.dart';
+import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
 
 class PayoutsModel extends BaseModel<PayoutsEntity> {

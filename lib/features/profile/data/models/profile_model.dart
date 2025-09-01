@@ -1,4 +1,4 @@
-import 'package:magic_rewards/core/models/models/base_model.dart';
+import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/profile/domain/entities/profile_entity.dart';
 
 class ProfileModel extends BaseModel<ProfileEntity> {

@@ -5,7 +5,7 @@ import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/config/di/di_service.dart';
-import 'package:magic_rewards/core/presentation/bloc/base_state.dart';
+import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
 import 'package:magic_rewards/features/live_offers/presentation/blocs/live_offers_bloc/live_offers_bloc.dart';

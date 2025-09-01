@@ -1,4 +1,4 @@
-import 'package:magic_rewards/core/models/models/base_model.dart';
+import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
 
 class CheckEmailModel extends BaseModel<CheckEmailEntity> {

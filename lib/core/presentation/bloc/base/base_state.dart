@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../config/enums/request_status.dart';
-import '../../data/datasources/errors/failure.dart';
+import '../../../../config/enums/request_status.dart';
+import '../../../data/errors/failure.dart';
 
 ///The [BaseState] class expresses the general state of use of stats in the application,
 /// each state or state of use ([Bloc] States),

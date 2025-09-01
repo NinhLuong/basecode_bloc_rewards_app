@@ -13,7 +13,7 @@ import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_exte
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 import 'package:magic_rewards/config/di/di_service.dart';
-import 'package:magic_rewards/core/presentation/bloc/base_state.dart';
+import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/home/domin/entities/home_entity.dart';
 import 'package:magic_rewards/features/home/presentation/blocs/home_bloc/home_bloc.dart';
@@ -21,7 +21,7 @@ import 'package:magic_rewards/features/home/presentation/components/offer_wall_c
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({super.key});
 
   final RefreshController refreshController = RefreshController();
 

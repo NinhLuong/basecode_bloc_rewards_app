@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:magic_rewards/core/data/datasources/errors/errors_handler.dart';
-import 'package:magic_rewards/core/data/datasources/errors/failure.dart';
+import 'package:magic_rewards/core/data/errors/errors_handler.dart';
+import 'package:magic_rewards/core/data/errors/failure.dart';
 import 'package:magic_rewards/features/rewards/data/data_source/rewards_data_source.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';

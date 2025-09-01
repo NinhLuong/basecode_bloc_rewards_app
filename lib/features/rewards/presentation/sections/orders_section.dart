@@ -4,7 +4,7 @@ import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/config/di/di_service.dart';
-import 'package:magic_rewards/core/presentation/bloc/base_state.dart';
+import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dart';
 import 'package:magic_rewards/features/rewards/presentation/blocs/orders_bloc/orders_bloc.dart';
 import 'package:magic_rewards/features/rewards/presentation/components/order_card.dart';

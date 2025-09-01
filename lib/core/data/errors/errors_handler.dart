@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:magic_rewards/core/models/entities/base_entity.dart';
-import 'package:magic_rewards/core/models/models/base_model.dart';
+import 'package:magic_rewards/core/domain/entities/base_entity.dart';
+import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
 
-import '../../models/error_message_model.dart';
+import '../models/error_message_model.dart';
 import 'exception.dart';
 import 'failure.dart';
 

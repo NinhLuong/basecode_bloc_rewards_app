@@ -4,7 +4,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../../core/presentation/bloc/base_state.dart';
+import '../../../../../core/presentation/bloc/base/base_state.dart';
 import '../../../domain/entities/user_entity.dart';
 import '../../../domain/parameters/login_parameters.dart';
 import '../../../domain/repository/auth_repository.dart';

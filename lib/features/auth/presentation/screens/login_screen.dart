@@ -12,7 +12,7 @@ import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/utils/app_validator.dart';
-import 'package:magic_rewards/core/presentation/bloc/base_state.dart';
+import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/presentation/blocs/login/login_bloc.dart';

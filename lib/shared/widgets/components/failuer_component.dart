@@ -7,11 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
-import 'package:magic_rewards/core/data/datasources/errors/failure.dart';
+import 'package:magic_rewards/core/data/errors/failure.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
-import 'package:magic_rewards/features/home/presentation/blocs/app_config_bloc/app_config_bloc.dart';
+import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
 
 /// The [FailureComponent] class is a generic component that takes a [Failure] object and dynamically selects the appropriate
 /// sub-component based on the runtime type of the failure. It uses a switch statement to determine the failure type and

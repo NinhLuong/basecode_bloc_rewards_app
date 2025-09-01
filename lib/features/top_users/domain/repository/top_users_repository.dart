@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:magic_rewards/core/data/datasources/errors/failure.dart';
+import 'package:magic_rewards/core/data/errors/failure.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 import 'package:magic_rewards/features/top_users/domain/parameters/top_users_parameters.dart';
 

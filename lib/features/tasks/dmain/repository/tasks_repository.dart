@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:magic_rewards/core/data/datasources/errors/failure.dart';
+import 'package:magic_rewards/core/data/errors/failure.dart';
 import 'package:magic_rewards/features/tasks/dmain/entities/reserve_comment_entity.dart';
 import 'package:magic_rewards/features/tasks/dmain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/dmain/entities/tasks_orders_entity.dart';

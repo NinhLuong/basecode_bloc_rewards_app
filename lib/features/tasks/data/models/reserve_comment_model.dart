@@ -1,4 +1,4 @@
-import 'package:magic_rewards/core/models/models/base_model.dart';
+import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/tasks/dmain/entities/reserve_comment_entity.dart';
 
 class ReserveCommentModel extends BaseModel<ReserveCommentEntity> {

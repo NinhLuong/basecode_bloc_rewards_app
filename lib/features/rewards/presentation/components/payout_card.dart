@@ -11,7 +11,7 @@ import 'package:magic_rewards/shared/widgets/components/app_text_field.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/di/di_service.dart';
 import 'package:magic_rewards/config/utils/app_validator.dart';
-import 'package:magic_rewards/core/presentation/bloc/base_state.dart';
+import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
 import 'package:magic_rewards/features/rewards/presentation/blocs/redeem_bloc/redeem_bloc.dart';

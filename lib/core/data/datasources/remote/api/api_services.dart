@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import 'api_headers.dart';
-import '../../errors/errors_handler.dart';
+import '../../../errors/errors_handler.dart';
 import '../../../repositories/app_response.dart';
 
 /// This class [ApiServices] represents the basic services for call API services in the application,

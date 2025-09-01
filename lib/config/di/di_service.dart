@@ -10,7 +10,7 @@ import 'package:magic_rewards/features/home/data/data_source/home_data_source.da
 import 'package:magic_rewards/features/home/data/data_source/home_data_source_imp.dart';
 import 'package:magic_rewards/features/home/data/repository/home_repository_imp.dart';
 import 'package:magic_rewards/features/home/domin/repository/home_repository.dart';
-import 'package:magic_rewards/features/home/presentation/blocs/app_config_bloc/app_config_bloc.dart';
+import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
 import 'package:magic_rewards/features/home/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:magic_rewards/features/live_offers/data/data_source/live_offers_data_source.dart';
 import 'package:magic_rewards/features/live_offers/data/data_source/live_offers_data_source_imp.dart';

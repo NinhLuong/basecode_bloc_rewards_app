@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:magic_rewards/core/models/models/base_model.dart';
+import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 
 class TopUsersModel extends BaseModel<TopUsersEntity> {
