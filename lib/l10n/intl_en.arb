@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "helloWorld": "Hello World!",
   "login": "Log in",
   "addOrder": "Add Order",

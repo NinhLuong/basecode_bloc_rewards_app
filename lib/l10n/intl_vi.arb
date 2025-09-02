@@ -1,4 +1,5 @@
 {
+  "@@locale": "vi",
   "helloWorld": "Chào thế giới",
   "login": "Đăng nhập",
   "addOrder": "Thêm đơn hàng",
