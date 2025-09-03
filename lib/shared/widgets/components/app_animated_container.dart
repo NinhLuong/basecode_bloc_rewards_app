@@ -8,13 +8,12 @@ class AppAnimatedContainer extends StatefulWidget {
   final Widget? child;
 
   const AppAnimatedContainer(
-      {Key? key,
+      {super.key,
       required this.height,
       required this.initHeight,
       required this.width,
       this.decoration,
-      this.child})
-      : super(key: key);
+      this.child});
 
   @override
   State<AppAnimatedContainer> createState() => _AppAnimatedContainerState();

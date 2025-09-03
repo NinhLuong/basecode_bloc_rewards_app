@@ -9,11 +9,10 @@ class AppRichText extends StatelessWidget {
   final VoidCallback onTap;
 
   const AppRichText(
-      {Key? key,
+      {super.key,
       required this.text,
       required this.buttonText,
-      required this.onTap})
-      : super(key: key);
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {

@@ -7,12 +7,12 @@ import 'package:magic_rewards/config/styles/app_gradient.dart';
 import 'package:magic_rewards/shared/widgets/components/app_avatar.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di<HomeBloc>(),
+      create: (context) => getIt<HomeBloc>(),
       child: BlocBuilder<HomeBloc, BaseState<HomeEntity>>(
         builder: (context, state) {
           if (state.isInit) _getHome(context);

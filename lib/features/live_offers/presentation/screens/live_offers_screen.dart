@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
@@ -13,7 +13,7 @@ import 'package:magic_rewards/features/live_offers/presentation/components/live_
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class LiveOffersScreen extends StatelessWidget {
-  LiveOffersScreen({Key? key}) : super(key: key);
+  LiveOffersScreen({super.key});
 
   final RefreshController _refreshController = RefreshController();
 
@@ -24,7 +24,7 @@ class LiveOffersScreen extends StatelessWidget {
         titleText: S.of(context).liveOffers,
       ),
       body: BlocProvider(
-        create: (context) => di<LiveOffersBloc>(),
+        create: (context) => getIt<LiveOffersBloc>(),
         child: BlocBuilder<LiveOffersBloc, BaseState<LiveOffersEntity>>(
           builder: (context, state) {
             if (state.isInit) getLiveOffers(context);

@@ -6,9 +6,9 @@ import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
@@ -19,12 +19,12 @@ import 'package:magic_rewards/features/tasks/presentation/routes/do_task_route.d
 class TaskDetailsScreen extends StatelessWidget {
   final TaskEntity task;
 
-  const TaskDetailsScreen({Key? key, required this.task}) : super(key: key);
+  const TaskDetailsScreen({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => di<CommentsBloc>(),
+      create: (_) => getIt<CommentsBloc>(),
       child: Scaffold(
         backgroundColor: AppColors.white1,
         appBar: CustomAppBar(

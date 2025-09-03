@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/features/tasks/presentation/routes/tasks_route.dart';
 
 class TasksCard extends StatelessWidget {
-  const TasksCard({Key? key}) : super(key: key);
+  const TasksCard({super.key});
 
   @override
   Widget build(BuildContext context) {

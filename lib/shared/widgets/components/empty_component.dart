@@ -4,7 +4,7 @@ import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 
 class EmptyComponent extends StatelessWidget {
-  const EmptyComponent({Key? key}) : super(key: key);
+  const EmptyComponent({super.key});
 
   @override
   Widget build(BuildContext context) {

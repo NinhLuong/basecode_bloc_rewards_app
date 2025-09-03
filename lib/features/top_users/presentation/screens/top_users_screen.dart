@@ -7,7 +7,7 @@ import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/top_users/presentation/components/top_users_tab.dart';
 
 class TopUsersScreen extends StatelessWidget {
-  const TopUsersScreen({Key? key}) : super(key: key);
+  const TopUsersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

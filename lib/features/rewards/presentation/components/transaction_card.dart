@@ -9,8 +9,7 @@ import 'package:magic_rewards/features/rewards/domain/entities/transactions_enti
 class TransactionCard extends StatelessWidget {
   final TransactionEntity transaction;
 
-  const TransactionCard({Key? key, required this.transaction})
-      : super(key: key);
+  const TransactionCard({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {

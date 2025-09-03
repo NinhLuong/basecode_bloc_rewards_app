@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/blocs/tasks_bloc/tasks_bloc.dart';
@@ -11,14 +11,14 @@ import 'package:magic_rewards/features/tasks/presentation/components/task_card.d
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TasksSection extends StatelessWidget {
-  TasksSection({Key? key}) : super(key: key);
+  TasksSection({super.key});
 
   final RefreshController refreshController = RefreshController();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => di<TasksBloc>(),
+        create: (context) => getIt<TasksBloc>(),
         child: BlocBuilder<TasksBloc, BaseState<TasksEntity>>(
           builder: (context, state) {
             if (state.isInit) getTasks(context);

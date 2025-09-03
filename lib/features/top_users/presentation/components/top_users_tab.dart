@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 import 'package:magic_rewards/features/top_users/presentation/blocs/top_users_bloc/top_users_bloc.dart';
@@ -16,14 +16,14 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class TopUsersTap extends StatelessWidget {
   final bool halfMonth;
 
-  TopUsersTap({Key? key, this.halfMonth = false}) : super(key: key);
+  TopUsersTap({super.key, this.halfMonth = false});
 
   final RefreshController _refreshController = RefreshController();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => di<TopUsersBloc>(),
+      create: (_) => getIt<TopUsersBloc>(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: BlocBuilder<TopUsersBloc, BaseState<TopUsersEntity>>(

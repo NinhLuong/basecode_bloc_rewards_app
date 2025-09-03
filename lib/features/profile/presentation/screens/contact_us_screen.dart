@@ -11,7 +11,7 @@ import 'package:magic_rewards/generated/l10n.dart';
 class ContactUsScreen extends StatelessWidget {
   final String email = "support@magic-rewards.com";
 
-  const ContactUsScreen({Key? key}) : super(key: key);
+  const ContactUsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

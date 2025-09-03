@@ -19,7 +19,6 @@ class AppTheme {
 
   final lightTheme = ThemeData.light().copyWith(
     brightness: Brightness.light,
-    useMaterial3: true,
     primaryColor: AppColors.primary,
     //+2
     textTheme: TextTheme(
@@ -142,7 +141,6 @@ class AppTheme {
 
   final darkTheme = ThemeData.dark().copyWith(
     brightness: Brightness.dark,
-    useMaterial3: true,
     primaryColor: AppColors.green,
     textTheme: TextTheme(
       displayLarge: TextStyle(

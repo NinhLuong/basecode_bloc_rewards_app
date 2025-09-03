@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
 
 class AppScaffold extends Scaffold {
-  @override
-  Widget? body;
-
   AppScaffold({
     super.key,
     super.appBar,
@@ -31,17 +28,17 @@ class AppScaffold extends Scaffold {
     super.drawerEnableOpenDragGesture,
     super.endDrawerEnableOpenDragGesture,
     super.restorationId,
-  }) {
-    this.body = Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(ImagesPaths.backGroundImagePng),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: body,
-    );
-  }
+  }) : super(
+          body: Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(ImagesPaths.backGroundImagePng),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: body,
+          ),
+        );
 }

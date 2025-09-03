@@ -7,7 +7,7 @@ import 'package:magic_rewards/config/styles/app_colors.dart';
 // TODO: customize Loading component view
 
 class LoadingComponent extends StatelessWidget {
-  const LoadingComponent({Key? key}) : super(key: key);
+  const LoadingComponent({super.key});
 
   @override
   Widget build(BuildContext context) {

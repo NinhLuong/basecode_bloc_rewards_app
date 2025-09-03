@@ -6,8 +6,8 @@ class UserEntity extends BaseEntity {
   final String userName;
   final String email;
   final String fullName;
-  String points;
-  String redeemedPoints;
+  final String points;
+  final String redeemedPoints;
 
   UserEntity(
       {this.accessToken,

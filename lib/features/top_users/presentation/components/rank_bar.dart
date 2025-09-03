@@ -10,8 +10,7 @@ class RankBar extends StatelessWidget {
   final UserRankEntity userRank;
   final double maxPoints;
 
-  const RankBar({Key? key, required this.userRank, required this.maxPoints})
-      : super(key: key);
+  const RankBar({super.key, required this.userRank, required this.maxPoints});
 
   @override
   Widget build(BuildContext context) {

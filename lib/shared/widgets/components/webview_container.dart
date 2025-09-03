@@ -11,8 +11,7 @@ class WebViewContainer extends StatefulWidget {
   final bool bigFont;
 
   const WebViewContainer(
-      {required this.url, required this.title, this.bigFont = false, Key? key})
-      : super(key: key);
+      {required this.url, required this.title, this.bigFont = false, super.key});
 
   @override
   createState() => _WebViewContainerState();
@@ -20,14 +19,12 @@ class WebViewContainer extends StatefulWidget {
 
 class _WebViewContainerState extends State<WebViewContainer> {
   late final String _url;
-  late final String _title;
   late final WebViewController _controller;
   int loader = 0;
 
   @override
   void initState() {
     _url = widget.url;
-    _title = widget.title;
 
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)

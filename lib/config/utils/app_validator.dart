@@ -21,7 +21,7 @@ class AppValidator {
     if (validators.contains(InputValidator.email)) {
       if (!RegExp(r'^[A-Z0-9._%+-]+@[A-Z0-9._]+\.[A-Z]{2,4}$',
               caseSensitive: false)
-          .hasMatch(input ?? '')) {
+          .hasMatch(input )) {
         return S.current.emailIsNotValid;
       }
     }
@@ -32,7 +32,7 @@ class AppValidator {
       }
     }
 
-    if (validators.contains(InputValidator.login_minlength)) {
+    if (validators.contains(InputValidator.loginMinlength)) {
       if (trimmedInput.length < minLength) {
         return S.current.invalidPhoneNumber;
         //return S.current.valueIsNotValid;
@@ -46,13 +46,13 @@ class AppValidator {
       }
     }
     if (validators.contains(InputValidator.mobile)) {
-      if (!RegExp(r'0[0-9]{0,14}').hasMatch(input ?? '')) {
+      if (!RegExp(r'0[0-9]{0,14}').hasMatch(input)) {
         return S.current.mobileIsNotValid;
       }
     }
 
-    if (validators.contains(InputValidator.login_mobile)) {
-      if (!RegExp(r'^(09|\+?9639|\+?009639)\d{8}$').hasMatch(input ?? '')) {
+    if (validators.contains(InputValidator.loginMobile)) {
+      if (!RegExp(r'^(09|\+?9639|\+?009639)\d{8}$').hasMatch(input)) {
         return '${S.current.mobileIsNotValid} 09xxxxxxxx';
       }
     }
@@ -71,7 +71,7 @@ class AppValidator {
     }
 
     if (validators.contains(InputValidator.noSpaces)) {
-      if (!RegExp(r'^\S+$').hasMatch(input ?? '')) {
+      if (!RegExp(r'^\S+$').hasMatch(input)) {
         return S.current.shouldntHaveSpaces;
       }
     }
@@ -102,7 +102,7 @@ enum InputValidator {
   mobile,
   url,
   positiveValue,
-  login_mobile,
-  login_minlength,
+  loginMobile,
+  loginMinlength,
   noSpaces
 }

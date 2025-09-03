@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/config/styles/app_gradient.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
@@ -13,12 +12,11 @@ class ProfileTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const ProfileTile(
-      {Key? key,
+      {super.key,
       required this.icon,
       required this.title,
       required this.onTap,
-      this.red = false})
-      : super(key: key);
+      this.red = false});
 
   @override
   Widget build(BuildContext context) {

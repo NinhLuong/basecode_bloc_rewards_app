@@ -4,18 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/shared/widgets/components/app_text_field.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
-import 'package:magic_rewards/shared/extensions/image_extensions/images_extenstion.dart';
+import 'package:magic_rewards/shared/extensions/image_extensions/images_extension.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/config/utils/app_validator.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
@@ -26,8 +25,7 @@ class DoTaskScreen extends StatefulWidget {
   final CommentEntity comment;
   final String taskUrl;
 
-  const DoTaskScreen({Key? key, required this.comment, required this.taskUrl})
-      : super(key: key);
+  const DoTaskScreen({super.key, required this.comment, required this.taskUrl});
 
   @override
   State<DoTaskScreen> createState() => _DoTaskScreenState();
@@ -58,7 +56,7 @@ class _DoTaskScreenState extends State<DoTaskScreen> {
         withBack: true,
       ),
       body: BlocProvider(
-        create: (_) => di<DoTaskBloc>(),
+        create: (_) => getIt<DoTaskBloc>(),
         child: BlocListener<DoTaskBloc, BaseState<void>>(
           listener: (context, state) {
             if (state.isError) {

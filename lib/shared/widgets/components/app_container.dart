@@ -12,14 +12,13 @@ class AppContainer extends StatelessWidget {
   final Gradient? borderGradient;
 
   const AppContainer(
-      {Key? key,
+      {super.key,
       required this.child,
       this.margin,
       this.padding,
       this.width,
       this.gradient,
-      this.borderGradient})
-      : super(key: key);
+      this.borderGradient});
 
   @override
   Widget build(BuildContext context) {

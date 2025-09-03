@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/observers/app_bloc_observer.dart';
-import 'package:magic_rewards/shared/services/logger_service.dart';
+import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 
 import 'app.dart';
 

@@ -83,45 +83,6 @@ class FailureComponent extends StatelessWidget {
         ],
       ),
     );
-
-    switch (failure.runtimeType) {
-      /// NoInternetFailureComponent handles the case when there is no internet connectivity.
-      case NoInternetFailure:
-        return NoInternetFailureComponent(
-            failure: failure as NoInternetFailure);
-
-      /// ServerFailureComponent handles the case when there is a failure related to the server.
-      case ServerFailure:
-        return ServerFailureComponent(failure: failure as ServerFailure);
-
-      /// UnknownFailureComponent handles the case when an unknown failure occurs.
-      case UnknownFailure:
-        return UnknownFailureComponent(failure: failure as UnknownFailure);
-
-      /// ForceUpdateFailureComponent handles the case when the app requires an update.
-      case ForceUpdateFailure:
-        return ForceUpdateFailureComponent(
-            failure: failure as ForceUpdateFailure);
-
-      /// AppUnderMaintenanceFailureComponent handles the case when the app is under maintenance.
-      case AppUnderMaintenanceFailure:
-        return AppUnderMaintenanceFailureComponent(
-            failure: failure as AppUnderMaintenanceFailure);
-
-      /// SessionExpiredFailureComponent handles the case when the session has expired due to inactivity.
-      case SessionExpiredFailure:
-        return SessionExpiredFailureComponent(
-            failure: failure as SessionExpiredFailure);
-
-      /// ParsingFailureComponent handles the case when there is a failure in parsing the response.
-      case ParsingFailure:
-        return ParsingFailureComponent(failure: failure as ParsingFailure);
-
-      /// Placeholder is a generic component used when the failure type is not recognized.
-      /// todo: implement this
-      default:
-        return const Placeholder();
-    }
   }
 }
 

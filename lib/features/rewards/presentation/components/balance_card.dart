@@ -13,11 +13,10 @@ class BalanceCard extends StatelessWidget {
   final double percent;
 
   const BalanceCard(
-      {Key? key,
+      {super.key,
       required this.balance,
       required this.percent,
-      required this.minPayout})
-      : super(key: key);
+      required this.minPayout});
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +59,6 @@ class BalanceCard extends StatelessWidget {
               animationDuration: 1000,
               lineHeight: 5.0.w,
               percent: percent,
-              linearStrokeCap: LinearStrokeCap.butt,
               backgroundColor: AppColors.black1.withOpacity(0.25),
               progressColor: AppColors.yellow,
               padding: EdgeInsets.zero,

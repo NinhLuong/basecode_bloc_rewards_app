@@ -1,9 +1,9 @@
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
 class ProfileEntity extends BaseEntity {
-  String balance;
-  String redeemedPoints;
-  String totalPoints;
+  final String balance;
+  final String redeemedPoints;
+  final String totalPoints;
 
   ProfileEntity(
       {required this.balance,

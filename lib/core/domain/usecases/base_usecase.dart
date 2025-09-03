@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:magic_rewards/core/data/errors/failure.dart';
 
-abstract class UseCase<Type, Params> {
-  Future<Either<Failure, Type>> call({required Params params});
+abstract class UseCase<T, Params> {
+  Future<Either<Failure, T>> call({required Params params});
 }
 
 class NoParams extends Equatable {

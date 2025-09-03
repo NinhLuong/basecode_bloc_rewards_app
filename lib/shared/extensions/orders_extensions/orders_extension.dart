@@ -1,6 +1,6 @@
 import 'package:magic_rewards/config/enums/order_status.dart';
 
-extension OrdersExtenstions on OrderStatus {
+extension OrdersExtensions on OrderStatus {
   // TODO: Customize app button decoration properties here
 
   String get stringify {
@@ -13,8 +13,7 @@ extension OrdersExtenstions on OrderStatus {
         return 'Processing';
       case OrderStatus.rejected:
         return 'Rejected';
-      default:
-        throw "No Such Order Type";
+    
     }
   }
 }

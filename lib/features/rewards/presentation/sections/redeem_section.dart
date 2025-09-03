@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
 import 'package:magic_rewards/features/rewards/presentation/blocs/payouts_bloc/payouts_bloc.dart';
@@ -12,14 +12,14 @@ import 'package:magic_rewards/features/rewards/presentation/components/payout_ca
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RedeemSection extends StatelessWidget {
-  RedeemSection({Key? key}) : super(key: key);
+  RedeemSection({super.key});
 
   final RefreshController refreshController = RefreshController();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => di<PayoutsBloc>(),
+        create: (context) => getIt<PayoutsBloc>(),
         child: BlocBuilder<PayoutsBloc, BaseState<PayoutsEntity>>(
           builder: (context, state) {
             if (state.isInit) getPayouts(context);

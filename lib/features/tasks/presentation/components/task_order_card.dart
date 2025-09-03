@@ -10,7 +10,7 @@ import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity
 class TaskOrderCard extends StatelessWidget {
   final TaskOrderEntity order;
 
-  const TaskOrderCard({Key? key, required this.order}) : super(key: key);
+  const TaskOrderCard({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {

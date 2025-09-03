@@ -16,9 +16,9 @@ class CommentEntity extends BaseEntity {
     required this.text,
   });
 
-  String id;
-  String taskId;
-  String text;
+  final String id;
+  final String taskId;
+  final String text;
 
   @override
   List<Object?> get props => [id, taskId, text];

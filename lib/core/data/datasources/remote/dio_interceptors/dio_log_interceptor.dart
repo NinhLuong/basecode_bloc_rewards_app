@@ -3,7 +3,7 @@
 import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
-import 'package:magic_rewards/shared/services/logger_service.dart';
+import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 
 
 class CustomLogInterceptor extends Interceptor {

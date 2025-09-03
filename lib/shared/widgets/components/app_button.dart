@@ -25,7 +25,7 @@ class AppButton extends StatelessWidget {
   late final Border? border;
 
   AppButton(
-      {Key? key,
+      {super.key,
       required this.onPressed,
       this.child,
       this.width,
@@ -33,8 +33,7 @@ class AppButton extends StatelessWidget {
       this.text,
       this.fontSize,
       this.type = AppButtonType.solidBlue,
-      this.loading = false})
-      : super(key: key) {
+      this.loading = false}) {
     color = switch (type) {
       AppButtonType.solidBlue => AppColors.blue,
       AppButtonType.solidYellow => AppColors.yellow,

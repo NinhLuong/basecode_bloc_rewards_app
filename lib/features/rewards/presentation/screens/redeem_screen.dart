@@ -8,7 +8,7 @@ import 'package:magic_rewards/features/rewards/presentation/sections/orders_sect
 import 'package:magic_rewards/features/rewards/presentation/sections/redeem_section.dart';
 
 class RedeemScreen extends StatelessWidget {
-  const RedeemScreen({Key? key}) : super(key: key);
+  const RedeemScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

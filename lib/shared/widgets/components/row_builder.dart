@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class RowBuilder extends StatelessWidget {
   const RowBuilder({
-    Key? key,
+    super.key,
     required this.itemBuilder,
     required this.itemCount,
     this.mainAxisAlignment = MainAxisAlignment.start,
@@ -13,7 +13,7 @@ class RowBuilder extends StatelessWidget {
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.textDirection,
     this.verticalDirection = VerticalDirection.down,
-  }) : super(key: key);
+  });
 
   /// The [itemBuilder] is a callback function that takes the [BuildContext] and [index] as parameters
   /// and returns the widget for the corresponding index.

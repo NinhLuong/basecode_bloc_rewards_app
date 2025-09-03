@@ -18,55 +18,53 @@ class AppDialogs {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             surfaceTintColor: Colors.transparent,
-            child: Container(
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: AppGradients.dialogGradient,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    margin: EdgeInsets.only(top: 60.w),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(height: 60.w),
-                        Text(text,
-                            style: context.f20700, textAlign: TextAlign.center),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: AppButton(
-                                  type: AppButtonType.solidRed,
-                                  text: confirmText,
-                                  onPressed: () {
-                                    context.pop(true);
-                                  }),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: AppButton(
-                                  text: S.of(context).cancel,
-                                  onPressed: () {
-                                    context.pop();
-                                  }),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+            child: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: AppGradients.dialogGradient,
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child:
-                          Image.asset(ImagesPaths.confirmPng, height: 200.w)),
-                ],
-              ),
+                  margin: EdgeInsets.only(top: 60.w),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 20),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: 60.w),
+                      Text(text,
+                          style: context.f20700, textAlign: TextAlign.center),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: AppButton(
+                                type: AppButtonType.solidRed,
+                                text: confirmText,
+                                onPressed: () {
+                                  context.pop(true);
+                                }),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: AppButton(
+                                text: S.of(context).cancel,
+                                onPressed: () {
+                                  context.pop();
+                                }),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child:
+                        Image.asset(ImagesPaths.confirmPng, height: 200.w)),
+              ],
             ),
           );
         }).then((value) {

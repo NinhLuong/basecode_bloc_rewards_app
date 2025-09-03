@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/app_network_image.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
@@ -12,8 +11,7 @@ class OfferWallCard extends StatelessWidget {
   final OfferWallEntity offerWall;
   final int index;
 
-  const OfferWallCard({Key? key, required this.offerWall, required this.index})
-      : super(key: key);
+  const OfferWallCard({super.key, required this.offerWall, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +56,7 @@ class OfferWallCard extends StatelessWidget {
 
   Future<void> _onPressed() async {
     String url = offerWall.url
-            .replaceAll('{user_id}', CacheStorageServices().username) ??
-        '';
+            .replaceAll('{user_id}', CacheStorageServices().username);
 
     ///todo: implement firebase analytics
     // await FirebaseAnalytics.instance.logEvent(name: 'offer', parameters: {'username' : appController.userManager.username, 'offer' : offer.offerTitle ?? ''});

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/config/languages/app_local.dart';
 import 'package:magic_rewards/config/themes/app_theme.dart';
 import 'package:magic_rewards/core/presentation/routes/app_routes.dart';
 import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
-import 'package:magic_rewards/shared/extensions/language_extensions/app_languages_extenstion.dart';
+import 'package:magic_rewards/shared/extensions/language_extensions/app_languages_extension.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => di<AppConfigBloc>(),
+      create: (_) => getIt<AppConfigBloc>(),
       child: ScreenUtilInit(
           designSize: const Size(428, 926),
           builder: (_, child) {

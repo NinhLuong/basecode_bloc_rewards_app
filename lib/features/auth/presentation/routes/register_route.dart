@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/features/auth/presentation/blocs/check_email/check_email_bloc.dart';
 import 'package:magic_rewards/features/auth/presentation/blocs/register/register_bloc.dart';
 
@@ -13,10 +13,10 @@ class RegisterRoute {
     path: name,
     builder: (context, state) => MultiBlocProvider(providers: [
       BlocProvider(
-        create: (context) => di<RegisterBloc>(),
+        create: (context) => getIt<RegisterBloc>(),
       ),
       BlocProvider(
-        create: (context) => di<CheckEmailBloc>(),
+        create: (context) => getIt<CheckEmailBloc>(),
       ),
     ], child: const RegisterScreen()),
   );

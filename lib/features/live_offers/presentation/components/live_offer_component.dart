@@ -12,8 +12,7 @@ import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_en
 class LiveOfferComponent extends StatelessWidget {
   final LiveOfferEntity liveOffer;
 
-  const LiveOfferComponent({Key? key, required this.liveOffer})
-      : super(key: key);
+  const LiveOfferComponent({super.key, required this.liveOffer});
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +51,7 @@ class LiveOfferComponent extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      SvgPicture.asset(ImagesPaths.profileSvg,
-                          color: AppColors.yellow),
+                      SvgPicture.asset(ImagesPaths.profileSvg),
                       const SizedBox(width: 10),
                       Expanded(
                           child: Text(liveOffer.username,

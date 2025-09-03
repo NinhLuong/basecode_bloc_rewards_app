@@ -7,7 +7,7 @@ class AppAvatar extends StatelessWidget {
   final int? index;
   final double? radius;
 
-  const AppAvatar({Key? key, this.index, this.radius}) : super(key: key);
+  const AppAvatar({super.key, this.index, this.radius});
 
   @override
   Widget build(BuildContext context) {

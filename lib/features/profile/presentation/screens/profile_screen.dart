@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_avatar.dart';
 import 'package:magic_rewards/shared/widgets/components/app_dialogs.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
@@ -26,7 +26,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../../../shared/widgets/components/custom_appbar.dart';
 
 class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({super.key});
 
   final RefreshController _refreshController = RefreshController();
 

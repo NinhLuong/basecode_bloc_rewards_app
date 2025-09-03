@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/shared/extensions/language_extensions/app_languages_extenstion.dart';
+import 'package:magic_rewards/shared/extensions/language_extensions/app_languages_extension.dart';
 import 'package:magic_rewards/shared/extensions/string_extensions/string_to_app_language.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 import 'package:magic_rewards/generated/l10n.dart';
@@ -38,5 +38,5 @@ class AppLocale {
   bool isEnglish() => currentLanguage() == AppLanguages.english;
 
   // Checks if the current language is Arabic
-  bool isArabic() => currentLanguage() == AppLanguages.arabic;
+  bool isArabic() => currentLanguage() == AppLanguages.vietnam;
 }

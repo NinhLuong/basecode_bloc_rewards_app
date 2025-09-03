@@ -1,7 +1,7 @@
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
 class HomeEntity extends BaseEntity {
-  String balance;
+  final String balance;
   final List<OfferWallEntity> offerWalls;
 
   HomeEntity({required this.offerWalls, required this.balance});
@@ -12,14 +12,14 @@ class HomeEntity extends BaseEntity {
 }
 
 class OfferWallEntity extends BaseEntity {
-  String id;
-  String title;
-  String? subtitle;
-  String url;
-  String type;
-  String? thumbnail;
-  String? position;
-  String? status;
+  final String id;
+  final String title;
+  final String? subtitle;
+  final String url;
+  final String type;
+  final String? thumbnail;
+  final String? position;
+  final String? status;
 
   OfferWallEntity(
       {required this.id,

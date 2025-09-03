@@ -5,8 +5,8 @@ extension StringToAppLanguage on String {
 
   AppLanguages get toAppLanguage {
     switch (this) {
-      case 'ar':
-        return AppLanguages.arabic;
+      case 'vi':
+        return AppLanguages.vietnam;
       case 'en':
         return AppLanguages.english;
       default:

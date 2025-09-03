@@ -9,7 +9,7 @@ import 'package:magic_rewards/features/tasks/presentation/sections/tasks_orders_
 import 'package:magic_rewards/features/tasks/presentation/sections/tasks_section.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({Key? key}) : super(key: key);
+  const TasksScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

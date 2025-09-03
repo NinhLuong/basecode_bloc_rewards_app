@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
 import 'package:magic_rewards/features/rewards/presentation/blocs/transactions_bloc/transactions_bloc.dart';
 import 'package:magic_rewards/features/rewards/presentation/screens/transactions_screen.dart';
@@ -15,7 +15,7 @@ class TransactionsRoute {
       return null;
     },
     builder: (context, state) => BlocProvider(
-        create: (context) => di<TransactionsBloc>(),
+        create: (context) => getIt<TransactionsBloc>(),
         child: TransactionsScreen()),
   );
 }

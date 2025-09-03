@@ -6,7 +6,7 @@ import 'package:magic_rewards/config/styles/app_gradient.dart';
 import 'package:magic_rewards/config/styles/app_shadow.dart';
 import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/config/di/di_service.dart';
+import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/home/presentation/screens/home_screen.dart';
 import 'package:magic_rewards/features/profile/presentation/blocs/delete_account_bloc/delete_account_bloc.dart';
@@ -63,8 +63,7 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Colors.transparent),
     BottomNavigationBarItem(
         icon: SvgPicture.asset(ImagesPaths.navbarIcons[4]),
-        activeIcon: SvgPicture.asset(ImagesPaths.navbarIcons[4],
-            color: AppColors.primary),
+        activeIcon: SvgPicture.asset(ImagesPaths.navbarIcons[4]),
         label: S.current.profile,
         backgroundColor: Colors.transparent),
   ];
@@ -77,10 +76,10 @@ class _MainScreenState extends State<MainScreen> {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => di<ProfileBloc>(),
+          create: (context) => getIt<ProfileBloc>(),
         ),
         BlocProvider(
-          create: (_) => di<DeleteAccountBloc>(),
+          create: (_) => getIt<DeleteAccountBloc>(),
         ),
       ],
       child: ProfileScreen(),

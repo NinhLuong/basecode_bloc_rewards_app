@@ -11,7 +11,7 @@ class RedeemParameters extends Equatable {
   final String username = CacheStorageServices().username;
   final String name;
   final String value;
-  final String devName = Platform.operatingSystem ?? '';
+  final String devName = Platform.operatingSystem ;
   final String devMan = AppConstants.devMan;
 
   RedeemParameters({required this.name, required this.value});

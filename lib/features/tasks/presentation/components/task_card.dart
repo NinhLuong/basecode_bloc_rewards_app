@@ -11,7 +11,7 @@ import 'package:magic_rewards/features/tasks/presentation/routes/task_details_ro
 class TaskCard extends StatelessWidget {
   final TaskEntity task;
 
-  const TaskCard({Key? key, required this.task}) : super(key: key);
+  const TaskCard({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {

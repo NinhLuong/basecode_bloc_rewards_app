@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/config/enums/order_status.dart';
-import 'package:magic_rewards/shared/extensions/orders_extensions/orders_extenstion.dart';
+import 'package:magic_rewards/shared/extensions/orders_extensions/orders_extension.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 
 class StatusSticker extends StatelessWidget {
   final OrderStatus status;
 
-  const StatusSticker({Key? key, required this.status}) : super(key: key);
+  const StatusSticker({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {

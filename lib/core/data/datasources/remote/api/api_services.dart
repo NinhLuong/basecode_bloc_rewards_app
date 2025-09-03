@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:magic_rewards/shared/services/logger_service.dart';
+import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/dio_log_interceptor.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
 import 'package:magic_rewards/core/data/errors/errors_handler.dart';

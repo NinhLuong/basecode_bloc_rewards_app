@@ -9,7 +9,7 @@ import 'package:magic_rewards/features/top_users/domain/entities/top_users_entit
 class MyRankCard extends StatelessWidget {
   final UserRankEntity userRank;
 
-  const MyRankCard({Key? key, required this.userRank}) : super(key: key);
+  const MyRankCard({super.key, required this.userRank});
 
   @override
   Widget build(BuildContext context) {

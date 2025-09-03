@@ -62,7 +62,7 @@ import 'package:magic_rewards/features/top_users/domain/usecases/get_top_users_u
 import 'package:magic_rewards/features/top_users/presentation/blocs/top_users_bloc/top_users_bloc.dart';
 import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
 
-final di = GetIt.instance;
+final getIt = GetIt.instance;
 
 /// This class [DIServices] is define to inject values and variables (Objects) into memory when the application is opened,
 /// those values will remain stored and preserved for direct access in randomaccess memory according to the specified conditions
@@ -73,13 +73,13 @@ final di = GetIt.instance;
 /// it is necessary You have to call [DIServices.init] in main.dart, main finction, before [runApp]
 ///
 /// 1- to inject Your Bloc object use [registerFactory] function
-///    Ex:   di.registerFactory(() => YourBloc(di()));
+///    Ex:   getIt.registerFactory(() => YourBloc(getIt()));
 /// 2- to inject Your Repository, Data Source object use [registerLazySingleton] function
-///    Ex:   di.registerLazySingleton(() => YourDataSource());
-///    Ex:   di.registerLazySingleton(() => YourDataSource());
+///    Ex:   getIt.registerLazySingleton(() => YourDataSource());
+///    Ex:   getIt.registerLazySingleton(() => YourDataSource());
 ///
-/// you can get any Object you inject by call [di]
-///    Ex: di<YourBloc>();
+/// you can get any Object you inject by call [getIt]
+///    Ex: getIt<YourBloc>();
 
 // TODO: add (BLOCs , REPOSITORIES , DATA SOURCES)
 class DIServices {
@@ -91,70 +91,70 @@ class DIServices {
 
   void init() {
     // CORE SERVICES
-    di.registerLazySingleton<ApiServices>(() => ApiServices());
+    getIt.registerLazySingleton<ApiServices>(() => ApiServices());
 
     // REPOSITORIES
-    di.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(di()));
-    di.registerLazySingleton<HomeRepository>(() => HomeRepositoryImp(di()));
-    di.registerLazySingleton<LiveOffersRepository>(
-        () => LiveOffersRepositoryImp(di()));
-    di.registerLazySingleton<RewardsRepository>(
-        () => RewardsRepositoryImp(di()));
-    di.registerLazySingleton<TopUsersRepository>(
-        () => TopUsersRepositoryImp(di()));
-    di.registerLazySingleton<ProfileRepository>(
-        () => ProfileRepositoryImp(di()));
-    di.registerLazySingleton<TasksRepository>(() => TasksRepositoryImp(di()));
+    getIt.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(getIt()));
+    getIt.registerLazySingleton<HomeRepository>(() => HomeRepositoryImp(getIt()));
+    getIt.registerLazySingleton<LiveOffersRepository>(
+        () => LiveOffersRepositoryImp(getIt()));
+    getIt.registerLazySingleton<RewardsRepository>(
+        () => RewardsRepositoryImp(getIt()));
+    getIt.registerLazySingleton<TopUsersRepository>(
+        () => TopUsersRepositoryImp(getIt()));
+    getIt.registerLazySingleton<ProfileRepository>(
+        () => ProfileRepositoryImp(getIt()));
+    getIt.registerLazySingleton<TasksRepository>(() => TasksRepositoryImp(getIt()));
 
     // DATA SOURCES
-    di.registerLazySingleton<AuthDataSource>(() => AuthRemoteDataSourceImp());
-    di.registerLazySingleton<HomeDataSource>(() => HomeRemoteDataSourceImp());
-    di.registerLazySingleton<LiveOffersDataSource>(
+    getIt.registerLazySingleton<AuthDataSource>(() => AuthRemoteDataSourceImp());
+    getIt.registerLazySingleton<HomeDataSource>(() => HomeRemoteDataSourceImp());
+    getIt.registerLazySingleton<LiveOffersDataSource>(
         () => LiveOffersRemoteDataSourceImp());
-    di.registerLazySingleton<RewardsDataSource>(
+    getIt.registerLazySingleton<RewardsDataSource>(
         () => RewardsRemoteDataSourceImp());
-    di.registerLazySingleton<TopUsersDataSource>(
+    getIt.registerLazySingleton<TopUsersDataSource>(
         () => TopUsersRemoteDataSourceImp());
-    di.registerLazySingleton<ProfileDataSource>(
+    getIt.registerLazySingleton<ProfileDataSource>(
         () => ProfileRemoteDataSourceImp());
-    di.registerLazySingleton<TasksDataSource>(() => TasksRemoteDataSourceImp());
+    getIt.registerLazySingleton<TasksDataSource>(() => TasksRemoteDataSourceImp());
 
     // Use cases
-    di.registerLazySingleton(() => LoginUsecase(di<AuthRepository>()));
-    di.registerLazySingleton(() => CheckEmailUsecase(di<AuthRepository>()));
-    di.registerLazySingleton(() => RegisterUsecase(di<AuthRepository>()));
-    di.registerLazySingleton(() => GetHomeUsecase(di<HomeRepository>()));
-    di.registerLazySingleton(() => GetLiveOffersUsecase(di<LiveOffersRepository>()));
-    di.registerLazySingleton(() => GetProfileUsecase(di<ProfileRepository>()));
-    di.registerLazySingleton(() => DeleteAccountUsecase(di<ProfileRepository>()));
-    di.registerLazySingleton(() => GetPayoutsUsecase(di<RewardsRepository>()));
-    di.registerLazySingleton(() => GetTransactionsUsecase(di<RewardsRepository>()));
-    di.registerLazySingleton(() => GetOrdersUsecase(di<RewardsRepository>()));
-    di.registerLazySingleton(() => RedeemUsecase(di<RewardsRepository>()));
-    di.registerLazySingleton(() => GetTasksUsecase(di<TasksRepository>()));
-    di.registerLazySingleton(() => GetTasksOrdersUsecase(di<TasksRepository>()));
-    di.registerLazySingleton(() => AddTaskOrderUsecase(di<TasksRepository>()));
-    di.registerLazySingleton(() => ReserveCommentUsecase(di<TasksRepository>()));
-    di.registerLazySingleton(() => GetTopUsersUsecase(di<TopUsersRepository>()));
+    getIt.registerLazySingleton(() => LoginUsecase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(() => CheckEmailUsecase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(() => RegisterUsecase(getIt<AuthRepository>()));
+    getIt.registerLazySingleton(() => GetHomeUsecase(getIt<HomeRepository>()));
+    getIt.registerLazySingleton(() => GetLiveOffersUsecase(getIt<LiveOffersRepository>()));
+    getIt.registerLazySingleton(() => GetProfileUsecase(getIt<ProfileRepository>()));
+    getIt.registerLazySingleton(() => DeleteAccountUsecase(getIt<ProfileRepository>()));
+    getIt.registerLazySingleton(() => GetPayoutsUsecase(getIt<RewardsRepository>()));
+    getIt.registerLazySingleton(() => GetTransactionsUsecase(getIt<RewardsRepository>()));
+    getIt.registerLazySingleton(() => GetOrdersUsecase(getIt<RewardsRepository>()));
+    getIt.registerLazySingleton(() => RedeemUsecase(getIt<RewardsRepository>()));
+    getIt.registerLazySingleton(() => GetTasksUsecase(getIt<TasksRepository>()));
+    getIt.registerLazySingleton(() => GetTasksOrdersUsecase(getIt<TasksRepository>()));
+    getIt.registerLazySingleton(() => AddTaskOrderUsecase(getIt<TasksRepository>()));
+    getIt.registerLazySingleton(() => ReserveCommentUsecase(getIt<TasksRepository>()));
+    getIt.registerLazySingleton(() => GetTopUsersUsecase(getIt<TopUsersRepository>()));
 
     // BLOCS
-    di.registerFactory(() => LoginBloc(di<LoginUsecase>()));
-    di.registerFactory(() => RegisterBloc(di<RegisterUsecase>()));
-    di.registerFactory(() => CheckEmailBloc(di<CheckEmailUsecase>()));
-    di.registerFactory(() => HomeBloc(di<GetHomeUsecase>()));
-    di.registerFactory(() => LiveOffersBloc(di<GetLiveOffersUsecase>()));
-    di.registerFactory(() => ProfileBloc(di<GetProfileUsecase>()));
-    di.registerFactory(() => DeleteAccountBloc(di<DeleteAccountUsecase>()));
-    di.registerFactory(() => PayoutsBloc(di<GetPayoutsUsecase>()));
-    di.registerFactory(() => RedeemBloc(di<RedeemUsecase>()));
-    di.registerFactory(() => OrdersBloc(di<GetOrdersUsecase>()));
-    di.registerFactory(() => TransactionsBloc(di<GetTransactionsUsecase>()));
-    di.registerFactory(() => TopUsersBloc(di<TopUsersRepository>()));
-    di.registerFactory(() => TasksBloc(di<TasksRepository>()));
-    di.registerFactory(() => CommentsBloc(di<TasksRepository>()));
-    di.registerFactory(() => DoTaskBloc(di<TasksRepository>()));
-    di.registerFactory(() => TasksOrdersBloc(di<TasksRepository>()));
+    getIt.registerFactory(() => LoginBloc(getIt<LoginUsecase>()));
+    getIt.registerFactory(() => RegisterBloc(getIt<RegisterUsecase>()));
+    getIt.registerFactory(() => CheckEmailBloc(getIt<CheckEmailUsecase>()));
+    getIt.registerFactory(() => HomeBloc(getIt<GetHomeUsecase>()));
+    getIt.registerFactory(() => LiveOffersBloc(getIt<GetLiveOffersUsecase>()));
+    getIt.registerFactory(() => ProfileBloc(getIt<GetProfileUsecase>()));
+    getIt.registerFactory(() => DeleteAccountBloc(getIt<DeleteAccountUsecase>()));
+    getIt.registerFactory(() => PayoutsBloc(getIt<GetPayoutsUsecase>()));
+    getIt.registerFactory(() => RedeemBloc(getIt<RedeemUsecase>()));
+    getIt.registerFactory(() => OrdersBloc(getIt<GetOrdersUsecase>()));
+    getIt.registerFactory(() => TransactionsBloc(getIt<GetTransactionsUsecase>()));
+    getIt.registerFactory(() => TopUsersBloc(getIt<TopUsersRepository>()));
+    getIt.registerFactory(() => TasksBloc(getIt<TasksRepository>()));
+    getIt.registerFactory(() => CommentsBloc(getIt<TasksRepository>()));
+    getIt.registerFactory(() => DoTaskBloc(getIt<TasksRepository>()));
+    getIt.registerFactory(() => TasksOrdersBloc(getIt<TasksRepository>()));
 
-    di.registerLazySingleton(() => AppConfigBloc());
+    getIt.registerLazySingleton(() => AppConfigBloc());
   }
 }

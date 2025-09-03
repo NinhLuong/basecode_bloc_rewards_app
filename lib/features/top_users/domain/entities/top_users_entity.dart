@@ -8,10 +8,10 @@ class TopUsersEntity extends BaseEntity {
     required this.maxPoints,
   });
 
-  List<UserRankEntity> topThree;
-  List<UserRankEntity> rest;
-  UserRankEntity? myRank;
-  double maxPoints;
+  final List<UserRankEntity> topThree;
+  final List<UserRankEntity> rest;
+  final UserRankEntity? myRank;
+  final double maxPoints;
 
   @override
   List<Object?> get props => [rest, topThree, myRank, maxPoints];
@@ -25,10 +25,10 @@ class UserRankEntity extends BaseEntity {
     required this.rank,
   });
 
-  String wallet;
-  double points;
-  String amount;
-  int rank;
+  final String wallet;
+  final double points;
+  final String amount;
+  final int rank;
 
   @override
   List<Object> get props => [wallet, points, amount, rank];

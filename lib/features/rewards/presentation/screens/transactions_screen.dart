@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failuer_component.dart';
+import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
@@ -15,7 +15,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class TransactionsScreen extends StatelessWidget {
   final RefreshController refreshController = RefreshController();
 
-  TransactionsScreen({Key? key}) : super(key: key);
+  TransactionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -36,7 +36,7 @@ class AppTextField extends StatefulWidget {
   final Color? fillColor;
 
   const AppTextField(
-      {Key? key,
+      {super.key,
       this.height,
       this.onSaved,
       this.focusNode,
@@ -65,8 +65,7 @@ class AppTextField extends StatefulWidget {
       this.borderRadius,
       this.labelText,
       this.password = false,
-      this.fillColor})
-      : super(key: key);
+      this.fillColor});
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();

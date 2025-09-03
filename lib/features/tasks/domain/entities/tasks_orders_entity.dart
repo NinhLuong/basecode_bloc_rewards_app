@@ -4,7 +4,7 @@ import 'package:magic_rewards/config/enums/order_status.dart';
 class TasksOrdersEntity extends BaseEntity {
   TasksOrdersEntity({required this.orders});
 
-  List<TaskOrderEntity> orders;
+  final List<TaskOrderEntity> orders;
 
   @override
   List<Object?> get props => [orders];
@@ -18,10 +18,10 @@ class TaskOrderEntity extends BaseEntity {
     required this.status,
   });
 
-  String taskName;
-  DateTime timestamp;
-  String price;
-  OrderStatus status;
+  final String taskName;
+  final DateTime timestamp;
+  final String price;
+  final OrderStatus status;
 
   @override
   List<Object?> get props => [taskName, timestamp, price, status];
