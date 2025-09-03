@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:magic_rewards/shared/services/logger_service.dart';
 
 import 'api_headers.dart';
 import '../../../errors/errors_handler.dart';
 import '../../../repositories/app_response.dart';
+import '../dio_interceptors/dio_log_interceptor.dart';
 
 /// This class [ApiServices] represents the basic services for call API services in the application,
 /// so that all requests for Server Side services are through this same serivce.
@@ -16,8 +18,11 @@ import '../../../repositories/app_response.dart';
 
 class ApiServices {
   static ApiServices? _instance;
+  late final Dio _dio;
 
-  ApiServices._();
+  ApiServices._() {
+    _dio = Dio()..interceptors.add(CustomLogInterceptor(logPrint: (obj) => LoggerService.network(obj.toString())));
+  }
 
   factory ApiServices() => _instance ??= ApiServices._();
 
@@ -28,7 +33,7 @@ class ApiServices {
     Object? data,
   }) async {
     return ErrorsHandler.exceptionThrower(
-      () => Dio().post(
+      () => _dio.post(
         url,
         data: data == null
             ? null
@@ -42,7 +47,7 @@ class ApiServices {
   Future<AppResponse> put(String url,
       {Map<String, dynamic>? headers, Object? data}) async {
     return ErrorsHandler.exceptionThrower(
-      () => Dio().put(
+      () => _dio.put(
         url,
         data: data == null
             ? null
@@ -56,7 +61,7 @@ class ApiServices {
   Future<AppResponse> delete(String url,
       {Map<String, dynamic>? headers, Object? data}) async {
     return ErrorsHandler.exceptionThrower(
-      () => Dio().delete(
+      () => _dio.delete(
         url,
         data: data == null
             ? null
@@ -70,7 +75,7 @@ class ApiServices {
   Future<AppResponse> get(String url,
       {Map<String, dynamic>? headers, Object? data}) async {
     return ErrorsHandler.exceptionThrower(
-      () => Dio().get(
+      () => _dio.get(
         url,
         options: Options(headers: headers ?? ApiHeaders().baseHeaders),
         data: data == null

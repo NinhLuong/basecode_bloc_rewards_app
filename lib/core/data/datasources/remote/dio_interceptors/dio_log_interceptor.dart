@@ -3,6 +3,8 @@
 import 'dart:math' as math;
 
 import 'package:dio/dio.dart';
+import 'package:magic_rewards/shared/services/logger_service.dart';
+
 
 class CustomLogInterceptor extends Interceptor {
   /// Print request [Options]
@@ -38,7 +40,7 @@ class CustomLogInterceptor extends Interceptor {
   /// Log printer; defaults logPrint log to console.
   /// In flutter, you'd better use debugPrint.
   /// you can also write log in a file.
-  void Function(Object object) logPrint;
+  void Function(Object object) logPrint = (obj) => LoggerService.network(obj.toString());
 
   CustomLogInterceptor({
     this.request = true,

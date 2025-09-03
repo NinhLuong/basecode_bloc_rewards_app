@@ -60,6 +60,7 @@ import 'package:magic_rewards/features/top_users/data/repository/top_users_repos
 import 'package:magic_rewards/features/top_users/domain/repository/top_users_repository.dart';
 import 'package:magic_rewards/features/top_users/domain/usecases/get_top_users_usecase.dart';
 import 'package:magic_rewards/features/top_users/presentation/blocs/top_users_bloc/top_users_bloc.dart';
+import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
 
 final di = GetIt.instance;
 
@@ -89,6 +90,9 @@ class DIServices {
   factory DIServices() => _instance ??= DIServices._();
 
   void init() {
+    // CORE SERVICES
+    di.registerLazySingleton<ApiServices>(() => ApiServices());
+
     // REPOSITORIES
     di.registerLazySingleton<AuthRepository>(() => AuthRepositoryImp(di()));
     di.registerLazySingleton<HomeRepository>(() => HomeRepositoryImp(di()));
