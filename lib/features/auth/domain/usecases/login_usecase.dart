@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:magic_rewards/core/data/errors/failure.dart';
+import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/core/domain/usecases/base_usecase.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart';

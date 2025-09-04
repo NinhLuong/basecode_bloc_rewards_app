@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:magic_rewards/core/data/errors/errors_handler.dart';
-import 'package:magic_rewards/core/data/errors/failure.dart';
+import 'package:magic_rewards/config/errors/errors_handler.dart';
+import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/features/tasks/data/data_source/tasks_data_source.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';

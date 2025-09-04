@@ -4,8 +4,8 @@ import 'package:magic_rewards/features/auth/data/models/user_model.dart';
 import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
 
-import '../../../../core/data/errors/errors_handler.dart';
-import '../../../../core/data/errors/failure.dart';
+import '../../../../config/errors/errors_handler.dart';
+import '../../../../config/errors/failure.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/parameters/login_parameters.dart';
 import '../../domain/parameters/register_parameters.dart';

@@ -1,5 +1,5 @@
 //! backend exception
-import '../models/error_message_model.dart';
+import '../../core/data/models/error_message_model.dart';
 
 /// In this file, you will find a set of expected exceptions according to the use cases found in the base project v2.
 /// You can add any [Exception] that is likely to occur within this file.
