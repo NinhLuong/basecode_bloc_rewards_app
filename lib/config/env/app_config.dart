@@ -5,45 +5,56 @@ import 'package:magic_rewards/config/env/local_env.dart';
 import 'package:magic_rewards/config/env/prod_env.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-
 enum Environment { local, dummy, dev, prod }
 
 class AppConfig {
   static Environment env = Environment.dev;
-  static AppEnv appEnv = DevEnv();
-  static String baseUrl = '';
-  static String apiBaseUrl = '';
-  static String apiKey = '';
+  static late AppEnv _appEnv;
   static PackageInfo? _packageInfo;
   static String? appVersion;
 
-  static Future<void> loadEnv() async {
-    await _checkEnv();
+  // Getters that provide safe access to environment variables
+  static String get baseUrl => _appEnv.baseUrl;
+  static String get apiBaseUrl => _appEnv.apiBaseUrl;
+  static String get apiKey => _appEnv.apiKey;
 
+  static Future<void> loadEnv() async {
+    try {
+      await _checkEnv();
+      _initializeAppEnv();
+      
+      // Validate that environment variables are loaded
+      if (apiBaseUrl.isEmpty) {
+        throw Exception('API Base URL is empty. Check your .env files.');
+      }
+      
+    } catch (e) {
+      throw Exception('Failed to load environment configuration: $e');
+    }
+  }
+
+  static void _initializeAppEnv() {
     switch (env) {
       case Environment.local:
-        appEnv = LocalEnv();
+        _appEnv = LocalEnv();
         break;
       case Environment.dummy:
-        appEnv = DummyEnv();
+        _appEnv = DummyEnv();
         break;
       case Environment.dev:
-        appEnv = DevEnv();
+        _appEnv = DevEnv();
         break;
       case Environment.prod:
-        appEnv = ProdEnv();
+        _appEnv = ProdEnv();
         break;
     }
-
-    apiBaseUrl = appEnv.apiBaseUrl;
-    baseUrl = appEnv.baseUrl;
-    apiKey = appEnv.apiKey;
   }
 
   static Future<void> _checkEnv() async {
     _packageInfo = await PackageInfo.fromPlatform();
     appVersion = _packageInfo?.version;
     final packageName = _packageInfo?.packageName ?? '';
+    
     try {
       if (packageName.contains(Environment.local.name)) {
         env = Environment.local;
@@ -55,6 +66,7 @@ class AppConfig {
         env = Environment.prod;
       }
     } catch (e) {
+      // Default to dev environment if detection fails
       env = Environment.dev;
     }
   }

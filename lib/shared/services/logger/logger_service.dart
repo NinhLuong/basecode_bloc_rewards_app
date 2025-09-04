@@ -31,13 +31,13 @@
 /// - **Verbose (300)**: Very detailed information for deep debugging
 import 'dart:developer' as developer;
 
-/// Centralized logging utility for the BlocArch application.
+/// Centralized logging utility for the Flutter application.
 ///
 /// Provides structured logging with different levels and context-specific
 /// methods for better debugging and monitoring capabilities.
 class LoggerService {
   /// Default tag used for logging when no specific tag is provided.
-  static const String _tag = 'BlocArch';
+  static const String _tag = 'Flutter';
 
   /// Logs a debug message with optional custom tag.
   ///

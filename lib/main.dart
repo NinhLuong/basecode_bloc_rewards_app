@@ -7,6 +7,7 @@ import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_se
 import 'package:magic_rewards/shared/services/di/di_service.dart';
 import 'package:magic_rewards/core/presentation/observers/app_bloc_observer.dart';
 import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:magic_rewards/config/env/app_config.dart';
 
 import 'app.dart';
 
@@ -20,6 +21,12 @@ Future<void> main() async {
   // Set up BlocObserver for comprehensive state management logging
   Bloc.observer = AppBlocObserver();
   LoggerService.app('📱 BlocObserver initialized');
+  
+  // Load environment configuration FIRST
+  LoggerService.app('⚙️ Loading environment configuration...');
+  await AppConfig.loadEnv();
+  LoggerService.app('✅ Environment loaded: ${AppConfig.env}');
+  LoggerService.app('🌐 API Base URL: ${AppConfig.apiBaseUrl}');
   
   // Initialize core services
   LoggerService.app('💾 Initializing cache storage...');

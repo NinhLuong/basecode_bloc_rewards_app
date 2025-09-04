@@ -45,6 +45,7 @@ dependencies:
   webview_flutter: ^4.2.0
   firebase_analytics: ^12.0.0
   # google_mobile_ads: ^6.0.0
+  package_info_plus: ^8.3.1
 
   #environment variables
   envied: ^1.2.1
