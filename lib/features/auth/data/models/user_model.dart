@@ -1,32 +1,40 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 
+part 'user_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class UserModel extends BaseModel<UserEntity> {
-  UserModel(
-      {this.error,
-      this.errorCode,
-      this.accessToken,
-      this.accountId,
-      this.account});
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'accessToken')
+  final String? accessToken;
+  
+  @JsonKey(name: 'accountId')
+  final String? accountId;
+  
+  @JsonKey(name: 'account')
+  final List<Account>? account;
 
-  UserModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    accessToken = json['accessToken'];
-    accountId = json['accountId'];
-    if (json['account'] != null) {
-      account = [];
-      json['account'].forEach((v) {
-        account?.add(Account.fromJson(v));
-      });
-    }
-  }
+  UserModel({
+    this.error,
+    this.errorCode,
+    this.accessToken,
+    this.accountId,
+    this.account,
+  });
 
-  bool? error;
-  int? errorCode;
-  String? accessToken;
-  String? accountId;
-  List<Account>? account;
+  factory UserModel.fromJson(Map<String, dynamic> json) => 
+      _$UserModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   @override
   UserEntity toEntity() {
@@ -41,7 +49,63 @@ class UserModel extends BaseModel<UserEntity> {
   }
 }
 
+@immutable
+@JsonSerializable()
 class Account {
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'id')
+  final String? id;
+  
+  @JsonKey(name: 'last_access')
+  final String? lastAccess;
+  
+  @JsonKey(name: 'last_ip_addr')
+  final String? lastIpAddr;
+  
+  @JsonKey(name: 'gcm')
+  final String? gcm;
+  
+  @JsonKey(name: 'state')
+  final String? state;
+  
+  @JsonKey(name: 'fullname')
+  final String? fullname;
+  
+  @JsonKey(name: 'username')
+  final String? username;
+  
+  @JsonKey(name: 'email')
+  final String? email;
+  
+  @JsonKey(name: 'regtime')
+  final String? regtime;
+  
+  @JsonKey(name: 'ip_addr')
+  final String? ipAddr;
+  
+  @JsonKey(name: 'mobile')
+  final String? mobile;
+  
+  @JsonKey(name: 'points')
+  final String? points;
+  
+  @JsonKey(name: 'refer')
+  final String? refer;
+  
+  @JsonKey(name: 'refered')
+  final String? refered;
+  
+  @JsonKey(name: 'redeemed_points')
+  final String? redeemedPoints;
+  
+  @JsonKey(name: 'total_points')
+  final String? totalPoints;
+
   Account({
     this.error,
     this.errorCode,
@@ -63,66 +127,8 @@ class Account {
     this.totalPoints,
   });
 
-  Account.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    id = json['id'];
-    lastAccess = json['last_access'];
-    lastIpAddr = json['last_ip_addr'];
-    gcm = json['gcm'];
-    state = json['state'];
-    fullname = json['fullname'];
-    username = json['username'];
-    email = json['email'];
-    regtime = json['regtime'];
-    ipAddr = json['ip_addr'];
-    mobile = json['mobile'];
-    points = json['points'];
-    refer = json['refer'];
-    refered = json['refered'];
-    redeemedPoints = json['redeemed_points'];
-    totalPoints = json['total_points'];
-  }
+  factory Account.fromJson(Map<String, dynamic> json) => 
+      _$AccountFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  String? id;
-  String? lastAccess;
-  String? lastIpAddr;
-  String? gcm;
-  String? state;
-  String? fullname;
-  String? username;
-  String? email;
-  String? regtime;
-  String? ipAddr;
-  String? mobile;
-  String? points;
-  String? refer;
-  String? refered;
-  String? redeemedPoints;
-  String? totalPoints;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    map['id'] = id;
-    map['last_access'] = lastAccess;
-    map['last_ip_addr'] = lastIpAddr;
-    map['gcm'] = gcm;
-    map['state'] = state;
-    map['fullname'] = fullname;
-    map['username'] = username;
-    map['email'] = email;
-    map['regtime'] = regtime;
-    map['ip_addr'] = ipAddr;
-    map['mobile'] = mobile;
-    map['points'] = points;
-    map['refer'] = refer;
-    map['refered'] = refered;
-    map['redeemed_points'] = redeemedPoints;
-    map['total_points'] = totalPoints;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$AccountToJson(this);
 }

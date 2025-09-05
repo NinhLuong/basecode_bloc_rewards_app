@@ -103,6 +103,128 @@ class LoggerService {
     );
   }
 
+  /// Logs a detailed error with comprehensive context information.
+  ///
+  /// This method provides enhanced error logging with stack trace analysis,
+  /// file paths, line numbers, and contextual information for debugging.
+  ///
+  /// [message] The primary error message.
+  /// [error] The error object to analyze.
+  /// [stackTrace] Stack trace for detailed location analysis.
+  /// [context] Optional additional context information.
+  static void detailedError(
+    String message,
+    Object? error, [
+    StackTrace? stackTrace,
+    Map<String, dynamic>? context,
+  ]) {
+    final currentStackTrace = stackTrace ?? StackTrace.current;
+    final stackTraceString = currentStackTrace.toString();
+    
+    // Parse stack trace to extract meaningful information
+    final stackLines = stackTraceString.split('\n');
+    final relevantFrames = stackLines.take(10).where((line) => 
+      line.contains('package:magic_rewards') || 
+      line.contains('lib/') || 
+      line.contains('dart:')
+    ).toList();
+
+    final contextInfo = context != null 
+      ? '\n🔍 Context:\n${context.entries.map((e) => '   • ${e.key}: ${e.value}').join('\n')}'
+      : '';
+
+    final detailedMessage = '''
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔥 DETAILED ERROR ANALYSIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 Message: $message
+🏷️  Error Type: ${error.runtimeType}
+💬 Error Details: $error
+⏰ Timestamp: ${DateTime.now().toIso8601String()}$contextInfo
+
+📍 STACK TRACE ANALYSIS:
+${relevantFrames.asMap().entries.map((entry) => '   ${entry.key + 1}. ${entry.value.trim()}').join('\n')}
+
+🔍 FULL STACK TRACE:
+$stackTraceString
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━''';
+
+    developer.log(
+      detailedMessage,
+      name: _tag,
+      level: 1000,
+      error: error,
+      stackTrace: currentStackTrace,
+    );
+  }
+
+  /// Logs a parsing error with specific analysis for JSON/model issues.
+  ///
+  /// This method is specifically designed to help debug common parsing
+  /// issues in Flutter applications, especially those related to JSON
+  /// serialization and null safety.
+  ///
+  /// [message] The primary error message.
+  /// [error] The parsing error object.
+  /// [stackTrace] Stack trace for location analysis.
+  /// [jsonData] Optional JSON data that caused the error.
+  /// [modelType] Optional model type being parsed.
+  static void parsingError(
+    String message,
+    Object? error, [
+    StackTrace? stackTrace,
+    dynamic jsonData,
+    Type? modelType,
+  ]) {
+    final analysisContext = <String, dynamic>{
+      'Error Type': error.runtimeType.toString(),
+      'Model Type': modelType?.toString() ?? 'Unknown',
+      'JSON Data Type': jsonData?.runtimeType.toString() ?? 'null',
+      'JSON Data': jsonData?.toString() ?? 'null',
+    };
+
+    // Common parsing error analysis
+    String troubleshootingTips = '';
+    if (error.toString().contains("type 'Null' is not a subtype of type 'Map<String, dynamic>'")) {
+      troubleshootingTips = '''
+
+🛠️  TROUBLESHOOTING TIPS:
+   • API returned null instead of expected JSON object
+   • Check if API endpoint is working correctly
+   • Verify API response format matches model expectations
+   • Ensure proper null safety in model constructors
+   • Check @JsonKey annotations for correct field mapping
+   • Verify toJson() and fromJson() methods are generated correctly''';
+    } else if (error.toString().contains('NoSuchMethodError')) {
+      troubleshootingTips = '''
+
+🛠️  TROUBLESHOOTING TIPS:
+   • Method called on null object
+   • Check null safety in model methods
+   • Verify object initialization before method calls
+   • Ensure proper null checks before accessing properties''';
+    } else if (error.toString().contains('FormatException')) {
+      troubleshootingTips = '''
+
+🛠️  TROUBLESHOOTING TIPS:
+   • Invalid data format in JSON
+   • Check data type mismatches (String vs int, etc.)
+   • Verify date/time format compatibility
+   • Check number format and locale issues''';
+    }
+
+    detailedError(
+      '''$message
+
+📊 PARSING ERROR ANALYSIS:
+   • This error typically occurs during JSON to Dart object conversion
+   • Check the API response format and ensure it matches your model structure$troubleshootingTips''',
+      error,
+      stackTrace,
+      analysisContext,
+    );
+  }
+
   /// Logs a verbose message with optional custom tag.
   ///
   /// Verbose messages contain very detailed information useful for

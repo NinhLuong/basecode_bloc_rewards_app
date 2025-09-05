@@ -1,29 +1,36 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
 
+part 'home_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class HomeModel extends BaseModel<HomeEntity> {
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'balance')
+  final String? balance;
+  
+  @JsonKey(name: 'offerwalls')
+  final List<OfferWallModel>? offerWalls;
+
   HomeModel({
     this.error,
     this.errorCode,
+    this.balance,
     this.offerWalls,
   });
 
-  HomeModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    balance = json['balance'];
-    if (json['offerwalls'] != null) {
-      offerWalls = [];
-      json['offerwalls'].forEach((v) {
-        offerWalls?.add(OfferWallModel.fromJson(v));
-      });
-    }
-  }
+  factory HomeModel.fromJson(Map<String, dynamic> json) => 
+      _$HomeModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  String? balance;
-  List<OfferWallModel>? offerWalls;
+  Map<String, dynamic> toJson() => _$HomeModelToJson(this);
 
   //
   // List<OfferWallModel> get activeOfferWalls {
@@ -38,7 +45,39 @@ class HomeModel extends BaseModel<HomeEntity> {
   }
 }
 
+@immutable
+@JsonSerializable()
 class OfferWallModel extends BaseModel<OfferWallEntity> {
+  @JsonKey(name: 'offer_id')
+  final String? id;
+  
+  @JsonKey(name: 'offer_title')
+  final String? title;
+  
+  @JsonKey(name: 'offer_subtitle')
+  final String? subtitle;
+  
+  @JsonKey(name: 'offer_url')
+  final String? url;
+  
+  @JsonKey(name: 'offer_type')
+  final String? type;
+  
+  @JsonKey(name: 'offer_points')
+  final String? points;
+  
+  @JsonKey(name: 'offer_featured')
+  final bool? featured;
+  
+  @JsonKey(name: 'offer_thumbnail')
+  final String? thumbnail;
+  
+  @JsonKey(name: 'offer_position')
+  final String? position;
+  
+  @JsonKey(name: 'offer_status')
+  final String? status;
+
   OfferWallModel({
     this.id,
     this.title,
@@ -52,29 +91,10 @@ class OfferWallModel extends BaseModel<OfferWallEntity> {
     this.status,
   });
 
-  OfferWallModel.fromJson(dynamic json) {
-    id = json['offer_id'];
-    title = json['offer_title'];
-    subtitle = json['offer_subtitle'];
-    url = json['offer_url'];
-    type = json['offer_type'];
-    points = json['offer_points'];
-    featured = json['offer_featured'];
-    thumbnail = json['offer_thumbnail'];
-    position = json['offer_position'];
-    status = json['offer_status'];
-  }
+  factory OfferWallModel.fromJson(Map<String, dynamic> json) => 
+      _$OfferWallModelFromJson(json);
 
-  String? id;
-  String? title;
-  String? subtitle;
-  String? url;
-  String? type;
-  String? points;
-  bool? featured;
-  String? thumbnail;
-  String? position;
-  String? status;
+  Map<String, dynamic> toJson() => _$OfferWallModelToJson(this);
 
   @override
   OfferWallEntity toEntity() {

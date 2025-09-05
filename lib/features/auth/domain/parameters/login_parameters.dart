@@ -1,21 +1,30 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
 
-class LoginParameters extends Equatable {
-  final String username;
-  final String password;
-  final int clientId = AppConstants.clientId;
+part 'login_parameters.g.dart';
 
-  const LoginParameters({
+@JsonSerializable()
+class LoginParameters extends Equatable {
+  @JsonKey(name: 'username')
+  final String username;
+  
+  @JsonKey(name: 'password')
+  final String password;
+  
+  @JsonKey(name: 'clientId')
+  final int clientId;
+
+  LoginParameters({
     required this.username,
     required this.password,
-  });
+    int? clientId,
+  }) : clientId = clientId ?? AppConstants.clientId;
 
-  Map<String, dynamic> toJson() => {
-        "username": username,
-        "password": password,
-        "clientId": clientId,
-      };
+  factory LoginParameters.fromJson(Map<String, dynamic> json) => 
+      _$LoginParametersFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LoginParametersToJson(this);
 
   @override
   List<Object> get props => [clientId, username, password];

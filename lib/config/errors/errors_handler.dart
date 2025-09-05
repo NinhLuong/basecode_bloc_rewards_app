@@ -65,12 +65,27 @@ class ErrorsHandler {
       // no internet Exception
       LoggerService.warning('No internet connection detected');
       throw NoInternetException();
-    } catch (e) {
-      LoggerService.error('Unexpected exception in API call', e);
+    } catch (e, stackTrace) {
+      LoggerService.detailedError(
+        'Unexpected exception in API call',
+        e,
+        stackTrace,
+        {
+          'API URL': 'Check the specific API endpoint in logs above',
+          'Request Method': 'Check the HTTP method in logs above',
+          'Exception Location': 'API Service Layer',
+        },
+      );
       
-      // in json parsion error
+      // in json parsing error
       if (e is TypeError) {
-        LoggerService.error('JSON parsing error occurred', e);
+        LoggerService.parsingError(
+          'JSON parsing error occurred during API response processing',
+          e,
+          stackTrace,
+          'Check API response data in logs above',
+          null, // We don't know the specific model type here
+        );
         throw ParsingException(parsingMessage: e.toString());
       }
 
@@ -91,22 +106,39 @@ class ErrorsHandler {
       
       LoggerService.debug('Use case operation completed successfully');
       return Right(result.toEntity() as T);
-    } catch (e) {
+    } catch (e, stackTrace) {
       /// then catch any errors + check types then return [Left] appropriate [Failure]
-      LoggerService.error('Use case operation failed', e);
+      LoggerService.detailedError(
+        'Use case operation failed with comprehensive analysis',
+        e,
+        stackTrace,
+        {
+          'Entity Type (T)': '$T',
+          'Model Type (M)': '$M',
+          'Operation': 'Use Case Execution',
+          'Layer': 'Domain Layer',
+        },
+      );
       
-      final failure = failureThrower(e);
+      final failure = failureThrower(e, stackTrace);
       LoggerService.warning('Converted exception to failure: ${failure.runtimeType} - ${failure.message}');
       
       return Left(failure);
     }
   }
 
-  static Failure failureThrower(Object e) {
+  static Failure failureThrower(Object e, [StackTrace? stackTrace]) {
     LoggerService.debug('Converting exception to failure: ${e.runtimeType}');
     
     if (e is ServerException) {
-      LoggerService.error('Server exception - Status: ${e.errorMessageModel.statusCode}, Message: ${e.errorMessageModel.statusMessage}');
+      LoggerService.error(
+        'Server exception details:\n'
+        'Status Code: ${e.errorMessageModel.statusCode}\n'
+        'Status Message: ${e.errorMessageModel.statusMessage}\n'
+        'Exception: $e',
+        e,
+        stackTrace,
+      );
       return ServerFailure(
         e.errorMessageModel.statusMessage,
         statusCode: e.errorMessageModel.statusCode,
@@ -114,31 +146,54 @@ class ErrorsHandler {
     }
     if (e is NoInternetException) {
       LoggerService.warning('No internet connection exception occurred');
+      LoggerService.error('No Internet Exception Stack Trace', e, stackTrace);
       return NoInternetFailure();
     }
     if (e is UnknownException) {
-      LoggerService.error('Unknown exception occurred: ${e.message}');
+      LoggerService.error(
+        'Unknown exception occurred with details:\n'
+        'Message: ${e.message}\n'
+        'Exception: $e',
+        e,
+        stackTrace,
+      );
       return UnknownFailure();
     }
     if (e is ForceUpdateException) {
       LoggerService.warning('Force update required: ${e.message}');
+      LoggerService.error('Force Update Exception Stack Trace', e, stackTrace);
       return ForceUpdateFailure();
     }
     if (e is AppUnderMaintenanceException) {
       LoggerService.warning('App under maintenance: ${e.message}');
+      LoggerService.error('App Under Maintenance Exception Stack Trace', e, stackTrace);
       return AppUnderMaintenanceFailure();
     }
     if (e is SessionExpiredException) {
       LoggerService.auth('Session expired exception: ${e.message}');
+      LoggerService.error('Session Expired Exception Stack Trace', e, stackTrace);
       return SessionExpiredFailure();
     }
     if (e is ParsingException || e is TypeError) {
       final parsingMessage = e is ParsingException ? e.parsingMessage : e.toString();
-      LoggerService.error('Parsing exception occurred: $parsingMessage');
+      LoggerService.parsingError(
+        'Parsing exception occurred during object conversion',
+        e,
+        stackTrace,
+        'Data parsing failed - check JSON structure and model annotations',
+        null, // Model type not available in this context
+      );
       return ParsingFailure(parsingMessage: parsingMessage);
     }
     
-    LoggerService.error('Unhandled exception type: ${e.runtimeType} - $e');
+    LoggerService.error(
+      'Unhandled exception type with full context:\n'
+      'Type: ${e.runtimeType}\n'
+      'Exception: $e\n'
+      'toString(): ${e.toString()}',
+      e,
+      stackTrace,
+    );
     return Failure(e.toString());
   }
 }

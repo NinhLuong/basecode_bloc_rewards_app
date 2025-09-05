@@ -1,7 +1,25 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
 
+part 'check_email_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class CheckEmailModel extends BaseModel<CheckEmailEntity> {
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'error_message')
+  final String? errorMessage;
+  
+  @JsonKey(name: 'verify_code')
+  final String? verifyCode;
+
   CheckEmailModel({
     this.error,
     this.errorCode,
@@ -9,26 +27,10 @@ class CheckEmailModel extends BaseModel<CheckEmailEntity> {
     this.verifyCode,
   });
 
-  CheckEmailModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    errorMessage = json['error_message'];
-    verifyCode = json['verify_code'];
-  }
+  factory CheckEmailModel.fromJson(Map<String, dynamic> json) => 
+      _$CheckEmailModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  String? errorMessage;
-  String? verifyCode;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    map['error_message'] = errorMessage;
-    map['verify_code'] = verifyCode;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$CheckEmailModelToJson(this);
 
   @override
   CheckEmailEntity toEntity() {
