@@ -1,9 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/dio_log_interceptor.dart';
+import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/error_interceptor.dart';
+import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/header_interceptor.dart';
+import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/token_interceptor.dart';
+import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/force_update_interceptor.dart';
+import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/premium_interceptor.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
 import 'package:magic_rewards/config/errors/errors_handler.dart';
-import 'api_headers.dart';
 
 /// This class [ApiServices] represents the basic services for call API services in the application,
 /// so that all requests for Server Side services are through this same serivce.
@@ -26,13 +30,37 @@ class ApiServices {
       sendTimeout: const Duration(seconds: 30),
     ));
     
+    _setupInterceptors();
+  }
+
+  /// Setup all interceptors in the correct order
+  /// Order matters: Request interceptors run in order, Response/Error interceptors run in reverse order
+  void _setupInterceptors() {
+    LoggerService.network('ApiServices: Setting up interceptors');
+    
     _dio.interceptors.addAll([
+      // 1. Header Interceptor - Add headers first (runs first for requests)
+      HeaderInterceptor(),
+      
+      // 2. Token Interceptor - Handle authentication (runs after headers)
+      TokenInterceptor(_dio),
+      
+      // 3. Premium Interceptor - Check premium access (runs after auth)
+      // PremiumInterceptor(),
+      
+      // 4. Force Update Interceptor - Check app version requirements
+      ForceUpdateInterceptor(),
+      
+      // 5. Logging Interceptor - Log requests/responses (should be near the end)
       CustomLogInterceptor(
         logPrint: (obj) => LoggerService.network(obj.toString()),
         requestBody: true,
         responseBody: true,
         error: true,
       ),
+      
+      // 6. Error Interceptor - Handle errors (runs last for requests, first for errors)
+      ErrorInterceptor(),
     ]);
   }
 
@@ -50,7 +78,7 @@ class ApiServices {
       () => _dio.post(
         url,
         data: data == null ? null : FormData.fromMap(data as Map<String, dynamic>),
-        options: Options(headers: headers ?? ApiHeaders().baseHeaders),
+        options: Options(headers: headers), // Headers are handled by interceptors
       ),
     );
   }
@@ -67,7 +95,7 @@ class ApiServices {
       () => _dio.put(
         url,
         data: data == null ? null : FormData.fromMap(data as Map<String, dynamic>),
-        options: Options(headers: headers ?? ApiHeaders().baseHeaders),
+        options: Options(headers: headers), // Headers are handled by interceptors
       ),
     );
   }
@@ -84,7 +112,7 @@ class ApiServices {
       () => _dio.delete(
         url,
         data: data == null ? null : FormData.fromMap(data as Map<String, dynamic>),
-        options: Options(headers: headers ?? ApiHeaders().baseHeaders),
+        options: Options(headers: headers), // Headers are handled by interceptors
       ),
     );
   }
@@ -101,8 +129,31 @@ class ApiServices {
       () => _dio.get(
         url,
         queryParameters: queryParameters,
-        options: Options(headers: headers ?? ApiHeaders().baseHeaders),
+        options: Options(headers: headers), // Headers are handled by interceptors
       ),
     );
+  }
+
+  /// Get direct access to Dio instance for advanced usage
+  /// Use with caution as this bypasses the standardized request methods
+  Dio get dioInstance => _dio;
+
+  /// Add custom interceptor at runtime if needed
+  void addInterceptor(Interceptor interceptor) {
+    _dio.interceptors.add(interceptor);
+    LoggerService.network('ApiServices: Custom interceptor added');
+  }
+
+  /// Remove all interceptors (useful for testing)
+  void clearInterceptors() {
+    _dio.interceptors.clear();
+    LoggerService.network('ApiServices: All interceptors cleared');
+  }
+
+  /// Reset interceptors to default configuration
+  void resetInterceptors() {
+    clearInterceptors();
+    _setupInterceptors();
+    LoggerService.network('ApiServices: Interceptors reset to default configuration');
   }
 }

@@ -7,5 +7,6 @@
 ///
 /// This enum is commonly used in asynchronous operations to track the status of network requests
 /// and handle different UI states based on the request's progress and outcome.
+library;
 
 enum RequestStatus { loading, success, error, init }

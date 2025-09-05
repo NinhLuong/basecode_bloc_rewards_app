@@ -1,5 +1,6 @@
 /// This code snippet demonstrates a function named `showToast` that displays a toast message using the Fluttertoast package.
 /// The function takes a required `message` parameter for the content of the toast message, and optional parameters for customizing the appearance of the toast.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

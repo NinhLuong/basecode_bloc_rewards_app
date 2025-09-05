@@ -3,5 +3,6 @@
 ///
 /// This enum is used to define the supported languages in the application and can be used
 /// to handle language selection and localization within the app.
+library;
 
 enum AppLanguages { vietnam, english }

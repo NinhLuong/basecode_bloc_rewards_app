@@ -4,6 +4,7 @@
 /// You can define [Duration] in the following way:
 ///
 /// static const Duration durationName = Duration(seconds: secondNumber);
+library;
 
 class AppDuration {
   static const Duration snackBarDuration = Duration(seconds: 5);

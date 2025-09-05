@@ -11,6 +11,7 @@ The application follows a **Clean Architecture** design pattern, which ensures s
 ### 1️⃣ Data Layer
 
 * **Data Source**: Handles API calls and remote data interactions.
+
 * **Models**: Defines the data structures.
 * **Repository Implementation**: Manages data retrieval and submission logic.
 
@@ -46,19 +47,7 @@ Additionally, the application features **high-quality UI components** that are m
 
 ## ⚙️ Installation
 
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/mhdamhd/magicrewards.git
-   ```
-
-2. **Navigate to the project directory:**
-
-   ```bash
-   cd magicrewards
-   ```
-
-3. **Install dependencies:**
+ **Install dependencies:**
 
    ```bash
    flutter pub get

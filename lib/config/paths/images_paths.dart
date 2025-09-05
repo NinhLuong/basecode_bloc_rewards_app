@@ -8,6 +8,7 @@
 /// by set path to [NetworkImage] widget, or to [CachedNetworkImage] widget
 ///
 /// Ex: NetworkImage(_path),
+library;
 
 // TODO: add images assest pathes here
 class ImagesPaths {

@@ -147,7 +147,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 style: context.f16400,
               )),
               Switch(
-                  activeColor: AppColors.blue,
+                  activeThumbColor: AppColors.blue,
                   inactiveThumbColor: AppColors.grey1,
                   value: showNotificationsEmail,
                   onChanged: (val) {

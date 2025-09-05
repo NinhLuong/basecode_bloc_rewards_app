@@ -59,7 +59,7 @@ class TopUsersTap extends StatelessWidget {
                           ...state.data!.rest
                               .map((e) =>
                                   buildRankContainer(context, userRank: e))
-                              .toList(),
+                              ,
                           const SizedBox(height: 70),
                         ],
                 ),

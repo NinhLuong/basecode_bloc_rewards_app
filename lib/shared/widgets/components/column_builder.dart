@@ -1,5 +1,6 @@
 /// The ColumnBuilder class is a custom widget that helps in generating a column of widgets dynamically.
 /// It takes an [itemBuilder] function, `itemCount`, and optional parameters to customize the layout of the column.
+library;
 
 import 'package:flutter/material.dart';
 

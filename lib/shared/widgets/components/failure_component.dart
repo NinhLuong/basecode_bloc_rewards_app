@@ -1,5 +1,6 @@
 /// This file contains a set of components for displaying different types of failures in a Flutter application.
 /// Each failure type has its own corresponding component that handles the visual representation of the failure.
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

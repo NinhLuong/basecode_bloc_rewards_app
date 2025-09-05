@@ -29,6 +29,7 @@
 /// - **Warning (900)**: Potential issues that don't stop execution
 /// - **Error (1000)**: Errors that need attention
 /// - **Verbose (300)**: Very detailed information for deep debugging
+library;
 import 'dart:developer' as developer;
 
 /// Centralized logging utility for the Flutter application.

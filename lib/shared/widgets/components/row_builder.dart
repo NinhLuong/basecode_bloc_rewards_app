@@ -1,5 +1,6 @@
 /// The RowBuilder class is a custom widget that helps in generating a row of widgets dynamically.
 /// It takes an [itemBuilder] function, [itemCount], and optional parameters to customize the layout of the row.
+library;
 
 import 'package:flutter/material.dart';
 
