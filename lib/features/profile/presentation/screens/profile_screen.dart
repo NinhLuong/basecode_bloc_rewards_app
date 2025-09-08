@@ -185,32 +185,28 @@ class ProfileScreen extends StatelessWidget {
             icon: ImagesPaths.signOutSvg,
             title: S.of(context).signOut,
             onTap: () async {
-              await AppDialogs.showConfirmDialog(context,
+              final confirmed = await AppDialogs.showConfirmDialog(context,
                       text: S.of(context).areYouSureToSignOut,
-                      confirmText: S.of(context).signOut)
-                  .then((value) {
-                if (value) {
-                  context.read<AppConfigBloc>().add(const LogOutEvent());
-                  context.go(LoginRoute.name);
-                }
-              });
+                      confirmText: S.of(context).signOut);
+              if (confirmed && context.mounted) {
+                context.read<AppConfigBloc>().add(const LogOutEvent());
+                context.go(LoginRoute.name);
+              }
             }),
         ProfileTile(
             icon: ImagesPaths.deleteAccountSvg,
             title: S.of(context).deleteAccount,
             onTap: () async {
-              await AppDialogs.showConfirmDialog(context,
+              final confirmed = await AppDialogs.showConfirmDialog(context,
                       text: S.of(context).areYouSureToDeleteAccount,
-                      confirmText: S.of(context).delete)
-                  .then((value) {
-                if (value) {
-                  context
-                      .read<DeleteAccountBloc>()
-                      .add(const DeleteAccountButtonPressedEvent());
-                  context.read<AppConfigBloc>().add(const LogOutEvent());
-                  context.go(LoginRoute.name);
-                }
-              });
+                      confirmText: S.of(context).delete);
+              if (confirmed && context.mounted) {
+                context
+                    .read<DeleteAccountBloc>()
+                    .add(const DeleteAccountButtonPressedEvent());
+                context.read<AppConfigBloc>().add(const LogOutEvent());
+                context.go(LoginRoute.name);
+              }
             },
             red: true),
       ],
