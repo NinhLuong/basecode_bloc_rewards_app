@@ -10,15 +10,15 @@ import 'package:magic_rewards/features/home/domain/usecases/get_home_usecase.dar
 part 'home_event.dart';
 
 class HomeBloc extends Bloc<HomeEvent, BaseState<HomeEntity>> {
-  final GetHomeUsecase getHomeUsecase;
+  final GetHomeUseCase getHomeUseCase;
 
-  HomeBloc(this.getHomeUsecase) : super(const BaseState<HomeEntity>()) {
+  HomeBloc(this.getHomeUseCase) : super(const BaseState<HomeEntity>()) {
     on<FetchHomeEvent>(_getHome);
   }
 
   FutureOr<void> _getHome(FetchHomeEvent event, emit) async {
     emit(state.loading());
-    final result = await getHomeUsecase.call(params: HomeParameters());
+    final result = await getHomeUseCase.call(params: HomeParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

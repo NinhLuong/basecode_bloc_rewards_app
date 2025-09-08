@@ -4,7 +4,7 @@ import 'package:magic_rewards/config/enums/order_status.dart';
 class OrdersEntity extends BaseEntity {
   final List<OrderEntity> orders;
 
-  OrdersEntity({required this.orders});
+  const OrdersEntity({required this.orders});
 
   @override
   List<Object?> get props => [orders];
@@ -18,7 +18,7 @@ class OrderEntity extends BaseEntity {
   final String wallet;
   final OrderStatus status;
 
-  OrderEntity(
+  const OrderEntity(
       {required this.id,
       required this.name,
       required this.points,

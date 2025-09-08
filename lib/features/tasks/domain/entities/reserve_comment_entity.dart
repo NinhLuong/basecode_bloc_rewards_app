@@ -3,14 +3,14 @@ import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 class ReserveCommentEntity extends BaseEntity {
   final CommentEntity commentEntity;
 
-  ReserveCommentEntity({required this.commentEntity});
+  const ReserveCommentEntity({required this.commentEntity});
 
   @override
   List<Object?> get props => [commentEntity];
 }
 
 class CommentEntity extends BaseEntity {
-  CommentEntity({
+  const CommentEntity({
     required this.id,
     required this.taskId,
     required this.text,

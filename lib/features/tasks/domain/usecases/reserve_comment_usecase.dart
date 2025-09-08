@@ -5,10 +5,10 @@ import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_ent
 import 'package:magic_rewards/features/tasks/domain/parameters/reserve_comment_parameters.dart';
 import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.dart';
 
-class ReserveCommentUsecase extends UseCase<ReserveCommentEntity, ReserveCommentParameters> {
+class ReserveCommentUseCase extends UseCase<ReserveCommentEntity, ReserveCommentParameters> {
   final TasksRepository tasksRepository;
 
-  ReserveCommentUsecase(this.tasksRepository);
+  ReserveCommentUseCase(this.tasksRepository);
 
   @override
   Future<Either<Failure, ReserveCommentEntity>> call({required ReserveCommentParameters params}) async {

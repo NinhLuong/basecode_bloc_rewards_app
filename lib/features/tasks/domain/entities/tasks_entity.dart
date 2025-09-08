@@ -1,14 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
+@immutable
 class TasksEntity extends BaseEntity {
   final List<TaskEntity> tasks;
 
-  TasksEntity({required this.tasks});
+  const TasksEntity({required this.tasks});
 
   @override
   List<Object?> get props => [tasks];
 }
 
+@immutable
 class TaskEntity extends BaseEntity {
   final String id;
   final String title;
@@ -18,7 +21,7 @@ class TaskEntity extends BaseEntity {
   final String url;
   final String price;
 
-  TaskEntity({
+  const TaskEntity({
     required this.id,
     required this.title,
     required this.subTitle,

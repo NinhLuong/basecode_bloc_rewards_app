@@ -5,10 +5,10 @@ import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dar
 import 'package:magic_rewards/features/rewards/domain/parameters/orders_parameters.dart';
 import 'package:magic_rewards/features/rewards/domain/repository/rewards_repository.dart';
 
-class GetOrdersUsecase extends UseCase<OrdersEntity, OrdersParameters> {
+class GetOrdersUseCase extends UseCase<OrdersEntity, OrdersParameters> {
   final RewardsRepository rewardsRepository;
 
-  GetOrdersUsecase(this.rewardsRepository);
+  GetOrdersUseCase(this.rewardsRepository);
 
   @override
   Future<Either<Failure, OrdersEntity>> call({required OrdersParameters params}) async {

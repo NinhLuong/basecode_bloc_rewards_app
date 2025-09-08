@@ -13,16 +13,16 @@ part 'check_email_event.dart';
 
 class CheckEmailBloc
     extends Bloc<CheckEmailEvent, BaseState<CheckEmailEntity>> {
-  final CheckEmailUsecase checkEmailUsecase;
+  final CheckEmailUseCase checkEmailUseCase;
 
-  CheckEmailBloc(this.checkEmailUsecase)
+  CheckEmailBloc(this.checkEmailUseCase)
       : super(const BaseState<CheckEmailEntity>()) {
     on<CheckEmailButtonTappedEvent>(_checkEmail, transformer: restartable());
   }
 
   FutureOr<void> _checkEmail(CheckEmailButtonTappedEvent event, emit) async {
     emit(state.loading());
-    final result = await checkEmailUsecase.call(
+    final result = await checkEmailUseCase.call(
       params: CheckEmailParameters(email: event.email),
     );
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));

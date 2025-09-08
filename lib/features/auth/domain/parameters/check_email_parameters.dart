@@ -17,9 +17,6 @@ class CheckEmailParameters extends Equatable {
     int? clientId,
   }) : clientId = clientId ?? AppConstants.clientId;
 
-  factory CheckEmailParameters.fromJson(Map<String, dynamic> json) => 
-      _$CheckEmailParametersFromJson(json);
-
   Map<String, dynamic> toJson() => _$CheckEmailParametersToJson(this);
 
   @override

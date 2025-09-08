@@ -9,9 +9,9 @@ import 'package:magic_rewards/features/profile/domain/usecases/delete_account_us
 part 'delete_account_event.dart';
 
 class DeleteAccountBloc extends Bloc<DeleteAccountEvent, BaseState<void>> {
-  final DeleteAccountUsecase deleteAccountUsecase;
+  final DeleteAccountUseCase deleteAccountUseCase;
 
-  DeleteAccountBloc(this.deleteAccountUsecase) : super(const BaseState<void>()) {
+  DeleteAccountBloc(this.deleteAccountUseCase) : super(const BaseState<void>()) {
     on<DeleteAccountButtonPressedEvent>(_deleteAccount);
   }
 
@@ -19,7 +19,7 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, BaseState<void>> {
       DeleteAccountButtonPressedEvent event, emit) async {
     emit(state.loading());
     final result =
-        await deleteAccountUsecase.call(params: DeleteAccountParameters());
+        await deleteAccountUseCase.call(params: DeleteAccountParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

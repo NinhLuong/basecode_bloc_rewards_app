@@ -1,32 +1,32 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/profile/domain/entities/profile_entity.dart';
 
+part 'profile_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class ProfileModel extends BaseModel<ProfileEntity> {
-  ProfileModel({
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'data')
+  final ProfileData? data;
+
+  const ProfileModel({
     this.error,
     this.errorCode,
     this.data,
   });
 
-  ProfileModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
-  }
+  factory ProfileModel.fromJson(Map<String, dynamic> json) => 
+      _$ProfileModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  Data? data;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    if (data != null) {
-      map['data'] = data?.toJson();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$ProfileModelToJson(this);
 
   @override
   ProfileEntity toEntity() {
@@ -38,28 +38,26 @@ class ProfileModel extends BaseModel<ProfileEntity> {
   }
 }
 
-class Data {
-  Data({
+@immutable
+@JsonSerializable()
+class ProfileData {
+  @JsonKey(name: 'balance')
+  final String? balance;
+  
+  @JsonKey(name: 'redeemed_points')
+  final String? redeemedPoints;
+  
+  @JsonKey(name: 'total_points')
+  final String? totalPoints;
+
+  const ProfileData({
     this.balance,
     this.redeemedPoints,
     this.totalPoints,
   });
 
-  Data.fromJson(dynamic json) {
-    balance = json['balance'];
-    redeemedPoints = json['redeemed_points'];
-    totalPoints = json['total_points'];
-  }
+  factory ProfileData.fromJson(Map<String, dynamic> json) => 
+      _$ProfileDataFromJson(json);
 
-  String? balance;
-  String? redeemedPoints;
-  String? totalPoints;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['balance'] = balance;
-    map['redeemed_points'] = redeemedPoints;
-    map['total_points'] = totalPoints;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$ProfileDataToJson(this);
 }

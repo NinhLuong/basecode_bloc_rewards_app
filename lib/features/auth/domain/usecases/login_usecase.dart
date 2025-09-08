@@ -6,10 +6,10 @@ import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.d
 import 'package:magic_rewards/features/auth/domain/repository/auth_repository.dart';
 
 
-class LoginUsecase extends UseCase<UserEntity, LoginParameters> {
+class LoginUseCase extends UseCase<UserEntity, LoginParameters> {
   final AuthRepository authRepository;
 
-  LoginUsecase(this.authRepository);
+  LoginUseCase(this.authRepository);
 
   @override
   Future<Either<Failure, UserEntity>> call({required LoginParameters params}) async {

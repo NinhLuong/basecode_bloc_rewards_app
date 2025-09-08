@@ -7,7 +7,7 @@ class PayoutsEntity extends BaseEntity {
   final double minPayout;
   final double redeemPercent;
 
-  PayoutsEntity(
+  const PayoutsEntity(
       {required this.payouts,
       required this.balance,
       required this.minPayout,
@@ -25,7 +25,7 @@ class PayoutEntity extends BaseEntity {
   final String thumbnail;
   final double cost;
 
-  PayoutEntity(
+  const PayoutEntity(
       {required this.id,
       required this.title,
       required this.subtitle,

@@ -1,32 +1,32 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
 
+part 'reserve_comment_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class ReserveCommentModel extends BaseModel<ReserveCommentEntity> {
-  ReserveCommentModel({
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'data')
+  final CommentModel? data;
+
+  const ReserveCommentModel({
     this.error,
     this.errorCode,
     this.data,
   });
 
-  ReserveCommentModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    data = json['data'] != null ? CommentModel.fromJson(json['data']) : null;
-  }
+  factory ReserveCommentModel.fromJson(Map<String, dynamic> json) => 
+      _$ReserveCommentModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  CommentModel? data;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    if (data != null) {
-      map['data'] = data?.toJson();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$ReserveCommentModelToJson(this);
 
   @override
   ReserveCommentEntity toEntity() {
@@ -34,8 +34,31 @@ class ReserveCommentModel extends BaseModel<ReserveCommentEntity> {
   }
 }
 
+@immutable
+@JsonSerializable()
 class CommentModel extends BaseModel<CommentEntity> {
-  CommentModel({
+  @JsonKey(name: 'comment_id')
+  final String? commentId;
+  
+  @JsonKey(name: 'comment_task_id')
+  final String? commentTaskId;
+  
+  @JsonKey(name: 'comment_user_id')
+  final String? commentUserId;
+  
+  @JsonKey(name: 'comment_text')
+  final String? commentText;
+  
+  @JsonKey(name: 'comment_status')
+  final String? commentStatus;
+  
+  @JsonKey(name: 'comment_last_changed')
+  final String? commentLastChanged;
+  
+  @JsonKey(name: 'comment_created_at')
+  final String? commentCreatedAt;
+
+  const CommentModel({
     this.commentId,
     this.commentTaskId,
     this.commentUserId,
@@ -45,35 +68,10 @@ class CommentModel extends BaseModel<CommentEntity> {
     this.commentCreatedAt,
   });
 
-  CommentModel.fromJson(dynamic json) {
-    commentId = json['comment_id'];
-    commentTaskId = json['comment_task_id'];
-    commentUserId = json['comment_user_id'];
-    commentText = json['comment_text'];
-    commentStatus = json['comment_status'];
-    commentLastChanged = json['comment_last_changed'];
-    commentCreatedAt = json['comment_created_at'];
-  }
+  factory CommentModel.fromJson(Map<String, dynamic> json) => 
+      _$CommentModelFromJson(json);
 
-  String? commentId;
-  String? commentTaskId;
-  String? commentUserId;
-  String? commentText;
-  String? commentStatus;
-  String? commentLastChanged;
-  String? commentCreatedAt;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['comment_id'] = commentId;
-    map['comment_task_id'] = commentTaskId;
-    map['comment_user_id'] = commentUserId;
-    map['comment_text'] = commentText;
-    map['comment_status'] = commentStatus;
-    map['comment_last_changed'] = commentLastChanged;
-    map['comment_created_at'] = commentCreatedAt;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$CommentModelToJson(this);
 
   @override
   CommentEntity toEntity() {

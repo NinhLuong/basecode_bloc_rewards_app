@@ -1,46 +1,37 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 
+part 'top_users_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class TopUsersModel extends BaseModel<TopUsersEntity> {
-  TopUsersModel({
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'requests')
+  final List<UserRankModel>? requests;
+  
+  @JsonKey(name: 'my_rank')
+  final UserRankModel? myRank;
+
+  const TopUsersModel({
     this.error,
     this.errorCode,
     this.requests,
     this.myRank,
   });
 
-  TopUsersModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    if (json['requests'] != null) {
-      requests = [];
-      json['requests'].forEach((v) {
-        requests?.add(UserRankModel.fromJson(v));
-      });
-    }
-    myRank = json['my_rank'] != null
-        ? UserRankModel.fromJson(json['my_rank'])
-        : null;
-  }
+  factory TopUsersModel.fromJson(Map<String, dynamic> json) => 
+      _$TopUsersModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  List<UserRankModel>? requests;
-  UserRankModel? myRank;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    if (requests != null) {
-      map['requests'] = requests?.map((v) => v.toJson()).toList();
-    }
-    if (myRank != null) {
-      map['my_rank'] = myRank?.toJson();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$TopUsersModelToJson(this);
 
   @override
   TopUsersEntity toEntity() {
@@ -67,36 +58,40 @@ class TopUsersModel extends BaseModel<TopUsersEntity> {
   }
 }
 
+@immutable
+@JsonSerializable()
 class UserRankModel extends BaseModel<UserRankEntity> {
-  UserRankModel({
-    this.requestFrom,
+  @JsonKey(name: 'request_from')
+  final String? _requestFrom;
+  
+  @JsonKey(name: 'points')
+  final String? points;
+  
+  @JsonKey(name: 'amount')
+  final String? amount;
+  
+  @JsonKey(name: 'rank')
+  final int? rank;
+
+  const UserRankModel({
+    String? requestFrom,
     this.points,
     this.amount,
     this.rank,
-  });
+  }) : _requestFrom = requestFrom;
 
-  UserRankModel.fromJson(dynamic json) {
-    requestFrom = (json['request_from'] as String?) ?? '';
-    var length = requestFrom!.length;
-    requestFrom = requestFrom!.replaceRange(length - 3, length, '***');
-    points = json['points'];
-    amount = json['amount'];
-    rank = json['rank'];
+  // Custom getter to apply masking logic
+  String? get requestFrom {
+    if (_requestFrom == null || _requestFrom.isEmpty) return '';
+    final length = _requestFrom.length;
+    if (length <= 3) return _requestFrom;
+    return _requestFrom.replaceRange(length - 3, length, '***');
   }
 
-  String? requestFrom;
-  String? points;
-  String? amount;
-  int? rank;
+  factory UserRankModel.fromJson(Map<String, dynamic> json) => 
+      _$UserRankModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['request_from'] = requestFrom;
-    map['points'] = points;
-    map['amount'] = amount;
-    map['rank'] = rank;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$UserRankModelToJson(this);
 
   @override
   UserRankEntity toEntity() {

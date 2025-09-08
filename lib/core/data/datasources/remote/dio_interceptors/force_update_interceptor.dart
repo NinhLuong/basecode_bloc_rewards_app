@@ -10,7 +10,7 @@ class ForceUpdateInterceptor extends Interceptor {
   static const String _forceUpdateHeader = 'X-Force-Update';
   static const String _minVersionHeader = 'X-Min-Version';
   // static const String _currentVersionHeader = 'X-Current-Version'; // For future use
-  static const String _updateUrlHeader = 'X-Update-Url';
+  // static const String _updateUrlHeader = 'X-Update-Url';
   static const String _updateMessageHeader = 'X-Update-Message';
 
   String? _cachedAppVersion;
@@ -254,9 +254,9 @@ class ForceUpdateInterceptor extends Interceptor {
   }
 
   /// Get update URL from headers
-  String? _getUpdateUrl(Headers headers) {
-    return headers.value(_updateUrlHeader);
-  }
+  // String? _getUpdateUrl(Headers headers) {
+  //   return headers.value(_updateUrlHeader);
+  // }
 
   /// Get current app version
   Future<String> _getAppVersion() async {

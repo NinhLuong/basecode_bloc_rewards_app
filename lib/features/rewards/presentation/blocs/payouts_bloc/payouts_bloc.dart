@@ -10,16 +10,16 @@ import 'package:magic_rewards/features/rewards/domain/usecases/get_payouts_useca
 part 'payouts_event.dart';
 
 class PayoutsBloc extends Bloc<PayoutsEvent, BaseState<PayoutsEntity>> {
-  final GetPayoutsUsecase getPayoutsUsecase;
+  final GetPayoutsUseCase getPayoutsUseCase;
 
-  PayoutsBloc(this.getPayoutsUsecase)
+  PayoutsBloc(this.getPayoutsUseCase)
       : super(const BaseState<PayoutsEntity>()) {
     on<FetchPayoutsEvent>(_getPayouts);
   }
 
   FutureOr<void> _getPayouts(FetchPayoutsEvent event, emit) async {
     emit(state.loading());
-    final result = await getPayoutsUsecase.call(params: PayoutsParameters());
+    final result = await getPayoutsUseCase.call(params: PayoutsParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

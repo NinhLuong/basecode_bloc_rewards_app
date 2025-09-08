@@ -1,42 +1,37 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/config/utils/app_date_formatter.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
 
+part 'transactions_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class TransactionsModel extends BaseModel<TransactionsEntity> {
-  TransactionsModel({
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'user')
+  final String? user;
+  
+  @JsonKey(name: 'transactions')
+  final List<Transaction>? transactions;
+
+  const TransactionsModel({
     this.error,
     this.errorCode,
     this.user,
     this.transactions,
   });
 
-  TransactionsModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    user = json['user'];
-    if (json['transactions'] != null) {
-      transactions = [];
-      json['transactions'].forEach((v) {
-        transactions?.add(Transaction.fromJson(v));
-      });
-    }
-  }
+  factory TransactionsModel.fromJson(Map<String, dynamic> json) => 
+      _$TransactionsModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  String? user;
-  List<Transaction>? transactions;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    map['user'] = user;
-    if (transactions != null) {
-      map['transactions'] = transactions?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$TransactionsModelToJson(this);
 
   @override
   TransactionsEntity toEntity() {
@@ -45,8 +40,28 @@ class TransactionsModel extends BaseModel<TransactionsEntity> {
   }
 }
 
+@immutable
+@JsonSerializable()
 class Transaction extends BaseModel<TransactionEntity> {
-  Transaction({
+  @JsonKey(name: 'tn_id')
+  final String? tnId;
+  
+  @JsonKey(name: 'tn_type')
+  final String? tnType;
+  
+  @JsonKey(name: 'tn_name')
+  final String? tnName;
+  
+  @JsonKey(name: 'tn_points')
+  final String? tnPoints;
+  
+  @JsonKey(name: 'tn_date')
+  final String? tnDate;
+  
+  @JsonKey(name: 'tn_status')
+  final String? tnStatus;
+
+  const Transaction({
     this.tnId,
     this.tnType,
     this.tnName,
@@ -55,32 +70,10 @@ class Transaction extends BaseModel<TransactionEntity> {
     this.tnStatus,
   });
 
-  Transaction.fromJson(dynamic json) {
-    tnId = json['tn_id'];
-    tnType = json['tn_type'];
-    tnName = json['tn_name'];
-    tnPoints = json['tn_points'];
-    tnDate = json['tn_date'];
-    tnStatus = json['tn_status'];
-  }
+  factory Transaction.fromJson(Map<String, dynamic> json) => 
+      _$TransactionFromJson(json);
 
-  String? tnId;
-  String? tnType;
-  String? tnName;
-  String? tnPoints;
-  String? tnDate;
-  String? tnStatus;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['tn_id'] = tnId;
-    map['tn_type'] = tnType;
-    map['tn_name'] = tnName;
-    map['tn_points'] = tnPoints;
-    map['tn_date'] = tnDate;
-    map['tn_status'] = tnStatus;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$TransactionToJson(this);
 
   @override
   TransactionEntity toEntity() {

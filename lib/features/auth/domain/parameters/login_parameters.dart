@@ -21,9 +21,6 @@ class LoginParameters extends Equatable {
     int? clientId,
   }) : clientId = clientId ?? AppConstants.clientId;
 
-  factory LoginParameters.fromJson(Map<String, dynamic> json) => 
-      _$LoginParametersFromJson(json);
-
   Map<String, dynamic> toJson() => _$LoginParametersToJson(this);
 
   @override

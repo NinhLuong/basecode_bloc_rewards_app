@@ -12,16 +12,16 @@ import 'package:magic_rewards/features/auth/domain/usecases/login_usecase.dart';
 part 'login_event.dart';
 
 class LoginBloc extends Bloc<LoginEvent, BaseState<UserEntity>> {
-  final LoginUsecase loginUsecase; 
+  final LoginUseCase loginUseCase; 
 
-  LoginBloc(this.loginUsecase) : super(const BaseState<UserEntity>()) {
+  LoginBloc(this.loginUseCase) : super(const BaseState<UserEntity>()) {
     on<LoginButtonTappedEvent>(_login, transformer: restartable());
   }
 
   FutureOr<void> _login(LoginButtonTappedEvent event, emit) async {
     emit(state.loading());
     final params = LoginParameters(username: event.username, password: event.password);
-    final result = await loginUsecase.call(params: params);
+    final result = await loginUseCase.call(params: params);
     result.fold(
       (failure) => emit(state.error(failure)),
       (user) => emit(state.success(user)),

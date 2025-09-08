@@ -10,15 +10,15 @@ import 'package:magic_rewards/features/rewards/domain/usecases/get_orders_usecas
 part 'orders_event.dart';
 
 class OrdersBloc extends Bloc<OrdersEvent, BaseState<OrdersEntity>> {
-  final GetOrdersUsecase getOrdersUsecase;
+  final GetOrdersUseCase getOrdersUseCase;
 
-  OrdersBloc(this.getOrdersUsecase) : super(const BaseState<OrdersEntity>()) {
+  OrdersBloc(this.getOrdersUseCase) : super(const BaseState<OrdersEntity>()) {
     on<FetchOrdersEvent>(_getOrders);
   }
 
   FutureOr<void> _getOrders(FetchOrdersEvent event, emit) async {
     emit(state.loading());
-    final result = await getOrdersUsecase.call(params: OrdersParameters());
+    final result = await getOrdersUseCase.call(params: OrdersParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

@@ -1,43 +1,38 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/shared/extensions/string_extensions/string_to_order_status.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/config/utils/app_date_formatter.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dart';
 
+part 'orders_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class OrdersModel extends BaseModel<OrdersEntity> {
-  OrdersModel({
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'user')
+  final String? user;
+  
+  @JsonKey(name: 'transactions')
+  final List<Order>? transactions;
+
+  const OrdersModel({
     this.error,
     this.errorCode,
     this.user,
     this.transactions,
   });
 
-  OrdersModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    user = json['user'];
-    if (json['transactions'] != null) {
-      transactions = [];
-      json['transactions'].forEach((v) {
-        transactions?.add(Order.fromJson(v));
-      });
-    }
-  }
+  factory OrdersModel.fromJson(Map<String, dynamic> json) => 
+      _$OrdersModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  String? user;
-  List<Order>? transactions;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    map['user'] = user;
-    if (transactions != null) {
-      map['transactions'] = transactions?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$OrdersModelToJson(this);
 
   @override
   OrdersEntity toEntity() {
@@ -46,8 +41,31 @@ class OrdersModel extends BaseModel<OrdersEntity> {
   }
 }
 
+@immutable
+@JsonSerializable()
 class Order extends BaseModel<OrderEntity> {
-  Order({
+  @JsonKey(name: 'tn_id')
+  final String? tnId;
+  
+  @JsonKey(name: 'tn_type')
+  final String? tnType;
+  
+  @JsonKey(name: 'tn_name')
+  final String? tnName;
+  
+  @JsonKey(name: 'tn_points')
+  final String? tnPoints;
+  
+  @JsonKey(name: 'tn_to')
+  final String? tnTo;
+  
+  @JsonKey(name: 'tn_date')
+  final String? tnDate;
+  
+  @JsonKey(name: 'tn_status')
+  final String? tnStatus;
+
+  const Order({
     this.tnId,
     this.tnType,
     this.tnName,
@@ -57,35 +75,10 @@ class Order extends BaseModel<OrderEntity> {
     this.tnStatus,
   });
 
-  Order.fromJson(dynamic json) {
-    tnId = json['tn_id'];
-    tnType = json['tn_type'];
-    tnName = json['tn_name'];
-    tnPoints = json['tn_points'];
-    tnTo = json['tn_to'];
-    tnDate = json['tn_date'];
-    tnStatus = json['tn_status'];
-  }
+  factory Order.fromJson(Map<String, dynamic> json) => 
+      _$OrderFromJson(json);
 
-  String? tnId;
-  String? tnType;
-  String? tnName;
-  String? tnPoints;
-  String? tnTo;
-  String? tnDate;
-  String? tnStatus;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['tn_id'] = tnId;
-    map['tn_type'] = tnType;
-    map['tn_name'] = tnName;
-    map['tn_points'] = tnPoints;
-    map['tn_to'] = tnPoints;
-    map['tn_date'] = tnDate;
-    map['tn_status'] = tnStatus;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$OrderToJson(this);
 
   @override
   OrderEntity toEntity() {

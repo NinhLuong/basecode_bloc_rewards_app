@@ -1,38 +1,33 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/config/utils/app_date_formatter.dart';
 import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
 
+part 'live_offers_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class LiveOffersModel extends BaseModel<LiveOffersEntity> {
-  LiveOffersModel({
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'live_offers')
+  final List<LiveOffers>? liveOffers;
+
+  const LiveOffersModel({
     this.error,
     this.errorCode,
     this.liveOffers,
   });
 
-  LiveOffersModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    if (json['live_offers'] != null) {
-      liveOffers = [];
-      json['live_offers'].forEach((v) {
-        liveOffers?.add(LiveOffers.fromJson(v));
-      });
-    }
-  }
+  factory LiveOffersModel.fromJson(Map<String, dynamic> json) => 
+      _$LiveOffersModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  List<LiveOffers>? liveOffers;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    if (liveOffers != null) {
-      map['live_offers'] = liveOffers?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$LiveOffersModelToJson(this);
 
   @override
   LiveOffersEntity toEntity() {
@@ -41,8 +36,25 @@ class LiveOffersModel extends BaseModel<LiveOffersEntity> {
   }
 }
 
+@immutable
+@JsonSerializable()
 class LiveOffers extends BaseModel<LiveOfferEntity> {
-  LiveOffers({
+  @JsonKey(name: 'id')
+  final String? id;
+  
+  @JsonKey(name: 'username')
+  final String? username;
+  
+  @JsonKey(name: 'points')
+  final String? points;
+  
+  @JsonKey(name: 'type')
+  final String? type;
+  
+  @JsonKey(name: 'date')
+  final String? date;
+
+  const LiveOffers({
     this.id,
     this.username,
     this.points,
@@ -50,29 +62,10 @@ class LiveOffers extends BaseModel<LiveOfferEntity> {
     this.date,
   });
 
-  LiveOffers.fromJson(dynamic json) {
-    id = json['id'];
-    username = json['username'];
-    points = json['points'];
-    type = json['type'];
-    date = json['date'];
-  }
+  factory LiveOffers.fromJson(Map<String, dynamic> json) => 
+      _$LiveOffersFromJson(json);
 
-  String? id;
-  String? username;
-  String? points;
-  String? type;
-  String? date;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['username'] = username;
-    map['points'] = points;
-    map['type'] = type;
-    map['date'] = date;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$LiveOffersToJson(this);
 
   @override
   LiveOfferEntity toEntity() {

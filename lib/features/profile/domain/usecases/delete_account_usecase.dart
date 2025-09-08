@@ -4,10 +4,10 @@ import 'package:magic_rewards/core/domain/usecases/base_usecase.dart';
 import 'package:magic_rewards/features/profile/domain/parameters/delete_account_parameters.dart';
 import 'package:magic_rewards/features/profile/domain/repository/profile_repository.dart';
 
-class DeleteAccountUsecase extends UseCase<void, DeleteAccountParameters> {
+class DeleteAccountUseCase extends UseCase<void, DeleteAccountParameters> {
   final ProfileRepository profileRepository;
 
-  DeleteAccountUsecase(this.profileRepository);
+  DeleteAccountUseCase(this.profileRepository);
 
   @override
   Future<Either<Failure, void>> call({required DeleteAccountParameters params}) async {

@@ -10,16 +10,16 @@ import 'package:magic_rewards/features/profile/domain/usecases/get_profile_useca
 part 'profile_event.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, BaseState<ProfileEntity>> {
-  final GetProfileUsecase getProfileUsecase;
+  final GetProfileUseCase getProfileUseCase;
 
-  ProfileBloc(this.getProfileUsecase)
+  ProfileBloc(this.getProfileUseCase)
       : super(const BaseState<ProfileEntity>()) {
     on<FetchProfileEvent>(_getProfile);
   }
 
   FutureOr<void> _getProfile(FetchProfileEvent event, emit) async {
     emit(state.loading());
-    final result = await getProfileUsecase.call(params: ProfileParameters());
+    final result = await getProfileUseCase.call(params: ProfileParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

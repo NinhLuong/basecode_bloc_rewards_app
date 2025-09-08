@@ -11,9 +11,9 @@ part 'live_offers_event.dart';
 
 class LiveOffersBloc
     extends Bloc<LiveOffersEvent, BaseState<LiveOffersEntity>> {
-  final GetLiveOffersUsecase getLiveOffersUsecase;
+  final GetLiveOffersUseCase getLiveOffersUseCase;
 
-  LiveOffersBloc(this.getLiveOffersUsecase)
+  LiveOffersBloc(this.getLiveOffersUseCase)
       : super(const BaseState<LiveOffersEntity>()) {
     on<FetchLiveOffersEvent>(_getLiveOffers);
   }
@@ -28,7 +28,7 @@ class LiveOffersBloc
       _liveOffersEntity = LiveOffersEntity(liveOffers: const []);
     }
     if (_page == 0) emit(state.loading());
-    final result = await getLiveOffersUsecase.call(
+    final result = await getLiveOffersUseCase.call(
         params: GetLiveOffersParameters(length: _length, page: _page));
     result.fold((l) => emit(state.error(l)), (r) {
       _page++;

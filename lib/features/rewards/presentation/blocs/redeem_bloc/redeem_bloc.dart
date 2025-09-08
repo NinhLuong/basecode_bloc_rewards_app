@@ -9,15 +9,15 @@ import 'package:magic_rewards/features/rewards/domain/usecases/redeem_usecase.da
 part 'redeem_event.dart';
 
 class RedeemBloc extends Bloc<RedeemEvent, BaseState<void>> {
-  final RedeemUsecase redeemUsecase;
+  final RedeemUseCase redeemUseCase;
 
-  RedeemBloc(this.redeemUsecase) : super(const BaseState<void>()) {
+  RedeemBloc(this.redeemUseCase) : super(const BaseState<void>()) {
     on<RedeemButtonPressedEvent>(_redeem);
   }
 
   FutureOr<void> _redeem(RedeemButtonPressedEvent event, emit) async {
     emit(state.loading());
-    final result = await redeemUsecase
+    final result = await redeemUseCase
         .call(params: RedeemParameters(name: event.name, value: event.value));
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }

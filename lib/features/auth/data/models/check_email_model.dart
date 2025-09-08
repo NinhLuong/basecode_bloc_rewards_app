@@ -20,7 +20,7 @@ class CheckEmailModel extends BaseModel<CheckEmailEntity> {
   @JsonKey(name: 'verify_code')
   final String? verifyCode;
 
-  CheckEmailModel({
+  const CheckEmailModel({
     this.error,
     this.errorCode,
     this.errorMessage,

@@ -1,37 +1,32 @@
+import 'package:flutter/foundation.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 
+part 'tasks_model.g.dart';
+
+@immutable
+@JsonSerializable()
 class TasksModel extends BaseModel<TasksEntity> {
-  TasksModel({
+  @JsonKey(name: 'error')
+  final bool? error;
+  
+  @JsonKey(name: 'error_code')
+  final int? errorCode;
+  
+  @JsonKey(name: 'tasks')
+  final List<TaskModel>? tasks;
+
+  const TasksModel({
     this.error,
     this.errorCode,
     this.tasks,
   });
 
-  TasksModel.fromJson(dynamic json) {
-    error = json['error'];
-    errorCode = json['error_code'];
-    if (json['tasks'] != null) {
-      tasks = [];
-      json['tasks'].forEach((v) {
-        tasks?.add(TaskModel.fromJson(v));
-      });
-    }
-  }
+  factory TasksModel.fromJson(Map<String, dynamic> json) => 
+      _$TasksModelFromJson(json);
 
-  bool? error;
-  int? errorCode;
-  List<TaskModel>? tasks;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['error'] = error;
-    map['error_code'] = errorCode;
-    if (tasks != null) {
-      map['tasks'] = tasks?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$TasksModelToJson(this);
 
   @override
   TasksEntity toEntity() {
@@ -39,8 +34,34 @@ class TasksModel extends BaseModel<TasksEntity> {
   }
 }
 
+@immutable
+@JsonSerializable()
 class TaskModel extends BaseModel<TaskEntity> {
-  TaskModel({
+  @JsonKey(name: 'task_id')
+  final String? taskId;
+  
+  @JsonKey(name: 'task_title')
+  final String? taskTitle;
+  
+  @JsonKey(name: 'task_sub_title')
+  final String? taskSubTitle;
+  
+  @JsonKey(name: 'task_description')
+  final String? taskDescription;
+  
+  @JsonKey(name: 'task_image')
+  final String? taskImage;
+  
+  @JsonKey(name: 'task_url')
+  final String? taskUrl;
+  
+  @JsonKey(name: 'task_price')
+  final String? taskPrice;
+  
+  @JsonKey(name: 'task_status')
+  final String? taskStatus;
+
+  const TaskModel({
     this.taskId,
     this.taskTitle,
     this.taskSubTitle,
@@ -51,38 +72,10 @@ class TaskModel extends BaseModel<TaskEntity> {
     this.taskStatus,
   });
 
-  TaskModel.fromJson(dynamic json) {
-    taskId = json['task_id'];
-    taskTitle = json['task_title'];
-    taskSubTitle = json['task_sub_title'];
-    taskDescription = json['task_description'];
-    taskImage = json['task_image'];
-    taskUrl = json['task_url'];
-    taskPrice = json['task_price'];
-    taskStatus = json['task_status'];
-  }
+  factory TaskModel.fromJson(Map<String, dynamic> json) => 
+      _$TaskModelFromJson(json);
 
-  String? taskId;
-  String? taskTitle;
-  String? taskSubTitle;
-  String? taskDescription;
-  String? taskImage;
-  String? taskUrl;
-  String? taskPrice;
-  String? taskStatus;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['task_id'] = taskId;
-    map['task_title'] = taskTitle;
-    map['task_sub_title'] = taskSubTitle;
-    map['task_description'] = taskDescription;
-    map['task_image'] = taskImage;
-    map['task_url'] = taskUrl;
-    map['task_price'] = taskPrice;
-    map['task_status'] = taskStatus;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$TaskModelToJson(this);
 
   @override
   TaskEntity toEntity() {

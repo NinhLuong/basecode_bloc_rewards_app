@@ -5,7 +5,7 @@ import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/erro
 import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/header_interceptor.dart';
 import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/token_interceptor.dart';
 import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/force_update_interceptor.dart';
-import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/premium_interceptor.dart';
+// import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/premium_interceptor.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
 import 'package:magic_rewards/config/errors/errors_handler.dart';
 

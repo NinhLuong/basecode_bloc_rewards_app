@@ -20,7 +20,7 @@ class HomeModel extends BaseModel<HomeEntity> {
   @JsonKey(name: 'offerwalls')
   final List<OfferWallModel>? offerWalls;
 
-  HomeModel({
+  const HomeModel({
     this.error,
     this.errorCode,
     this.balance,
@@ -78,7 +78,7 @@ class OfferWallModel extends BaseModel<OfferWallEntity> {
   @JsonKey(name: 'offer_status')
   final String? status;
 
-  OfferWallModel({
+  const OfferWallModel({
     this.id,
     this.title,
     this.subtitle,

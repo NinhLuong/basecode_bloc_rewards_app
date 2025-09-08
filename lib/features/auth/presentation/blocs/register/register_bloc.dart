@@ -10,15 +10,15 @@ import 'package:magic_rewards/features/auth/domain/usecases/register_usecase.dar
 part 'register_event.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, BaseState<UserEntity>> {
-  final RegisterUsecase registerUsecase;
+  final RegisterUseCase registerUseCase;
 
-  RegisterBloc(this.registerUsecase) : super(const BaseState<UserEntity>()) {
+  RegisterBloc(this.registerUseCase) : super(const BaseState<UserEntity>()) {
     on<RegisterButtonTappedEvent>(_register);
   }
 
   FutureOr<void> _register(RegisterButtonTappedEvent event, emit) async {
     emit(state.loading());
-    final result = await registerUsecase.call(
+    final result = await registerUseCase.call(
       params: RegisterParameters(
         email: event.email,
         fullName: event.fullName,

@@ -11,9 +11,9 @@ part 'transactions_event.dart';
 
 class TransactionsBloc
     extends Bloc<TransactionsEvent, BaseState<TransactionsEntity>> {
-  final GetTransactionsUsecase getTransactionsUsecase;
+  final GetTransactionsUseCase getTransactionsUseCase;
 
-  TransactionsBloc(this.getTransactionsUsecase)
+  TransactionsBloc(this.getTransactionsUseCase)
       : super(const BaseState<TransactionsEntity>()) {
     on<FetchTransactionsEvent>(_getTransactions);
   }
@@ -21,7 +21,7 @@ class TransactionsBloc
   FutureOr<void> _getTransactions(FetchTransactionsEvent event, emit) async {
     emit(state.loading());
     final result =
-        await getTransactionsUsecase.call(params: TransactionsParameters());
+        await getTransactionsUseCase.call(params: TransactionsParameters());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

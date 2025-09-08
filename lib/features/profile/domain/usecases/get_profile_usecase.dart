@@ -5,10 +5,10 @@ import 'package:magic_rewards/features/profile/domain/entities/profile_entity.da
 import 'package:magic_rewards/features/profile/domain/parameters/profile_parameters.dart';
 import 'package:magic_rewards/features/profile/domain/repository/profile_repository.dart';
 
-class GetProfileUsecase extends UseCase<ProfileEntity, ProfileParameters> {
+class GetProfileUseCase extends UseCase<ProfileEntity, ProfileParameters> {
   final ProfileRepository profileRepository;
 
-  GetProfileUsecase(this.profileRepository);
+  GetProfileUseCase(this.profileRepository);
 
   @override
   Future<Either<Failure, ProfileEntity>> call({required ProfileParameters params}) async {

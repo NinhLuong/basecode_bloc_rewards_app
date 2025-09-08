@@ -5,10 +5,10 @@ import 'package:magic_rewards/features/rewards/domain/entities/transactions_enti
 import 'package:magic_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
 import 'package:magic_rewards/features/rewards/domain/repository/rewards_repository.dart';
 
-class GetTransactionsUsecase extends UseCase<TransactionsEntity, TransactionsParameters> {
+class GetTransactionsUseCase extends UseCase<TransactionsEntity, TransactionsParameters> {
   final RewardsRepository rewardsRepository;
 
-  GetTransactionsUsecase(this.rewardsRepository);
+  GetTransactionsUseCase(this.rewardsRepository);
 
   @override
   Future<Either<Failure, TransactionsEntity>> call({required TransactionsParameters params}) async {
