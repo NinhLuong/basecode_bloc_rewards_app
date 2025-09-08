@@ -23,7 +23,7 @@ class UserModel extends BaseModel<UserEntity> {
   @JsonKey(name: 'account')
   final List<Account>? account;
 
-  UserModel({
+  const UserModel({
     this.error,
     this.errorCode,
     this.accessToken,
@@ -106,7 +106,7 @@ class Account {
   @JsonKey(name: 'total_points')
   final String? totalPoints;
 
-  Account({
+  const Account({
     this.error,
     this.errorCode,
     this.id,

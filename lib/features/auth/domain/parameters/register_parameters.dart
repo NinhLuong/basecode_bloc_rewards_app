@@ -29,7 +29,7 @@ class RegisterParameters extends Equatable {
   @JsonKey(name: 'clientId')
   final int clientId;
 
-  RegisterParameters({
+  const RegisterParameters({
     required this.email,
     required this.userName,
     required this.fullName,

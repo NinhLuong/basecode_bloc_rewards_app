@@ -15,7 +15,7 @@ class LoginParameters extends Equatable {
   @JsonKey(name: 'clientId')
   final int clientId;
 
-  LoginParameters({
+  const LoginParameters({
     required this.username,
     required this.password,
     int? clientId,
