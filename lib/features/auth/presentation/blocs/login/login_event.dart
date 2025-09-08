@@ -11,7 +11,8 @@ class LoginButtonTappedEvent extends LoginEvent {
   final String username;
   final String password;
 
-  const LoginButtonTappedEvent(
+  const 
+  LoginButtonTappedEvent(
       {required this.username, required this.password});
 
   @override

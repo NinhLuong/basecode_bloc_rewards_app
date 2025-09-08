@@ -10,7 +10,7 @@ import 'package:magic_rewards/core/data/repositories/app_response.dart';
 import 'package:magic_rewards/config/errors/errors_handler.dart';
 
 /// This class [ApiServices] represents the basic services for call API services in the application,
-/// so that all requests for Server Side services are through this same serivce.
+/// so that all requests for Server Side services are through this same service.
 ///
 /// methods:
 ///   1- [post] post http request
