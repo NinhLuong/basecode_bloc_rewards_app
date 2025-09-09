@@ -1,18 +1,16 @@
-import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
-@immutable
-class ProfileEntity extends BaseEntity {
-  final String balance;
-  final String redeemedPoints;
-  final String totalPoints;
+part 'profile_entity.freezed.dart';
 
-  const ProfileEntity({
-    required this.balance,
-    required this.redeemedPoints,
-    required this.totalPoints,
-  });
+@freezed
+abstract class ProfileEntity extends BaseEntity with _$ProfileEntity {
+  const ProfileEntity._();
 
-  @override
-  List<Object?> get props => [balance, redeemedPoints, totalPoints];
+  const factory ProfileEntity({
+    required String balance,
+    required String redeemedPoints,
+    required String totalPoints,
+  }) = _ProfileEntity;
+
 }

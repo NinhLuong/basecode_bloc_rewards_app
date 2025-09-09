@@ -1,26 +1,27 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
-class TransactionsEntity extends BaseEntity {
-  final List<TransactionEntity> orders;
+part 'transactions_entity.freezed.dart';
 
-  const TransactionsEntity({required this.orders});
+@freezed
+abstract class TransactionsEntity extends BaseEntity with _$TransactionsEntity {
+  const TransactionsEntity._();
 
-  @override
-  List<Object?> get props => [orders];
+  const factory TransactionsEntity({
+    required List<TransactionEntity> orders,
+  }) = _TransactionsEntity;
+
 }
 
-class TransactionEntity extends BaseEntity {
-  final String id;
-  final String name;
-  final String points;
-  final DateTime date;
+@freezed
+abstract class TransactionEntity extends BaseEntity with _$TransactionEntity {
+  const TransactionEntity._();
 
-  const TransactionEntity(
-      {required this.id,
-      required this.name,
-      required this.points,
-      required this.date});
+  const factory TransactionEntity({
+    required String id,
+    required String name,
+    required String points,
+    required DateTime date,
+  }) = _TransactionEntity;
 
-  @override
-  List<Object?> get props => [id, name, points, date];
 }

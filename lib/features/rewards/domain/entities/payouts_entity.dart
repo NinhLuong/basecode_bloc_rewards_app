@@ -1,38 +1,32 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
-class PayoutsEntity extends BaseEntity {
-  final List<PayoutEntity> payouts;
-  final double balance;
+part 'payouts_entity.freezed.dart';
 
-  final double minPayout;
-  final double redeemPercent;
+@freezed
+abstract class PayoutsEntity extends BaseEntity with _$PayoutsEntity {
+  const PayoutsEntity._();
 
-  const PayoutsEntity(
-      {required this.payouts,
-      required this.balance,
-      required this.minPayout,
-      required this.redeemPercent});
+  const factory PayoutsEntity({
+    required List<PayoutEntity> payouts,
+    required double balance,
+    required double minPayout,
+    required double redeemPercent,
+  }) = _PayoutsEntity;
 
-  @override
-  List<Object?> get props => [payouts, balance];
 }
 
-class PayoutEntity extends BaseEntity {
-  final String id;
-  final String title;
-  final String subtitle;
-  final String message;
-  final String thumbnail;
-  final double cost;
+@freezed
+abstract class PayoutEntity extends BaseEntity with _$PayoutEntity {
+  const PayoutEntity._();
 
-  const PayoutEntity(
-      {required this.id,
-      required this.title,
-      required this.subtitle,
-      required this.message,
-      required this.thumbnail,
-      required this.cost});
+  const factory PayoutEntity({
+    required String id,
+    required String title,
+    required String subtitle,
+    required String message,
+    required String thumbnail,
+    required double cost,
+  }) = _PayoutEntity;
 
-  @override
-  List<Object?> get props => [id, title, subtitle, message, thumbnail, cost];
 }

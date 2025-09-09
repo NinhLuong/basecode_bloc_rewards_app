@@ -1,10 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
-class CheckEmailEntity extends BaseEntity {
-  final String? verifyCode;
+part 'check_email_entity.freezed.dart';
 
-  const CheckEmailEntity({required this.verifyCode});
+@freezed
+abstract class CheckEmailEntity extends BaseEntity with _$CheckEmailEntity {
+  const CheckEmailEntity._();
 
-  @override
-  List<Object?> get props => [verifyCode];
+  const factory CheckEmailEntity({
+    required String? verifyCode,
+  }) = _CheckEmailEntity;
+
 }

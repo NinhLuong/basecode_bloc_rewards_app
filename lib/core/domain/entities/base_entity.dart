@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:equatable/equatable.dart';
 
 @immutable
-abstract class BaseEntity extends Equatable {
+abstract class BaseEntity{
   const BaseEntity();
 }

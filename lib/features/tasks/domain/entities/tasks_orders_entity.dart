@@ -1,28 +1,28 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 import 'package:magic_rewards/config/enums/order_status.dart';
 
-class TasksOrdersEntity extends BaseEntity {
-  const TasksOrdersEntity({required this.orders});
+part 'tasks_orders_entity.freezed.dart';
 
-  final List<TaskOrderEntity> orders;
+@freezed
+abstract class TasksOrdersEntity extends BaseEntity with _$TasksOrdersEntity {
+  const TasksOrdersEntity._();
 
-  @override
-  List<Object?> get props => [orders];
+  const factory TasksOrdersEntity({
+    required List<TaskOrderEntity> orders,
+  }) = _TasksOrdersEntity;
+
 }
 
-class TaskOrderEntity extends BaseEntity {
-  const TaskOrderEntity({
-    required this.taskName,
-    required this.timestamp,
-    required this.price,
-    required this.status,
-  });
+@freezed
+abstract class TaskOrderEntity extends BaseEntity with _$TaskOrderEntity {
+  const TaskOrderEntity._();
 
-  final String taskName;
-  final DateTime timestamp;
-  final String price;
-  final OrderStatus status;
+  const factory TaskOrderEntity({
+    required String taskName,
+    required DateTime timestamp,
+    required String price,
+    required OrderStatus status,
+  }) = _TaskOrderEntity;
 
-  @override
-  List<Object?> get props => [taskName, timestamp, price, status];
 }

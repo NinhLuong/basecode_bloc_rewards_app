@@ -1,31 +1,30 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 import 'package:magic_rewards/config/enums/order_status.dart';
 
-class OrdersEntity extends BaseEntity {
-  final List<OrderEntity> orders;
+part 'orders_entity.freezed.dart';
 
-  const OrdersEntity({required this.orders});
+@freezed
+abstract class OrdersEntity extends BaseEntity with _$OrdersEntity {
+  const OrdersEntity._();
 
-  @override
-  List<Object?> get props => [orders];
+  const factory OrdersEntity({
+    required List<OrderEntity> orders,
+  }) = _OrdersEntity;
+
 }
 
-class OrderEntity extends BaseEntity {
-  final String id;
-  final String name;
-  final String points;
-  final DateTime date;
-  final String wallet;
-  final OrderStatus status;
+@freezed
+abstract class OrderEntity extends BaseEntity with _$OrderEntity {
+  const OrderEntity._();
 
-  const OrderEntity(
-      {required this.id,
-      required this.name,
-      required this.points,
-      required this.date,
-      required this.status,
-      required this.wallet});
+  const factory OrderEntity({
+    required String id,
+    required String name,
+    required String points,
+    required DateTime date,
+    required String wallet,
+    required OrderStatus status,
+  }) = _OrderEntity;
 
-  @override
-  List<Object?> get props => [id, name, points, date, status, wallet];
 }

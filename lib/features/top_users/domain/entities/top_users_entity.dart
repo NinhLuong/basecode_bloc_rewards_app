@@ -1,38 +1,30 @@
-import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
-@immutable
-class TopUsersEntity extends BaseEntity {
-  final List<UserRankEntity> topThree;
-  final List<UserRankEntity> rest;
-  final UserRankEntity? myRank;
-  final double maxPoints;
+part 'top_users_entity.freezed.dart';
 
-  const TopUsersEntity({
-    required this.topThree,
-    required this.rest,
-    this.myRank,
-    required this.maxPoints,
-  });
+@freezed
+abstract class TopUsersEntity extends BaseEntity with _$TopUsersEntity {
+  const TopUsersEntity._();
 
-  @override
-  List<Object?> get props => [rest, topThree, myRank, maxPoints];
+  const factory TopUsersEntity({
+    required List<UserRankEntity> topThree,
+    required List<UserRankEntity> rest,
+    UserRankEntity? myRank,
+    required double maxPoints,
+  }) = _TopUsersEntity;
+
 }
 
-@immutable
-class UserRankEntity extends BaseEntity {
-  final String wallet;
-  final double points;
-  final String amount;
-  final int rank;
+@freezed
+abstract class UserRankEntity extends BaseEntity with _$UserRankEntity {
+  const UserRankEntity._();
 
-  const UserRankEntity({
-    required this.wallet,
-    required this.points,
-    required this.amount,
-    required this.rank,
-  });
+  const factory UserRankEntity({
+    required String wallet,
+    required double points,
+    required String amount,
+    required int rank,
+  }) = _UserRankEntity;
 
-  @override
-  List<Object> get props => [wallet, points, amount, rank];
 }

@@ -1,27 +1,20 @@
-import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
-@immutable
-class UserEntity extends BaseEntity {
-  final String? accessToken;
-  final String accountId;
-  final String userName;
-  final String email;
-  final String fullName;
-  final String points;
-  final String redeemedPoints;
+part 'user_entity.freezed.dart';
 
-  const UserEntity({
-    this.accessToken,
-    required this.accountId,
-    required this.email,
-    required this.fullName,
-    required this.points,
-    required this.redeemedPoints,
-    required this.userName,
-  });
+@freezed
+abstract class UserEntity extends BaseEntity with _$UserEntity {
+  const UserEntity._();
 
-  @override
-  List<Object> get props =>
-      [accountId, email, fullName, points, redeemedPoints, userName];
+  const factory UserEntity({
+    String? accessToken,
+    required String accountId,
+    required String userName,
+    required String email,
+    required String fullName,
+    required String points,
+    required String redeemedPoints,
+  }) = _UserEntity;
+
 }

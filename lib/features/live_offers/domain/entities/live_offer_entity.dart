@@ -5,8 +5,6 @@ class LiveOffersEntity extends BaseEntity {
 
   const LiveOffersEntity({required this.liveOffers});
 
-  @override
-  List<Object?> get props => [liveOffers];
 }
 
 class LiveOfferEntity extends BaseEntity {
@@ -23,6 +21,4 @@ class LiveOfferEntity extends BaseEntity {
       required this.date,
       required this.type});
 
-  @override
-  List<Object?> get props => [id, username, points, date, type];
 }

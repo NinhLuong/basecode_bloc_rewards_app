@@ -1,25 +1,26 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
-class ReserveCommentEntity extends BaseEntity {
-  final CommentEntity commentEntity;
+part 'reserve_comment_entity.freezed.dart';
 
-  const ReserveCommentEntity({required this.commentEntity});
+@freezed
+abstract class ReserveCommentEntity extends BaseEntity with _$ReserveCommentEntity {
+  const ReserveCommentEntity._();
 
-  @override
-  List<Object?> get props => [commentEntity];
+  const factory ReserveCommentEntity({
+    required CommentEntity commentEntity,
+  }) = _ReserveCommentEntity;
+
 }
 
-class CommentEntity extends BaseEntity {
-  const CommentEntity({
-    required this.id,
-    required this.taskId,
-    required this.text,
-  });
+@freezed
+abstract class CommentEntity extends BaseEntity with _$CommentEntity {
+  const CommentEntity._();
 
-  final String id;
-  final String taskId;
-  final String text;
+  const factory CommentEntity({
+    required String id,
+    required String taskId,
+    required String text,
+  }) = _CommentEntity;
 
-  @override
-  List<Object?> get props => [id, taskId, text];
 }

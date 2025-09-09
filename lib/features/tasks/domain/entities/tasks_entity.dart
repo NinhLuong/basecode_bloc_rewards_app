@@ -1,37 +1,30 @@
-import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
 
-@immutable
-class TasksEntity extends BaseEntity {
-  final List<TaskEntity> tasks;
+part 'tasks_entity.freezed.dart';
 
-  const TasksEntity({required this.tasks});
+@freezed
+abstract class TasksEntity extends BaseEntity with _$TasksEntity {
+  const TasksEntity._();
 
-  @override
-  List<Object?> get props => [tasks];
+  const factory TasksEntity({
+    required List<TaskEntity> tasks,
+  }) = _TasksEntity;
+
 }
 
-@immutable
-class TaskEntity extends BaseEntity {
-  final String id;
-  final String title;
-  final String subTitle;
-  final String description;
-  final String image;
-  final String url;
-  final String price;
+@freezed
+abstract class TaskEntity extends BaseEntity with _$TaskEntity {
+  const TaskEntity._();
 
-  const TaskEntity({
-    required this.id,
-    required this.title,
-    required this.subTitle,
-    required this.description,
-    required this.image,
-    required this.url,
-    required this.price,
-  });
+  const factory TaskEntity({
+    required String id,
+    required String title,
+    required String subTitle,
+    required String description,
+    required String image,
+    required String url,
+    required String price,
+  }) = _TaskEntity;
 
-  @override
-  List<Object?> get props =>
-      [id, title, subTitle, description, image, url, price];
 }
