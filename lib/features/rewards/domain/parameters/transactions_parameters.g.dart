@@ -6,17 +6,17 @@ part of 'transactions_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TransactionsParameters _$TransactionsParametersFromJson(
+_TransactionsParameters _$TransactionsParametersFromJson(
   Map<String, dynamic> json,
-) => TransactionsParameters(
-  clientId: (json['clientId'] as num?)?.toInt(),
-  accountId: json['accountId'] as String?,
-  accessToken: json['accessToken'] as String?,
-  username: json['user'] as String?,
+) => _TransactionsParameters(
+  clientId: (json['clientId'] as num).toInt(),
+  accountId: json['accountId'] as String,
+  accessToken: json['accessToken'] as String,
+  username: json['user'] as String,
 );
 
 Map<String, dynamic> _$TransactionsParametersToJson(
-  TransactionsParameters instance,
+  _TransactionsParameters instance,
 ) => <String, dynamic>{
   'clientId': instance.clientId,
   'accountId': instance.accountId,

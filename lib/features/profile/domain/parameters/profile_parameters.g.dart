@@ -6,15 +6,15 @@ part of 'profile_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProfileParameters _$ProfileParametersFromJson(Map<String, dynamic> json) =>
-    ProfileParameters(
-      accessToken: json['accessToken'] as String?,
-      accountId: json['accountId'] as String?,
-      username: json['user'] as String?,
-      clientId: (json['clientId'] as num?)?.toInt(),
+_ProfileParameters _$ProfileParametersFromJson(Map<String, dynamic> json) =>
+    _ProfileParameters(
+      accessToken: json['accessToken'] as String,
+      accountId: json['accountId'] as String,
+      username: json['user'] as String,
+      clientId: (json['clientId'] as num).toInt(),
     );
 
-Map<String, dynamic> _$ProfileParametersToJson(ProfileParameters instance) =>
+Map<String, dynamic> _$ProfileParametersToJson(_ProfileParameters instance) =>
     <String, dynamic>{
       'accessToken': instance.accessToken,
       'accountId': instance.accountId,

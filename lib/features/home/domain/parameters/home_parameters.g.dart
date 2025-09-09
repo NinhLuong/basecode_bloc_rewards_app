@@ -6,15 +6,15 @@ part of 'home_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeParameters _$HomeParametersFromJson(Map<String, dynamic> json) =>
-    HomeParameters(
-      clientId: (json['clientId'] as num?)?.toInt(),
-      accountId: json['accountId'] as String?,
-      accessToken: json['accessToken'] as String?,
-      username: json['user'] as String?,
+_HomeParameters _$HomeParametersFromJson(Map<String, dynamic> json) =>
+    _HomeParameters(
+      clientId: (json['clientId'] as num).toInt(),
+      accountId: json['accountId'] as String,
+      accessToken: json['accessToken'] as String,
+      username: json['user'] as String,
     );
 
-Map<String, dynamic> _$HomeParametersToJson(HomeParameters instance) =>
+Map<String, dynamic> _$HomeParametersToJson(_HomeParameters instance) =>
     <String, dynamic>{
       'clientId': instance.clientId,
       'accountId': instance.accountId,

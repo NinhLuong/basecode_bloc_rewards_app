@@ -18,7 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, BaseState<HomeEntity>> {
 
   FutureOr<void> _getHome(FetchHomeEvent event, emit) async {
     emit(state.loading());
-    final result = await getHomeUseCase.call(params: HomeParameters());
+    final result = await getHomeUseCase.call(params: HomeParameters.create());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

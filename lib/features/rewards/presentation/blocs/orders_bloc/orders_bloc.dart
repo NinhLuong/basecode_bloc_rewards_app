@@ -18,7 +18,7 @@ class OrdersBloc extends Bloc<OrdersEvent, BaseState<OrdersEntity>> {
 
   FutureOr<void> _getOrders(FetchOrdersEvent event, emit) async {
     emit(state.loading());
-    final result = await getOrdersUseCase.call(params: OrdersParameters());
+    final result = await getOrdersUseCase.call(params: OrdersParameters.create());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

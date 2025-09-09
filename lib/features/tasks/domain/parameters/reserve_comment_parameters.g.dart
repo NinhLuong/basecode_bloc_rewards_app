@@ -1,29 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'live_offers_parameters.dart';
+part of 'reserve_comment_parameters.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_GetLiveOffersParameters _$GetLiveOffersParametersFromJson(
+_ReserveCommentParameters _$ReserveCommentParametersFromJson(
   Map<String, dynamic> json,
-) => _GetLiveOffersParameters(
+) => _ReserveCommentParameters(
   accessToken: json['accessToken'] as String,
   accountId: json['accountId'] as String,
-  username: json['user'] as String,
+  username: json['username'] as String,
   clientId: (json['clientId'] as num).toInt(),
-  page: (json['page'] as num).toInt(),
-  length: (json['length'] as num).toInt(),
+  taskId: json['taskId'] as String,
 );
 
-Map<String, dynamic> _$GetLiveOffersParametersToJson(
-  _GetLiveOffersParameters instance,
+Map<String, dynamic> _$ReserveCommentParametersToJson(
+  _ReserveCommentParameters instance,
 ) => <String, dynamic>{
   'accessToken': instance.accessToken,
   'accountId': instance.accountId,
-  'user': instance.username,
+  'username': instance.username,
   'clientId': instance.clientId,
-  'page': instance.page,
-  'length': instance.length,
+  'taskId': instance.taskId,
 };

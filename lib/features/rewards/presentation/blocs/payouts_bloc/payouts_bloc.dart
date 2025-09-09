@@ -19,7 +19,7 @@ class PayoutsBloc extends Bloc<PayoutsEvent, BaseState<PayoutsEntity>> {
 
   FutureOr<void> _getPayouts(FetchPayoutsEvent event, emit) async {
     emit(state.loading());
-    final result = await getPayoutsUseCase.call(params: PayoutsParameters());
+    final result = await getPayoutsUseCase.call(params: PayoutsParameters.create());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

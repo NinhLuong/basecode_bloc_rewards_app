@@ -19,7 +19,7 @@ class DeleteAccountBloc extends Bloc<DeleteAccountEvent, BaseState<void>> {
       DeleteAccountButtonPressedEvent event, emit) async {
     emit(state.loading());
     final result =
-        await deleteAccountUseCase.call(params: DeleteAccountParameters());
+        await deleteAccountUseCase.call(params: DeleteAccountParameters.create());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

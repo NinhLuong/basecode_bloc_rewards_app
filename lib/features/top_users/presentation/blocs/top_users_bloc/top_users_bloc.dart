@@ -20,7 +20,7 @@ class TopUsersBloc extends Bloc<TopUsersEvent, BaseState<TopUsersEntity>> {
   FutureOr<void> _getTopUsers(FetchTopUsersEvent event, emit) async {
     emit(state.loading());
     final result = await liveOffersRepository
-        .getTopUsers(TopUsersParameters(halfMonth: event.halfMonth));
+        .getTopUsers(TopUsersParameters.create(halfMonth: event.halfMonth));
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

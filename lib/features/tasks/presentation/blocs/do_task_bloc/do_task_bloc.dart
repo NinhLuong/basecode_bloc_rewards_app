@@ -18,7 +18,7 @@ class DoTaskBloc extends Bloc<DoTaskEvent, BaseState<void>> {
 
   FutureOr<void> _doTask(DoTaskButtonPressedEvent event, emit) async {
     emit(state.loading());
-    final result = await tasksRepository.addTaskOrder(AddTaskOrderParameters(
+    final result = await tasksRepository.addTaskOrder(AddTaskOrderParameters.create(
       taskId: event.taskId,
       commentId: event.commentId,
       name: event.name,

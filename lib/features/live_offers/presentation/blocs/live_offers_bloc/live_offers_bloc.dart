@@ -29,7 +29,7 @@ class LiveOffersBloc
     }
     if (_page == 0) emit(state.loading());
     final result = await getLiveOffersUseCase.call(
-        params: GetLiveOffersParameters(length: _length, page: _page));
+        params: GetLiveOffersParameters.create(length: _length, page: _page));
     result.fold((l) => emit(state.error(l)), (r) {
       _page++;
       _liveOffersEntity = LiveOffersEntity(

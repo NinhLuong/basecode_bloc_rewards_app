@@ -6,19 +6,19 @@ part of 'redeem_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RedeemParameters _$RedeemParametersFromJson(Map<String, dynamic> json) =>
-    RedeemParameters(
+_RedeemParameters _$RedeemParametersFromJson(Map<String, dynamic> json) =>
+    _RedeemParameters(
+      clientId: (json['clientId'] as num).toInt(),
+      accountId: json['accountId'] as String,
+      accessToken: json['accessToken'] as String,
+      username: json['user'] as String,
       name: json['name'] as String,
       value: json['value'] as String,
-      clientId: (json['clientId'] as num?)?.toInt(),
-      accountId: json['accountId'] as String?,
-      accessToken: json['accessToken'] as String?,
-      username: json['user'] as String?,
-      devName: json['dev_name'] as String?,
-      devMan: json['dev_man'] as String?,
+      devName: json['dev_name'] as String,
+      devMan: json['dev_man'] as String,
     );
 
-Map<String, dynamic> _$RedeemParametersToJson(RedeemParameters instance) =>
+Map<String, dynamic> _$RedeemParametersToJson(_RedeemParameters instance) =>
     <String, dynamic>{
       'clientId': instance.clientId,
       'accountId': instance.accountId,

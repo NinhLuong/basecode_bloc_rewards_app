@@ -44,7 +44,7 @@ void main() {
       offerWalls: [testOfferWallEntity],
     );
 
-    final validParameters = HomeParameters();
+    final validParameters = HomeParameters.create();
 
     test('should return HomeEntity when repository call is successful', () async {
       // Arrange
@@ -117,7 +117,7 @@ void main() {
 
     test('should pass correct parameters to repository', () async {
       // Arrange
-      final customParameters = HomeParameters();
+      final customParameters = HomeParameters.create();
       when(mockHomeRepository.getHome(any))
           .thenAnswer((_) async => const Right(testHomeEntity));
 

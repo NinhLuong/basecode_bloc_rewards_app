@@ -6,16 +6,16 @@ part of 'delete_account_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DeleteAccountParameters _$DeleteAccountParametersFromJson(
+_DeleteAccountParameters _$DeleteAccountParametersFromJson(
   Map<String, dynamic> json,
-) => DeleteAccountParameters(
-  accessToken: json['accessToken'] as String?,
-  accountId: json['accountId'] as String?,
-  clientId: (json['clientId'] as num?)?.toInt(),
+) => _DeleteAccountParameters(
+  accessToken: json['accessToken'] as String,
+  accountId: json['accountId'] as String,
+  clientId: (json['clientId'] as num).toInt(),
 );
 
 Map<String, dynamic> _$DeleteAccountParametersToJson(
-  DeleteAccountParameters instance,
+  _DeleteAccountParameters instance,
 ) => <String, dynamic>{
   'accessToken': instance.accessToken,
   'accountId': instance.accountId,

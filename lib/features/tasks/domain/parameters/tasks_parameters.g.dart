@@ -6,15 +6,15 @@ part of 'tasks_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TasksParameters _$TasksParametersFromJson(Map<String, dynamic> json) =>
-    TasksParameters(
-      accessToken: json['accessToken'] as String?,
-      accountId: json['accountId'] as String?,
-      username: json['user'] as String?,
-      clientId: (json['clientId'] as num?)?.toInt(),
+_TasksParameters _$TasksParametersFromJson(Map<String, dynamic> json) =>
+    _TasksParameters(
+      accessToken: json['accessToken'] as String,
+      accountId: json['accountId'] as String,
+      username: json['user'] as String,
+      clientId: (json['clientId'] as num).toInt(),
     );
 
-Map<String, dynamic> _$TasksParametersToJson(TasksParameters instance) =>
+Map<String, dynamic> _$TasksParametersToJson(_TasksParameters instance) =>
     <String, dynamic>{
       'accessToken': instance.accessToken,
       'accountId': instance.accountId,

@@ -21,7 +21,7 @@ class TasksOrdersBloc
   FutureOr<void> _getTasksOrders(FetchTasksOrdersEvent event, emit) async {
     emit(state.loading());
     final result =
-        await tasksRepository.getTasksOrders(TasksOrdersParameters());
+        await tasksRepository.getTasksOrders(TasksOrdersParameters.create());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

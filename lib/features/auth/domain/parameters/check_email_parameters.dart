@@ -1,24 +1,18 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
 
+part 'check_email_parameters.freezed.dart';
 part 'check_email_parameters.g.dart';
 
-@JsonSerializable()
-class CheckEmailParameters extends Equatable {
-  @JsonKey(name: 'email')
-  final String email;
+@freezed
+abstract class CheckEmailParameters with _$CheckEmailParameters {
+  const CheckEmailParameters._();
   
-  @JsonKey(name: 'clientId')
-  final int clientId;
+  const factory CheckEmailParameters({
+    @JsonKey(name: 'email') required String email,
+    @JsonKey(name: 'clientId') @Default(AppConstants.clientId) int clientId,
+  }) = _CheckEmailParameters;
 
-  const CheckEmailParameters({
-    required this.email,
-    int? clientId,
-  }) : clientId = clientId ?? AppConstants.clientId;
-
-  Map<String, dynamic> toJson() => _$CheckEmailParametersToJson(this);
-
-  @override
-  List<Object> get props => [clientId, email];
+  factory CheckEmailParameters.fromJson(Map<String, dynamic> json) =>
+      _$CheckEmailParametersFromJson(json);
 }

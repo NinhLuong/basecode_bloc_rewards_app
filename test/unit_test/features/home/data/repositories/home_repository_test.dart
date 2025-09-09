@@ -49,7 +49,7 @@ void main() {
       offerWalls: [testOfferWallModel],
     );
 
-    final testHomeParameters = HomeParameters();
+    final testHomeParameters = HomeParameters.create();
 
     group('getHome', () {
       test('should return HomeEntity when data source call is successful', () async {
@@ -244,7 +244,7 @@ void main() {
 
       test('should pass correct parameters to data source', () async {
         // Arrange
-        final customParameters = HomeParameters();
+        final customParameters = HomeParameters.create();
         when(mockHomeDataSource.getHome(any))
             .thenAnswer((_) async => testHomeModel);
 

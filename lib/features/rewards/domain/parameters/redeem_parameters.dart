@@ -1,57 +1,46 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 
+part 'redeem_parameters.freezed.dart';
 part 'redeem_parameters.g.dart';
 
-@immutable
-@JsonSerializable()
-class RedeemParameters extends Equatable {
-  @JsonKey(name: 'clientId')
-  final int clientId;
-  
-  @JsonKey(name: 'accountId')
-  final String accountId;
-  
-  @JsonKey(name: 'accessToken')
-  final String accessToken;
-  
-  @JsonKey(name: 'user')
-  final String username;
-  
-  @JsonKey(name: 'name')
-  final String name;
-  
-  @JsonKey(name: 'value')
-  final String value;
-  
-  @JsonKey(name: 'dev_name')
-  final String devName;
-  
-  @JsonKey(name: 'dev_man')
-  final String devMan;
+@freezed
+abstract class RedeemParameters with _$RedeemParameters {
+  const RedeemParameters._();
 
-  RedeemParameters({
-    required this.name,
-    required this.value,
+  const factory RedeemParameters({
+    @JsonKey(name: 'clientId') required int clientId,
+    @JsonKey(name: 'accountId') required String accountId,
+    @JsonKey(name: 'accessToken') required String accessToken,
+    @JsonKey(name: 'user') required String username,
+    @JsonKey(name: 'name') required String name,
+    @JsonKey(name: 'value') required String value,
+    @JsonKey(name: 'dev_name') required String devName,
+    @JsonKey(name: 'dev_man') required String devMan,
+  }) = _RedeemParameters;
+
+  factory RedeemParameters.create({
+    required String name,
+    required String value,
     int? clientId,
     String? accountId,
     String? accessToken,
     String? username,
     String? devName,
     String? devMan,
-  }) : clientId = clientId ?? AppConstants.clientId,
-       accountId = accountId ?? CacheStorageServices().accountId,
-       accessToken = accessToken ?? CacheStorageServices().token,
-       username = username ?? CacheStorageServices().username,
-       devName = devName ?? Platform.operatingSystem,
-       devMan = devMan ?? AppConstants.devMan;
+  }) => RedeemParameters(
+    clientId: clientId ?? AppConstants.clientId,
+    accountId: accountId ?? CacheStorageServices().accountId,
+    accessToken: accessToken ?? CacheStorageServices().token,
+    username: username ?? CacheStorageServices().username,
+    name: name,
+    value: value,
+    devName: devName ?? Platform.operatingSystem,
+    devMan: devMan ?? AppConstants.devMan,
+  );
 
-  Map<String, dynamic> toJson() => _$RedeemParametersToJson(this);
-
-  @override
-  List<Object> get props => [name, value];
+  factory RedeemParameters.fromJson(Map<String, dynamic> json) =>
+      _$RedeemParametersFromJson(json);
 }

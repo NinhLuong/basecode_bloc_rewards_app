@@ -6,15 +6,15 @@ part of 'orders_parameters.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-OrdersParameters _$OrdersParametersFromJson(Map<String, dynamic> json) =>
-    OrdersParameters(
-      clientId: (json['clientId'] as num?)?.toInt(),
-      accountId: json['accountId'] as String?,
-      accessToken: json['accessToken'] as String?,
-      username: json['user'] as String?,
+_OrdersParameters _$OrdersParametersFromJson(Map<String, dynamic> json) =>
+    _OrdersParameters(
+      clientId: (json['clientId'] as num).toInt(),
+      accountId: json['accountId'] as String,
+      accessToken: json['accessToken'] as String,
+      username: json['user'] as String,
     );
 
-Map<String, dynamic> _$OrdersParametersToJson(OrdersParameters instance) =>
+Map<String, dynamic> _$OrdersParametersToJson(_OrdersParameters instance) =>
     <String, dynamic>{
       'clientId': instance.clientId,
       'accountId': instance.accountId,

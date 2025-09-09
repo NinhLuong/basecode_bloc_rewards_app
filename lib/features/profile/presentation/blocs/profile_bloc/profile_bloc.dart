@@ -19,7 +19,7 @@ class ProfileBloc extends Bloc<ProfileEvent, BaseState<ProfileEntity>> {
 
   FutureOr<void> _getProfile(FetchProfileEvent event, emit) async {
     emit(state.loading());
-    final result = await getProfileUseCase.call(params: ProfileParameters());
+    final result = await getProfileUseCase.call(params: ProfileParameters.create());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

@@ -18,7 +18,7 @@ class TasksBloc extends Bloc<TasksEvent, BaseState<TasksEntity>> {
 
   FutureOr<void> _getTasks(FetchTasksEvent event, emit) async {
     emit(state.loading());
-    final result = await tasksRepository.getTasks(TasksParameters());
+    final result = await tasksRepository.getTasks(TasksParameters.create());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

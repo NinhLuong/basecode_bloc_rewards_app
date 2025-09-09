@@ -1,22 +1,28 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 
-class TasksOrdersParameters extends Equatable {
-  final String accessToken = CacheStorageServices().token;
-  final String accountId = CacheStorageServices().accountId;
-  final String username = CacheStorageServices().username;
-  final int clientId = AppConstants.clientId;
+part 'tasks_orders_parameters.freezed.dart';
+part 'tasks_orders_parameters.g.dart';
 
-  TasksOrdersParameters();
+@freezed
+abstract class TasksOrdersParameters with _$TasksOrdersParameters {
+  const TasksOrdersParameters._();
 
-  Map<String, dynamic> toJson() => {
-        'accessToken': accessToken,
-        'accountId': accountId,
-        'user': username,
-        'clientId': clientId
-      };
+  const factory TasksOrdersParameters({
+    @JsonKey(name: 'accessToken') required String accessToken,
+    @JsonKey(name: 'accountId') required String accountId,
+    @JsonKey(name: 'user') required String username,
+    @JsonKey(name: 'clientId') required int clientId,
+  }) = _TasksOrdersParameters;
 
-  @override
-  List<Object> get props => [username];
+  factory TasksOrdersParameters.create() => TasksOrdersParameters(
+    accessToken: CacheStorageServices().token,
+    accountId: CacheStorageServices().accountId,
+    username: CacheStorageServices().username,
+    clientId: AppConstants.clientId,
+  );
+
+  factory TasksOrdersParameters.fromJson(Map<String, dynamic> json) =>
+      _$TasksOrdersParametersFromJson(json);
 }

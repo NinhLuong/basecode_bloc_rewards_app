@@ -1,51 +1,23 @@
-import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/shared/constants/app_constants.dart';
 
+part 'register_parameters.freezed.dart';
 part 'register_parameters.g.dart';
 
-@immutable
-@JsonSerializable()
-class RegisterParameters extends Equatable {
-  @JsonKey(name: 'username')
-  final String userName;
-  
-  @JsonKey(name: 'password')
-  final String password;
-  
-  @JsonKey(name: 'fullname')
-  final String fullName;
-  
-  @JsonKey(name: 'email')
-  final String email;
-  
-  @JsonKey(name: 'groupEmail')
-  final String groupEmail;
-  
-  @JsonKey(name: 'reg')
-  final String reg;
-  
-  @JsonKey(name: 'clientId')
-  final int clientId;
+@freezed
+abstract class RegisterParameters with _$RegisterParameters {
+  const RegisterParameters._();
 
-  const RegisterParameters({
-    required this.email,
-    required this.userName,
-    required this.fullName,
-    required this.password,
-    required this.groupEmail,
-    String? reg,
-    int? clientId,
-  }) : reg = reg ?? AppConstants.reg,
-       clientId = clientId ?? AppConstants.clientId;
+  const factory RegisterParameters({
+    @JsonKey(name: 'email') required String email,
+    @JsonKey(name: 'username') required String userName,
+    @JsonKey(name: 'fullname') required String fullName,
+    @JsonKey(name: 'password') required String password,
+    @JsonKey(name: 'groupEmail') required String groupEmail,
+    @JsonKey(name: 'reg') @Default(AppConstants.reg) String reg,
+    @JsonKey(name: 'clientId') @Default(AppConstants.clientId) int clientId,
+  }) = _RegisterParameters;
 
-  factory RegisterParameters.fromJson(Map<String, dynamic> json) => 
+  factory RegisterParameters.fromJson(Map<String, dynamic> json) =>
       _$RegisterParametersFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RegisterParametersToJson(this);
-
-  @override
-  List<Object> get props =>
-      [userName, password, email, fullName, reg, clientId, groupEmail];
 }

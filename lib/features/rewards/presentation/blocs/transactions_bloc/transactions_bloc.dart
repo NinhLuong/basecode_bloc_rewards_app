@@ -21,7 +21,7 @@ class TransactionsBloc
   FutureOr<void> _getTransactions(FetchTransactionsEvent event, emit) async {
     emit(state.loading());
     final result =
-        await getTransactionsUseCase.call(params: TransactionsParameters());
+        await getTransactionsUseCase.call(params: TransactionsParameters.create());
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

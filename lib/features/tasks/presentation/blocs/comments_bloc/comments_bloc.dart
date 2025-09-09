@@ -21,7 +21,7 @@ class CommentsBloc
   FutureOr<void> _reserveComment(ReserveCommentEvent event, emit) async {
     emit(state.loading());
     final result = await tasksRepository
-        .reserveComment(ReserveCommentParameters(taskId: event.taskId));
+        .reserveComment(ReserveCommentParameters.create(taskId: event.taskId));
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }

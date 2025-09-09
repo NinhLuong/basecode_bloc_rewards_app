@@ -18,7 +18,7 @@ class RedeemBloc extends Bloc<RedeemEvent, BaseState<void>> {
   FutureOr<void> _redeem(RedeemButtonPressedEvent event, emit) async {
     emit(state.loading());
     final result = await redeemUseCase
-        .call(params: RedeemParameters(name: event.name, value: event.value));
+        .call(params: RedeemParameters.create(name: event.name, value: event.value));
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));
   }
 }
