@@ -1,13 +1,8 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:magic_rewards/config/enums/request_status.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart';
 import 'package:magic_rewards/features/auth/domain/usecases/register_usecase.dart';
 import 'package:magic_rewards/features/auth/presentation/blocs/register/register_bloc.dart';
 

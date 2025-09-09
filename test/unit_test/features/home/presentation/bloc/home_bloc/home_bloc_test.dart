@@ -7,7 +7,6 @@ import 'package:magic_rewards/config/enums/request_status.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
-import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart';
 import 'package:magic_rewards/features/home/domain/usecases/get_home_usecase.dart';
 import 'package:magic_rewards/features/home/presentation/blocs/home_bloc/home_bloc.dart';
 
