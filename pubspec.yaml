@@ -85,7 +85,7 @@ dependencies:
 
   #serialization
   json_annotation: ^4.9.0
-  # freezed_annotation: ^3.1.0
+  freezed_annotation: ^3.1.0
   equatable: ^2.0.5
   
 
@@ -112,7 +112,7 @@ dev_dependencies:
   json_serializable: ^6.11.0
 
   build_runner: ^2.7.1
-  # freezed: ^3.2.0
+  freezed: ^3.2.0
 
   #envied generator
   envied_generator: ^1.2.1

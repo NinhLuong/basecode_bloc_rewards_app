@@ -1,37 +1,25 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 
+part 'top_users_model.freezed.dart';
 part 'top_users_model.g.dart';
 
-@immutable
-@JsonSerializable()
-class TopUsersModel extends BaseModel<TopUsersEntity> {
-  @JsonKey(name: 'error')
-  final bool? error;
-  
-  @JsonKey(name: 'error_code')
-  final int? errorCode;
-  
-  @JsonKey(name: 'requests')
-  final List<UserRankModel>? requests;
-  
-  @JsonKey(name: 'my_rank')
-  final UserRankModel? myRank;
+@freezed
+abstract class TopUsersModel extends BaseModel<TopUsersEntity> with _$TopUsersModel {
+  const TopUsersModel._();
 
-  const TopUsersModel({
-    this.error,
-    this.errorCode,
-    this.requests,
-    this.myRank,
-  });
+  const factory TopUsersModel({
+    @JsonKey(name: 'error') bool? error,
+    @JsonKey(name: 'error_code') int? errorCode,
+    @JsonKey(name: 'requests') List<UserRankModel>? requests,
+    @JsonKey(name: 'my_rank') UserRankModel? myRank,
+  }) = _TopUsersModel;
 
-  factory TopUsersModel.fromJson(Map<String, dynamic> json) => 
+  factory TopUsersModel.fromJson(Map<String, dynamic> json) =>
       _$TopUsersModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TopUsersModelToJson(this);
 
   @override
   TopUsersEntity toEntity() {
@@ -58,45 +46,32 @@ class TopUsersModel extends BaseModel<TopUsersEntity> {
   }
 }
 
-@immutable
-@JsonSerializable()
-class UserRankModel extends BaseModel<UserRankEntity> {
-  @JsonKey(name: 'request_from')
-  final String? _requestFrom;
-  
-  @JsonKey(name: 'points')
-  final String? points;
-  
-  @JsonKey(name: 'amount')
-  final String? amount;
-  
-  @JsonKey(name: 'rank')
-  final int? rank;
+@freezed
+abstract class UserRankModel extends BaseModel<UserRankEntity> with _$UserRankModel {
+  const UserRankModel._();
 
-  const UserRankModel({
-    String? requestFrom,
-    this.points,
-    this.amount,
-    this.rank,
-  }) : _requestFrom = requestFrom;
+  const factory UserRankModel({
+    @JsonKey(name: 'request_from') String? requestFrom,
+    @JsonKey(name: 'points') String? points,
+    @JsonKey(name: 'amount') String? amount,
+    @JsonKey(name: 'rank') int? rank,
+  }) = _UserRankModel;
 
   // Custom getter to apply masking logic
-  String? get requestFrom {
-    if (_requestFrom == null || _requestFrom.isEmpty) return '';
-    final length = _requestFrom.length;
-    if (length <= 3) return _requestFrom;
-    return _requestFrom.replaceRange(length - 3, length, '***');
+  String? get maskedRequestFrom {
+    if (requestFrom == null || requestFrom!.isEmpty) return '';
+    final length = requestFrom!.length;
+    if (length <= 3) return requestFrom;
+    return requestFrom!.replaceRange(length - 3, length, '***');
   }
 
-  factory UserRankModel.fromJson(Map<String, dynamic> json) => 
+  factory UserRankModel.fromJson(Map<String, dynamic> json) =>
       _$UserRankModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserRankModelToJson(this);
 
   @override
   UserRankEntity toEntity() {
     return UserRankEntity(
-      wallet: requestFrom ?? '',
+      wallet: maskedRequestFrom ?? '',
       points: (num.tryParse(points ?? '') ?? 0).toDouble(),
       amount: amount ?? '',
       rank: rank ?? 0,

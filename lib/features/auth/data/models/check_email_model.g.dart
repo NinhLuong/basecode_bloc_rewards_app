@@ -6,15 +6,15 @@ part of 'check_email_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CheckEmailModel _$CheckEmailModelFromJson(Map<String, dynamic> json) =>
-    CheckEmailModel(
+_CheckEmailModel _$CheckEmailModelFromJson(Map<String, dynamic> json) =>
+    _CheckEmailModel(
       error: json['error'] as bool?,
       errorCode: (json['error_code'] as num?)?.toInt(),
       errorMessage: json['error_message'] as String?,
       verifyCode: json['verify_code'] as String?,
     );
 
-Map<String, dynamic> _$CheckEmailModelToJson(CheckEmailModel instance) =>
+Map<String, dynamic> _$CheckEmailModelToJson(_CheckEmailModel instance) =>
     <String, dynamic>{
       'error': instance.error,
       'error_code': instance.errorCode,

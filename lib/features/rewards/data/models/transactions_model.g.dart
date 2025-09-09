@@ -6,8 +6,8 @@ part of 'transactions_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TransactionsModel _$TransactionsModelFromJson(Map<String, dynamic> json) =>
-    TransactionsModel(
+_TransactionsModel _$TransactionsModelFromJson(Map<String, dynamic> json) =>
+    _TransactionsModel(
       error: json['error'] as bool?,
       errorCode: (json['error_code'] as num?)?.toInt(),
       user: json['user'] as String?,
@@ -16,7 +16,7 @@ TransactionsModel _$TransactionsModelFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$TransactionsModelToJson(TransactionsModel instance) =>
+Map<String, dynamic> _$TransactionsModelToJson(_TransactionsModel instance) =>
     <String, dynamic>{
       'error': instance.error,
       'error_code': instance.errorCode,
@@ -24,7 +24,7 @@ Map<String, dynamic> _$TransactionsModelToJson(TransactionsModel instance) =>
       'transactions': instance.transactions,
     };
 
-Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
+_Transaction _$TransactionFromJson(Map<String, dynamic> json) => _Transaction(
   tnId: json['tn_id'] as String?,
   tnType: json['tn_type'] as String?,
   tnName: json['tn_name'] as String?,
@@ -33,7 +33,7 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) => Transaction(
   tnStatus: json['tn_status'] as String?,
 );
 
-Map<String, dynamic> _$TransactionToJson(Transaction instance) =>
+Map<String, dynamic> _$TransactionToJson(_Transaction instance) =>
     <String, dynamic>{
       'tn_id': instance.tnId,
       'tn_type': instance.tnType,

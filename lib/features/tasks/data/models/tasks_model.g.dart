@@ -6,7 +6,7 @@ part of 'tasks_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TasksModel _$TasksModelFromJson(Map<String, dynamic> json) => TasksModel(
+_TasksModel _$TasksModelFromJson(Map<String, dynamic> json) => _TasksModel(
   error: json['error'] as bool?,
   errorCode: (json['error_code'] as num?)?.toInt(),
   tasks: (json['tasks'] as List<dynamic>?)
@@ -14,14 +14,14 @@ TasksModel _$TasksModelFromJson(Map<String, dynamic> json) => TasksModel(
       .toList(),
 );
 
-Map<String, dynamic> _$TasksModelToJson(TasksModel instance) =>
+Map<String, dynamic> _$TasksModelToJson(_TasksModel instance) =>
     <String, dynamic>{
       'error': instance.error,
       'error_code': instance.errorCode,
       'tasks': instance.tasks,
     };
 
-TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => TaskModel(
+_TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => _TaskModel(
   taskId: json['task_id'] as String?,
   taskTitle: json['task_title'] as String?,
   taskSubTitle: json['task_sub_title'] as String?,
@@ -32,13 +32,14 @@ TaskModel _$TaskModelFromJson(Map<String, dynamic> json) => TaskModel(
   taskStatus: json['task_status'] as String?,
 );
 
-Map<String, dynamic> _$TaskModelToJson(TaskModel instance) => <String, dynamic>{
-  'task_id': instance.taskId,
-  'task_title': instance.taskTitle,
-  'task_sub_title': instance.taskSubTitle,
-  'task_description': instance.taskDescription,
-  'task_image': instance.taskImage,
-  'task_url': instance.taskUrl,
-  'task_price': instance.taskPrice,
-  'task_status': instance.taskStatus,
-};
+Map<String, dynamic> _$TaskModelToJson(_TaskModel instance) =>
+    <String, dynamic>{
+      'task_id': instance.taskId,
+      'task_title': instance.taskTitle,
+      'task_sub_title': instance.taskSubTitle,
+      'task_description': instance.taskDescription,
+      'task_image': instance.taskImage,
+      'task_url': instance.taskUrl,
+      'task_price': instance.taskPrice,
+      'task_status': instance.taskStatus,
+    };

@@ -6,7 +6,7 @@ part of 'orders_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-OrdersModel _$OrdersModelFromJson(Map<String, dynamic> json) => OrdersModel(
+_OrdersModel _$OrdersModelFromJson(Map<String, dynamic> json) => _OrdersModel(
   error: json['error'] as bool?,
   errorCode: (json['error_code'] as num?)?.toInt(),
   user: json['user'] as String?,
@@ -15,7 +15,7 @@ OrdersModel _$OrdersModelFromJson(Map<String, dynamic> json) => OrdersModel(
       .toList(),
 );
 
-Map<String, dynamic> _$OrdersModelToJson(OrdersModel instance) =>
+Map<String, dynamic> _$OrdersModelToJson(_OrdersModel instance) =>
     <String, dynamic>{
       'error': instance.error,
       'error_code': instance.errorCode,
@@ -23,7 +23,7 @@ Map<String, dynamic> _$OrdersModelToJson(OrdersModel instance) =>
       'transactions': instance.transactions,
     };
 
-Order _$OrderFromJson(Map<String, dynamic> json) => Order(
+_Order _$OrderFromJson(Map<String, dynamic> json) => _Order(
   tnId: json['tn_id'] as String?,
   tnType: json['tn_type'] as String?,
   tnName: json['tn_name'] as String?,
@@ -33,7 +33,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
   tnStatus: json['tn_status'] as String?,
 );
 
-Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
+Map<String, dynamic> _$OrderToJson(_Order instance) => <String, dynamic>{
   'tn_id': instance.tnId,
   'tn_type': instance.tnType,
   'tn_name': instance.tnName,

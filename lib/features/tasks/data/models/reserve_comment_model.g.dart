@@ -6,8 +6,8 @@ part of 'reserve_comment_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ReserveCommentModel _$ReserveCommentModelFromJson(Map<String, dynamic> json) =>
-    ReserveCommentModel(
+_ReserveCommentModel _$ReserveCommentModelFromJson(Map<String, dynamic> json) =>
+    _ReserveCommentModel(
       error: json['error'] as bool?,
       errorCode: (json['error_code'] as num?)?.toInt(),
       data: json['data'] == null
@@ -16,24 +16,25 @@ ReserveCommentModel _$ReserveCommentModelFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ReserveCommentModelToJson(
-  ReserveCommentModel instance,
+  _ReserveCommentModel instance,
 ) => <String, dynamic>{
   'error': instance.error,
   'error_code': instance.errorCode,
   'data': instance.data,
 };
 
-CommentModel _$CommentModelFromJson(Map<String, dynamic> json) => CommentModel(
-  commentId: json['comment_id'] as String?,
-  commentTaskId: json['comment_task_id'] as String?,
-  commentUserId: json['comment_user_id'] as String?,
-  commentText: json['comment_text'] as String?,
-  commentStatus: json['comment_status'] as String?,
-  commentLastChanged: json['comment_last_changed'] as String?,
-  commentCreatedAt: json['comment_created_at'] as String?,
-);
+_CommentModel _$CommentModelFromJson(Map<String, dynamic> json) =>
+    _CommentModel(
+      commentId: json['comment_id'] as String?,
+      commentTaskId: json['comment_task_id'] as String?,
+      commentUserId: json['comment_user_id'] as String?,
+      commentText: json['comment_text'] as String?,
+      commentStatus: json['comment_status'] as String?,
+      commentLastChanged: json['comment_last_changed'] as String?,
+      commentCreatedAt: json['comment_created_at'] as String?,
+    );
 
-Map<String, dynamic> _$CommentModelToJson(CommentModel instance) =>
+Map<String, dynamic> _$CommentModelToJson(_CommentModel instance) =>
     <String, dynamic>{
       'comment_id': instance.commentId,
       'comment_task_id': instance.commentTaskId,

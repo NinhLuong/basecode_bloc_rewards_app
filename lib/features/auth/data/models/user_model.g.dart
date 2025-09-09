@@ -6,7 +6,7 @@ part of 'user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
+_UserModel _$UserModelFromJson(Map<String, dynamic> json) => _UserModel(
   error: json['error'] as bool?,
   errorCode: (json['error_code'] as num?)?.toInt(),
   accessToken: json['accessToken'] as String?,
@@ -16,15 +16,16 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       .toList(),
 );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
-  'error': instance.error,
-  'error_code': instance.errorCode,
-  'accessToken': instance.accessToken,
-  'accountId': instance.accountId,
-  'account': instance.account,
-};
+Map<String, dynamic> _$UserModelToJson(_UserModel instance) =>
+    <String, dynamic>{
+      'error': instance.error,
+      'error_code': instance.errorCode,
+      'accessToken': instance.accessToken,
+      'accountId': instance.accountId,
+      'account': instance.account,
+    };
 
-Account _$AccountFromJson(Map<String, dynamic> json) => Account(
+_Account _$AccountFromJson(Map<String, dynamic> json) => _Account(
   error: json['error'] as bool?,
   errorCode: (json['error_code'] as num?)?.toInt(),
   id: json['id'] as String?,
@@ -45,7 +46,7 @@ Account _$AccountFromJson(Map<String, dynamic> json) => Account(
   totalPoints: json['total_points'] as String?,
 );
 
-Map<String, dynamic> _$AccountToJson(Account instance) => <String, dynamic>{
+Map<String, dynamic> _$AccountToJson(_Account instance) => <String, dynamic>{
   'error': instance.error,
   'error_code': instance.errorCode,
   'id': instance.id,

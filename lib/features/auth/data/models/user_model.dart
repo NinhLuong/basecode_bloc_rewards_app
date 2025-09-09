@@ -1,40 +1,25 @@
 import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 
+part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
-@immutable
-@JsonSerializable()
-class UserModel extends BaseModel<UserEntity> {
-  @JsonKey(name: 'error')
-  final bool? error;
-  
-  @JsonKey(name: 'error_code')
-  final int? errorCode;
-  
-  @JsonKey(name: 'accessToken')
-  final String? accessToken;
-  
-  @JsonKey(name: 'accountId')
-  final String? accountId;
-  
-  @JsonKey(name: 'account')
-  final List<Account>? account;
+@freezed
+abstract class UserModel extends BaseModel<UserEntity> with _$UserModel {
+  const UserModel._();
 
-  const UserModel({
-    this.error,
-    this.errorCode,
-    this.accessToken,
-    this.accountId,
-    this.account,
-  });
+  const factory UserModel({
+    @JsonKey(name: 'error') bool? error,
+    @JsonKey(name: 'error_code') int? errorCode,
+    @JsonKey(name: 'accessToken') String? accessToken,
+    @JsonKey(name: 'accountId') String? accountId,
+    @JsonKey(name: 'account') List<Account>? account,
+  }) = _UserModel;
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => 
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 
   @override
   UserEntity toEntity() {
@@ -49,86 +34,29 @@ class UserModel extends BaseModel<UserEntity> {
   }
 }
 
-@immutable
-@JsonSerializable()
-class Account {
-  @JsonKey(name: 'error')
-  final bool? error;
-  
-  @JsonKey(name: 'error_code')
-  final int? errorCode;
-  
-  @JsonKey(name: 'id')
-  final String? id;
-  
-  @JsonKey(name: 'last_access')
-  final String? lastAccess;
-  
-  @JsonKey(name: 'last_ip_addr')
-  final String? lastIpAddr;
-  
-  @JsonKey(name: 'gcm')
-  final String? gcm;
-  
-  @JsonKey(name: 'state')
-  final String? state;
-  
-  @JsonKey(name: 'fullname')
-  final String? fullname;
-  
-  @JsonKey(name: 'username')
-  final String? username;
-  
-  @JsonKey(name: 'email')
-  final String? email;
-  
-  @JsonKey(name: 'regtime')
-  final String? regtime;
-  
-  @JsonKey(name: 'ip_addr')
-  final String? ipAddr;
-  
-  @JsonKey(name: 'mobile')
-  final String? mobile;
-  
-  @JsonKey(name: 'points')
-  final String? points;
-  
-  @JsonKey(name: 'refer')
-  final String? refer;
-  
-  @JsonKey(name: 'refered')
-  final String? refered;
-  
-  @JsonKey(name: 'redeemed_points')
-  final String? redeemedPoints;
-  
-  @JsonKey(name: 'total_points')
-  final String? totalPoints;
+@freezed
+abstract class Account with _$Account {
+  const factory Account({
+    @JsonKey(name: 'error') bool? error,
+    @JsonKey(name: 'error_code') int? errorCode,
+    @JsonKey(name: 'id') String? id,
+    @JsonKey(name: 'last_access') String? lastAccess,
+    @JsonKey(name: 'last_ip_addr') String? lastIpAddr,
+    @JsonKey(name: 'gcm') String? gcm,
+    @JsonKey(name: 'state') String? state,
+    @JsonKey(name: 'fullname') String? fullname,
+    @JsonKey(name: 'username') String? username,
+    @JsonKey(name: 'email') String? email,
+    @JsonKey(name: 'regtime') String? regtime,
+    @JsonKey(name: 'ip_addr') String? ipAddr,
+    @JsonKey(name: 'mobile') String? mobile,
+    @JsonKey(name: 'points') String? points,
+    @JsonKey(name: 'refer') String? refer,
+    @JsonKey(name: 'refered') String? refered,
+    @JsonKey(name: 'redeemed_points') String? redeemedPoints,
+    @JsonKey(name: 'total_points') String? totalPoints,
+  }) = _Account;
 
-  const Account({
-    this.error,
-    this.errorCode,
-    this.id,
-    this.lastAccess,
-    this.lastIpAddr,
-    this.gcm,
-    this.state,
-    this.fullname,
-    this.username,
-    this.email,
-    this.regtime,
-    this.ipAddr,
-    this.mobile,
-    this.points,
-    this.refer,
-    this.refered,
-    this.redeemedPoints,
-    this.totalPoints,
-  });
-
-  factory Account.fromJson(Map<String, dynamic> json) => 
+  factory Account.fromJson(Map<String, dynamic> json) =>
       _$AccountFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AccountToJson(this);
 }

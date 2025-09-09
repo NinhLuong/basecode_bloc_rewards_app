@@ -1,38 +1,26 @@
 import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/shared/extensions/string_extensions/string_to_order_status.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/config/utils/app_date_formatter.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dart';
 
+part 'orders_model.freezed.dart';
 part 'orders_model.g.dart';
 
-@immutable
-@JsonSerializable()
-class OrdersModel extends BaseModel<OrdersEntity> {
-  @JsonKey(name: 'error')
-  final bool? error;
-  
-  @JsonKey(name: 'error_code')
-  final int? errorCode;
-  
-  @JsonKey(name: 'user')
-  final String? user;
-  
-  @JsonKey(name: 'transactions')
-  final List<Order>? transactions;
+@freezed
+abstract class OrdersModel extends BaseModel<OrdersEntity> with _$OrdersModel {
+  const OrdersModel._();
 
-  const OrdersModel({
-    this.error,
-    this.errorCode,
-    this.user,
-    this.transactions,
-  });
+  const factory OrdersModel({
+    @JsonKey(name: 'error') bool? error,
+    @JsonKey(name: 'error_code') int? errorCode,
+    @JsonKey(name: 'user') String? user,
+    @JsonKey(name: 'transactions') List<Order>? transactions,
+  }) = _OrdersModel;
 
-  factory OrdersModel.fromJson(Map<String, dynamic> json) => 
+  factory OrdersModel.fromJson(Map<String, dynamic> json) =>
       _$OrdersModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$OrdersModelToJson(this);
 
   @override
   OrdersEntity toEntity() {
@@ -41,44 +29,22 @@ class OrdersModel extends BaseModel<OrdersEntity> {
   }
 }
 
-@immutable
-@JsonSerializable()
-class Order extends BaseModel<OrderEntity> {
-  @JsonKey(name: 'tn_id')
-  final String? tnId;
-  
-  @JsonKey(name: 'tn_type')
-  final String? tnType;
-  
-  @JsonKey(name: 'tn_name')
-  final String? tnName;
-  
-  @JsonKey(name: 'tn_points')
-  final String? tnPoints;
-  
-  @JsonKey(name: 'tn_to')
-  final String? tnTo;
-  
-  @JsonKey(name: 'tn_date')
-  final String? tnDate;
-  
-  @JsonKey(name: 'tn_status')
-  final String? tnStatus;
+@freezed
+abstract class Order extends BaseModel<OrderEntity> with _$Order {
+  const Order._();
 
-  const Order({
-    this.tnId,
-    this.tnType,
-    this.tnName,
-    this.tnPoints,
-    this.tnTo,
-    this.tnDate,
-    this.tnStatus,
-  });
+  const factory Order({
+    @JsonKey(name: 'tn_id') String? tnId,
+    @JsonKey(name: 'tn_type') String? tnType,
+    @JsonKey(name: 'tn_name') String? tnName,
+    @JsonKey(name: 'tn_points') String? tnPoints,
+    @JsonKey(name: 'tn_to') String? tnTo,
+    @JsonKey(name: 'tn_date') String? tnDate,
+    @JsonKey(name: 'tn_status') String? tnStatus,
+  }) = _Order;
 
-  factory Order.fromJson(Map<String, dynamic> json) => 
+  factory Order.fromJson(Map<String, dynamic> json) =>
       _$OrderFromJson(json);
-
-  Map<String, dynamic> toJson() => _$OrderToJson(this);
 
   @override
   OrderEntity toEntity() {

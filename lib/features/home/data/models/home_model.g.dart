@@ -6,7 +6,7 @@ part of 'home_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => HomeModel(
+_HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => _HomeModel(
   error: json['error'] as bool?,
   errorCode: (json['error_code'] as num?)?.toInt(),
   balance: json['balance'] as String?,
@@ -15,15 +15,16 @@ HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => HomeModel(
       .toList(),
 );
 
-Map<String, dynamic> _$HomeModelToJson(HomeModel instance) => <String, dynamic>{
-  'error': instance.error,
-  'error_code': instance.errorCode,
-  'balance': instance.balance,
-  'offerwalls': instance.offerWalls,
-};
+Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
+    <String, dynamic>{
+      'error': instance.error,
+      'error_code': instance.errorCode,
+      'balance': instance.balance,
+      'offerwalls': instance.offerWalls,
+    };
 
-OfferWallModel _$OfferWallModelFromJson(Map<String, dynamic> json) =>
-    OfferWallModel(
+_OfferWallModel _$OfferWallModelFromJson(Map<String, dynamic> json) =>
+    _OfferWallModel(
       id: json['offer_id'] as String?,
       title: json['offer_title'] as String?,
       subtitle: json['offer_subtitle'] as String?,
@@ -36,7 +37,7 @@ OfferWallModel _$OfferWallModelFromJson(Map<String, dynamic> json) =>
       status: json['offer_status'] as String?,
     );
 
-Map<String, dynamic> _$OfferWallModelToJson(OfferWallModel instance) =>
+Map<String, dynamic> _$OfferWallModelToJson(_OfferWallModel instance) =>
     <String, dynamic>{
       'offer_id': instance.id,
       'offer_title': instance.title,

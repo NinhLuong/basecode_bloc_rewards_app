@@ -3,13 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
+import 'package:flutter/src/foundation/diagnostics.dart' as _i3;
 import 'package:magic_rewards/features/home/data/data_source/home_data_source.dart'
-    as _i3;
+    as _i4;
 import 'package:magic_rewards/features/home/data/models/home_model.dart' as _i2;
 import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart'
-    as _i5;
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -29,23 +30,27 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeHomeModel_0 extends _i1.SmartFake implements _i2.HomeModel {
   _FakeHomeModel_0(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
+
+  @override
+  String toString({_i3.DiagnosticLevel? minLevel = _i3.DiagnosticLevel.info}) =>
+      super.toString();
 }
 
 /// A class which mocks [HomeDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeDataSource extends _i1.Mock implements _i3.HomeDataSource {
+class MockHomeDataSource extends _i1.Mock implements _i4.HomeDataSource {
   MockHomeDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.HomeModel> getHome(_i5.HomeParameters? parameters) =>
+  _i5.Future<_i2.HomeModel> getHome(_i6.HomeParameters? parameters) =>
       (super.noSuchMethod(
             Invocation.method(#getHome, [parameters]),
-            returnValue: _i4.Future<_i2.HomeModel>.value(
+            returnValue: _i5.Future<_i2.HomeModel>.value(
               _FakeHomeModel_0(this, Invocation.method(#getHome, [parameters])),
             ),
           )
-          as _i4.Future<_i2.HomeModel>);
+          as _i5.Future<_i2.HomeModel>);
 }

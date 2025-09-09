@@ -6,16 +6,17 @@ part of 'payouts_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PayoutsModel _$PayoutsModelFromJson(Map<String, dynamic> json) => PayoutsModel(
-  error: json['error'] as bool?,
-  errorCode: (json['error_code'] as num?)?.toInt(),
-  payouts: (json['payouts'] as List<dynamic>?)
-      ?.map((e) => Payout.fromJson(e as Map<String, dynamic>))
-      .toList(),
-  balance: json['balance'] as String?,
-);
+_PayoutsModel _$PayoutsModelFromJson(Map<String, dynamic> json) =>
+    _PayoutsModel(
+      error: json['error'] as bool?,
+      errorCode: (json['error_code'] as num?)?.toInt(),
+      payouts: (json['payouts'] as List<dynamic>?)
+          ?.map((e) => Payout.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      balance: json['balance'] as String?,
+    );
 
-Map<String, dynamic> _$PayoutsModelToJson(PayoutsModel instance) =>
+Map<String, dynamic> _$PayoutsModelToJson(_PayoutsModel instance) =>
     <String, dynamic>{
       'error': instance.error,
       'error_code': instance.errorCode,
@@ -23,7 +24,7 @@ Map<String, dynamic> _$PayoutsModelToJson(PayoutsModel instance) =>
       'balance': instance.balance,
     };
 
-Payout _$PayoutFromJson(Map<String, dynamic> json) => Payout(
+_Payout _$PayoutFromJson(Map<String, dynamic> json) => _Payout(
   payoutId: json['payout_id'] as String?,
   payoutTitle: json['payout_title'] as String?,
   payoutSubtitle: json['payout_subtitle'] as String?,
@@ -34,7 +35,7 @@ Payout _$PayoutFromJson(Map<String, dynamic> json) => Payout(
   payoutStatus: json['payout_status'] as String?,
 );
 
-Map<String, dynamic> _$PayoutToJson(Payout instance) => <String, dynamic>{
+Map<String, dynamic> _$PayoutToJson(_Payout instance) => <String, dynamic>{
   'payout_id': instance.payoutId,
   'payout_title': instance.payoutTitle,
   'payout_subtitle': instance.payoutSubtitle,

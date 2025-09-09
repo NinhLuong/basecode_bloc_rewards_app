@@ -6,8 +6,8 @@ part of 'top_users_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TopUsersModel _$TopUsersModelFromJson(Map<String, dynamic> json) =>
-    TopUsersModel(
+_TopUsersModel _$TopUsersModelFromJson(Map<String, dynamic> json) =>
+    _TopUsersModel(
       error: json['error'] as bool?,
       errorCode: (json['error_code'] as num?)?.toInt(),
       requests: (json['requests'] as List<dynamic>?)
@@ -18,7 +18,7 @@ TopUsersModel _$TopUsersModelFromJson(Map<String, dynamic> json) =>
           : UserRankModel.fromJson(json['my_rank'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$TopUsersModelToJson(TopUsersModel instance) =>
+Map<String, dynamic> _$TopUsersModelToJson(_TopUsersModel instance) =>
     <String, dynamic>{
       'error': instance.error,
       'error_code': instance.errorCode,
@@ -26,18 +26,18 @@ Map<String, dynamic> _$TopUsersModelToJson(TopUsersModel instance) =>
       'my_rank': instance.myRank,
     };
 
-UserRankModel _$UserRankModelFromJson(Map<String, dynamic> json) =>
-    UserRankModel(
-      requestFrom: json['requestFrom'] as String?,
+_UserRankModel _$UserRankModelFromJson(Map<String, dynamic> json) =>
+    _UserRankModel(
+      requestFrom: json['request_from'] as String?,
       points: json['points'] as String?,
       amount: json['amount'] as String?,
       rank: (json['rank'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$UserRankModelToJson(UserRankModel instance) =>
+Map<String, dynamic> _$UserRankModelToJson(_UserRankModel instance) =>
     <String, dynamic>{
+      'request_from': instance.requestFrom,
       'points': instance.points,
       'amount': instance.amount,
       'rank': instance.rank,
-      'requestFrom': instance.requestFrom,
     };

@@ -3,23 +3,24 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
+import 'package:flutter/src/foundation/diagnostics.dart' as _i3;
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart'
-    as _i9;
+    as _i10;
 import 'package:magic_rewards/features/auth/data/data_source/auth_data_source.dart'
-    as _i4;
+    as _i5;
 import 'package:magic_rewards/features/auth/data/models/check_email_model.dart'
-    as _i3;
+    as _i4;
 import 'package:magic_rewards/features/auth/data/models/user_model.dart' as _i2;
 import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart'
-    as _i8;
+    as _i9;
 import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart'
-    as _i6;
-import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart'
     as _i7;
+import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart'
+    as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -38,66 +39,74 @@ import 'package:mockito/src/dummies.dart' as _i10;
 class _FakeUserModel_0 extends _i1.SmartFake implements _i2.UserModel {
   _FakeUserModel_0(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
+
+  @override
+  String toString({_i3.DiagnosticLevel? minLevel = _i3.DiagnosticLevel.info}) =>
+      super.toString();
 }
 
 class _FakeCheckEmailModel_1 extends _i1.SmartFake
-    implements _i3.CheckEmailModel {
+    implements _i4.CheckEmailModel {
   _FakeCheckEmailModel_1(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
+
+  @override
+  String toString({_i3.DiagnosticLevel? minLevel = _i3.DiagnosticLevel.info}) =>
+      super.toString();
 }
 
 /// A class which mocks [AuthDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthDataSource extends _i1.Mock implements _i4.AuthDataSource {
+class MockAuthDataSource extends _i1.Mock implements _i5.AuthDataSource {
   MockAuthDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.UserModel> login(_i6.LoginParameters? parameters) =>
+  _i6.Future<_i2.UserModel> login(_i7.LoginParameters? parameters) =>
       (super.noSuchMethod(
             Invocation.method(#login, [parameters]),
-            returnValue: _i5.Future<_i2.UserModel>.value(
+            returnValue: _i6.Future<_i2.UserModel>.value(
               _FakeUserModel_0(this, Invocation.method(#login, [parameters])),
             ),
           )
-          as _i5.Future<_i2.UserModel>);
+          as _i6.Future<_i2.UserModel>);
 
   @override
-  _i5.Future<_i2.UserModel> register(_i7.RegisterParameters? parameters) =>
+  _i6.Future<_i2.UserModel> register(_i8.RegisterParameters? parameters) =>
       (super.noSuchMethod(
             Invocation.method(#register, [parameters]),
-            returnValue: _i5.Future<_i2.UserModel>.value(
+            returnValue: _i6.Future<_i2.UserModel>.value(
               _FakeUserModel_0(
                 this,
                 Invocation.method(#register, [parameters]),
               ),
             ),
           )
-          as _i5.Future<_i2.UserModel>);
+          as _i6.Future<_i2.UserModel>);
 
   @override
-  _i5.Future<_i3.CheckEmailModel> checkEmail(
-    _i8.CheckEmailParameters? parameters,
+  _i6.Future<_i4.CheckEmailModel> checkEmail(
+    _i9.CheckEmailParameters? parameters,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#checkEmail, [parameters]),
-            returnValue: _i5.Future<_i3.CheckEmailModel>.value(
+            returnValue: _i6.Future<_i4.CheckEmailModel>.value(
               _FakeCheckEmailModel_1(
                 this,
                 Invocation.method(#checkEmail, [parameters]),
               ),
             ),
           )
-          as _i5.Future<_i3.CheckEmailModel>);
+          as _i6.Future<_i4.CheckEmailModel>);
 }
 
 /// A class which mocks [CacheStorageServices].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCacheStorageServices extends _i1.Mock
-    implements _i9.CacheStorageServices {
+    implements _i10.CacheStorageServices {
   MockCacheStorageServices() {
     _i1.throwOnMissingStub(this);
   }
@@ -111,7 +120,7 @@ class MockCacheStorageServices extends _i1.Mock
   String get token =>
       (super.noSuchMethod(
             Invocation.getter(#token),
-            returnValue: _i10.dummyValue<String>(
+            returnValue: _i11.dummyValue<String>(
               this,
               Invocation.getter(#token),
             ),
@@ -126,7 +135,7 @@ class MockCacheStorageServices extends _i1.Mock
   String get username =>
       (super.noSuchMethod(
             Invocation.getter(#username),
-            returnValue: _i10.dummyValue<String>(
+            returnValue: _i11.dummyValue<String>(
               this,
               Invocation.getter(#username),
             ),
@@ -137,7 +146,7 @@ class MockCacheStorageServices extends _i1.Mock
   String get accountId =>
       (super.noSuchMethod(
             Invocation.getter(#accountId),
-            returnValue: _i10.dummyValue<String>(
+            returnValue: _i11.dummyValue<String>(
               this,
               Invocation.getter(#accountId),
             ),
@@ -148,7 +157,7 @@ class MockCacheStorageServices extends _i1.Mock
   String get fullname =>
       (super.noSuchMethod(
             Invocation.getter(#fullname),
-            returnValue: _i10.dummyValue<String>(
+            returnValue: _i11.dummyValue<String>(
               this,
               Invocation.getter(#fullname),
             ),
@@ -159,7 +168,7 @@ class MockCacheStorageServices extends _i1.Mock
   String get email =>
       (super.noSuchMethod(
             Invocation.getter(#email),
-            returnValue: _i10.dummyValue<String>(
+            returnValue: _i11.dummyValue<String>(
               this,
               Invocation.getter(#email),
             ),
@@ -167,119 +176,119 @@ class MockCacheStorageServices extends _i1.Mock
           as String);
 
   @override
-  _i5.Future<void> setToken(String? token) =>
+  _i6.Future<void> setToken(String? token) =>
       (super.noSuchMethod(
             Invocation.method(#setToken, [token]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> removeToken() =>
+  _i6.Future<void> removeToken() =>
       (super.noSuchMethod(
             Invocation.method(#removeToken, []),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> setLocale(String? locale) =>
+  _i6.Future<void> setLocale(String? locale) =>
       (super.noSuchMethod(
             Invocation.method(#setLocale, [locale]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> setAvatar(int? id) =>
+  _i6.Future<void> setAvatar(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#setAvatar, [id]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> setUserName(String? username) =>
+  _i6.Future<void> setUserName(String? username) =>
       (super.noSuchMethod(
             Invocation.method(#setUserName, [username]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> removeUserName() =>
+  _i6.Future<void> removeUserName() =>
       (super.noSuchMethod(
             Invocation.method(#removeUserName, []),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> setAccountId(String? username) =>
+  _i6.Future<void> setAccountId(String? username) =>
       (super.noSuchMethod(
             Invocation.method(#setAccountId, [username]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> removeAccountId() =>
+  _i6.Future<void> removeAccountId() =>
       (super.noSuchMethod(
             Invocation.method(#removeAccountId, []),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> setFullName(String? fullname) =>
+  _i6.Future<void> setFullName(String? fullname) =>
       (super.noSuchMethod(
             Invocation.method(#setFullName, [fullname]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> removeFullName() =>
+  _i6.Future<void> removeFullName() =>
       (super.noSuchMethod(
             Invocation.method(#removeFullName, []),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> setEmail(String? email) =>
+  _i6.Future<void> setEmail(String? email) =>
       (super.noSuchMethod(
             Invocation.method(#setEmail, [email]),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> removeEmail() =>
+  _i6.Future<void> removeEmail() =>
       (super.noSuchMethod(
             Invocation.method(#removeEmail, []),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 
   @override
-  _i5.Future<void> clearAll() =>
+  _i6.Future<void> clearAll() =>
       (super.noSuchMethod(
             Invocation.method(#clearAll, []),
-            returnValue: _i5.Future<void>.value(),
-            returnValueForMissingStub: _i5.Future<void>.value(),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
           )
-          as _i5.Future<void>);
+          as _i6.Future<void>);
 }

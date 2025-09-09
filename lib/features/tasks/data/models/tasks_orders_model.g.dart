@@ -6,8 +6,8 @@ part of 'tasks_orders_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TasksOrdersModel _$TasksOrdersModelFromJson(Map<String, dynamic> json) =>
-    TasksOrdersModel(
+_TasksOrdersModel _$TasksOrdersModelFromJson(Map<String, dynamic> json) =>
+    _TasksOrdersModel(
       error: json['error'] as bool?,
       errorCode: (json['error_code'] as num?)?.toInt(),
       requests: (json['requests'] as List<dynamic>?)
@@ -15,15 +15,15 @@ TasksOrdersModel _$TasksOrdersModelFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$TasksOrdersModelToJson(TasksOrdersModel instance) =>
+Map<String, dynamic> _$TasksOrdersModelToJson(_TasksOrdersModel instance) =>
     <String, dynamic>{
       'error': instance.error,
       'error_code': instance.errorCode,
       'requests': instance.requests,
     };
 
-TaskOrderModel _$TaskOrderModelFromJson(Map<String, dynamic> json) =>
-    TaskOrderModel(
+_TaskOrderModel _$TaskOrderModelFromJson(Map<String, dynamic> json) =>
+    _TaskOrderModel(
       error: json['error'] as bool?,
       errorCode: (json['error_code'] as num?)?.toInt(),
       id: json['id'] as String?,
@@ -40,7 +40,7 @@ TaskOrderModel _$TaskOrderModelFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$TaskOrderModelToJson(TaskOrderModel instance) =>
+Map<String, dynamic> _$TaskOrderModelToJson(_TaskOrderModel instance) =>
     <String, dynamic>{
       'error': instance.error,
       'error_code': instance.errorCode,

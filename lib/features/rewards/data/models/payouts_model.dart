@@ -1,36 +1,24 @@
 import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:magic_rewards/core/domain/models/base_model.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
 
+part 'payouts_model.freezed.dart';
 part 'payouts_model.g.dart';
 
-@immutable
-@JsonSerializable()
-class PayoutsModel extends BaseModel<PayoutsEntity> {
-  @JsonKey(name: 'error')
-  final bool? error;
-  
-  @JsonKey(name: 'error_code')
-  final int? errorCode;
-  
-  @JsonKey(name: 'payouts')
-  final List<Payout>? payouts;
-  
-  @JsonKey(name: 'balance')
-  final String? balance;
+@freezed
+abstract class PayoutsModel extends BaseModel<PayoutsEntity> with _$PayoutsModel {
+  const PayoutsModel._();
 
-  const PayoutsModel({
-    this.error,
-    this.errorCode,
-    this.payouts,
-    this.balance,
-  });
+  const factory PayoutsModel({
+    @JsonKey(name: 'error') bool? error,
+    @JsonKey(name: 'error_code') int? errorCode,
+    @JsonKey(name: 'payouts') List<Payout>? payouts,
+    @JsonKey(name: 'balance') String? balance,
+  }) = _PayoutsModel;
 
-  factory PayoutsModel.fromJson(Map<String, dynamic> json) => 
+  factory PayoutsModel.fromJson(Map<String, dynamic> json) =>
       _$PayoutsModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PayoutsModelToJson(this);
 
   @override
   PayoutsEntity toEntity() {
@@ -62,48 +50,23 @@ class PayoutsModel extends BaseModel<PayoutsEntity> {
   }
 }
 
-@immutable
-@JsonSerializable()
-class Payout extends BaseModel<PayoutEntity> {
-  @JsonKey(name: 'payout_id')
-  final String? payoutId;
-  
-  @JsonKey(name: 'payout_title')
-  final String? payoutTitle;
-  
-  @JsonKey(name: 'payout_subtitle')
-  final String? payoutSubtitle;
-  
-  @JsonKey(name: 'payout_message')
-  final String? payoutMessage;
-  
-  @JsonKey(name: 'payout_amount')
-  final String? payoutAmount;
-  
-  @JsonKey(name: 'payout_pointsRequired')
-  final String? payoutPointsRequired;
-  
-  @JsonKey(name: 'payout_thumbnail')
-  final String? payoutThumbnail;
-  
-  @JsonKey(name: 'payout_status')
-  final String? payoutStatus;
+@freezed
+abstract class Payout extends BaseModel<PayoutEntity> with _$Payout {
+  const Payout._();
 
-  const Payout({
-    this.payoutId,
-    this.payoutTitle,
-    this.payoutSubtitle,
-    this.payoutMessage,
-    this.payoutAmount,
-    this.payoutPointsRequired,
-    this.payoutThumbnail,
-    this.payoutStatus,
-  });
+  const factory Payout({
+    @JsonKey(name: 'payout_id') String? payoutId,
+    @JsonKey(name: 'payout_title') String? payoutTitle,
+    @JsonKey(name: 'payout_subtitle') String? payoutSubtitle,
+    @JsonKey(name: 'payout_message') String? payoutMessage,
+    @JsonKey(name: 'payout_amount') String? payoutAmount,
+    @JsonKey(name: 'payout_pointsRequired') String? payoutPointsRequired,
+    @JsonKey(name: 'payout_thumbnail') String? payoutThumbnail,
+    @JsonKey(name: 'payout_status') String? payoutStatus,
+  }) = _Payout;
 
-  factory Payout.fromJson(Map<String, dynamic> json) => 
+  factory Payout.fromJson(Map<String, dynamic> json) =>
       _$PayoutFromJson(json);
-
-  Map<String, dynamic> toJson() => _$PayoutToJson(this);
 
   @override
   PayoutEntity toEntity() {
