@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/live_offers/domain/usecases/get_live_offe
 
 part 'live_offers_event.dart';
 
+@injectable
 class LiveOffersBloc
     extends Bloc<LiveOffersEvent, BaseState<LiveOffersEntity>> {
   final GetLiveOffersUseCase getLiveOffersUseCase;

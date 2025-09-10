@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:magic_rewards/config/secret/api/apis_urls.dart';
 import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
@@ -10,6 +11,7 @@ import 'package:magic_rewards/features/tasks/domain/parameters/reserve_comment_p
 import 'package:magic_rewards/features/tasks/domain/parameters/tasks_orders_parameters.dart';
 import 'package:magic_rewards/features/tasks/domain/parameters/tasks_parameters.dart';
 
+@LazySingleton(as: TasksDataSource)
 class TasksRemoteDataSourceImp extends TasksDataSource {
   @override
   Future<TasksModel> getTasks(TasksParameters parameters) async {

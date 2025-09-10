@@ -4,7 +4,7 @@ import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/shared/services/di/di_service.dart';
+import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';

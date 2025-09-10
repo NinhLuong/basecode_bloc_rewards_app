@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -8,6 +9,7 @@ import 'package:magic_rewards/features/rewards/domain/usecases/redeem_usecase.da
 
 part 'redeem_event.dart';
 
+@injectable
 class RedeemBloc extends Bloc<RedeemEvent, BaseState<void>> {
   final RedeemUseCase redeemUseCase;
 

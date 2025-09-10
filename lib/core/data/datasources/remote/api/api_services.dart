@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/dio_log_interceptor.dart';
 import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/error_interceptor.dart';
@@ -19,11 +20,11 @@ import 'package:magic_rewards/config/errors/errors_handler.dart';
 ///   4- [put] put http request
 ///
 
+@injectable 
 class ApiServices {
-  static ApiServices? _instance;
   late final Dio _dio;
 
-  ApiServices._() {
+  ApiServices() {
     _dio = Dio(BaseOptions(
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
@@ -64,7 +65,6 @@ class ApiServices {
     ]);
   }
 
-  factory ApiServices() => _instance ??= ApiServices._();
 
   // on post request
   Future<AppResponse> post(

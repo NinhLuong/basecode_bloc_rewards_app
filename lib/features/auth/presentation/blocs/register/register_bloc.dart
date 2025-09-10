@@ -6,19 +6,21 @@ import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart';
 import 'package:magic_rewards/features/auth/domain/usecases/register_usecase.dart';
+import 'package:injectable/injectable.dart';
 
 part 'register_event.dart';
 
+@injectable
 class RegisterBloc extends Bloc<RegisterEvent, BaseState<UserEntity>> {
-  final RegisterUseCase registerUseCase;
+  final RegisterUseCase _registerUseCase;
 
-  RegisterBloc(this.registerUseCase) : super(const BaseState<UserEntity>.initial()) {
+  RegisterBloc(this._registerUseCase) : super(const BaseState<UserEntity>.initial()) {
     on<RegisterButtonTappedEvent>(_register);
   }
 
   FutureOr<void> _register(RegisterButtonTappedEvent event, emit) async {
     emit(state.loading());
-    final result = await registerUseCase.call(
+    final result = await _registerUseCase.call(
       params: RegisterParameters(
         email: event.email,
         fullName: event.fullName,

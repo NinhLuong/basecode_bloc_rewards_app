@@ -58,6 +58,7 @@ dependencies:
 
   dartz: ^0.10.1
   #dependency injection
+  injectable: ^2.5.1
   get_it: ^8.2.0
 
   #UI
@@ -116,6 +117,9 @@ dev_dependencies:
 
   #envied generator
   envied_generator: ^1.2.1
+  
+  #injectable generator
+  injectable_generator: ^2.6.2
 
   #test
   mockito: ^5.5.0

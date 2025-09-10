@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/shared/services/di/di_service.dart';
+import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
 import 'package:magic_rewards/features/rewards/presentation/blocs/payouts_bloc/payouts_bloc.dart';

@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:magic_rewards/config/errors/errors_handler.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
@@ -11,6 +12,7 @@ import 'package:magic_rewards/features/tasks/domain/parameters/tasks_orders_para
 import 'package:magic_rewards/features/tasks/domain/parameters/tasks_parameters.dart';
 import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.dart';
 
+@LazySingleton(as: TasksRepository)
 class TasksRepositoryImp extends TasksRepository {
   final TasksDataSource tasksDataSource;
 

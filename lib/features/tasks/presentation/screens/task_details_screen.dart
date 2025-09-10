@@ -8,7 +8,7 @@ import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/shared/services/di/di_service.dart';
+import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';

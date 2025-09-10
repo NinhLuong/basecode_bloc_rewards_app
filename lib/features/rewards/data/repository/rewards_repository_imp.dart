@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:magic_rewards/config/errors/errors_handler.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
@@ -11,6 +12,7 @@ import 'package:magic_rewards/features/rewards/domain/parameters/redeem_paramete
 import 'package:magic_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
 import 'package:magic_rewards/features/rewards/domain/repository/rewards_repository.dart';
 
+@LazySingleton(as: RewardsRepository)
 class RewardsRepositoryImp extends RewardsRepository {
   final RewardsDataSource rewardsDataSource;
 

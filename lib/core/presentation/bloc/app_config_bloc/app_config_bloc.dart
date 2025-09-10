@@ -6,11 +6,14 @@ import 'package:magic_rewards/config/enums/app_languages.dart';
 import 'package:magic_rewards/config/enums/app_state.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 import 'package:magic_rewards/config/languages/app_local.dart';
+import 'package:injectable/injectable.dart';
+
 
 part 'app_config_event.dart';
 
 part 'app_config_state.dart';
 
+@injectable
 class AppConfigBloc extends Bloc<AppConfigEvent, AppConfigState> {
   AppConfigBloc()
       : super(AppConfigState(

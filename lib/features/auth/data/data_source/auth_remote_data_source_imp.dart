@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:magic_rewards/features/auth/data/models/check_email_model.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
 
@@ -9,7 +10,8 @@ import '../../domain/parameters/register_parameters.dart';
 import '../models/user_model.dart';
 import 'auth_data_source.dart';
 
-class AuthRemoteDataSourceImp extends AuthDataSource {
+@LazySingleton(as: AuthDataSource)
+class AuthRemoteDataSourceImp implements AuthDataSource {
   @override
   Future<UserModel> login(LoginParameters parameters) async {
     AppResponse response = await ApiServices().post(

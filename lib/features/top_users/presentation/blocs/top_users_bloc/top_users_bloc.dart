@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/top_users/domain/repository/top_users_rep
 
 part 'top_users_event.dart';
 
+@injectable
 class TopUsersBloc extends Bloc<TopUsersEvent, BaseState<TopUsersEntity>> {
   final TopUsersRepository liveOffersRepository;
 

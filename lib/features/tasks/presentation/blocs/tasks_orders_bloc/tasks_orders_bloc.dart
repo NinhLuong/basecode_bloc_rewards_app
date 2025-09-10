@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.
 
 part 'tasks_orders_event.dart';
 
+@injectable
 class TasksOrdersBloc
     extends Bloc<TasksOrdersEvent, BaseState<TasksOrdersEntity>> {
   final TasksRepository tasksRepository;

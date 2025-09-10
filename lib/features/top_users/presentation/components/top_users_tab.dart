@@ -5,7 +5,7 @@ import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/shared/services/di/di_service.dart';
+import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 import 'package:magic_rewards/features/top_users/presentation/blocs/top_users_bloc/top_users_bloc.dart';

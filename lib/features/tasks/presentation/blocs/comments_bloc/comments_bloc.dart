@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.
 
 part 'comments_event.dart';
 
+@injectable
 class CommentsBloc
     extends Bloc<CommentsEvent, BaseState<ReserveCommentEntity>> {
   final TasksRepository tasksRepository;

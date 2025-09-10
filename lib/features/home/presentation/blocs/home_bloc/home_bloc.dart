@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/home/domain/usecases/get_home_usecase.dar
 
 part 'home_event.dart';
 
+@injectable
 class HomeBloc extends Bloc<HomeEvent, BaseState<HomeEntity>> {
   final GetHomeUseCase getHomeUseCase;
 

@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/rewards/domain/usecases/get_orders_usecas
 
 part 'orders_event.dart';
 
+@injectable
 class OrdersBloc extends Bloc<OrdersEvent, BaseState<OrdersEntity>> {
   final GetOrdersUseCase getOrdersUseCase;
 

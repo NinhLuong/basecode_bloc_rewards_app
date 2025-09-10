@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/rewards/domain/usecases/get_payouts_useca
 
 part 'payouts_event.dart';
 
+@injectable
 class PayoutsBloc extends Bloc<PayoutsEvent, BaseState<PayoutsEntity>> {
   final GetPayoutsUseCase getPayoutsUseCase;
 

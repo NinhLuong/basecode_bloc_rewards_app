@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:magic_rewards/config/secret/api/apis_urls.dart';
 import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
@@ -6,6 +7,7 @@ import 'package:magic_rewards/features/profile/data/models/profile_model.dart';
 import 'package:magic_rewards/features/profile/domain/parameters/delete_account_parameters.dart';
 import 'package:magic_rewards/features/profile/domain/parameters/profile_parameters.dart';
 
+@LazySingleton(as: ProfileDataSource)
 class ProfileRemoteDataSourceImp extends ProfileDataSource {
   @override
   Future<ProfileModel> getProfile(ProfileParameters parameters) async {

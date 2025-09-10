@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -8,6 +9,7 @@ import 'package:magic_rewards/features/profile/domain/usecases/delete_account_us
 
 part 'delete_account_event.dart';
 
+@injectable
 class DeleteAccountBloc extends Bloc<DeleteAccountEvent, BaseState<void>> {
   final DeleteAccountUseCase deleteAccountUseCase;
 

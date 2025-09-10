@@ -8,21 +8,23 @@ import 'package:magic_rewards/features/auth/domain/parameters/check_email_parame
 import 'package:magic_rewards/features/auth/domain/usecases/check_email_usecase.dart';
 
 import '../../../../../core/presentation/bloc/base/base_state.dart';
+import 'package:injectable/injectable.dart';
 
 part 'check_email_event.dart';
 
+@injectable
 class CheckEmailBloc
     extends Bloc<CheckEmailEvent, BaseState<CheckEmailEntity>> {
-  final CheckEmailUseCase checkEmailUseCase;
+  final CheckEmailUseCase _checkEmailUseCase;
 
-  CheckEmailBloc(this.checkEmailUseCase)
+  CheckEmailBloc(this._checkEmailUseCase)
       : super(const BaseState<CheckEmailEntity>.initial()) {
     on<CheckEmailButtonTappedEvent>(_checkEmail, transformer: restartable());
   }
 
   FutureOr<void> _checkEmail(CheckEmailButtonTappedEvent event, emit) async {
     emit(state.loading());
-    final result = await checkEmailUseCase.call(
+    final result = await _checkEmailUseCase.call(
       params: CheckEmailParameters(email: event.email),
     );
     result.fold((l) => emit(state.error(l)), (r) => emit(state.success(r)));

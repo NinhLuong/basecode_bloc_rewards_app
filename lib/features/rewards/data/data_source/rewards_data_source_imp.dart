@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:magic_rewards/config/secret/api/apis_urls.dart';
 import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
@@ -10,6 +11,7 @@ import 'package:magic_rewards/features/rewards/domain/parameters/payouts_paramet
 import 'package:magic_rewards/features/rewards/domain/parameters/redeem_parameters.dart';
 import 'package:magic_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
 
+@LazySingleton(as: RewardsDataSource)
 class RewardsRemoteDataSourceImp extends RewardsDataSource {
   @override
   Future<PayoutsModel> getPayouts(PayoutsParameters parameters) async {

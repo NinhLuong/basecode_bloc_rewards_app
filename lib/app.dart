@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/shared/services/di/di_service.dart';
+import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/config/languages/app_local.dart';
 import 'package:magic_rewards/config/themes/app_theme.dart';
 import 'package:magic_rewards/core/presentation/routes/app_routes.dart';

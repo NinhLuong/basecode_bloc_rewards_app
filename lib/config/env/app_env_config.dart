@@ -7,7 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 enum Environment { local, dummy, dev, prod }
 
-class AppConfig {
+class AppEnvConfig {
   static Environment env = Environment.dev;
   static late AppEnv _appEnv;
   static PackageInfo? _packageInfo;

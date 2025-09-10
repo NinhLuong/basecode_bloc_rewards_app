@@ -1,4 +1,4 @@
-import 'package:magic_rewards/config/env/app_config.dart';
+import 'package:magic_rewards/config/env/app_env_config.dart';
 
 /// class [ApisUrls] contains all URLs to external services, services,
 /// or APIs, according to the following figure
@@ -8,7 +8,7 @@ import 'package:magic_rewards/config/env/app_config.dart';
 
 class ApisUrls {
   /// [_baseUrl] base server url
-  static final String _baseUrl = AppConfig.apiBaseUrl; //live
+  static final String _baseUrl = AppEnvConfig.apiBaseUrl; //live
   // static final String _baseUrl = 'https://dev.magic-rewards.com/admin';//dev
   // static final String _baseUrl = 'http://10.0.2.2:8000/admin';//local
   // static final String _baseUrl = 'http://172.20.10.4/admin';//ubuntu

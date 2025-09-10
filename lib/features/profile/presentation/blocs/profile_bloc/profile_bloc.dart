@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/profile/domain/usecases/get_profile_useca
 
 part 'profile_event.dart';
 
+@injectable
 class ProfileBloc extends Bloc<ProfileEvent, BaseState<ProfileEntity>> {
   final GetProfileUseCase getProfileUseCase;
 

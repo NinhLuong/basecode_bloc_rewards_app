@@ -9,7 +9,7 @@ import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/app_network_image.dart';
 import 'package:magic_rewards/shared/widgets/components/app_text_field.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/shared/services/di/di_service.dart';
+import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/config/utils/app_validator.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';

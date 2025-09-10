@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/shared/services/di/di_service.dart';
+import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/core/presentation/observers/app_bloc_observer.dart';
 import 'package:magic_rewards/shared/services/logger/logger_service.dart';
-import 'package:magic_rewards/config/env/app_config.dart';
+import 'package:magic_rewards/config/env/app_env_config.dart';
 
 import 'app.dart';
 
@@ -24,9 +24,9 @@ Future<void> main() async {
   
   // Load environment configuration FIRST
   LoggerService.app('⚙️ Loading environment configuration...');
-  await AppConfig.loadEnv();
-  LoggerService.app('✅ Environment loaded: ${AppConfig.env}');
-  LoggerService.app('🌐 API Base URL: ${AppConfig.apiBaseUrl}');
+  await AppEnvConfig.loadEnv();
+  LoggerService.app('✅ Environment loaded: ${AppEnvConfig.env}');
+  LoggerService.app('🌐 API Base URL: ${AppEnvConfig.apiBaseUrl}');
   
   // Initialize core services
   LoggerService.app('💾 Initializing cache storage...');
@@ -36,7 +36,8 @@ Future<void> main() async {
   await ScreenUtil.ensureScreenSize();
   
   LoggerService.app('🔗 Initializing dependency injection...');
-  DIServices().init();
+  // DIServices().init();
+  configureDependencies();
   
   LoggerService.app('✅ Application initialization completed');
   

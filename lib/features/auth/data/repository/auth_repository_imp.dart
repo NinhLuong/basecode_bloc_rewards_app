@@ -11,16 +11,18 @@ import '../../domain/parameters/login_parameters.dart';
 import '../../domain/parameters/register_parameters.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../data_source/auth_data_source.dart';
+import 'package:injectable/injectable.dart';
 
-class AuthRepositoryImp extends AuthRepository {
-  final AuthDataSource authDataSource;
+@LazySingleton(as: AuthRepository)
+class AuthRepositoryImp implements AuthRepository {
+  final AuthDataSource _authDataSource;
 
-  AuthRepositoryImp(this.authDataSource);
+  AuthRepositoryImp(this._authDataSource);
 
   @override
   Future<Either<Failure, UserEntity>> login(LoginParameters parameters) async {
     try {
-      final UserModel res = await authDataSource.login(parameters);
+      final UserModel res = await _authDataSource.login(parameters);
       final user = res.toEntity();
       await CacheStorageServices().setToken(user.accessToken!);
       await CacheStorageServices().setUserName(user.userName);
@@ -37,7 +39,7 @@ class AuthRepositoryImp extends AuthRepository {
   Future<Either<Failure, UserEntity>> register(
       RegisterParameters parameters) async {
     try {
-      final UserModel res = await authDataSource.register(parameters);
+      final UserModel res = await _authDataSource.register(parameters);
       final user = res.toEntity();
       await CacheStorageServices().setToken(user.accessToken!);
       await CacheStorageServices().setUserName(user.userName);
@@ -54,6 +56,6 @@ class AuthRepositoryImp extends AuthRepository {
   Future<Either<Failure, CheckEmailEntity>> checkEmail(
       CheckEmailParameters parameters) {
     return ErrorsHandler.handleEither(
-        () => authDataSource.checkEmail(parameters));
+        () => _authDataSource.checkEmail(parameters));
   }
 }

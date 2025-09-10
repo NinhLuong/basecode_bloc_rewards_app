@@ -3,18 +3,16 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
-import 'package:dartz/dartz.dart' as _i3;
-import 'package:magic_rewards/config/errors/failure.dart' as _i6;
+import 'package:dartz/dartz.dart' as _i2;
+import 'package:magic_rewards/config/errors/failure.dart' as _i5;
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart'
-    as _i7;
+    as _i6;
 import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart'
-    as _i8;
-import 'package:magic_rewards/features/auth/domain/repository/auth_repository.dart'
-    as _i2;
+    as _i7;
 import 'package:magic_rewards/features/auth/domain/usecases/register_usecase.dart'
-    as _i4;
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -31,49 +29,32 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeAuthRepository_0 extends _i1.SmartFake
-    implements _i2.AuthRepository {
-  _FakeAuthRepository_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
-  _FakeEither_1(Object parent, Invocation parentInvocation)
+class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
+  _FakeEither_0(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
 /// A class which mocks [RegisterUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRegisterUseCase extends _i1.Mock implements _i4.RegisterUseCase {
+class MockRegisterUseCase extends _i1.Mock implements _i3.RegisterUseCase {
   MockRegisterUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.AuthRepository get authRepository =>
-      (super.noSuchMethod(
-            Invocation.getter(#authRepository),
-            returnValue: _FakeAuthRepository_0(
-              this,
-              Invocation.getter(#authRepository),
-            ),
-          )
-          as _i2.AuthRepository);
-
-  @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.UserEntity>> call({
-    required _i8.RegisterParameters? params,
+  _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>> call({
+    required _i7.RegisterParameters? params,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#call, [], {#params: params}),
             returnValue:
-                _i5.Future<_i3.Either<_i6.Failure, _i7.UserEntity>>.value(
-                  _FakeEither_1<_i6.Failure, _i7.UserEntity>(
+                _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>.value(
+                  _FakeEither_0<_i5.Failure, _i6.UserEntity>(
                     this,
                     Invocation.method(#call, [], {#params: params}),
                   ),
                 ),
           )
-          as _i5.Future<_i3.Either<_i6.Failure, _i7.UserEntity>>);
+          as _i4.Future<_i2.Either<_i5.Failure, _i6.UserEntity>>);
 }

@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -9,6 +10,7 @@ import 'package:magic_rewards/features/tasks/domain/repository/tasks_repository.
 
 part 'do_task_event.dart';
 
+@injectable
 class DoTaskBloc extends Bloc<DoTaskEvent, BaseState<void>> {
   final TasksRepository tasksRepository;
 
