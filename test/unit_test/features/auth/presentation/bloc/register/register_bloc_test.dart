@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:magic_rewards/config/enums/request_status.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/domain/usecases/register_usecase.dart';
@@ -38,8 +37,8 @@ void main() {
       registerBloc = RegisterBloc(mockRegisterUseCase);
 
       // Assert
-      expect(registerBloc.state, const BaseState<UserEntity>());
-      expect(registerBloc.state.requestStatus, RequestStatus.init);
+      expect(registerBloc.state, const BaseState<UserEntity>.initial());
+      expect(registerBloc.state.isInit, true);
       expect(registerBloc.state.data, null);
     });
 

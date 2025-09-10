@@ -12,7 +12,7 @@ part 'tasks_event.dart';
 class TasksBloc extends Bloc<TasksEvent, BaseState<TasksEntity>> {
   final TasksRepository tasksRepository;
 
-  TasksBloc(this.tasksRepository) : super(const BaseState<TasksEntity>()) {
+  TasksBloc(this.tasksRepository) : super(const BaseState<TasksEntity>.initial()) {
     on<FetchTasksEvent>(_getTasks);
   }
 

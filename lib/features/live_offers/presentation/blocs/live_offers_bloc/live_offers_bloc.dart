@@ -14,7 +14,7 @@ class LiveOffersBloc
   final GetLiveOffersUseCase getLiveOffersUseCase;
 
   LiveOffersBloc(this.getLiveOffersUseCase)
-      : super(const BaseState<LiveOffersEntity>()) {
+      : super(const BaseState<LiveOffersEntity>.initial()) {
     on<FetchLiveOffersEvent>(_getLiveOffers);
   }
 

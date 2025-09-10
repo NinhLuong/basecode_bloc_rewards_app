@@ -11,7 +11,7 @@ part 'redeem_event.dart';
 class RedeemBloc extends Bloc<RedeemEvent, BaseState<void>> {
   final RedeemUseCase redeemUseCase;
 
-  RedeemBloc(this.redeemUseCase) : super(const BaseState<void>()) {
+  RedeemBloc(this.redeemUseCase) : super(const BaseState<void>.initial()) {
     on<RedeemButtonPressedEvent>(_redeem);
   }
 

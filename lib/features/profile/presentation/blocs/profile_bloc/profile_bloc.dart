@@ -13,7 +13,7 @@ class ProfileBloc extends Bloc<ProfileEvent, BaseState<ProfileEntity>> {
   final GetProfileUseCase getProfileUseCase;
 
   ProfileBloc(this.getProfileUseCase)
-      : super(const BaseState<ProfileEntity>()) {
+      : super(const BaseState<ProfileEntity>.initial()) {
     on<FetchProfileEvent>(_getProfile);
   }
 

@@ -13,7 +13,7 @@ class TopUsersBloc extends Bloc<TopUsersEvent, BaseState<TopUsersEntity>> {
   final TopUsersRepository liveOffersRepository;
 
   TopUsersBloc(this.liveOffersRepository)
-      : super(const BaseState<TopUsersEntity>()) {
+      : super(const BaseState<TopUsersEntity>.initial()) {
     on<FetchTopUsersEvent>(_getTopUsers);
   }
 

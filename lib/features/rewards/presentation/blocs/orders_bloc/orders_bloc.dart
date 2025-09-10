@@ -12,7 +12,7 @@ part 'orders_event.dart';
 class OrdersBloc extends Bloc<OrdersEvent, BaseState<OrdersEntity>> {
   final GetOrdersUseCase getOrdersUseCase;
 
-  OrdersBloc(this.getOrdersUseCase) : super(const BaseState<OrdersEntity>()) {
+  OrdersBloc(this.getOrdersUseCase) : super(const BaseState<OrdersEntity>.initial()) {
     on<FetchOrdersEvent>(_getOrders);
   }
 

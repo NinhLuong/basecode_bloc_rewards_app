@@ -13,7 +13,7 @@ class PayoutsBloc extends Bloc<PayoutsEvent, BaseState<PayoutsEntity>> {
   final GetPayoutsUseCase getPayoutsUseCase;
 
   PayoutsBloc(this.getPayoutsUseCase)
-      : super(const BaseState<PayoutsEntity>()) {
+      : super(const BaseState<PayoutsEntity>.initial()) {
     on<FetchPayoutsEvent>(_getPayouts);
   }
 

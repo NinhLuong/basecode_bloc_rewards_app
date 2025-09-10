@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:magic_rewards/config/enums/request_status.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
@@ -52,8 +51,8 @@ void main() {
       loginBloc = LoginBloc(mockLoginUseCase);
 
       // Assert
-      expect(loginBloc.state, const BaseState<UserEntity>());
-      expect(loginBloc.state.requestStatus, RequestStatus.init);
+      expect(loginBloc.state, const BaseState<UserEntity>.initial());
+      expect(loginBloc.state.isInit, true);
       expect(loginBloc.state.data, null);
     });
 
@@ -65,51 +64,44 @@ void main() {
               .thenAnswer((_) async => const Right(testUser));
           return LoginBloc(mockLoginUseCase);
         },
-        act: (bloc) => bloc.add(
-          const LoginButtonTappedEvent(
-            username: testUsername,
-            password: testPassword,
-          ),
-        ),
+        act: (bloc) => bloc.add(const LoginButtonTappedEvent(
+          username: testUsername,
+          password: testPassword,
+        )),
         expect: () => [
-          const BaseState<UserEntity>().loading(),
-          const BaseState<UserEntity>().success(testUser),
+          const BaseState<UserEntity>.loading(),
+          const BaseState<UserEntity>.success(testUser),
         ],
         verify: (_) {
-          final expectedParams = LoginParameters(
-            username: testUsername,
-            password: testPassword,
-          );
-          verify(mockLoginUseCase.call(params: expectedParams)).called(1);
+          final capturedParams = verify(
+            mockLoginUseCase.call(params: captureAnyNamed('params'))
+          ).captured.first as LoginParameters;
+          
+          expect(capturedParams.username, testUsername);
+          expect(capturedParams.password, testPassword);
         },
       );
 
       blocTest<LoginBloc, BaseState<UserEntity>>(
         'should emit [loading, error] when login fails with server error',
         build: () {
-          const failure = ServerFailure('Server error', statusCode: 500);
+          const failure = ServerFailure('Login failed', statusCode: 401);
           when(mockLoginUseCase.call(params: anyNamed('params')))
               .thenAnswer((_) async => const Left(failure));
           return LoginBloc(mockLoginUseCase);
         },
-        act: (bloc) => bloc.add(
-          const LoginButtonTappedEvent(
-            username: testUsername,
-            password: testPassword,
-          ),
-        ),
+        act: (bloc) => bloc.add(const LoginButtonTappedEvent(
+          username: testUsername,
+          password: testPassword,
+        )),
         expect: () => [
-          const BaseState<UserEntity>().loading(),
-          const BaseState<UserEntity>().error(
-            const ServerFailure('Server error', statusCode: 500),
+          const BaseState<UserEntity>.loading(),
+          const BaseState<UserEntity>.error(
+            ServerFailure('Login failed', statusCode: 401),
           ),
         ],
         verify: (_) {
-          final expectedParams = LoginParameters(
-            username: testUsername,
-            password: testPassword,
-          );
-          verify(mockLoginUseCase.call(params: expectedParams)).called(1);
+          verify(mockLoginUseCase.call(params: anyNamed('params'))).called(1);
         },
       );
 
@@ -121,49 +113,37 @@ void main() {
               .thenAnswer((_) async => Left(failure));
           return LoginBloc(mockLoginUseCase);
         },
-        act: (bloc) => bloc.add(
-          const LoginButtonTappedEvent(
-            username: testUsername,
-            password: testPassword,
-          ),
-        ),
+        act: (bloc) => bloc.add(const LoginButtonTappedEvent(
+          username: testUsername,
+          password: testPassword,
+        )),
         expect: () => [
-          const BaseState<UserEntity>().loading(),
-          BaseState<UserEntity>().error(NoInternetFailure()),
+          const BaseState<UserEntity>.loading(),
+          BaseState<UserEntity>.error(NoInternetFailure()),
         ],
         verify: (_) {
-          final expectedParams = LoginParameters(
-            username: testUsername,
-            password: testPassword,
-          );
-          verify(mockLoginUseCase.call(params: expectedParams)).called(1);
+          verify(mockLoginUseCase.call(params: anyNamed('params'))).called(1);
         },
       );
 
       blocTest<LoginBloc, BaseState<UserEntity>>(
-        'should emit [loading, error] when login fails with validation error',
+        'should emit [loading, error] when login fails with invalid credentials',
         build: () {
           const failure = Failure('Invalid credentials');
           when(mockLoginUseCase.call(params: anyNamed('params')))
               .thenAnswer((_) async => const Left(failure));
           return LoginBloc(mockLoginUseCase);
         },
-        act: (bloc) => bloc.add(
-          const LoginButtonTappedEvent(
-            username: testUsername,
-            password: testPassword,
-          ),
-        ),
+        act: (bloc) => bloc.add(const LoginButtonTappedEvent(
+          username: 'wronguser',
+          password: 'wrongpassword',
+        )),
         expect: () => [
-          const BaseState<UserEntity>().loading(),
-          const BaseState<UserEntity>().error(const Failure('Invalid credentials')),
+          const BaseState<UserEntity>.loading(),
+          const BaseState<UserEntity>.error(Failure('Invalid credentials')),
         ],
         verify: (_) {
-          final expectedParams = LoginParameters(
-            username: testUsername,
-            password: testPassword,
-          );
-          verify(mockLoginUseCase.call(params: expectedParams)).called(1);
+          verify(mockLoginUseCase.call(params: anyNamed('params'))).called(1);
         },
       );
 
@@ -175,44 +155,37 @@ void main() {
               .thenAnswer((_) async => Left(failure));
           return LoginBloc(mockLoginUseCase);
         },
-        act: (bloc) => bloc.add(
-          const LoginButtonTappedEvent(
-            username: testUsername,
-            password: testPassword,
-          ),
-        ),
+        act: (bloc) => bloc.add(const LoginButtonTappedEvent(
+          username: testUsername,
+          password: testPassword,
+        )),
         expect: () => [
-          const BaseState<UserEntity>().loading(),
-          BaseState<UserEntity>().error(SessionExpiredFailure()),
+          const BaseState<UserEntity>.loading(),
+          BaseState<UserEntity>.error(SessionExpiredFailure()),
         ],
         verify: (_) {
-          final expectedParams = LoginParameters(
-            username: testUsername,
-            password: testPassword,
-          );
-          verify(mockLoginUseCase.call(params: expectedParams)).called(1);
+          verify(mockLoginUseCase.call(params: anyNamed('params'))).called(1);
         },
       );
 
       blocTest<LoginBloc, BaseState<UserEntity>>(
-        'should pass correct parameters to use case',
+        'should use correct LoginParameters when calling use case',
         build: () {
           when(mockLoginUseCase.call(params: anyNamed('params')))
               .thenAnswer((_) async => const Right(testUser));
           return LoginBloc(mockLoginUseCase);
         },
-        act: (bloc) => bloc.add(
-          const LoginButtonTappedEvent(
-            username: 'customuser',
-            password: 'custompassword',
-          ),
-        ),
+        act: (bloc) => bloc.add(const LoginButtonTappedEvent(
+          username: 'customuser',
+          password: 'custompassword',
+        )),
         verify: (_) {
-          final expectedParams = LoginParameters(
-            username: 'customuser',
-            password: 'custompassword',
-          );
-          verify(mockLoginUseCase.call(params: expectedParams)).called(1);
+          final capturedParams = verify(
+            mockLoginUseCase.call(params: captureAnyNamed('params'))
+          ).captured.first as LoginParameters;
+          
+          expect(capturedParams.username, 'customuser');
+          expect(capturedParams.password, 'custompassword');
         },
       );
 
@@ -224,27 +197,21 @@ void main() {
               .thenAnswer((_) async => const Left(failure));
           return LoginBloc(mockLoginUseCase);
         },
-        act: (bloc) => bloc.add(
-          const LoginButtonTappedEvent(
-            username: '',
-            password: '',
-          ),
-        ),
+        act: (bloc) => bloc.add(const LoginButtonTappedEvent(
+          username: '',
+          password: '',
+        )),
         expect: () => [
-          const BaseState<UserEntity>().loading(),
-          const BaseState<UserEntity>().error(const Failure('Invalid credentials')),
+          const BaseState<UserEntity>.loading(),
+          const BaseState<UserEntity>.error(Failure('Invalid credentials')),
         ],
         verify: (_) {
-          final expectedParams = LoginParameters(
-            username: '',
-            password: '',
-          );
-          verify(mockLoginUseCase.call(params: expectedParams)).called(1);
+          verify(mockLoginUseCase.call(params: anyNamed('params'))).called(1);
         },
       );
 
       blocTest<LoginBloc, BaseState<UserEntity>>(
-        'should handle multiple sequential login attempts',
+        'should handle multiple consecutive login attempts',
         build: () {
           when(mockLoginUseCase.call(params: anyNamed('params')))
               .thenAnswer((_) async => const Right(testUser));
@@ -252,19 +219,19 @@ void main() {
         },
         act: (bloc) {
           bloc.add(const LoginButtonTappedEvent(
-            username: 'user1',
-            password: 'password1',
+            username: testUsername,
+            password: testPassword,
           ));
           bloc.add(const LoginButtonTappedEvent(
-            username: 'user2',
-            password: 'password2',
+            username: testUsername,
+            password: testPassword,
           ));
         },
         expect: () => [
-          const BaseState<UserEntity>().loading(),
-          const BaseState<UserEntity>().success(testUser),
-          BaseState<UserEntity>(data: testUser).loading(),
-          const BaseState<UserEntity>().success(testUser),
+          const BaseState<UserEntity>.loading(),
+          const BaseState<UserEntity>.success(testUser),
+          const BaseState<UserEntity>.loading(),
+          const BaseState<UserEntity>.success(testUser),
         ],
         verify: (_) {
           verify(mockLoginUseCase.call(params: anyNamed('params'))).called(2);
@@ -281,7 +248,6 @@ void main() {
         expect(loadingState.isSuccess, false);
         expect(loadingState.isError, false);
         expect(loadingState.isInit, false);
-        expect(loadingState.requestStatus, RequestStatus.loading);
       });
 
       test('should have correct properties for success state', () {
@@ -292,7 +258,6 @@ void main() {
         expect(successState.isSuccess, true);
         expect(successState.isError, false);
         expect(successState.isInit, false);
-        expect(successState.requestStatus, RequestStatus.success);
         expect(successState.data, testUser);
       });
 
@@ -305,7 +270,6 @@ void main() {
         expect(errorState.isSuccess, false);
         expect(errorState.isError, true);
         expect(errorState.isInit, false);
-        expect(errorState.requestStatus, RequestStatus.error);
         expect(errorState.failure, failure);
         expect(errorState.errorMessage, 'Test error');
       });

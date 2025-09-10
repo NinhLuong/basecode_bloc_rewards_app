@@ -12,7 +12,7 @@ part 'home_event.dart';
 class HomeBloc extends Bloc<HomeEvent, BaseState<HomeEntity>> {
   final GetHomeUseCase getHomeUseCase;
 
-  HomeBloc(this.getHomeUseCase) : super(const BaseState<HomeEntity>()) {
+  HomeBloc(this.getHomeUseCase) : super(const BaseState<HomeEntity>.initial()) {
     on<FetchHomeEvent>(_getHome);
   }
 

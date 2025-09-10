@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:magic_rewards/config/enums/request_status.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
@@ -54,8 +53,8 @@ void main() {
       homeBloc = HomeBloc(mockGetHomeUseCase);
 
       // Assert
-      expect(homeBloc.state, const BaseState<HomeEntity>());
-      expect(homeBloc.state.requestStatus, RequestStatus.init);
+      expect(homeBloc.state, const BaseState<HomeEntity>.initial());
+      expect(homeBloc.state.isInit, true);
       expect(homeBloc.state.data, null);
     });
 
@@ -69,8 +68,8 @@ void main() {
         },
         act: (bloc) => bloc.add(const FetchHomeEvent()),
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          const BaseState<HomeEntity>().success(testHomeEntity),
+          const BaseState<HomeEntity>.loading(),
+          const BaseState<HomeEntity>.success(testHomeEntity),
         ],
         verify: (_) {
           verify(mockGetHomeUseCase.call(params: anyNamed('params'))).called(1);
@@ -87,8 +86,8 @@ void main() {
         },
         act: (bloc) => bloc.add(const FetchHomeEvent()),
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          const BaseState<HomeEntity>().error(
+          const BaseState<HomeEntity>.loading(),
+          const BaseState<HomeEntity>.error(
             const ServerFailure('Server error', statusCode: 500),
           ),
         ],
@@ -107,8 +106,8 @@ void main() {
         },
         act: (bloc) => bloc.add(const FetchHomeEvent()),
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          BaseState<HomeEntity>().error(NoInternetFailure()),
+          const BaseState<HomeEntity>.loading(),
+          BaseState<HomeEntity>.error(NoInternetFailure()),
         ],
         verify: (_) {
           verify(mockGetHomeUseCase.call(params: anyNamed('params'))).called(1);
@@ -125,8 +124,8 @@ void main() {
         },
         act: (bloc) => bloc.add(const FetchHomeEvent()),
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          BaseState<HomeEntity>().error(SessionExpiredFailure()),
+          const BaseState<HomeEntity>.loading(),
+          BaseState<HomeEntity>.error(SessionExpiredFailure()),
         ],
         verify: (_) {
           verify(mockGetHomeUseCase.call(params: anyNamed('params'))).called(1);
@@ -143,8 +142,8 @@ void main() {
         },
         act: (bloc) => bloc.add(const FetchHomeEvent()),
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          BaseState<HomeEntity>().error(UnknownFailure()),
+          const BaseState<HomeEntity>.loading(),
+          BaseState<HomeEntity>.error(UnknownFailure()),
         ],
         verify: (_) {
           verify(mockGetHomeUseCase.call(params: anyNamed('params'))).called(1);
@@ -173,8 +172,8 @@ void main() {
         },
         act: (bloc) => bloc.add(const FetchHomeEvent()),
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          const BaseState<HomeEntity>().success(HomeEntity(balance: '0', offerWalls: [])),
+          const BaseState<HomeEntity>.loading(),
+          const BaseState<HomeEntity>.success(HomeEntity(balance: '0', offerWalls: [])),
         ],
         verify: (_) {
           verify(mockGetHomeUseCase.call(params: anyNamed('params'))).called(1);
@@ -214,8 +213,8 @@ void main() {
         },
         act: (bloc) => bloc.add(const FetchHomeEvent()),
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          const BaseState<HomeEntity>().success(HomeEntity(
+          const BaseState<HomeEntity>.loading(),
+          const BaseState<HomeEntity>.success(HomeEntity(
             balance: '500',
             offerWalls: [
               OfferWallEntity(
@@ -258,10 +257,10 @@ void main() {
           bloc.add(const FetchHomeEvent());
         },
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          const BaseState<HomeEntity>().success(testHomeEntity),
-          BaseState<HomeEntity>(data: testHomeEntity).loading(),
-          const BaseState<HomeEntity>().success(testHomeEntity),
+          const BaseState<HomeEntity>.loading(),
+          const BaseState<HomeEntity>.success(testHomeEntity),
+          const BaseState<HomeEntity>.loading(),
+          const BaseState<HomeEntity>.success(testHomeEntity),
         ],
         verify: (_) {
           verify(mockGetHomeUseCase.call(params: anyNamed('params'))).called(2);
@@ -288,10 +287,10 @@ void main() {
           bloc.add(const FetchHomeEvent());
         },
         expect: () => [
-          const BaseState<HomeEntity>().loading(),
-          const BaseState<HomeEntity>().success(testHomeEntity),
-          BaseState<HomeEntity>(data: testHomeEntity).loading(),
-          BaseState<HomeEntity>(data: testHomeEntity).error(NoInternetFailure()),
+          const BaseState<HomeEntity>.loading(),
+          const BaseState<HomeEntity>.success(testHomeEntity),
+          const BaseState<HomeEntity>.loading(),
+          BaseState<HomeEntity>.error(NoInternetFailure()),
         ],
         verify: (_) {
           verify(mockGetHomeUseCase.call(params: anyNamed('params'))).called(2);
@@ -308,7 +307,6 @@ void main() {
         expect(loadingState.isSuccess, false);
         expect(loadingState.isError, false);
         expect(loadingState.isInit, false);
-        expect(loadingState.requestStatus, RequestStatus.loading);
       });
 
       test('should have correct properties for success state', () {
@@ -319,7 +317,6 @@ void main() {
         expect(successState.isSuccess, true);
         expect(successState.isError, false);
         expect(successState.isInit, false);
-        expect(successState.requestStatus, RequestStatus.success);
         expect(successState.data, testHomeEntity);
       });
 
@@ -332,7 +329,6 @@ void main() {
         expect(errorState.isSuccess, false);
         expect(errorState.isError, true);
         expect(errorState.isInit, false);
-        expect(errorState.requestStatus, RequestStatus.error);
         expect(errorState.failure, failure);
         expect(errorState.errorMessage, 'Test error');
       });

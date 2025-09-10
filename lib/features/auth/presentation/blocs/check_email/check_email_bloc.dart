@@ -16,7 +16,7 @@ class CheckEmailBloc
   final CheckEmailUseCase checkEmailUseCase;
 
   CheckEmailBloc(this.checkEmailUseCase)
-      : super(const BaseState<CheckEmailEntity>()) {
+      : super(const BaseState<CheckEmailEntity>.initial()) {
     on<CheckEmailButtonTappedEvent>(_checkEmail, transformer: restartable());
   }
 

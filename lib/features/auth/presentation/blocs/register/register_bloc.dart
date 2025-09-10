@@ -12,7 +12,7 @@ part 'register_event.dart';
 class RegisterBloc extends Bloc<RegisterEvent, BaseState<UserEntity>> {
   final RegisterUseCase registerUseCase;
 
-  RegisterBloc(this.registerUseCase) : super(const BaseState<UserEntity>()) {
+  RegisterBloc(this.registerUseCase) : super(const BaseState<UserEntity>.initial()) {
     on<RegisterButtonTappedEvent>(_register);
   }
 

@@ -14,7 +14,7 @@ part 'login_event.dart';
 class LoginBloc extends Bloc<LoginEvent, BaseState<UserEntity>> {
   final LoginUseCase loginUseCase; 
 
-  LoginBloc(this.loginUseCase) : super(const BaseState<UserEntity>()) {
+  LoginBloc(this.loginUseCase) : super(const BaseState<UserEntity>.initial()) {
     on<LoginButtonTappedEvent>(_login, transformer: restartable());
   }
 

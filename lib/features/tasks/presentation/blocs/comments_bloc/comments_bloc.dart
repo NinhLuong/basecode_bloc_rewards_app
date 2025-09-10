@@ -14,7 +14,7 @@ class CommentsBloc
   final TasksRepository tasksRepository;
 
   CommentsBloc(this.tasksRepository)
-      : super(const BaseState<ReserveCommentEntity>()) {
+      : super(const BaseState<ReserveCommentEntity>.initial()) {
     on<ReserveCommentEvent>(_reserveComment);
   }
 

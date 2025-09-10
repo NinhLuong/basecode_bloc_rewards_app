@@ -14,7 +14,7 @@ class TasksOrdersBloc
   final TasksRepository tasksRepository;
 
   TasksOrdersBloc(this.tasksRepository)
-      : super(const BaseState<TasksOrdersEntity>()) {
+      : super(const BaseState<TasksOrdersEntity>.initial()) {
     on<FetchTasksOrdersEvent>(_getTasksOrders);
   }
 

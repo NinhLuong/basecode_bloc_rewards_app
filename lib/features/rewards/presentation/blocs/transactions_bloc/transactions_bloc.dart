@@ -14,7 +14,7 @@ class TransactionsBloc
   final GetTransactionsUseCase getTransactionsUseCase;
 
   TransactionsBloc(this.getTransactionsUseCase)
-      : super(const BaseState<TransactionsEntity>()) {
+      : super(const BaseState<TransactionsEntity>.initial()) {
     on<FetchTransactionsEvent>(_getTransactions);
   }
 

@@ -12,7 +12,7 @@ part 'do_task_event.dart';
 class DoTaskBloc extends Bloc<DoTaskEvent, BaseState<void>> {
   final TasksRepository tasksRepository;
 
-  DoTaskBloc(this.tasksRepository) : super(const BaseState<void>()) {
+  DoTaskBloc(this.tasksRepository) : super(const BaseState<void>.initial()) {
     on<DoTaskButtonPressedEvent>(_doTask);
   }
 
