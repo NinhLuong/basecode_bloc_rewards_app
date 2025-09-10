@@ -12,9 +12,13 @@ import 'auth_data_source.dart';
 
 @LazySingleton(as: AuthDataSource)
 class AuthRemoteDataSourceImp implements AuthDataSource {
+  final ApiServices _apiServices;
+
+  AuthRemoteDataSourceImp(this._apiServices);
+
   @override
   Future<UserModel> login(LoginParameters parameters) async {
-    AppResponse response = await ApiServices().post(
+    AppResponse response = await _apiServices.post(
       ApisUrls.login,
       data: parameters.toJson(),
     );
@@ -23,7 +27,7 @@ class AuthRemoteDataSourceImp implements AuthDataSource {
 
   @override
   Future<UserModel> register(RegisterParameters parameters) async {
-    AppResponse response = await ApiServices().post(
+    AppResponse response = await _apiServices.post(
       ApisUrls.register,
       data: parameters.toJson(),
     );
@@ -32,7 +36,7 @@ class AuthRemoteDataSourceImp implements AuthDataSource {
 
   @override
   Future<CheckEmailModel> checkEmail(CheckEmailParameters parameters) async {
-    AppResponse response = await ApiServices().post(
+    AppResponse response = await _apiServices.post(
       ApisUrls.checkEmail,
       data: parameters.toJson(),
     );

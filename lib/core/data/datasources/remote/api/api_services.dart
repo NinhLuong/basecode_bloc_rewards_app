@@ -20,7 +20,7 @@ import 'package:magic_rewards/config/errors/errors_handler.dart';
 ///   4- [put] put http request
 ///
 
-@injectable 
+@LazySingleton()
 class ApiServices {
   late final Dio _dio;
 

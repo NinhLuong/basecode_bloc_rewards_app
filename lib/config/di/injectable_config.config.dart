@@ -127,28 +127,28 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i294.ApiServices>(() => _i294.ApiServices());
     gh.factory<_i147.AppConfigBloc>(() => _i147.AppConfigBloc());
-    gh.lazySingleton<_i364.AuthDataSource>(
-      () => _i899.AuthRemoteDataSourceImp(),
-    );
-    gh.lazySingleton<_i241.TasksDataSource>(
-      () => _i276.TasksRemoteDataSourceImp(),
-    );
-    gh.lazySingleton<_i519.ProfileDataSource>(
-      () => _i998.ProfileRemoteDataSourceImp(),
-    );
-    gh.lazySingleton<_i68.HomeDataSource>(
-      () => _i966.HomeRemoteDataSourceImp(),
-    );
-    gh.lazySingleton<_i683.LiveOffersDataSource>(
-      () => _i395.LiveOffersRemoteDataSourceImp(),
+    gh.lazySingleton<_i294.ApiServices>(() => _i294.ApiServices());
+    gh.lazySingleton<_i884.TopUsersDataSource>(
+      () => _i380.TopUsersRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
     gh.lazySingleton<_i923.RewardsDataSource>(
-      () => _i268.RewardsRemoteDataSourceImp(),
+      () => _i268.RewardsRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
-    gh.lazySingleton<_i884.TopUsersDataSource>(
-      () => _i380.TopUsersRemoteDataSourceImp(),
+    gh.lazySingleton<_i683.LiveOffersDataSource>(
+      () => _i395.LiveOffersRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i519.ProfileDataSource>(
+      () => _i998.ProfileRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i68.HomeDataSource>(
+      () => _i966.HomeRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i241.TasksDataSource>(
+      () => _i276.TasksRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i364.AuthDataSource>(
+      () => _i899.AuthRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
     gh.lazySingleton<_i656.TopUsersRepository>(
       () => _i694.TopUsersRepositoryImp(gh<_i884.TopUsersDataSource>()),

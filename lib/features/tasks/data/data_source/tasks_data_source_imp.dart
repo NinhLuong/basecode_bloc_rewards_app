@@ -13,17 +13,21 @@ import 'package:magic_rewards/features/tasks/domain/parameters/tasks_parameters.
 
 @LazySingleton(as: TasksDataSource)
 class TasksRemoteDataSourceImp extends TasksDataSource {
+  final ApiServices _apiServices;
+
+  TasksRemoteDataSourceImp(this._apiServices);
+
   @override
   Future<TasksModel> getTasks(TasksParameters parameters) async {
     AppResponse appResponse =
-        await ApiServices().post(ApisUrls.tasks, data: parameters.toJson());
+        await _apiServices.post(ApisUrls.tasks, data: parameters.toJson());
     return TasksModel.fromJson(appResponse.data);
   }
 
   @override
   Future<ReserveCommentModel> reserveComment(
       ReserveCommentParameters parameters) async {
-    AppResponse appResponse = await ApiServices()
+    AppResponse appResponse = await _apiServices
         .post(ApisUrls.reserveComment, data: parameters.toJson());
     return ReserveCommentModel.fromJson(appResponse.data);
   }
@@ -31,7 +35,7 @@ class TasksRemoteDataSourceImp extends TasksDataSource {
   @override
   Future<void> addTaskOrder(AddTaskOrderParameters parameters) async {
     var formData = await parameters.toJson();
-    await ApiServices().post(
+    await _apiServices.post(
       ApisUrls.addTaskOrder,
       data: formData,
     );
@@ -40,7 +44,7 @@ class TasksRemoteDataSourceImp extends TasksDataSource {
   @override
   Future<TasksOrdersModel> getTasksOrders(
       TasksOrdersParameters parameters) async {
-    AppResponse appResponse = await ApiServices()
+    AppResponse appResponse = await _apiServices
         .post(ApisUrls.tasksOrders, data: parameters.toJson());
     return TasksOrdersModel.fromJson(appResponse.data);
   }

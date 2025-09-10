@@ -8,10 +8,14 @@ import 'package:magic_rewards/features/top_users/domain/parameters/top_users_par
 
 @LazySingleton(as: TopUsersDataSource)
 class TopUsersRemoteDataSourceImp extends TopUsersDataSource {
+  final ApiServices _apiServices;
+
+  TopUsersRemoteDataSourceImp(this._apiServices);
+
   @override
   Future<TopUsersModel> getTopUsers(TopUsersParameters parameters) async {
     AppResponse appResponse =
-        await ApiServices().post(ApisUrls.topUsers, data: parameters.toJson());
+        await _apiServices.post(ApisUrls.topUsers, data: parameters.toJson());
     return TopUsersModel.fromJson(appResponse.data);
   }
 }

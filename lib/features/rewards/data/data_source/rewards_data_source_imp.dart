@@ -13,29 +13,33 @@ import 'package:magic_rewards/features/rewards/domain/parameters/transactions_pa
 
 @LazySingleton(as: RewardsDataSource)
 class RewardsRemoteDataSourceImp extends RewardsDataSource {
+  final ApiServices _apiServices;
+
+  RewardsRemoteDataSourceImp(this._apiServices);
+
   @override
   Future<PayoutsModel> getPayouts(PayoutsParameters parameters) async {
     AppResponse appResponse =
-        await ApiServices().post(ApisUrls.payouts, data: parameters.toJson());
+        await _apiServices.post(ApisUrls.payouts, data: parameters.toJson());
     return PayoutsModel.fromJson(appResponse.data);
   }
 
   @override
   Future<void> redeem(RedeemParameters parameters) async {
-    await ApiServices().post(ApisUrls.redeem, data: parameters.toJson());
+    await _apiServices.post(ApisUrls.redeem, data: parameters.toJson());
   }
 
   @override
   Future<OrdersModel> getOrders(OrdersParameters parameters) async {
     AppResponse appResponse =
-        await ApiServices().post(ApisUrls.orders, data: parameters.toJson());
+        await _apiServices.post(ApisUrls.orders, data: parameters.toJson());
     return OrdersModel.fromJson(appResponse.data);
   }
 
   @override
   Future<TransactionsModel> getTransactions(
       TransactionsParameters parameters) async {
-    AppResponse appResponse = await ApiServices()
+    AppResponse appResponse = await _apiServices
         .post(ApisUrls.transactions, data: parameters.toJson());
     return TransactionsModel.fromJson(appResponse.data);
   }

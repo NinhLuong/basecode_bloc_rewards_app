@@ -8,10 +8,14 @@ import 'package:magic_rewards/features/live_offers/domain/parameters/live_offers
 
 @LazySingleton(as: LiveOffersDataSource)
 class LiveOffersRemoteDataSourceImp extends LiveOffersDataSource {
+  final ApiServices _apiServices;
+
+  LiveOffersRemoteDataSourceImp(this._apiServices);
+
   @override
   Future<LiveOffersModel> getLiveOffers(
       GetLiveOffersParameters parameters) async {
-    AppResponse appResponse = await ApiServices()
+    AppResponse appResponse = await _apiServices
         .post(ApisUrls.liveOffers, data: parameters.toJson());
     return LiveOffersModel.fromJson(appResponse.data);
   }

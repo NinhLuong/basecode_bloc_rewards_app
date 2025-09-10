@@ -9,15 +9,19 @@ import 'package:magic_rewards/features/profile/domain/parameters/profile_paramet
 
 @LazySingleton(as: ProfileDataSource)
 class ProfileRemoteDataSourceImp extends ProfileDataSource {
+  final ApiServices _apiServices;
+
+  ProfileRemoteDataSourceImp(this._apiServices);
+
   @override
   Future<ProfileModel> getProfile(ProfileParameters parameters) async {
     AppResponse appResponse =
-        await ApiServices().post(ApisUrls.profile, data: parameters.toJson());
+        await _apiServices.post(ApisUrls.profile, data: parameters.toJson());
     return ProfileModel.fromJson(appResponse.data);
   }
 
   @override
   Future<void> deleteAccount(DeleteAccountParameters parameters) async {
-    await ApiServices().post(ApisUrls.deleteAccount, data: parameters.toJson());
+    await _apiServices.post(ApisUrls.deleteAccount, data: parameters.toJson());
   }
 }

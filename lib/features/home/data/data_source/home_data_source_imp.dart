@@ -8,10 +8,14 @@ import 'package:magic_rewards/features/home/domain/parameters/home_parameters.da
 
 @LazySingleton(as: HomeDataSource)
 class HomeRemoteDataSourceImp extends HomeDataSource {
+  final ApiServices _apiServices;
+
+  HomeRemoteDataSourceImp(this._apiServices);
+
   @override
   Future<HomeModel> getHome(HomeParameters parameters) async {
     AppResponse appResponse =
-        await ApiServices().post(ApisUrls.home, data: parameters.toJson());
+        await _apiServices.post(ApisUrls.home, data: parameters.toJson());
     return HomeModel.fromJson(appResponse.data);
   }
 }
