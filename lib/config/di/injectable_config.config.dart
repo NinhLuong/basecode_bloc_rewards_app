@@ -12,12 +12,19 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../core/data/datasources/local/cache/cache_storage_services.dart'
+    as _i505;
 import '../../core/data/datasources/remote/api/api_services.dart' as _i294;
 import '../../core/presentation/bloc/app_config_bloc/app_config_bloc.dart'
     as _i147;
-import '../../features/auth/data/data_source/auth_data_source.dart' as _i364;
-import '../../features/auth/data/data_source/auth_remote_data_source_imp.dart'
-    as _i899;
+import '../../features/auth/data/datasources/remote/auth_data_source.dart'
+    as _i632;
+import '../../features/auth/data/datasources/remote/auth_remote_data_source_imp.dart'
+    as _i858;
+import '../../features/auth/data/datasources/local/user_local_data_source.dart'
+    as _i931;
+import '../../features/auth/data/datasources/local/user_local_data_source_impl.dart'
+    as _i85;
 import '../../features/auth/data/repository/auth_repository_imp.dart' as _i794;
 import '../../features/auth/domain/repository/auth_repository.dart' as _i961;
 import '../../features/auth/domain/usecases/check_email_usecase.dart' as _i879;
@@ -28,17 +35,17 @@ import '../../features/auth/presentation/blocs/check_email/check_email_bloc.dart
 import '../../features/auth/presentation/blocs/login/login_bloc.dart' as _i1018;
 import '../../features/auth/presentation/blocs/register/register_bloc.dart'
     as _i517;
-import '../../features/home/data/data_source/home_data_source.dart' as _i68;
-import '../../features/home/data/data_source/home_data_source_imp.dart'
+import '../../features/home/data/datasources/home_data_source.dart' as _i68;
+import '../../features/home/data/datasources/home_data_source_imp.dart'
     as _i966;
 import '../../features/home/data/repository/home_repository_imp.dart' as _i342;
 import '../../features/home/domain/repository/home_repository.dart' as _i541;
 import '../../features/home/domain/usecases/get_home_usecase.dart' as _i836;
 import '../../features/home/presentation/blocs/home_bloc/home_bloc.dart'
     as _i665;
-import '../../features/live_offers/data/data_source/live_offers_data_source.dart'
+import '../../features/live_offers/data/datasources/live_offers_data_source.dart'
     as _i683;
-import '../../features/live_offers/data/data_source/live_offers_data_source_imp.dart'
+import '../../features/live_offers/data/datasources/live_offers_data_source_imp.dart'
     as _i395;
 import '../../features/live_offers/data/repository/live_offers_repository_imp.dart'
     as _i100;
@@ -48,9 +55,9 @@ import '../../features/live_offers/domain/usecases/get_live_offers_usecase.dart'
     as _i133;
 import '../../features/live_offers/presentation/blocs/live_offers_bloc/live_offers_bloc.dart'
     as _i611;
-import '../../features/profile/data/data_source/profile_data_source.dart'
+import '../../features/profile/data/datasources/profile_data_source.dart'
     as _i519;
-import '../../features/profile/data/data_source/profile_data_source_imp.dart'
+import '../../features/profile/data/datasources/profile_data_source_imp.dart'
     as _i998;
 import '../../features/profile/data/repository/profile_repository_imp.dart'
     as _i335;
@@ -64,9 +71,9 @@ import '../../features/profile/presentation/blocs/delete_account_bloc/delete_acc
     as _i287;
 import '../../features/profile/presentation/blocs/profile_bloc/profile_bloc.dart'
     as _i118;
-import '../../features/rewards/data/data_source/rewards_data_source.dart'
+import '../../features/rewards/data/datasources/rewards_data_source.dart'
     as _i923;
-import '../../features/rewards/data/data_source/rewards_data_source_imp.dart'
+import '../../features/rewards/data/datasources/rewards_data_source_imp.dart'
     as _i268;
 import '../../features/rewards/data/repository/rewards_repository_imp.dart'
     as _i544;
@@ -86,8 +93,8 @@ import '../../features/rewards/presentation/blocs/redeem_bloc/redeem_bloc.dart'
     as _i132;
 import '../../features/rewards/presentation/blocs/transactions_bloc/transactions_bloc.dart'
     as _i886;
-import '../../features/tasks/data/data_source/tasks_data_source.dart' as _i241;
-import '../../features/tasks/data/data_source/tasks_data_source_imp.dart'
+import '../../features/tasks/data/datasources/tasks_data_source.dart' as _i241;
+import '../../features/tasks/data/datasources/tasks_data_source_imp.dart'
     as _i276;
 import '../../features/tasks/data/repository/tasks_repository_imp.dart'
     as _i436;
@@ -107,9 +114,9 @@ import '../../features/tasks/presentation/blocs/tasks_bloc/tasks_bloc.dart'
     as _i449;
 import '../../features/tasks/presentation/blocs/tasks_orders_bloc/tasks_orders_bloc.dart'
     as _i706;
-import '../../features/top_users/data/data_source/top_users_data_source.dart'
+import '../../features/top_users/data/datasources/top_users_data_source.dart'
     as _i884;
-import '../../features/top_users/data/data_source/top_users_data_source_imp.dart'
+import '../../features/top_users/data/datasources/top_users_data_source_imp.dart'
     as _i380;
 import '../../features/top_users/data/repository/top_users_repository_imp.dart'
     as _i694;
@@ -127,10 +134,19 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i505.CacheStorageServices>(
+      () => _i505.CacheStorageServices.new(),
+    );
     gh.factory<_i147.AppConfigBloc>(() => _i147.AppConfigBloc());
     gh.lazySingleton<_i294.ApiServices>(() => _i294.ApiServices());
     gh.lazySingleton<_i884.TopUsersDataSource>(
       () => _i380.TopUsersRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i632.AuthDataSource>(
+      () => _i858.AuthRemoteDataSourceImp(gh<_i294.ApiServices>()),
+    );
+    gh.lazySingleton<_i931.UserLocalDataSource>(
+      () => _i85.UserLocalDataSourceImpl(gh<_i505.CacheStorageServices>()),
     );
     gh.lazySingleton<_i923.RewardsDataSource>(
       () => _i268.RewardsRemoteDataSourceImp(gh<_i294.ApiServices>()),
@@ -146,9 +162,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i241.TasksDataSource>(
       () => _i276.TasksRemoteDataSourceImp(gh<_i294.ApiServices>()),
-    );
-    gh.lazySingleton<_i364.AuthDataSource>(
-      () => _i899.AuthRemoteDataSourceImp(gh<_i294.ApiServices>()),
     );
     gh.lazySingleton<_i656.TopUsersRepository>(
       () => _i694.TopUsersRepositoryImp(gh<_i884.TopUsersDataSource>()),
@@ -168,14 +181,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i429.TasksRepository>(
       () => _i436.TasksRepositoryImp(gh<_i241.TasksDataSource>()),
     );
+    gh.lazySingleton<_i961.AuthRepository>(
+      () => _i794.AuthRepositoryImp(
+        gh<_i632.AuthDataSource>(),
+        gh<_i931.UserLocalDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i541.HomeRepository>(
       () => _i342.HomeRepositoryImp(gh<_i68.HomeDataSource>()),
     );
     gh.factory<_i611.LiveOffersBloc>(
       () => _i611.LiveOffersBloc(gh<_i133.GetLiveOffersUseCase>()),
-    );
-    gh.lazySingleton<_i961.AuthRepository>(
-      () => _i794.AuthRepositoryImp(gh<_i364.AuthDataSource>()),
     );
     gh.lazySingleton<_i364.ProfileRepository>(
       () => _i335.ProfileRepositoryImp(gh<_i519.ProfileDataSource>()),

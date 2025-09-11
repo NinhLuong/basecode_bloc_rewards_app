@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:injectable/injectable.dart';
 
 /// [CacheStorageServices] services express services related to storing variables in the cache
 /// By defining a [_Keys] variable suitable for the value to be stored, and defining the following 4 methods,
@@ -15,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// It is important to call [CacheStorageServices.init] in the main.dart file before the [runApp] function
 /// await CacheStorageServices.init();
 
+@injectable
 class CacheStorageServices {
   static CacheStorageServices? _instance;
   static SharedPreferences? _preferences;

@@ -1,9 +1,9 @@
 import 'package:magic_rewards/features/auth/data/models/check_email_model.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
 
-import '../../domain/parameters/login_parameters.dart';
-import '../../domain/parameters/register_parameters.dart';
-import '../models/user_model.dart';
+import '../../../domain/parameters/login_parameters.dart';
+import '../../../domain/parameters/register_parameters.dart';
+import '../../models/user_model.dart';
 
 abstract class AuthDataSource {
   Future<UserModel> login(LoginParameters parameters);

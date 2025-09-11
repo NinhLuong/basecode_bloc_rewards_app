@@ -8,7 +8,7 @@ import 'dart:async' as _i6;
 import 'package:flutter/src/foundation/diagnostics.dart' as _i3;
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart'
     as _i10;
-import 'package:magic_rewards/features/auth/data/data_source/auth_data_source.dart'
+import 'package:magic_rewards/features/auth/data/datasources/remote/auth_data_source.dart'
     as _i5;
 import 'package:magic_rewards/features/auth/data/models/check_email_model.dart'
     as _i4;
