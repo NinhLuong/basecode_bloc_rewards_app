@@ -17,7 +17,7 @@ import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
 import 'package:magic_rewards/features/home/presentation/blocs/home_bloc/home_bloc.dart';
-import 'package:magic_rewards/features/home/presentation/components/offer_wall_card.dart';
+import 'package:magic_rewards/features/home/presentation/widgets/offer_wall_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class HomeScreen extends StatelessWidget {

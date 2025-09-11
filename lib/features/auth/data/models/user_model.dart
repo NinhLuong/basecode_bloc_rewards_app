@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/core/domain/models/base_model.dart';
+import 'package:magic_rewards/core/data/models/base_model.dart';
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 
 part 'user_model.freezed.dart';

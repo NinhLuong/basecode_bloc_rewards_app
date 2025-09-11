@@ -7,7 +7,7 @@ import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/blocs/tasks_bloc/tasks_bloc.dart';
-import 'package:magic_rewards/features/tasks/presentation/components/task_card.dart';
+import 'package:magic_rewards/features/tasks/presentation/widgets/task_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TasksSection extends StatelessWidget {

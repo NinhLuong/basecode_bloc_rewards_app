@@ -9,7 +9,7 @@ import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
 import 'package:magic_rewards/features/live_offers/presentation/blocs/live_offers_bloc/live_offers_bloc.dart';
-import 'package:magic_rewards/features/live_offers/presentation/components/live_offer_component.dart';
+import 'package:magic_rewards/features/live_offers/presentation/widgets/live_offer_component.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class LiveOffersScreen extends StatelessWidget {

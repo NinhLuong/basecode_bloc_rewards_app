@@ -9,8 +9,8 @@ import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
 import 'package:magic_rewards/features/top_users/presentation/blocs/top_users_bloc/top_users_bloc.dart';
-import 'package:magic_rewards/features/top_users/presentation/components/my_rank_card.dart';
-import 'package:magic_rewards/features/top_users/presentation/components/rank_bar.dart';
+import 'package:magic_rewards/features/top_users/presentation/widgets/my_rank_card.dart';
+import 'package:magic_rewards/features/top_users/presentation/widgets/rank_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TopUsersTap extends StatelessWidget {

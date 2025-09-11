@@ -4,7 +4,7 @@ import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_se
 import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
 import 'package:magic_rewards/features/rewards/presentation/blocs/transactions_bloc/transactions_bloc.dart';
-import 'package:magic_rewards/features/rewards/presentation/screens/transactions_screen.dart';
+import 'package:magic_rewards/features/rewards/presentation/pages/transactions_screen.dart';
 
 class TransactionsRoute {
   static const String name = '/transactions';

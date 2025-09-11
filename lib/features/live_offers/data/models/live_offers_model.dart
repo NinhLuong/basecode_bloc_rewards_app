@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:magic_rewards/core/domain/models/base_model.dart';
+import 'package:magic_rewards/core/data/models/base_model.dart';
 import 'package:magic_rewards/config/utils/app_date_formatter.dart';
 import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
 

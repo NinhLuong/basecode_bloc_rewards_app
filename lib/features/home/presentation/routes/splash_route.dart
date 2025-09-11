@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/features/home/presentation/screens/splash_screen.dart';
+import 'package:magic_rewards/features/home/presentation/pages/splash_screen.dart';
 
 class SplashRoute {
   static const String name = '/splash';

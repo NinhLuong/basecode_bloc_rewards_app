@@ -15,7 +15,7 @@ import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
 import 'package:magic_rewards/features/rewards/presentation/blocs/redeem_bloc/redeem_bloc.dart';
-import 'package:magic_rewards/features/rewards/presentation/components/message_dialog.dart';
+import 'package:magic_rewards/features/rewards/presentation/widgets/message_dialog.dart';
 
 class PayoutCard extends StatelessWidget {
   final PayoutEntity payout;

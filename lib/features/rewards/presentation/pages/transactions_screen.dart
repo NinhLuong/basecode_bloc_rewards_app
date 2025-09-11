@@ -9,7 +9,7 @@ import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
 import 'package:magic_rewards/features/rewards/presentation/blocs/transactions_bloc/transactions_bloc.dart';
-import 'package:magic_rewards/features/rewards/presentation/components/transaction_card.dart';
+import 'package:magic_rewards/features/rewards/presentation/widgets/transaction_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TransactionsScreen extends StatelessWidget {

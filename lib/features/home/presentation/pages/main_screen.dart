@@ -8,13 +8,13 @@ import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/home/presentation/screens/home_screen.dart';
+import 'package:magic_rewards/features/home/presentation/pages/home_screen.dart';
 import 'package:magic_rewards/features/profile/presentation/blocs/delete_account_bloc/delete_account_bloc.dart';
 import 'package:magic_rewards/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
-import 'package:magic_rewards/features/profile/presentation/screens/profile_screen.dart';
-import 'package:magic_rewards/features/rewards/presentation/screens/redeem_screen.dart';
-import 'package:magic_rewards/features/tasks/presentation/screens/tasks_screen.dart';
-import 'package:magic_rewards/features/top_users/presentation/screens/top_users_screen.dart';
+import 'package:magic_rewards/features/profile/presentation/pages/profile_screen.dart';
+import 'package:magic_rewards/features/rewards/presentation/pages/redeem_screen.dart';
+import 'package:magic_rewards/features/tasks/presentation/pages/tasks_screen.dart';
+import 'package:magic_rewards/features/top_users/presentation/pages/top_users_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

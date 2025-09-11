@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:magic_rewards/core/domain/entities/base_entity.dart';
-import 'package:magic_rewards/core/domain/models/base_model.dart';
+import 'package:magic_rewards/core/data/models/base_model.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
 import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 

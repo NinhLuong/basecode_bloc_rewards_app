@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
-import 'package:magic_rewards/features/tasks/presentation/screens/do_task_screen.dart';
+import 'package:magic_rewards/features/tasks/presentation/pages/do_task_screen.dart';
 
 class DoTaskRoute {
   static const String name = '/do_task';

@@ -4,7 +4,7 @@ import 'package:magic_rewards/config/di/injectable_config.dart';
 import 'package:magic_rewards/features/auth/presentation/blocs/check_email/check_email_bloc.dart';
 import 'package:magic_rewards/features/auth/presentation/blocs/register/register_bloc.dart';
 
-import '../screens/register_screen.dart';
+import '../pages/register_screen.dart';
 
 class RegisterRoute {
   static const String name = '/register';
