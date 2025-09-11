@@ -8,7 +8,7 @@ import '../../../../../core/data/repositories/app_response.dart';
 import '../../../domain/parameters/login_parameters.dart';
 import '../../../domain/parameters/register_parameters.dart';
 import '../../models/user_model.dart';
-import 'auth_data_source.dart';
+import 'auth_datasource.dart';
 
 @LazySingleton(as: AuthDataSource)
 class AuthRemoteDataSourceImp implements AuthDataSource {

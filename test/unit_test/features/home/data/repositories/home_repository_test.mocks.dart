@@ -6,7 +6,7 @@
 import 'dart:async' as _i5;
 
 import 'package:flutter/src/foundation/diagnostics.dart' as _i3;
-import 'package:magic_rewards/features/home/data/datasources/home_data_source.dart'
+import 'package:magic_rewards/features/home/data/datasources/home_datasource.dart'
     as _i4;
 import 'package:magic_rewards/features/home/data/models/home_model.dart' as _i2;
 import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart'

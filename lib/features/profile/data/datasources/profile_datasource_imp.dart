@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:magic_rewards/config/secret/api/apis_urls.dart';
 import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
-import 'package:magic_rewards/features/profile/data/datasources/profile_data_source.dart';
+import 'package:magic_rewards/features/profile/data/datasources/profile_datasource.dart';
 import 'package:magic_rewards/features/profile/data/models/profile_model.dart';
 import 'package:magic_rewards/features/profile/domain/parameters/delete_account_parameters.dart';
 import 'package:magic_rewards/features/profile/domain/parameters/profile_parameters.dart';

@@ -6,13 +6,15 @@
 import 'dart:async' as _i6;
 
 import 'package:flutter/src/foundation/diagnostics.dart' as _i3;
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart'
+import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart'
     as _i10;
-import 'package:magic_rewards/features/auth/data/datasources/remote/auth_data_source.dart'
+import 'package:magic_rewards/features/auth/data/datasources/remote/auth_datasource.dart'
     as _i5;
 import 'package:magic_rewards/features/auth/data/models/check_email_model.dart'
     as _i4;
 import 'package:magic_rewards/features/auth/data/models/user_model.dart' as _i2;
+import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart'
+    as _i11;
 import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart'
     as _i9;
 import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart'
@@ -20,7 +22,6 @@ import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.d
 import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart'
     as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -102,191 +103,19 @@ class MockAuthDataSource extends _i1.Mock implements _i5.AuthDataSource {
           as _i6.Future<_i4.CheckEmailModel>);
 }
 
-/// A class which mocks [CacheStorageServices].
+/// A class which mocks [UserLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCacheStorageServices extends _i1.Mock
-    implements _i10.CacheStorageServices {
-  MockCacheStorageServices() {
+class MockUserLocalDataSource extends _i1.Mock
+    implements _i10.UserLocalDataSource {
+  MockUserLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  bool get hasToken =>
-      (super.noSuchMethod(Invocation.getter(#hasToken), returnValue: false)
-          as bool);
-
-  @override
-  String get token =>
+  _i6.Future<void> saveUserData(_i11.UserEntity? user) =>
       (super.noSuchMethod(
-            Invocation.getter(#token),
-            returnValue: _i11.dummyValue<String>(
-              this,
-              Invocation.getter(#token),
-            ),
-          )
-          as String);
-
-  @override
-  int get avatar =>
-      (super.noSuchMethod(Invocation.getter(#avatar), returnValue: 0) as int);
-
-  @override
-  String get username =>
-      (super.noSuchMethod(
-            Invocation.getter(#username),
-            returnValue: _i11.dummyValue<String>(
-              this,
-              Invocation.getter(#username),
-            ),
-          )
-          as String);
-
-  @override
-  String get accountId =>
-      (super.noSuchMethod(
-            Invocation.getter(#accountId),
-            returnValue: _i11.dummyValue<String>(
-              this,
-              Invocation.getter(#accountId),
-            ),
-          )
-          as String);
-
-  @override
-  String get fullname =>
-      (super.noSuchMethod(
-            Invocation.getter(#fullname),
-            returnValue: _i11.dummyValue<String>(
-              this,
-              Invocation.getter(#fullname),
-            ),
-          )
-          as String);
-
-  @override
-  String get email =>
-      (super.noSuchMethod(
-            Invocation.getter(#email),
-            returnValue: _i11.dummyValue<String>(
-              this,
-              Invocation.getter(#email),
-            ),
-          )
-          as String);
-
-  @override
-  _i6.Future<void> setToken(String? token) =>
-      (super.noSuchMethod(
-            Invocation.method(#setToken, [token]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> removeToken() =>
-      (super.noSuchMethod(
-            Invocation.method(#removeToken, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> setLocale(String? locale) =>
-      (super.noSuchMethod(
-            Invocation.method(#setLocale, [locale]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> setAvatar(int? id) =>
-      (super.noSuchMethod(
-            Invocation.method(#setAvatar, [id]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> setUserName(String? username) =>
-      (super.noSuchMethod(
-            Invocation.method(#setUserName, [username]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> removeUserName() =>
-      (super.noSuchMethod(
-            Invocation.method(#removeUserName, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> setAccountId(String? username) =>
-      (super.noSuchMethod(
-            Invocation.method(#setAccountId, [username]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> removeAccountId() =>
-      (super.noSuchMethod(
-            Invocation.method(#removeAccountId, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> setFullName(String? fullname) =>
-      (super.noSuchMethod(
-            Invocation.method(#setFullName, [fullname]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> removeFullName() =>
-      (super.noSuchMethod(
-            Invocation.method(#removeFullName, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> setEmail(String? email) =>
-      (super.noSuchMethod(
-            Invocation.method(#setEmail, [email]),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> removeEmail() =>
-      (super.noSuchMethod(
-            Invocation.method(#removeEmail, []),
-            returnValue: _i6.Future<void>.value(),
-            returnValueForMissingStub: _i6.Future<void>.value(),
-          )
-          as _i6.Future<void>);
-
-  @override
-  _i6.Future<void> clearAll() =>
-      (super.noSuchMethod(
-            Invocation.method(#clearAll, []),
+            Invocation.method(#saveUserData, [user]),
             returnValue: _i6.Future<void>.value(),
             returnValueForMissingStub: _i6.Future<void>.value(),
           )

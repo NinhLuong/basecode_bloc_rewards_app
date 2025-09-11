@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:magic_rewards/config/secret/api/apis_urls.dart';
 import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
 import 'package:magic_rewards/core/data/repositories/app_response.dart';
-import 'package:magic_rewards/features/tasks/data/datasources/tasks_data_source.dart';
+import 'package:magic_rewards/features/tasks/data/datasources/tasks_datasource.dart';
 import 'package:magic_rewards/features/tasks/data/models/reserve_comment_model.dart';
 import 'package:magic_rewards/features/tasks/data/models/tasks_model.dart';
 import 'package:magic_rewards/features/tasks/data/models/tasks_orders_model.dart';

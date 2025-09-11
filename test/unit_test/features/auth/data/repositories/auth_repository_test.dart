@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/features/auth/data/datasources/remote/auth_data_source.dart';
+import 'package:magic_rewards/features/auth/data/datasources/remote/auth_datasource.dart';
+import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
 import 'package:magic_rewards/features/auth/data/models/user_model.dart';
 import 'package:magic_rewards/features/auth/data/repository/auth_repository_imp.dart';
 import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart';
@@ -17,12 +17,12 @@ import '../../../../../helpers/test_helper.dart';
 // Generate mocks for dependencies
 @GenerateMocks([
   AuthDataSource,
-  CacheStorageServices,
+  UserLocalDataSource,
 ])
 void main() {
   late AuthRepositoryImp authRepository;
   late MockAuthDataSource mockAuthDataSource;
-  late MockCacheStorageServices mockCacheStorageServices;
+  late MockUserLocalDataSource mockUserLocalDataSource;
 
   setUpAll(() async {
     // Initialize localization for tests
@@ -31,8 +31,11 @@ void main() {
 
   setUp(() {
     mockAuthDataSource = MockAuthDataSource();
-    mockCacheStorageServices = MockCacheStorageServices();
-    authRepository = AuthRepositoryImp(mockAuthDataSource);
+    mockUserLocalDataSource = MockUserLocalDataSource();
+    authRepository = AuthRepositoryImp(
+      mockAuthDataSource,
+      mockUserLocalDataSource,
+    );
   });
 
   group('AuthRepository', () {
@@ -103,9 +106,8 @@ void main() {
         await authRepository.login(testLoginParameters);
 
         // Assert
-        // Note: We can't easily test the caching without making CacheStorageServices injectable
-        // This is a limitation of the current implementation
         verify(mockAuthDataSource.login(testLoginParameters)).called(1);
+        verify(mockUserLocalDataSource.saveUserData(any)).called(1);
       });
 
       test('should return Failure when data source throws exception', () async {
@@ -195,6 +197,7 @@ void main() {
           },
         );
         verify(mockAuthDataSource.register(testRegisterParameters)).called(1);
+        verify(mockUserLocalDataSource.saveUserData(any)).called(1);
       });
 
       test('should return Failure when data source throws exception', () async {

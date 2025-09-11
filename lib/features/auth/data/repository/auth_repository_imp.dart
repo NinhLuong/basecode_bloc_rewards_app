@@ -9,7 +9,7 @@ import '../../domain/entities/user_entity.dart';
 import '../../domain/parameters/login_parameters.dart';
 import '../../domain/parameters/register_parameters.dart';
 import '../../domain/repository/auth_repository.dart';
-import '../datasources/remote/auth_data_source.dart';
+import '../datasources/remote/auth_datasource.dart';
 import '../datasources/local/user_local_data_source.dart';
 import 'package:injectable/injectable.dart';
 
