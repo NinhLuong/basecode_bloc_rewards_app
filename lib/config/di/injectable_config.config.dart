@@ -23,7 +23,7 @@ import '../../features/auth/data/datasources/remote/auth_remote_data_source_imp.
     as _i858;
 import '../../features/auth/data/datasources/local/user_local_data_source.dart'
     as _i931;
-import '../../features/auth/data/datasources/local/user_local_data_source_impl.dart'
+import '../../features/auth/data/datasources/local/user_local_data_source.dart'
     as _i85;
 import '../../features/auth/data/repository/auth_repository_imp.dart' as _i794;
 import '../../features/auth/domain/repository/auth_repository.dart' as _i961;
