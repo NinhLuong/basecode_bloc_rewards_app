@@ -12,11 +12,9 @@ import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
 import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
 import 'package:magic_rewards/features/home/presentation/blocs/home_bloc/home_bloc.dart';
+import 'package:magic_rewards/features/home/presentation/blocs/home_bloc/home_state.dart';
 import 'package:magic_rewards/features/home/presentation/widgets/offer_wall_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -29,12 +27,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<HomeBloc>(),
-      child: BlocBuilder<HomeBloc, BaseState<HomeEntity>>(
+      child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
-          if (state.isInit) _getHome(context);
+          if (state.isInitial) _getHome(context);
           if (state.isError) {
             return FailureComponent(
-                failure: state.failure, retry: () => _getHome(context));
+                failure: state.failure!, retry: () => _getHome(context));
           }
           return Scaffold(
             appBar: CustomAppBar(
@@ -47,8 +45,10 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(S.of(context).welome, style: context.f12700),
-                      Text("@${CacheStorageServices().username}",
-                          style: context.f10500)
+                      Text(
+                        "@${state.username}",
+                        style: context.f10500,
+                      ),
                     ],
                   ),
                 ],
@@ -68,9 +68,7 @@ class HomeScreen extends StatelessWidget {
                                 color: AppColors.blue,
                                 borderRadius: BorderRadius.circular(25)),
                             child: Text(
-                              state.isSuccess
-                                  ? (state.data?.balance ?? '-')
-                                  : '--',
+                              state.balance,
                               style: context.f12600,
                             ),
                           ),
@@ -92,10 +90,10 @@ class HomeScreen extends StatelessWidget {
                 : SmartRefresher(
                     controller: refreshController,
                     onRefresh: () =>
-                        context.read<HomeBloc>().add(const FetchHomeEvent()),
+                        context.read<HomeBloc>().add(const FetchHomeAndUserEvent()),
                     child: ListView(
                       children: state.isSuccess &&
-                              state.data!.offerWalls.isEmpty
+                              state.offerWalls.isEmpty
                           ? [const EmptyComponent()]
                           : [
                               const SizedBox(height: 10),
@@ -132,14 +130,13 @@ class HomeScreen extends StatelessWidget {
                                 crossAxisCount: 2,
                                 childAspectRatio: 9 / 10,
                                 physics: const NeverScrollableScrollPhysics(),
-                                children: state.data?.offerWalls
+                                children: state.offerWalls
                                         .map((e) => OfferWallCard(
                                               offerWall: e,
-                                              index: state.data!.offerWalls
+                                              index: state.offerWalls
                                                   .indexOf(e),
                                             ))
-                                        .toList() ??
-                                    [],
+                                        .toList(),
                               ),
                               const SizedBox(height: 30),
                             ],
@@ -153,7 +150,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _getHome(BuildContext context) {
-    context.read<HomeBloc>().add(const FetchHomeEvent());
+    context.read<HomeBloc>().add(const FetchHomeAndUserEvent());
   }
 
   Row buildTitle(BuildContext context,

@@ -7,6 +7,10 @@ import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
 import 'package:magic_rewards/config/errors/failure.dart' as _i6;
+import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart'
+    as _i9;
+import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart'
+    as _i10;
 import 'package:magic_rewards/features/home/domain/entities/home_entity.dart'
     as _i7;
 import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart'
@@ -76,4 +80,31 @@ class MockGetHomeUseCase extends _i1.Mock implements _i4.GetHomeUseCase {
                 ),
           )
           as _i5.Future<_i3.Either<_i6.Failure, _i7.HomeEntity>>);
+}
+
+/// A class which mocks [UserLocalDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserLocalDataSource extends _i1.Mock
+    implements _i9.UserLocalDataSource {
+  MockUserLocalDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<void> saveUserData(_i10.UserEntity? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveUserData, [user]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
+
+  @override
+  _i5.Future<_i10.UserEntity?> getUserData() =>
+      (super.noSuchMethod(
+            Invocation.method(#getUserData, []),
+            returnValue: _i5.Future<_i10.UserEntity?>.value(),
+          )
+          as _i5.Future<_i10.UserEntity?>);
 }

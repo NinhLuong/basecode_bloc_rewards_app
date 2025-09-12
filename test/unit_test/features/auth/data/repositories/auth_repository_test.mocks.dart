@@ -120,4 +120,12 @@ class MockUserLocalDataSource extends _i1.Mock
             returnValueForMissingStub: _i6.Future<void>.value(),
           )
           as _i6.Future<void>);
+
+  @override
+  _i6.Future<_i11.UserEntity?> getUserData() =>
+      (super.noSuchMethod(
+            Invocation.method(#getUserData, []),
+            returnValue: _i6.Future<_i11.UserEntity?>.value(),
+          )
+          as _i6.Future<_i11.UserEntity?>);
 }

@@ -202,6 +202,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i364.ProfileRepository>(
       () => _i335.ProfileRepositoryImp(gh<_i553.ProfileDataSource>()),
     );
+    gh.factory<_i665.HomeBloc>(
+      () => _i665.HomeBloc(
+        gh<_i836.GetHomeUseCase>(),
+        gh<_i931.UserLocalDataSource>(),
+      ),
+    );
     gh.factory<_i132.RedeemBloc>(
       () => _i132.RedeemBloc(gh<_i33.RedeemUseCase>()),
     );
@@ -267,9 +273,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i435.GetTopUsersUseCase>(
       () => _i435.GetTopUsersUseCase(gh<_i656.TopUsersRepository>()),
-    );
-    gh.factory<_i665.HomeBloc>(
-      () => _i665.HomeBloc(gh<_i836.GetHomeUseCase>()),
     );
     gh.factory<_i118.ProfileBloc>(
       () => _i118.ProfileBloc(gh<_i965.GetProfileUseCase>()),

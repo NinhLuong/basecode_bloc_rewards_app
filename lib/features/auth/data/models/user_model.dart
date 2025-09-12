@@ -34,6 +34,23 @@ abstract class UserModel extends BaseModel<UserEntity> with _$UserModel {
   }
 }
 
+extension UserModelExtension on UserModel {
+  UserModel fromEntity(UserEntity entity) {
+    return UserModel(
+      accessToken: entity.accessToken,
+      accountId: entity.accountId,
+      account: [
+        Account(
+          email: entity.email,
+          points: entity.points,
+          redeemedPoints: entity.redeemedPoints,
+          username: entity.userName,
+        ),
+      ],
+    );
+  }
+}
+
 @freezed
 abstract class Account with _$Account {
   const factory Account({

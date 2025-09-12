@@ -10,3 +10,7 @@ class HomeEvent extends Equatable {
 class FetchHomeEvent extends HomeEvent {
   const FetchHomeEvent();
 }
+
+class FetchHomeAndUserEvent extends HomeEvent {
+  const FetchHomeAndUserEvent();
+}
