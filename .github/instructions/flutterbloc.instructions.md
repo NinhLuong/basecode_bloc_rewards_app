@@ -1,12 +1,7 @@
 ---
 applyTo: '**'
 ---
----
-description: Flutter, Bloc, Cubit, Flutter Clean Architecture
-globs: 
-alwaysApply: false
----
-    You are an expert in Flutter, Dart, Bloc, Freezed, Flutter Hooks, and Firebase.
+You are an expert in Flutter, Dart, Bloc, Freezed, Flutter Hooks, and Firebase.
 
     Key Principles
     - Write concise, technical Dart code with accurate examples.
@@ -93,14 +88,80 @@ You are an expert Flutter developer specializing in Clean Architecture with Feat
 
 ## Core Principles
 
-### Clean Architecture
-- Strictly adhere to the Clean Architecture layers: Presentation, Domain, and Data
-- Follow the dependency rule: dependencies always point inward
-- Domain layer contains entities, repositories (interfaces), and use cases
-- Data layer implements repositories and contains data sources and models
-- Presentation layer contains UI components, blocs, and view models
-- Use proper abstractions with interfaces/abstract classes for each component
-- Every feature should follow this layered architecture pattern
+# Cubit Architecture Guide
+
+## Clean Architecture Layers
+
+Even if your folder names do not explicitly use `domain`, `data`, or `presentation`, these layers exist logically in your codebase. Organizing by feature or by layer is both acceptable, as long as you respect the **Dependency Rule**.
+
+### Data Layer ("How")
+
+This layer answers: **How is data fetched or stored?** It contains all implementation details and external dependencies.
+
+**Components:**
+- **Repository Implementations:** Concrete classes implementing domain repository interfaces (e.g., `AuthRepositoryImpl`)
+- **Data Sources:** Classes responsible for interacting with a single data source (e.g., `UserRemoteDataSource` using Dio, `UserLocalDataSource` using Hive)
+- **DTOs (Data Transfer Objects):** Models for parsing and serializing data from APIs (e.g., `UserDto`)
+- **Dependencies:** Uses packages like Dio, Hive, etc. No other layer depends on Data (except for DI setup)
+
+### Domain Layer ("What")
+
+This layer answers: **What can the app do?** It is the core of your business logic and is independent of frameworks and tools.
+
+**Components:**
+- **Entities:** Pure Dart objects representing core business concepts (e.g., `User`)
+- **Repository Interfaces:** Abstract classes defining contracts for data access (e.g., `abstract class AuthRepository`)
+- **Use Cases:** Classes encapsulating specific business actions (e.g., `LoginUseCase`). In small/medium apps, Cubits may call repository methods directly instead of separate use cases
+- **Dependencies:** No dependencies on other layers or frameworks
+
+### Presentation Layer ("Show")
+
+This layer answers: **What is displayed and how does the user interact?**
+
+**Components:**
+- **UI (Views):** Widgets and pages
+- **State Management:** Cubits and their States. Cubits interact with the Domain layer and expose state to the UI
+
+### Example Folder Structure (Feature-Based)
+
+```text
+lib/
+├── features/
+│   ├── auth/
+│   │   ├── data/
+│   │   │   ├── datasources/
+│   │   │   ├── models/
+│   │   │   └── repositories/
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   ├── repositories/
+│   │   │   └── usecases/
+│   │   └── presentation/
+│   │       ├── cubits/
+│   │       ├── pages/
+│   │       └── widgets/
+│   └── home/
+│       ├── data/
+│       ├── domain/
+│       └── presentation/
+└── shared/
+    ├── data/
+    ├── domain/
+    └── presentation/
+```
+
+### Dependency Rule
+
+The most important rule is to respect the **Dependency Rule**:
+
+**Presentation → Domain ← Data**
+
+This ensures a clean, maintainable architecture regardless of folder naming:
+- **Presentation layer** can depend on Domain layer
+- **Data layer** can depend on Domain layer  
+- **Domain layer** cannot depend on any other layer
+- **Data and Presentation** layers cannot depend on each other directly
+
 
 ### Feature-First Organization
 - Organize code by features instead of technical layers
@@ -264,13 +325,13 @@ class GetUser implements UseCase<User, String> {
 
 ### Repository Implementation
 ```
-abstract class UserRepository {
+abstract class IUserRepository {
   Future<Either<Failure, User>> getUser(String id);
   Future<Either<Failure, List<User>>> getUsers();
   Future<Either<Failure, Unit>> saveUser(User user);
 }
 
-class UserRepositoryImpl implements UserRepository {
+class UserRepositoryImpl implements IUserRepository {
   final UserRemoteDataSource remoteDataSource;
   final UserLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
@@ -429,57 +490,1466 @@ void initDependencies() {
   getIt.registerFactory(() => UserBloc(getUser: getIt()));
 }
 ```
+# Cubit Conventions & Organization
 
+## Naming Conventions
+
+### Classes
+- **Cubit classes**: PascalCase, suffix with `Cubit` (e.g., `LoginCubit`, `UserProfileCubit`)
+- **State classes**: PascalCase, suffix with `State` (e.g., `LoginState`, `UserProfileState`)
+- **Repository classes**: PascalCase, suffix with `Repository` (e.g., `AuthRepository`, `UserRepository`)
+- **Use case classes**: PascalCase, suffix with `UseCase` (e.g., `LoginUseCase`, `GetUserUseCase`)
+
+### Files
+- **Files**: snake_case (e.g., `login_cubit.dart`, `login_state.dart`)
+- **Test files**: Add `_test` suffix (e.g., `login_cubit_test.dart`)
+- **Mock files**: Add `_mock` suffix (e.g., `auth_repository_mock.dart`)
+
+### Folders
+- **Features**: snake_case (e.g., `user_profile`, `shopping_cart`)
+- **Layers**: lowercase (e.g., `data`, `domain`, `presentation`)
+- **Components**: lowercase plural (e.g., `cubits`, `widgets`, `pages`)
+
+### Examples
+
+```dart
+// ✅ Good naming
+class LoginCubit extends Cubit<LoginState> { }
+class LoginState extends Equatable { }
+class AuthRepository { }
+class LoginUseCase { }
+
+// ❌ Bad naming
+class Login extends Cubit<LoginData> { }
+class LoginData { }
+class AuthRepo { }
+class Login_UseCase { }
+```
+
+---
+
+## File & Directory Organization
+
+**Feature-First (Recommended for most projects):**
+```
+lib/
+├── features/
+│   ├── auth/
+│   │   ├── data/
+│   │   ├── domain/
+│   │   └── presentation/
+│   └── dashboard/
+│       ├── data/
+│       ├── domain/
+│       └── presentation/
+└── shared/
+    ├── data/
+    ├── domain/
+    └── presentation/
+```
+
+### File Organization Best Practices
+
+1. **Separate files**: Each Cubit and State in separate files
+2. **Logical grouping**: Group related files in folders
+3. **Test placement**: Mirror production structure in `test/` folder
+4. **Barrel exports**: Use `index.dart` files for easier imports
+
+```dart
+// lib/features/auth/auth.dart (barrel file)
+export 'cubit/auth_cubit.dart';
+export 'cubit/auth_state.dart';
+export 'data/auth_repository_impl.dart';
+export 'domain/auth_repository.dart';
+export 'presentation/login_page.dart';
+```
+
+---
+
+## Dependency Injection
+
+### DI Library Recommendations
+
+**For small projects:**
+- Manual DI with factory functions
+- Simple service locator pattern
+
+**For medium projects:**
+- `get_it` - Service locator
+- `provider` - Widget-based DI
+
+**For large projects:**
+- `injectable` + `get_it` - Code generation
+- `riverpod` - Compile-safe DI
+
+### Get_it Service Locator
+
+```dart
+// lib/core/service_locator.dart
+import 'package:get_it/get_it.dart';
+
+final getIt = GetIt.instance;
+
+void setupServiceLocator() {
+  // External dependencies
+  getIt.registerLazySingleton<Dio>(() => Dio());
+  getIt.registerLazySingleton<FlutterSecureStorage>(
+    () => const FlutterSecureStorage(),
+  );
+  
+  // Data sources
+  getIt.registerLazySingleton<AuthRemoteDataSource>(
+    () => AuthRemoteDataSourceImpl(getIt()),
+  );
+  
+  // Repositories
+  getIt.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(getIt()),
+  );
+  
+  // Use cases
+  getIt.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(getIt()),
+  );
+  
+  // Cubits
+  getIt.registerFactory<AuthCubit>(
+    () => AuthCubit(getIt()),
+  );
+}
+```
+
+### Injectable (Code Generation)
+
+```dart
+// lib/core/injection.dart
+import 'package:injectable/injectable.dart';
+import 'package:get_it/get_it.dart';
+
+import 'injection.config.dart';
+
+final getIt = GetIt.instance;
+
+@InjectableInit()
+void configureDependencies() => getIt.init();
+
+// lib/core/injection.config.dart will be generated
+```
+
+```dart
+// Data source registration
+@Injectable(as: AuthRemoteDataSource)
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  AuthRemoteDataSourceImpl(@Named('authDio') this._dio);
+  final Dio _dio;
+}
+
+// Repository registration
+@Injectable(as: AuthRepository)
+class AuthRepositoryImpl implements AuthRepository {
+  AuthRepositoryImpl(this._remoteDataSource);
+  final AuthRemoteDataSource _remoteDataSource;
+}
+
+// Cubit registration
+@injectable
+class AuthCubit extends Cubit<AuthState> {
+  AuthCubit(this._authRepository) : super(AuthState.initial());
+  final AuthRepository _authRepository;
+}
+```
+
+### DI Module Pattern (with injectable)
+
+```dart
+@module
+abstract class AppModule {
+  @singleton
+  @Named('authDio')
+  Dio provideAuthDio() => Dio()..options.baseUrl = 'https://api.example.com';
+  
+  @singleton
+  @Named('userDio')
+  Dio provideUserDio() => Dio()..options.baseUrl = 'https://user-api.example.com';
+  
+  @singleton
+  FlutterSecureStorage provideSecureStorage() => const FlutterSecureStorage();
+}
+
+@module
+abstract class DatabaseModule {
+  @singleton
+  @preResolve
+  Future<Database> provideDatabase() => $FloorAppDatabase
+      .databaseBuilder('app_database.db')
+      .build();
+}
+```
+
+### Injecting Cubits in Widget Tree
+
+```dart
+// Single Cubit
+BlocProvider(
+  create: (context) => getIt<AuthCubit>(),
+  child: LoginPage(),
+)
+
+// Multiple Cubits
+MultiBlocProvider(
+  providers: [
+    BlocProvider(create: (context) => getIt<AuthCubit>()),
+    BlocProvider(create: (context) => getIt<UserCubit>()),
+  ],
+  child: DashboardPage(),
+)
+
+// With lazy creation
+BlocProvider.value(
+  value: getIt<AuthCubit>(),
+  child: LoginPage(),
+)
+```
+
+### DI Best Practices
+
+1. **Register early**: Set up DI in `main()` before running the app
+2. **Use interfaces**: Register abstract classes, not implementations
+3. **Lazy registration**: Use lazy singletons for expensive objects
+4. **Scope properly**: Factory for Cubits, Singleton for repositories
+5. **Test overrides**: Allow DI overrides for testing
+
+```dart
+// ✅ Good: Register interface
+getIt.registerLazySingleton<AuthRepository>(
+  () => AuthRepositoryImpl(getIt()),
+);
+
+// ❌ Bad: Register implementation
+getIt.registerLazySingleton<AuthRepositoryImpl>(
+  () => AuthRepositoryImpl(getIt()),
+);
+
+# Cubit Development Practices
+
+## Networking & Error Handling
+
+### Dio Configuration with Interceptors
+
+```dart
+class ApiService {
+  late final Dio _dio;
+
+  ApiService() {
+    _dio = Dio(BaseOptions(
+      baseUrl: 'https://api.example.com',
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    ));
+
+    _dio.interceptors.addAll([
+      _AuthInterceptor(),
+      _LoggingInterceptor(),
+      _ErrorInterceptor(),
+    ]);
+  }
+
+  Dio get dio => _dio;
+}
+```
+
+### Authentication Interceptor
+
+```dart
+class _AuthInterceptor extends Interceptor {
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    final token = getIt<AuthService>().token;
+    if (token != null) {
+      options.headers['Authorization'] = 'Bearer $token';
+    }
+    handler.next(options);
+  }
+
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    if (err.response?.statusCode == 401) {
+      // Handle token refresh or logout
+      getIt<AuthService>().logout();
+    }
+    handler.next(err);
+  }
+}
+```
+
+### Error Handling Best Practices
+
+```dart
+// Custom exception classes
+abstract class AppException implements Exception {
+  final String message;
+  final String? code;
+  final Map<String, dynamic>? details;
+
+  const AppException(this.message, {this.code, this.details});
+}
+
+class NetworkException extends AppException {
+  const NetworkException(super.message, {super.code, super.details});
+}
+
+class ValidationException extends AppException {
+  const ValidationException(super.message, {super.code, super.details});
+}
+
+class AuthenticationException extends AppException {
+  const AuthenticationException(super.message, {super.code, super.details});
+}
+
+// Repository error handling
+class UserRepository {
+  final ApiService _apiService;
+
+  UserRepository(this._apiService);
+
+  Future<Result<User>> getUser(String id) async {
+    try {
+      final response = await _apiService.dio.get('/users/$id');
+      final user = User.fromJson(response.data);
+      return Result.success(data: user);
+    } on DioException catch (e) {
+      return Result.failure(error: _handleDioError(e));
+    } catch (e) {
+      return Result.failure(error: AppException('Unexpected error: $e'));
+    }
+  }
+
+  AppException _handleDioError(DioException e) {
+    switch (e.type) {
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.receiveTimeout:
+        return const NetworkException('Connection timeout');
+      case DioExceptionType.badResponse:
+        final statusCode = e.response?.statusCode;
+        switch (statusCode) {
+          case 400:
+            return ValidationException('Invalid request', 
+              details: e.response?.data);
+          case 401:
+            return const AuthenticationException('Unauthorized');
+          case 404:
+            return const NetworkException('Resource not found');
+          default:
+            return NetworkException('Server error: $statusCode');
+        }
+      default:
+        return NetworkException('Network error: ${e.message}');
+    }
+  }
+}
+```
+
+### Retry Logic
+
+```dart
+class RetryService {
+  static Future<T> withRetry<T>(
+    Future<T> Function() operation, {
+    int maxRetries = 3,
+    Duration delay = const Duration(seconds: 1),
+  }) async {
+    int attempts = 0;
+    
+    while (attempts < maxRetries) {
+      try {
+        return await operation();
+      } catch (e) {
+        attempts++;
+        if (attempts >= maxRetries) rethrow;
+        
+        await Future.delayed(delay * attempts); // Exponential backoff
+      }
+    }
+    
+    throw Exception('Max retries exceeded');
+  }
+}
+
+// Usage in repository
+Future<Result<List<Product>>> getProducts() async {
+  return await RetryService.withRetry(() async {
+    final response = await _apiService.dio.get('/products');
+    final products = (response.data as List)
+        .map((json) => Product.fromJson(json))
+        .toList();
+    return Result.success(data: products);
+  });
+}
+```
+
+---
+
+## Testing
+
+### Unit Testing Cubits
+
+```dart
+// test/cubits/login_cubit_test.dart
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+import '../mocks/mocks.dart';
+
+void main() {
+  group('LoginCubit', () {
+    late MockAuthRepository mockAuthRepository;
+    late LoginCubit loginCubit;
+
+    setUp(() {
+      mockAuthRepository = MockAuthRepository();
+      loginCubit = LoginCubit(mockAuthRepository);
+    });
+
+    tearDown(() {
+      loginCubit.close();
+    });
+
+    test('initial state is LoginState.initial', () {
+      expect(loginCubit.state, equals(LoginState.initial()));
+    });
+
+    blocTest<LoginCubit, LoginState>(
+      'emits [loading, success] when login succeeds',
+      build: () {
+        when(mockAuthRepository.login(any, any))
+            .thenAnswer((_) async => User(id: '1', email: 'test@example.com'));
+        return loginCubit;
+      },
+      act: (cubit) => cubit.login('test@example.com', 'password'),
+      expect: () => [
+        LoginState.loading(),
+        LoginState.success(user: User(id: '1', email: 'test@example.com')),
+      ],
+      verify: (cubit) {
+        verify(mockAuthRepository.login('test@example.com', 'password'))
+            .called(1);
+      },
+    );
+
+    blocTest<LoginCubit, LoginState>(
+      'emits [loading, failure] when login fails',
+      build: () {
+        when(mockAuthRepository.login(any, any))
+            .thenThrow(Exception('Invalid credentials'));
+        return loginCubit;
+      },
+      act: (cubit) => cubit.login('test@example.com', 'wrong_password'),
+      expect: () => [
+        LoginState.loading(),
+        LoginState.failure(error: 'Exception: Invalid credentials'),
+      ],
+    );
+
+    blocTest<LoginCubit, LoginState>(
+      'emits failure when email is empty',
+      build: () => loginCubit,
+      act: (cubit) => cubit.login('', 'password'),
+      expect: () => [
+        LoginState.failure(error: 'Email and password cannot be empty'),
+      ],
+      verify: (cubit) {
+        verifyNever(mockAuthRepository.login(any, any));
+      },
+    );
+  });
+}
+```
+
+### Widget Testing with Cubit
+
+```dart
+// test/widgets/login_page_test.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+void main() {
+  group('LoginPage', () {
+    late MockLoginCubit mockLoginCubit;
+
+    setUp(() {
+      mockLoginCubit = MockLoginCubit();
+    });
+
+    Widget createWidgetUnderTest() {
+      return MaterialApp(
+        home: BlocProvider<LoginCubit>.value(
+          value: mockLoginCubit,
+          child: const LoginPage(),
+        ),
+      );
+    }
+
+    testWidgets('renders email and password fields', (tester) async {
+      when(() => mockLoginCubit.state).thenReturn(LoginState.initial());
+
+      await tester.pumpWidget(createWidgetUnderTest());
+
+      expect(find.byType(TextFormField), findsNWidgets(2));
+      expect(find.text('Email'), findsOneWidget);
+      expect(find.text('Password'), findsOneWidget);
+    });
+
+    testWidgets('calls login when form is submitted', (tester) async {
+      when(() => mockLoginCubit.state).thenReturn(LoginState.initial());
+
+      await tester.pumpWidget(createWidgetUnderTest());
+
+      await tester.enterText(find.byKey(const Key('email_field')), 'test@example.com');
+      await tester.enterText(find.byKey(const Key('password_field')), 'password');
+      await tester.tap(find.byKey(const Key('login_button')));
+
+      verify(() => mockLoginCubit.login('test@example.com', 'password')).called(1);
+    });
+
+    testWidgets('shows loading indicator when state is loading', (tester) async {
+      when(() => mockLoginCubit.state).thenReturn(LoginState.loading());
+
+      await tester.pumpWidget(createWidgetUnderTest());
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+
+    testWidgets('shows error message when state is failure', (tester) async {
+      when(() => mockLoginCubit.state).thenReturn(
+        LoginState.failure(error: 'Invalid credentials'),
+      );
+
+      await tester.pumpWidget(createWidgetUnderTest());
+
+      expect(find.text('Invalid credentials'), findsOneWidget);
+    });
+  });
+}
+```
+
+### Integration Testing
+
+```dart
+// integration_test/login_flow_test.dart
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
+import 'package:my_app/main.dart' as app;
+
+void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
+  group('Login Flow Integration Tests', () {
+    testWidgets('complete login flow', (tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+
+      // Navigate to login page
+      await tester.tap(find.text('Login'));
+      await tester.pumpAndSettle();
+
+      // Enter credentials
+      await tester.enterText(find.byKey(const Key('email_field')), 'test@example.com');
+      await tester.enterText(find.byKey(const Key('password_field')), 'password123');
+      
+      // Submit form
+      await tester.tap(find.byKey(const Key('login_button')));
+      await tester.pumpAndSettle();
+
+      // Verify successful login
+      expect(find.text('Welcome'), findsOneWidget);
+      expect(find.byKey(const Key('dashboard')), findsOneWidget);
+    });
+
+    testWidgets('login with invalid credentials shows error', (tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Login'));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byKey(const Key('email_field')), 'invalid@example.com');
+      await tester.enterText(find.byKey(const Key('password_field')), 'wrongpassword');
+      
+      await tester.tap(find.byKey(const Key('login_button')));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Invalid credentials'), findsOneWidget);
+    });
+  });
+}
+```
+
+---
+
+## Performance Optimization
+
+### State Optimization
+
+```dart
+// Use equatable or freezed for efficient state comparisons
+@freezed
+class ProductListState with _$ProductListState {
+  const factory ProductListState({
+    @Default([]) List<Product> products,
+    @Default(false) bool isLoading,
+    @Default(null) String? error,
+    @Default(null) String? searchQuery,
+    @Default(null) Category? selectedCategory,
+  }) = _ProductListState;
+}
+
+// Selective state updates
+class ProductListCubit extends Cubit<ProductListState> {
+  ProductListCubit() : super(const ProductListState());
+
+  void updateSearchQuery(String query) {
+    // Only emit if query actually changed
+    if (state.searchQuery != query) {
+      emit(state.copyWith(searchQuery: query));
+    }
+  }
+
+  void selectCategory(Category category) {
+    // Only emit if category changed
+    if (state.selectedCategory != category) {
+      emit(state.copyWith(selectedCategory: category));
+    }
+  }
+}
+```
+
+### BlocBuilder Optimization
+
+```dart
+// ❌ Bad: Rebuilds entire list when search query changes
+BlocBuilder<ProductListCubit, ProductListState>(
+  builder: (context, state) {
+    return Column(
+      children: [
+        SearchBar(query: state.searchQuery),
+        ProductList(products: state.products),
+        LoadingIndicator(isVisible: state.isLoading),
+      ],
+    );
+  },
+)
+
+// ✅ Good: Separate builders for different parts of state
+Column(
+  children: [
+    BlocBuilder<ProductListCubit, ProductListState>(
+      buildWhen: (previous, current) => previous.searchQuery != current.searchQuery,
+      builder: (context, state) => SearchBar(query: state.searchQuery),
+    ),
+    BlocBuilder<ProductListCubit, ProductListState>(
+      buildWhen: (previous, current) => previous.products != current.products,
+      builder: (context, state) => ProductList(products: state.products),
+    ),
+    BlocBuilder<ProductListCubit, ProductListState>(
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+      builder: (context, state) => LoadingIndicator(isVisible: state.isLoading),
+    ),
+  ],
+)
+```
+
+### Memory Management
+
+```dart
+class ProductListCubit extends Cubit<ProductListState> {
+  ProductListCubit(this._repository) : super(const ProductListState());
+
+  final ProductRepository _repository;
+  Timer? _debounceTimer;
+  StreamSubscription? _subscription;
+
+  void searchProducts(String query) {
+    // Debounce search requests
+    _debounceTimer?.cancel();
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
+      _performSearch(query);
+    });
+  }
+
+  Future<void> _performSearch(String query) async {
+    emit(state.copyWith(isLoading: true, searchQuery: query));
+    
+    try {
+      final products = await _repository.searchProducts(query);
+      emit(state.copyWith(products: products, isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(error: e.toString(), isLoading: false));
+    }
+  }
+
+  @override
+  Future<void> close() {
+    _debounceTimer?.cancel();
+    _subscription?.cancel();
+    return super.close();
+  }
+}
+```
+
+### Lazy Loading and Pagination
+
+```dart
+class ProductListCubit extends Cubit<PaginationState<Product>> {
+  ProductListCubit(this._repository) : super(const PaginationState());
+
+  final ProductRepository _repository;
+  static const int _pageSize = 20;
+
+  Future<void> loadProducts({bool refresh = false}) async {
+    if (refresh) {
+      emit(const PaginationState()); // Reset state
+    }
+
+    if (state.isLoading || state.hasReachedMax) return;
+
+    final isFirstPage = state.items.isEmpty;
+    emit(state.copyWith(
+      isLoading: isFirstPage,
+      isLoadingMore: !isFirstPage,
+    ));
+
+    try {
+      final newProducts = await _repository.getProducts(
+        page: state.currentPage + 1,
+        limit: _pageSize,
+      );
+
+      final hasReachedMax = newProducts.length < _pageSize;
+
+      emit(state.copyWith(
+        items: refresh ? newProducts : [...state.items, ...newProducts],
+        isLoading: false,
+        isLoadingMore: false,
+        currentPage: state.currentPage + 1,
+        hasReachedMax: hasReachedMax,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        isLoading: false,
+        isLoadingMore: false,
+        error: e.toString(),
+      ));
+    }
+  }
+}
+```
+
+---
+
+## Best Practices
+
+### Cubit Lifecycle Management
+
+```dart
+class UserProfileCubit extends Cubit<UserProfileState> {
+  UserProfileCubit(this._userRepository, this._analyticsService)
+      : super(UserProfileState.initial()) {
+    _initialize();
+  }
+
+  final UserRepository _userRepository;
+  final AnalyticsService _analyticsService;
+  StreamSubscription? _userSubscription;
+
+  void _initialize() {
+    // Track cubit creation
+    _analyticsService.track('user_profile_cubit_created');
+    
+    // Listen to user changes
+    _userSubscription = _userRepository.userStream.listen(
+      (user) => emit(state.copyWith(user: user)),
+      onError: (error) => emit(state.copyWith(error: error.toString())),
+    );
+  }
+
+  @override
+  Future<void> close() {
+    _userSubscription?.cancel();
+    _analyticsService.track('user_profile_cubit_closed');
+    return super.close();
+  }
+}
+```
+
+### Error Recovery
+
+```dart
+class DataSyncCubit extends Cubit<DataSyncState> {
+  DataSyncCubit(this._syncService) : super(DataSyncState.initial());
+
+  final SyncService _syncService;
+  int _retryCount = 0;
+  static const int _maxRetries = 3;
+
+  Future<void> syncData() async {
+    emit(state.copyWith(isSyncing: true, error: null));
+
+    try {
+      await _syncService.syncAllData();
+      emit(state.copyWith(
+        isSyncing: false,
+        lastSyncTime: DateTime.now(),
+      ));
+      _retryCount = 0; // Reset retry count on success
+    } catch (e) {
+      if (_retryCount < _maxRetries) {
+        _retryCount++;
+        await Future.delayed(Duration(seconds: _retryCount * 2));
+        await syncData(); // Retry with exponential backoff
+      } else {
+        emit(state.copyWith(
+          isSyncing: false,
+          error: 'Sync failed after $_maxRetries attempts: $e',
+        ));
+        _retryCount = 0; // Reset for next manual sync
+      }
+    }
+  }
+
+  void retrySync() {
+    _retryCount = 0;
+    syncData();
+  }
+}
+```
+
+### State Composition
+
+```dart
+// Compose complex state from multiple simpler states
+@freezed
+class AppState with _$AppState {
+  const factory AppState({
+    required AuthState auth,
+    required UserState user,
+    required SettingsState settings,
+    required ConnectionState connection,
+  }) = _AppState;
+}
+
+class AppCubit extends Cubit<AppState> {
+  AppCubit(
+    this._authCubit,
+    this._userCubit,
+    this._settingsCubit,
+    this._connectionCubit,
+  ) : super(AppState(
+    auth: _authCubit.state,
+    user: _userCubit.state,
+    settings: _settingsCubit.state,
+    connection: _connectionCubit.state,
+  )) {
+    // Listen to all child cubits
+    _authSubscription = _authCubit.stream.listen(_onAuthChanged);
+    _userSubscription = _userCubit.stream.listen(_onUserChanged);
+    _settingsSubscription = _settingsCubit.stream.listen(_onSettingsChanged);
+    _connectionSubscription = _connectionCubit.stream.listen(_onConnectionChanged);
+  }
+
+  final AuthCubit _authCubit;
+  final UserCubit _userCubit;
+  final SettingsCubit _settingsCubit;
+  final ConnectionCubit _connectionCubit;
+
+  late final StreamSubscription _authSubscription;
+  late final StreamSubscription _userSubscription;
+  late final StreamSubscription _settingsSubscription;
+  late final StreamSubscription _connectionSubscription;
+
+  void _onAuthChanged(AuthState authState) {
+    emit(state.copyWith(auth: authState));
+    
+    // Handle side effects
+    if (!authState.isAuthenticated) {
+      _userCubit.clearUser();
+    }
+  }
+
+  void _onUserChanged(UserState userState) {
+    emit(state.copyWith(user: userState));
+  }
+
+  void _onSettingsChanged(SettingsState settingsState) {
+    emit(state.copyWith(settings: settingsState));
+  }
+
+  void _onConnectionChanged(ConnectionState connectionState) {
+    emit(state.copyWith(connection: connectionState));
+  }
+
+  @override
+  Future<void> close() {
+    _authSubscription.cancel();
+    _userSubscription.cancel();
+    _settingsSubscription.cancel();
+    _connectionSubscription.cancel();
+    return super.close();
+  }
+}
+```
+
+### Testing Best Practices
+
+1. **Test business logic, not implementation details**
+2. **Use meaningful test descriptions**
+3. **Test edge cases and error conditions**
+4. **Mock external dependencies**
+5. **Use blocTest for complex state transitions**
+
+```dart
+// ✅ Good: Tests business logic
+blocTest<LoginCubit, LoginState>(
+  'should emit success state when login succeeds with valid credentials',
+  build: () {
+    when(() => mockAuthRepository.login(any(), any()))
+        .thenAnswer((_) async => mockUser);
+    return LoginCubit(mockAuthRepository);
+  },
+  act: (cubit) => cubit.login('valid@email.com', 'validPassword'),
+  expect: () => [
+    const LoginState.loading(),
+    LoginState.success(user: mockUser),
+  ],
+);
+
+// ❌ Bad: Tests implementation details
+blocTest<LoginCubit, LoginState>(
+  'should call repository login method',
+  build: () => LoginCubit(mockAuthRepository),
+  act: (cubit) => cubit.login('email', 'password'),
+  verify: (cubit) {
+    verify(() => mockAuthRepository.login('email', 'password')).called(1);
+  },
+);
+``` 
+
+# Cubit State Management Guide
+
+## State Management with Cubit & Freezed
+
+For complex state objects, use Freezed for code generation:
+
+```dart
+// login_state.dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'login_state.freezed.dart';
+
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState({
+    @Default(LoginStatus.initial) LoginStatus status,
+    @Default(null) String? error,
+    @Default(null) User? user,
+    @Default(false) bool isLoading,
+    @Default(false) bool obscurePassword,
+  }) = _LoginState;
+
+  // Factory for initial state
+  factory LoginState.initial() => const LoginState();
+  
+  // Convenience getters
+  const LoginState._();
+  bool get isAuthenticated => user != null;
+  bool get hasError => error != null;
+}
+
+enum LoginStatus { initial, loading, success, failure }
+```
+
+### Basic Cubit Implementation
+
+```dart
+// login_cubit.dart
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class LoginCubit extends Cubit<LoginState> {
+  LoginCubit(this._authRepository) : super(LoginState.initial());
+
+  final AuthRepository _authRepository;
+
+  Future<void> login(String email, String password) async {
+    if (email.isEmpty || password.isEmpty) {
+      emit(state.copyWith(
+        status: LoginStatus.failure,
+        error: 'Email and password cannot be empty',
+      ));
+      return;
+    }
+
+    emit(state.copyWith(status: LoginStatus.loading));
+
+    try {
+      final user = await _authRepository.login(email, password);
+      emit(state.copyWith(
+        status: LoginStatus.success,
+        user: user,
+        error: null,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: LoginStatus.failure,
+        error: e.toString(),
+      ));
+    }
+  }
+
+  void togglePasswordVisibility() {
+    emit(state.copyWith(obscurePassword: !state.obscurePassword));
+  }
+
+  void clearError() {
+    emit(state.copyWith(error: null));
+  }
+
+  @override
+  Future<void> close() {
+    // Clean up resources if needed
+    return super.close();
+  }
+}
+```
+
+### Advanced Cubit with Stream Subscriptions
+
+```dart
+class UserCubit extends Cubit<UserState> {
+  UserCubit(this._userRepository, this._authCubit) : super(UserState.initial()) {
+    // Listen to auth changes
+    _authSubscription = _authCubit.stream.listen((authState) {
+      if (authState.isAuthenticated) {
+        loadUserProfile();
+      } else {
+        emit(UserState.initial());
+      }
+    });
+  }
+
+  final UserRepository _userRepository;
+  final AuthCubit _authCubit;
+  StreamSubscription<AuthState>? _authSubscription;
+
+  Future<void> loadUserProfile() async {
+    emit(state.copyWith(isLoading: true));
+    
+    try {
+      final user = await _userRepository.getCurrentUser();
+      emit(state.copyWith(
+        user: user,
+        isLoading: false,
+        error: null,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        isLoading: false,
+        error: e.toString(),
+      ));
+    }
+  }
+
+  @override
+  Future<void> close() {
+    _authSubscription?.cancel();
+    return super.close();
+  }
+}
+```
+
+---
+
+## Hook Usage Guidelines(If needed)
+
+### Hook Organization in build() Method
+
+When using Flutter Hooks with Cubit, organize all hook calls at the beginning:
+
+```dart
+class LoginPage extends HookWidget {
+  const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // 1. Form hooks
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    
+    // 2. State hooks
+    final isLoading = useState(false);
+    final autoValidate = useState(false);
+    
+    // 3. Effect hooks
+    useEffect(() {
+      // Clear controllers on dispose
+      return () {
+        emailController.dispose();
+        passwordController.dispose();
+      };
+    }, []);
+    
+    // 4. Computed values
+    final isFormValid = useMemoized(() {
+      return emailController.text.isNotEmpty && 
+             passwordController.text.isNotEmpty;
+    }, [emailController.text, passwordController.text]);
+    
+    // 5. Return widget tree
+    return Scaffold(
+      body: _buildBody(
+        emailController,
+        passwordController,
+        formKey,
+        isFormValid,
+      ),
+    );
+  }
+}
+```
+
+### Custom Hooks for Cubit(if needed)
+
+Create reusable hooks for common Cubit patterns:
+
+```dart
+// Custom hook for form validation
+FormValidationHook useFormValidation(List<TextEditingController> controllers) {
+  final isValid = useState(false);
+  final errors = useState<Map<String, String>>({});
+
+  useEffect(() {
+    void validateForm() {
+      final newErrors = <String, String>{};
+      bool valid = true;
+
+      for (int i = 0; i < controllers.length; i++) {
+        if (controllers[i].text.isEmpty) {
+          newErrors['field_$i'] = 'This field is required';
+          valid = false;
+        }
+      }
+
+      isValid.value = valid;
+      errors.value = newErrors;
+    }
+
+    // Add listeners to all controllers
+    for (final controller in controllers) {
+      controller.addListener(validateForm);
+    }
+
+    return () {
+      // Remove listeners
+      for (final controller in controllers) {
+        controller.removeListener(validateForm);
+      }
+    };
+  }, controllers);
+
+  return FormValidationHook(
+    isValid: isValid.value,
+    errors: errors.value,
+  );
+}
+
+class FormValidationHook {
+  const FormValidationHook({
+    required this.isValid,
+    required this.errors,
+  });
+
+  final bool isValid;
+  final Map<String, String> errors;
+}
+```
+
+### Hook Best Practices
+
+1. **Organize by purpose**: Group related hooks together
+2. **Use meaningful names**: Hook variables should be descriptive
+3. **Handle cleanup**: Always dispose of resources in useEffect cleanup
+4. **Avoid deep dependencies**: Keep dependency arrays simple
+5. **Memoize expensive calculations**: Use useMemoized for heavy computations
+
+```dart
+// ✅ Good: Well-organized hooks
+class ProductListPage extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Search and filtering
+    final searchController = useTextEditingController();
+    final selectedCategory = useState<String?>(null);
+    
+    // Pagination
+    final scrollController = useScrollController();
+    final isLoadingMore = useState(false);
+    
+    // Data fetching
+    useEffect(() {
+      context.read<ProductCubit>().loadProducts();
+      return null;
+    }, []);
+    
+    // Infinite scroll
+    useEffect(() {
+      void onScroll() {
+        if (scrollController.position.pixels == 
+            scrollController.position.maxScrollExtent) {
+          context.read<ProductCubit>().loadMoreProducts();
+        }
+      }
+      
+      scrollController.addListener(onScroll);
+      return () => scrollController.removeListener(onScroll);
+    }, [scrollController]);
+    
+    return Scaffold(/* ... */);
+  }
+}
+```
+
+---
+
+## State Patterns
+
+### Loading State Pattern
+
+```dart
+@freezed
+class DataState<T> with _$DataState<T> {
+  const factory DataState.initial() = DataInitial<T>;
+  const factory DataState.loading() = DataLoading<T>;
+  const factory DataState.success(T data) = DataSuccess<T>;
+  const factory DataState.failure(String error) = DataFailure<T>;
+}
+
+// Usage in UI
+BlocBuilder<ProductCubit, DataState<List<Product>>>(
+  builder: (context, state) {
+    return state.when(
+      initial: () => const Center(child: Text('Ready to load')),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      success: (products) => ProductList(products: products),
+      failure: (error) => ErrorWidget(error: error),
+    );
+  },
+)
+```
+
+### Pagination State Pattern
+
+```dart
+@freezed
+class PaginationState<T> with _$PaginationState<T> {
+  const factory PaginationState({
+    @Default([]) List<T> items,
+    @Default(false) bool isLoading,
+    @Default(false) bool isLoadingMore,
+    @Default(false) bool hasReachedMax,
+    @Default(1) int currentPage,
+    String? error,
+  }) = _PaginationState<T>;
+}
+
+class ProductCubit extends Cubit<PaginationState<Product>> {
+  ProductCubit(this._repository) : super(const PaginationState());
+
+  final ProductRepository _repository;
+
+  Future<void> loadProducts() async {
+    emit(state.copyWith(isLoading: true, error: null));
+    
+    try {
+      final products = await _repository.getProducts(page: 1);
+      emit(state.copyWith(
+        items: products,
+        isLoading: false,
+        currentPage: 1,
+        hasReachedMax: products.length < 20, // Assuming 20 per page
+      ));
+    } catch (e) {
+      emit(state.copyWith(isLoading: false, error: e.toString()));
+    }
+  }
+
+  Future<void> loadMoreProducts() async {
+    if (state.isLoadingMore || state.hasReachedMax) return;
+    
+    emit(state.copyWith(isLoadingMore: true));
+    
+    try {
+      final newProducts = await _repository.getProducts(
+        page: state.currentPage + 1,
+      );
+      
+      emit(state.copyWith(
+        items: [...state.items, ...newProducts],
+        isLoadingMore: false,
+        currentPage: state.currentPage + 1,
+        hasReachedMax: newProducts.length < 20,
+      ));
+    } catch (e) {
+      emit(state.copyWith(isLoadingMore: false, error: e.toString()));
+    }
+  }
+}
+```
+
+### Form State Pattern
+
+```dart
+@freezed
+class FormState with _$FormState {
+  const factory FormState({
+    @Default({}) Map<String, String> values,
+    @Default({}) Map<String, String> errors,
+    @Default(false) bool isSubmitting,
+    @Default(false) bool isValid,
+    @Default(false) bool isDirty,
+  }) = _FormState;
+}
+
+class ContactFormCubit extends Cubit<FormState> {
+  ContactFormCubit() : super(const FormState());
+
+  void updateField(String field, String value) {
+    final newValues = Map<String, String>.from(state.values);
+    newValues[field] = value;
+    
+    final newErrors = Map<String, String>.from(state.errors);
+    newErrors.remove(field); // Clear error when typing
+    
+    emit(state.copyWith(
+      values: newValues,
+      errors: newErrors,
+      isDirty: true,
+      isValid: _validateForm(newValues),
+    ));
+  }
+
+  bool _validateForm(Map<String, String> values) {
+    return values['email']?.isNotEmpty == true &&
+           values['name']?.isNotEmpty == true &&
+           values['message']?.isNotEmpty == true;
+  }
+
+  Future<void> submitForm() async {
+    if (!state.isValid) {
+      emit(state.copyWith(errors: _getValidationErrors()));
+      return;
+    }
+
+    emit(state.copyWith(isSubmitting: true));
+    
+    try {
+      await _submitToServer(state.values);
+      emit(const FormState()); // Reset form
+    } catch (e) {
+      emit(state.copyWith(
+        isSubmitting: false,
+        errors: {'general': e.toString()},
+      ));
+    }
+  }
+}
+```
+
+---
+
+## Error Handling in State
+
+### Error State Types
+
+```dart
+@freezed
+class AppError with _$AppError {
+  const factory AppError.network(String message) = NetworkError;
+  const factory AppError.validation(Map<String, String> errors) = ValidationError;
+  const factory AppError.authentication(String message) = AuthError;
+  const factory AppError.unknown(String message) = UnknownError;
+}
+
+@freezed
+class UserState with _$UserState {
+  const factory UserState({
+    @Default(false) bool isLoading,
+    @Default(null) User? user,
+    @Default(null) AppError? error,
+  }) = _UserState;
+}
+```
+
+### Error Handling in UI
+
+```dart
+BlocListener<UserCubit, UserState>(
+  listener: (context, state) {
+    if (state.error != null) {
+      state.error!.when(
+        network: (message) => _showNetworkError(context, message),
+        validation: (errors) => _showValidationErrors(context, errors),
+        authentication: (message) => _redirectToLogin(context),
+        unknown: (message) => _showGenericError(context, message),
+      );
+    }
+  },
+  child: BlocBuilder<UserCubit, UserState>(
+    builder: (context, state) {
+      if (state.isLoading) {
+        return const LoadingIndicator();
+      }
+      
+      return UserProfile(user: state.user);
+    },
+  ),
+)
+```
+
+### Global Error Handling
+
+```dart
+class AppCubit extends Cubit<AppState> {
+  AppCubit() : super(AppState.initial()) {
+    // Listen to all Cubit errors globally
+    _errorController.stream.listen(_handleGlobalError);
+  }
+
+  final StreamController<AppError> _errorController = StreamController();
+  
+  void reportError(AppError error) {
+    _errorController.add(error);
+  }
+
+  void _handleGlobalError(AppError error) {
+    error.when(
+      network: (message) => emit(state.copyWith(
+        connectionStatus: ConnectionStatus.disconnected,
+        lastError: error,
+      )),
+      authentication: (message) => emit(state.copyWith(
+        isAuthenticated: false,
+        lastError: error,
+      )),
+      validation: (errors) => {}, // Handle locally
+      unknown: (message) => emit(state.copyWith(lastError: error)),
+    );
+  }
+} 
 Refer to official Flutter and flutter_bloc documentation for more detailed implementation guidelines.
-
-### **SYSTEM PROMPT**
-
-Assume the persona of a Google Developer Expert (GDE) for Flutter with over 8 years of experience. Your primary goal is to provide production-ready, highly efficient, and maintainable code for a senior Flutter developer.
-
-You **must** adhere to the following principles and workflow without deviation.
-
-### **1. Core Principles: Code Quality & Conventions**
-
-* **Syntax & Style:** All code must use modern Dart 3+ features. It must strictly adhere to the official Flutter style guide and Effective Dart principles. Full null-safety is mandatory.
-* **Performance:** Prioritize performance and readability. Use `const` wherever possible. Avoid anti-patterns like rebuilding widgets unnecessarily or placing logic in `build` methods.
-* **Clarity:** Write meaningful comments only for complex or non-obvious logic. Do not comment on self-explanatory code.
-* **Dependencies:** Do not use deprecated widgets or packages. Propose well-maintained, popular packages when necessary.
-
-### **2. Architectural Mandates**
-
-Your proposed solution must be built on a foundation of clean, scalable architecture.
-
-* **Architectural Strategy:** You must first **propose** a high-level architecture (e.g., Clean Architecture, MVVM). You **must justify** your choice based on the project's requirements for scalability, testability, and maintainability.
-* **Separation of Concerns:** Enforce a strict separation of concerns. The presentation layer (UI), business logic layer (State Management), and data layer **must** be clearly decoupled.
-* **State Management:** **Propose** a state management solution (e.g., BLoC, Riverpod) that aligns with your chosen architecture. **Justify** why this solution is the optimal choice.
-* **Dependency Injection (DI):** You **must** implement a Dependency Injection strategy to manage dependencies throughout the app. **Propose** a suitable DI tool or pattern and explain your choice. All dependencies must be resolved via this mechanism.
-* **Routing:** You **must** implement a centralized, declarative routing solution. It must support type-safe argument passing and deep-linking. **Propose** a suitable routing package or strategy and **justify** your selection.
-
-### **3. Data Layer & Models**
-
-* **Repository Pattern:** The data layer **must** use the Repository Pattern to abstract data sources from the rest of the application.
-* **Immutability:** All state objects and data models **must be immutable**. You **must** use a strategy to reduce boilerplate for `copyWith`, equality checks, and serialization (e.g., code generation via `freezed`, or libraries like `equatable`). **Propose** the specific tools you will use.
-* **Error Handling:** You **must not** let raw exceptions bubble up from the data layer. Implement a robust result-type pattern (e.g., `Either`, `Result`) to explicitly communicate success or failure states. **Propose** a library or a custom implementation for this.
-
-### **4. Implementation Workflow: The Proposal-Approval Cycle**
-
-You must follow this interactive workflow before writing any production code.
-
-* **Phase 1: Analysis & Information Gathering**
-    * Based on my request, conduct a comprehensive analysis.
-    * If you need to see the content of existing files to understand the full context or potential side effects, you **must** ask for them explicitly.
-
-* **Phase 2: Strategic Proposal**
-    * After analysis, present a concise proposal document. This proposal **must** include:
-        1.  **Chosen Architecture & Patterns:** A summary of the architectural decisions, state management, DI, and routing strategies you will implement, along with the justifications required in Section 2.
-        2.  **Tooling:** A list of any new packages or tools you propose to use and why.
-        3.  **Plan of Action:** A high-level summary of the changes you will make.
-        4.  **Affected Files:** A complete list of all files that will be created or modified.
-
-* **Phase 3: Approval & Execution**
-    * **Do not proceed with generating code** until I give you explicit approval of your proposal (e.g., "Approved", "Proceed", "OK").
-    * Once approved, generate the complete, production-ready, and fully compilable code for all affected files. Ensure there are no broken references or incomplete implementations.
-
-### **5. Scope of Delivery**
-* Focus on delivering the production-ready application code.
-* Do not generate accompanying tests, documentation, or example projects unless I explicitly request them.
