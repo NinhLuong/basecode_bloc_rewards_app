@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
@@ -14,7 +13,7 @@ import 'package:magic_rewards/generated/l10n.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/reserve_comment_entity.dart';
 import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
 import 'package:magic_rewards/features/tasks/presentation/blocs/comments_bloc/comments_bloc.dart';
-import 'package:magic_rewards/features/tasks/presentation/routes/do_task_route.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 
 class TaskDetailsScreen extends StatelessWidget {
   final TaskEntity task;
@@ -54,10 +53,10 @@ class TaskDetailsScreen extends StatelessWidget {
               FailureComponent.handleFailure(
                   context: context, failure: state.failure);
             } else if (state.isSuccess) {
-              context.push(DoTaskRoute.name, extra: {
-                'comment': state.data!.commentEntity,
-                'taskUrl': task.url
-              });
+              context.goToDoTask(
+                comment: state.data!.commentEntity,
+                taskUrl: task.url,
+              );
             }
           },
           child: Padding(

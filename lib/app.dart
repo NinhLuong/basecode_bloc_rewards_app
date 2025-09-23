@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/config/languages/app_local.dart';
 import 'package:magic_rewards/config/themes/app_theme.dart';
 import 'package:magic_rewards/core/presentation/routes/app_routes.dart';
 import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
@@ -19,24 +18,31 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<AppConfigBloc>(),
       child: ScreenUtilInit(
-          designSize: const Size(428, 926),
-          builder: (_, child) {
-            return MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              locale: AppLocale().currentLanguage().locale,
-              title: AppConstants.applicationName,
-              theme: AppTheme().lightTheme,
-              darkTheme: AppTheme().lightTheme,
-              routerConfig: AppRoutes.router,
-            );
-          }),
+        designSize: const Size(428, 926),
+        builder: (context, child) {
+          // Create router with BLoC context for reactive navigation
+          return BlocBuilder<AppConfigBloc, AppConfigState>(
+            builder: (context, state) {
+              return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                locale: state.language.locale,
+                title: AppConstants.applicationName,
+                theme: AppTheme().lightTheme,
+                darkTheme: AppTheme().lightTheme,
+                // Use BLoC-integrated router configuration
+                routerConfig: AppRoutes.createRouter(context),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

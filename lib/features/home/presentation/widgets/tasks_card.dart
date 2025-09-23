@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/features/tasks/presentation/routes/tasks_route.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 
 class TasksCard extends StatelessWidget {
   const TasksCard({super.key});
@@ -20,7 +19,7 @@ class TasksCard extends StatelessWidget {
             padding: EdgeInsets.zero,
           ),
           onPressed: () {
-            context.push(TasksRoute.name);
+            context.goToTasks();
           },
           child: Image.asset(ImagesPaths.tasksPng)),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -37,9 +39,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Icons.arrow_back_ios,
                 color: Colors.white,
               ),
-              onPressed: () => context.pop())
+              onPressed: () => _handleBackNavigation(context))
           : null,
     );
+  }
+
+  /// Handles back navigation with safety checks and intelligent fallback
+  void _handleBackNavigation(BuildContext context) {
+    try {
+      final currentLocation = GoRouterState.of(context).uri.toString();
+      LoggerService.debug('🔙 Back navigation requested from: $currentLocation');
+      
+      if (context.canPop()) {
+        LoggerService.debug('✅ Can pop: Navigating back');
+        context.pop();
+      } else {
+        LoggerService.warning('⚠️ Cannot pop: Using intelligent fallback navigation');
+      }
+    } catch (error, stackTrace) {
+      LoggerService.error(
+        'Error during back navigation, falling back to main screen',
+        error,
+        stackTrace,
+      );
+      // Ultimate fallback
+      context.goToMain();
+    }
   }
 
   @override

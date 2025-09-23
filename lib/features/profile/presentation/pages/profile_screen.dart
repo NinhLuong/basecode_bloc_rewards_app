@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 import 'package:magic_rewards/shared/widgets/components/app_avatar.dart';
 import 'package:magic_rewards/shared/widgets/components/app_dialogs.dart';
 import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
@@ -12,15 +12,11 @@ import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
 import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
 import 'package:magic_rewards/features/profile/domain/entities/profile_entity.dart';
 import 'package:magic_rewards/features/profile/presentation/blocs/delete_account_bloc/delete_account_bloc.dart';
 import 'package:magic_rewards/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:magic_rewards/features/profile/presentation/widgets/profile_tile.dart';
-import 'package:magic_rewards/features/profile/presentation/routes/contact_us_route.dart';
-import 'package:magic_rewards/features/profile/presentation/routes/terms_route.dart';
-import 'package:magic_rewards/features/rewards/presentation/routes/transactions_route.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../../shared/widgets/components/custom_appbar.dart';
@@ -167,19 +163,19 @@ class ProfileScreen extends StatelessWidget {
             icon: ImagesPaths.historySvg,
             title: S.of(context).history,
             onTap: () {
-              context.push(TransactionsRoute.name);
+              context.goToTransactions();
             }),
         ProfileTile(
             icon: ImagesPaths.termsSvg,
             title: S.of(context).privacyPolicy,
             onTap: () {
-              context.push(TermsRoute.name);
+              context.goToTerms();
             }),
         ProfileTile(
             icon: ImagesPaths.contactUsSvg,
             title: S.of(context).contactUs,
             onTap: () {
-              context.push(ContactUsRoute.name);
+              context.goToContactUs();
             }),
         ProfileTile(
             icon: ImagesPaths.signOutSvg,
@@ -190,7 +186,7 @@ class ProfileScreen extends StatelessWidget {
                       confirmText: S.of(context).signOut);
               if (confirmed && context.mounted) {
                 context.read<AppConfigBloc>().add(const LogOutEvent());
-                context.go(LoginRoute.name);
+                context.goToLogin();
               }
             }),
         ProfileTile(
@@ -205,7 +201,7 @@ class ProfileScreen extends StatelessWidget {
                     .read<DeleteAccountBloc>()
                     .add(const DeleteAccountButtonPressedEvent());
                 context.read<AppConfigBloc>().add(const LogOutEvent());
-                context.go(LoginRoute.name);
+                context.goToLogin();
               }
             },
             red: true),

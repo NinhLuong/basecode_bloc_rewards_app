@@ -5,13 +5,12 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
 import 'package:magic_rewards/config/errors/failure.dart';
 import 'package:magic_rewards/config/paths/images_paths.dart';
 import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
 
 /// The [FailureComponent] class is a generic component that takes a [Failure] object and dynamically selects the appropriate
@@ -36,7 +35,7 @@ class FailureComponent extends StatelessWidget {
       WidgetsBinding.instance.addPostFrameCallback(
         (timeStamp) {
           context.read<AppConfigBloc>().add(const LogOutEvent());
-          context.go(LoginRoute.name);
+          context.goToLogin();
         },
       );
     }
@@ -49,7 +48,7 @@ class FailureComponent extends StatelessWidget {
         (timeStamp) {
           showToast(message: failure.message);
           context.read<AppConfigBloc>().add(const LogOutEvent());
-          context.go(LoginRoute.name);
+          context.goToLogin();
         },
       );
       return const SizedBox();

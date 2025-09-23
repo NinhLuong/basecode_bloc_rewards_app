@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magic_rewards/config/styles/app_colors.dart';
 import 'package:magic_rewards/config/styles/app_gradient.dart';
+import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:magic_rewards/core/presentation/routes/navigation_guards.dart';
 import 'package:magic_rewards/shared/widgets/components/app_button.dart';
 import 'package:magic_rewards/shared/widgets/components/app_container.dart';
 import 'package:magic_rewards/shared/widgets/components/app_logo.dart';
@@ -20,8 +22,6 @@ import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.d
 import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:magic_rewards/features/auth/presentation/blocs/check_email/check_email_bloc.dart';
 import 'package:magic_rewards/features/auth/presentation/blocs/register/register_bloc.dart';
-import 'package:magic_rewards/features/auth/presentation/routes/login_route.dart';
-import 'package:magic_rewards/features/home/presentation/routes/main_route.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -171,7 +171,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               listener: (context, state) {
             if (state.isSuccess) {
               showToast(message: S.of(context).signedUpScuccessfully);
-              context.go(MainRoute.name);
+              // Use reactive authentication system instead of manual navigation
+              context.handleLoginSuccess();
             } else if (state.isError) {
               FailureComponent.handleFailure(
                   context: context, failure: state.failure);
@@ -204,7 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             text: S.of(context).alreadyHaveAnAccount,
             buttonText: S.of(context).signIn,
             onTap: () {
-              context.go(LoginRoute.name);
+              context.goToLogin();
             },
           ),
         ],
