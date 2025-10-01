@@ -29,3 +29,10 @@ class LogInEvent extends AppConfigEvent {
   @override
   List<Object> get props => [];
 }
+
+class SyncWithSystemLocaleEvent extends AppConfigEvent {
+  const SyncWithSystemLocaleEvent();
+
+  @override
+  List<Object> get props => [];
+}

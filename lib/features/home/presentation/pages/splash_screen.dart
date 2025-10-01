@@ -12,12 +12,22 @@ import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
 import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
 import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _handleSplashNavigation();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    _handleSplashNavigation(context);
     return AppScaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -33,36 +43,54 @@ class SplashScreen extends StatelessWidget {
   }
 
   /// Handles navigation logic after splash screen display
-  void _handleSplashNavigation(BuildContext context) {
-    Future.delayed(AppDuration.splashDuration).then((_) {
-      try {
-        // Get current authentication state from BLoC
-        final appConfigState = context.read<AppConfigBloc>().state;
-        final isAuthenticated = appConfigState.appState == AppState.loggedIn;
+  Future<void> _handleSplashNavigation() async {
+    try {
+      // Wait for splash duration
+      await Future.delayed(AppDuration.splashDuration);
+      
+      // Check if widget is still mounted before proceeding
+      if (!mounted) {
+        LoggerService.app('🚫 SplashScreen widget was disposed during delay');
+        return;
+      }
 
-        LoggerService.app(
-          '🚀 Splash navigation decision:\n'
-          '🔐 Is Authenticated: $isAuthenticated\n'
-          '🎯 App State: ${appConfigState.appState}\n'
-          '📍 Target Route: ${isAuthenticated ? AppRoutePaths.main : AppRoutePaths.login}',
-        );
+      // Get current authentication state from BLoC
+      final appConfigState = context.read<AppConfigBloc>().state;
+      final isAuthenticated = appConfigState.appState == AppState.loggedIn;
 
-        if (isAuthenticated) {
-          LoggerService.app('✅ User authenticated, navigating to main screen');
-          context.goToMain();
-        } else {
-          LoggerService.app('🔑 User not authenticated, navigating to login screen');
-          context.goToLogin();
-        }
-      } catch (error, stackTrace) {
-        LoggerService.error(
-          'Error during splash navigation, falling back to login',
-          error,
-          stackTrace,
-        );
-        // Fallback to login on any error
+      LoggerService.app(
+        '🚀 Splash navigation decision:\n'
+        '🔐 Is Authenticated: $isAuthenticated\n'
+        '🎯 App State: ${appConfigState.appState}\n'
+        '📍 Target Route: ${isAuthenticated ? AppRoutePaths.main : AppRoutePaths.login}',
+      );
+
+      // Double-check mounted status before navigation
+      if (!mounted) {
+        LoggerService.app('🚫 SplashScreen widget was disposed before navigation');
+        return;
+      }
+
+      if (isAuthenticated) {
+        LoggerService.app('✅ User authenticated, navigating to main screen');
+        context.goToMain();
+      } else {
+        LoggerService.app('🔑 User not authenticated, navigating to login screen');
         context.goToLogin();
       }
-    });
+    } catch (error, stackTrace) {
+      LoggerService.error(
+        'Error during splash navigation, falling back to login',
+        error,
+        stackTrace,
+      );
+      
+      // Check mounted status before fallback navigation
+      if (mounted) {
+        context.goToLogin();
+      } else {
+        LoggerService.app('🚫 Cannot perform fallback navigation, widget disposed');
+      }
+    }
   }
 }
