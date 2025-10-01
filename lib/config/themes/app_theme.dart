@@ -133,7 +133,7 @@ class AppTheme {
       buttonColor: AppColors.green,
     ),
     snackBarTheme: SnackBarThemeData(
-      backgroundColor: AppColors.green.withOpacity(0.8),
+      backgroundColor: AppColors.green.withValues(alpha:0.8),
       contentTextStyle: const TextStyle(color: AppColors.white),
       actionTextColor: AppColors.white,
     ),

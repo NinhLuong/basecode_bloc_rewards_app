@@ -16,7 +16,6 @@ class HomeRemoteDataSourceImp extends HomeDataSource {
 
   @override
   Future<HomeModel> getHome(HomeParameters parameters) async {
-    try {
       final AppResponse appResponse = await _apiServices.post(
         ApisUrls.home,
         data: parameters.toJson(),
@@ -30,10 +29,6 @@ class HomeRemoteDataSourceImp extends HomeDataSource {
       }
 
       return HomeModel.fromJson(appResponse.data);
-    } catch (e) {
-      throw ServerException(
-        ErrorMessageModel(statusMessage: 'Failed to parse home data: $e'),
-      );
-    }
+    
   }
 }

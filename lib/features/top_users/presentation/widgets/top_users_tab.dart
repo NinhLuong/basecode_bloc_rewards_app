@@ -86,7 +86,7 @@ class TopUsersTap extends StatelessWidget {
             Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha:0.2),
                     borderRadius: BorderRadius.circular(5)),
                 child: Text(userRank.amount, style: context.f14600)),
           ],

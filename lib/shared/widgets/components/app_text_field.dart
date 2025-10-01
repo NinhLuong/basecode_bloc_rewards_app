@@ -143,7 +143,7 @@ class _AppTextFieldState extends State<AppTextField> {
               counter: const SizedBox(),
               // labelText: widget.labelText,
               labelStyle: context.f16600
-                  ?.copyWith(color: Colors.black.withOpacity(0.25)),
+                  ?.copyWith(color: Colors.black.withValues(alpha:0.25)),
               floatingLabelStyle: context.f18700
                   ?.copyWith(color: Colors.black, letterSpacing: 1.2),
               contentPadding: widget.contentPadding ??
@@ -152,7 +152,7 @@ class _AppTextFieldState extends State<AppTextField> {
               hintText: widget.hintText,
               hintStyle: widget.hintStyle ??
                   context.f12400
-                      ?.copyWith(color: Colors.black.withOpacity(0.25)),
+                      ?.copyWith(color: Colors.black.withValues(alpha:0.25)),
               // border: OutlineInputBorder(
               //     borderSide: const BorderSide(color: Color(0xFFE0E0DF)),
               //     borderRadius: borderRadius ?? BorderRadius.circular(10.0)

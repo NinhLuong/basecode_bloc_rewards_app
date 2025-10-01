@@ -21,10 +21,10 @@ class AppGradients {
 
   static LinearGradient blueGradient = LinearGradient(
     colors: [
-      AppColors.white.withOpacity(0.5),
-      AppColors.blue1.withOpacity(0.5),
-      AppColors.blue2.withOpacity(0.75),
-      AppColors.blue3.withOpacity(0.5)
+      AppColors.white.withValues(alpha:0.5),
+      AppColors.blue1.withValues(alpha:0.5),
+      AppColors.blue2.withValues(alpha:0.75),
+      AppColors.blue3.withValues(alpha:0.5)
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -50,8 +50,8 @@ class AppGradients {
 
   static LinearGradient whiteGradient = LinearGradient(
     colors: [
-      AppColors.white1.withOpacity(0.4),
-      AppColors.white1.withOpacity(0.1),
+      AppColors.white1.withValues(alpha:0.4),
+      AppColors.white1.withValues(alpha:0.1),
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -60,8 +60,8 @@ class AppGradients {
   static LinearGradient white1Gradient = LinearGradient(
     colors: [
       Colors.white,
-      Colors.white.withOpacity(0.5),
-      Colors.white.withOpacity(0)
+      Colors.white.withValues(alpha:0.5),
+      Colors.white.withValues(alpha:0)
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -69,9 +69,9 @@ class AppGradients {
 
   static LinearGradient buttonGradient = LinearGradient(
     colors: [
-      AppColors.blue1.withOpacity(0.5),
-      AppColors.blue2.withOpacity(0.75),
-      AppColors.blue3.withOpacity(0.5)
+      AppColors.blue1.withValues(alpha:0.5),
+      AppColors.blue2.withValues(alpha:0.75),
+      AppColors.blue3.withValues(alpha:0.5)
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -79,8 +79,8 @@ class AppGradients {
 
   static LinearGradient blackGradient = LinearGradient(
     colors: [
-      AppColors.lightBlack.withOpacity(0.5),
-      AppColors.lightBlack.withOpacity(0.75)
+      AppColors.lightBlack.withValues(alpha:0.5),
+      AppColors.lightBlack.withValues(alpha:0.75)
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -88,8 +88,8 @@ class AppGradients {
 
   static LinearGradient redGradient = LinearGradient(
     colors: [
-      AppColors.white1.withOpacity(0.4),
-      AppColors.red.withOpacity(0.1),
+      AppColors.white1.withValues(alpha:0.4),
+      AppColors.red.withValues(alpha:0.1),
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -97,18 +97,18 @@ class AppGradients {
 
   static LinearGradient red1Gradient = LinearGradient(
     colors: [
-      Colors.white.withOpacity(0.5),
-      Colors.white.withOpacity(0.5),
-      AppColors.red1.withOpacity(0.2),
-      AppColors.red2.withOpacity(0.5),
-      AppColors.red3.withOpacity(0.6)
+      Colors.white.withValues(alpha:0.5),
+      Colors.white.withValues(alpha:0.5),
+      AppColors.red1.withValues(alpha:0.2),
+      AppColors.red2.withValues(alpha:0.5),
+      AppColors.red3.withValues(alpha:0.6)
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
 
   static LinearGradient yellowGradient = LinearGradient(
-    colors: [AppColors.yellow3.withOpacity(0.2), AppColors.yellow5],
+    colors: [AppColors.yellow3.withValues(alpha:0.2), AppColors.yellow5],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
@@ -116,8 +116,8 @@ class AppGradients {
   static LinearGradient yellow1Gradient = LinearGradient(
     colors: [
       Colors.white,
-      AppColors.yellow5.withOpacity(0.6),
-      AppColors.yellow6.withOpacity(0.5)
+      AppColors.yellow5.withValues(alpha:0.6),
+      AppColors.yellow6.withValues(alpha:0.5)
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,

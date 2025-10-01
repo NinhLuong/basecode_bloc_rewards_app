@@ -59,7 +59,7 @@ class BalanceCard extends StatelessWidget {
               animationDuration: 1000,
               lineHeight: 5.0.w,
               percent: percent,
-              backgroundColor: AppColors.black1.withOpacity(0.25),
+              backgroundColor: AppColors.black1.withValues(alpha:0.25),
               progressColor: AppColors.yellow,
               padding: EdgeInsets.zero,
             ),

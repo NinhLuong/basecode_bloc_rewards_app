@@ -13,5 +13,5 @@ class AppShadows {
       const BoxShadow(color: AppColors.black, blurRadius: 20);
 
   static BoxShadow blackShadow = BoxShadow(
-      color: Colors.black.withOpacity(0.2), spreadRadius: -1, blurRadius: 12);
+      color: Colors.black.withValues(alpha:0.2), spreadRadius: -1, blurRadius: 12);
 }
