@@ -28,7 +28,7 @@ class FailureComponent extends StatelessWidget {
   final VoidCallback? retry;
   final bool refresh;
 
-  static handleFailure(
+  static void handleFailure(
       {required BuildContext context, required Failure failure}) {
     showToast(message: failure.message);
     if (failure is SessionExpiredFailure) {

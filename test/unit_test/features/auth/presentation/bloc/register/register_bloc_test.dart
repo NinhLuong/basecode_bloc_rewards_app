@@ -22,15 +22,6 @@ void main() {
   });
 
   group('RegisterBloc', () {
-    const testUser = UserEntity(
-      accountId: 'test-account-id',
-      email: 'test@example.com',
-      fullName: 'Test User',
-      points: '0',
-      redeemedPoints: '0',
-      userName: 'testuser',
-      accessToken: 'test-token',
-    );
 
     test('initial state should be BaseState with init status', () {
       // Arrange & Act

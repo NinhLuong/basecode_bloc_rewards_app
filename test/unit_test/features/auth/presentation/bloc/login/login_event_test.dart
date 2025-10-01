@@ -81,11 +81,6 @@ void main() {
       });
 
       test('should be immutable', () {
-        // Arrange
-        const event = LoginButtonTappedEvent(
-          username: 'testuser',
-          password: 'testpassword',
-        );
 
         // Assert - These should be final fields
         expect(() {

@@ -284,8 +284,12 @@ class ForceUpdateInterceptor extends Interceptor {
       final maxLength = [v1Parts.length, v2Parts.length].reduce((a, b) => a > b ? a : b);
 
       // Pad shorter version with zeros
-      while (v1Parts.length < maxLength) v1Parts.add(0);
-      while (v2Parts.length < maxLength) v2Parts.add(0);
+      while (v1Parts.length < maxLength) {
+        v1Parts.add(0);
+      }
+      while (v2Parts.length < maxLength) {
+        v2Parts.add(0);
+      }
 
       for (int i = 0; i < maxLength; i++) {
         if (v1Parts[i] < v2Parts[i]) return -1;

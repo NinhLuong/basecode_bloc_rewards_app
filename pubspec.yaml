@@ -48,7 +48,7 @@ dependencies:
   webview_flutter: ^4.2.0
 
   #package info
-  package_info_plus: ^8.3.1
+  package_info_plus: ^9.0.0
 
   #environment variables
   envied: ^1.2.1
@@ -63,18 +63,18 @@ dependencies:
 
   #UI
   adaptive_theme: ^3.4.0
-  fluttertoast: ^8.2.2
+  fluttertoast: ^9.0.0
   shimmer: ^3.0.0
   intl: ^0.20.2
   url_launcher: ^6.1.14
   logger: ^2.0.2
-  extended_image: ^9.1.0
+  extended_image: ^10.0.1
   flutter_svg: ^2.0.7
   flutter_screenutil: ^5.9.0
 
   gradient_borders: ^1.0.0
   percent_indicator: ^4.2.3
-  flutter_widget_from_html: ^0.16.1
+  flutter_widget_from_html: ^0.17.1
 
   bloc_concurrency: ^0.3.0
 
@@ -109,7 +109,7 @@ dev_dependencies:
     sdk: flutter
 
   intl_utils: ^2.8.11
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   json_serializable: ^6.11.0
 
   build_runner: ^2.7.1

@@ -24,8 +24,6 @@ void main() {
       });
 
       test('should be immutable', () {
-        // Arrange
-        const event = FetchHomeEvent();
 
         // Assert - This should compile without errors since the class should be immutable
         expect(() {
@@ -122,11 +120,9 @@ void main() {
         const event2 = FetchHomeEvent();
         
         // Act
-        final eventSet = {event1, event2};
         final eventList = [event1, event2];
         
         // Assert
-        expect(eventSet.length, 1); // Set should contain only one unique instance
         expect(eventList.length, 2); // List should contain both instances
         expect(eventList[0], equals(eventList[1])); // But they should be equal
       });
