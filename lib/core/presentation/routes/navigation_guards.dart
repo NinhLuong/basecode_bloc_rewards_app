@@ -30,7 +30,7 @@ class NavigationGuards {
 
       return _handleAuthenticationRedirects(currentPath, appConfigState);
     } catch (e) {
-      LoggerService.error('Error in navigation redirect handler', e);
+      L.error('Error in navigation redirect handler', e);
       // Fallback to login on any error to ensure app doesn't break
       return AppRoutePaths.login;
     }
@@ -43,7 +43,7 @@ class NavigationGuards {
     final isProtectedRoute = AppRoutePaths.isProtectedRoute(currentPath);
     final isSplashRoute = currentPath == AppRoutePaths.splash;
 
-    LoggerService.app(
+    L.app(
       '🔍 Authentication Redirect Analysis:\n'
       '📍 Current Path: $currentPath\n'
       '🔐 Is Authenticated: $isAuthenticated\n'
@@ -55,24 +55,24 @@ class NavigationGuards {
 
     // ALWAYS allow splash screen to be shown initially
     if (isSplashRoute) {
-      LoggerService.app('🚀 ALLOWING: Splash screen access - no redirect during initial load');
+      L.app('🚀 ALLOWING: Splash screen access - no redirect during initial load');
       return null;
     }
 
     // Redirect unauthenticated users trying to access protected routes
     if (!isAuthenticated && isProtectedRoute) {
-      LoggerService.app('🚫 BLOCKING: Unauthenticated user trying to access protected route, redirecting to login');
+      L.app('🚫 BLOCKING: Unauthenticated user trying to access protected route, redirecting to login');
       return AppRoutePaths.login;
     }
 
     // Redirect authenticated users from auth routes to main
     if (isAuthenticated && isAuthRoute) {
-      LoggerService.app('✅ Authenticated user on auth route, redirecting to main');
+      L.app('✅ Authenticated user on auth route, redirecting to main');
       return AppRoutePaths.main;
     }
 
     // No redirect needed
-    LoggerService.app('✅ ALLOWING: Navigation permitted, no redirect needed');
+    L.app('✅ ALLOWING: Navigation permitted, no redirect needed');
     return null;
   }
 
@@ -96,7 +96,7 @@ class NavigationGuards {
   /// Can be extended to validate deep link parameters,
   /// handle expired links, or perform additional checks
   static String? handleDeepLink(String path, Map<String, String> queryParams) {
-    LoggerService.app('🔗 Processing deep link: $path with params: $queryParams');
+    L.app('🔗 Processing deep link: $path with params: $queryParams');
     
     // Add any deep link validation logic here
     // For example: validate invite codes, check link expiration, etc.
@@ -135,7 +135,7 @@ class NavigationGuards {
   /// 
   /// This can be called when user logs out to ensure proper navigation cleanup
   static void handleLogout(BuildContext context) {
-    LoggerService.app('🚪 Handling user logout navigation');
+    L.app('🚪 Handling user logout navigation');
     
     // Add AppConfigBloc logout event
     context.read<AppConfigBloc>().add(const LogOutEvent());
@@ -148,7 +148,7 @@ class NavigationGuards {
   /// 
   /// This can be called after successful authentication
   static void handleLoginSuccess(BuildContext context) {
-    LoggerService.app('✅ Handling successful login navigation');
+    L.app('✅ Handling successful login navigation');
     
     // Add AppConfigBloc login event
     context.read<AppConfigBloc>().add(const LogInEvent());
@@ -159,7 +159,7 @@ class NavigationGuards {
 
   /// Logs navigation attempts for debugging
   static void _logNavigationAttempt(String currentPath, AppConfigState appState) {
-    LoggerService.app(
+    L.app(
       'Navigation Redirect Check:\n'
       '📍 Current Path: $currentPath\n'
       '🎯 App State: ${appState.appState}\n'

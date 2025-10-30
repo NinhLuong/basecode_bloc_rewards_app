@@ -30,7 +30,7 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onCreate(BlocBase bloc) {
     super.onCreate(bloc);
-    LoggerService.info('🆕 Bloc Created: ${bloc.runtimeType}');
+    L.info('🆕 Bloc Created: ${bloc.runtimeType}');
   }
 
   @override
@@ -38,7 +38,7 @@ class AppBlocObserver extends BlocObserver {
     // Only log events for Bloc instances (not Cubit)
     if (bloc is Bloc) {
       super.onEvent(bloc, event);
-      LoggerService.debug('📤 Event Added: ${bloc.runtimeType} - Event: ${event.runtimeType}');
+      L.debug('📤 Event Added: ${bloc.runtimeType} - Event: ${event.runtimeType}');
     }
   }
 
@@ -50,7 +50,7 @@ class AppBlocObserver extends BlocObserver {
     final currentState = change.currentState.runtimeType;
     final nextState = change.nextState.runtimeType;
     
-    LoggerService.debug(
+    L.debug(
       '🔄 State Transition: ${bloc.runtimeType}\n'
       '   From: $currentState\n'
       '   To: $nextState'
@@ -58,7 +58,7 @@ class AppBlocObserver extends BlocObserver {
     
     // Log important state changes at info level for easier filtering
     if (_isImportantStateChange(change)) {
-      LoggerService.info(
+      L.info(
         '⚡ Important State Change: ${bloc.runtimeType} -> $nextState'
       );
     }
@@ -69,7 +69,7 @@ class AppBlocObserver extends BlocObserver {
     // For Blocs (not Cubits), log the complete transition including event
     if (bloc is Bloc) {
       super.onTransition(bloc, transition);
-      LoggerService.debug(
+      L.debug(
         '🔀 Transition: ${bloc.runtimeType}\n'
         '   Event: ${transition.event.runtimeType}\n'
         '   From: ${transition.currentState.runtimeType}\n'
@@ -82,7 +82,7 @@ class AppBlocObserver extends BlocObserver {
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
     
-    LoggerService.error(
+    L.error(
       '❌ Bloc Error in ${bloc.runtimeType}: $error',
       error,
       stackTrace,
@@ -92,7 +92,7 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onClose(BlocBase bloc) {
     super.onClose(bloc);
-    LoggerService.info('🗑️ Bloc Closed: ${bloc.runtimeType}');
+    L.info('🗑️ Bloc Closed: ${bloc.runtimeType}');
   }
 
   /// Determines if a state change is important enough to log at info level.

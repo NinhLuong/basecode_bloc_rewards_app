@@ -29,11 +29,11 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     try {
-      LoggerService.auth('TokenInterceptor: Processing request to ${options.path}');
+      L.auth('TokenInterceptor: Processing request to ${options.path}');
 
       // Skip token addition for auth endpoints to avoid circular calls
       if (_isAuthEndpoint(options.path)) {
-        LoggerService.auth('TokenInterceptor: Skipping token for auth endpoint');
+        L.auth('TokenInterceptor: Skipping token for auth endpoint');
         handler.next(options);
         return;
       }
@@ -42,14 +42,14 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
       final localToken = _cacheService.token;
       if (localToken.isNotEmpty && localToken != 'no token') {
         options.headers[_authHeaderKey] = '$_bearer $localToken';
-        LoggerService.auth('TokenInterceptor: Token added to request headers');
+        L.auth('TokenInterceptor: Token added to request headers');
       } else {
-        LoggerService.warning('TokenInterceptor: No valid token available for request');
+        L.warning('TokenInterceptor: No valid token available for request');
       }
 
       handler.next(options);
     } catch (e) {
-      LoggerService.error('TokenInterceptor: Error processing request', e);
+      L.error('TokenInterceptor: Error processing request', e);
       handler.next(options);
     }
   }
@@ -57,23 +57,23 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     try {
-      LoggerService.auth('TokenInterceptor: Handling error for ${err.requestOptions.path}');
+      L.auth('TokenInterceptor: Handling error for ${err.requestOptions.path}');
 
       // Check if error is due to unauthorized access (401)
       if (err.response?.statusCode == 401) {
-        LoggerService.auth('TokenInterceptor: 401 Unauthorized - attempting token refresh');
+        L.auth('TokenInterceptor: 401 Unauthorized - attempting token refresh');
         
         // Try to refresh token and retry request
         final refreshResult = await _handleTokenRefresh(err.requestOptions);
         
         if (refreshResult) {
-          LoggerService.auth('TokenInterceptor: Token refreshed successfully, retrying request');
+          L.auth('TokenInterceptor: Token refreshed successfully, retrying request');
           try {
-            final retryResponse = await _retryRequest(err.requestOptions);
+            final retryResponse = await _retryRequest(err.requestOptions); 
             handler.resolve(retryResponse);
             return;
           } catch (retryError) {
-            LoggerService.error('TokenInterceptor: Retry request failed', retryError);
+            L.error('TokenInterceptor: Retry request failed', retryError);
             if (retryError is DioException) {
               handler.reject(retryError);
             } else {
@@ -82,7 +82,7 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
             return;
           }
         } else {
-          LoggerService.auth('TokenInterceptor: Token refresh failed - user needs to re-authenticate');
+          L.auth('TokenInterceptor: Token refresh failed - user needs to re-authenticate');
           
           // Clear stored credentials and throw session expired exception
           await _clearAuthenticationData();
@@ -101,10 +101,10 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
       }
 
       // For non-401 errors, pass through
-      LoggerService.auth('TokenInterceptor: Non-401 error, passing through');
+      L.auth('TokenInterceptor: Non-401 error, passing through');
       handler.next(err);
     } catch (e) {
-      LoggerService.error('TokenInterceptor: Error in error handler', e);
+      L.error('TokenInterceptor: Error in error handler', e);
       handler.next(err);
     }
   }
@@ -114,18 +114,18 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
     try {
       // If already refreshing, queue the request
       if (_isRefreshing) {
-        LoggerService.auth('TokenInterceptor: Token refresh already in progress, queueing request');
+        L.auth('TokenInterceptor: Token refresh already in progress, queueing request');
         _pendingRequests.add(failedRequest);
         return false;
       }
 
       _isRefreshing = true;
-      LoggerService.auth('TokenInterceptor: Starting token refresh process');
+      L.auth('TokenInterceptor: Starting token refresh process');
 
       // Get refresh token from cache
       final refreshToken = await _getRefreshToken();
       if (refreshToken == null || refreshToken.isEmpty) {
-        LoggerService.warning('TokenInterceptor: No refresh token available');
+        L.warning('TokenInterceptor: No refresh token available');
         _isRefreshing = false;
         return false;
       }
@@ -139,16 +139,16 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
         // Process any pending requests
         await _processPendingRequests();
         
-        LoggerService.auth('TokenInterceptor: Token refresh completed successfully');
+        L.auth('TokenInterceptor: Token refresh completed successfully');
         _isRefreshing = false;
         return true;
       }
 
-      LoggerService.warning('TokenInterceptor: Token refresh failed');
+      L.warning('TokenInterceptor: Token refresh failed');
       _isRefreshing = false;
       return false;
     } catch (e) {
-      LoggerService.error('TokenInterceptor: Error during token refresh', e);
+      L.error('TokenInterceptor: Error during token refresh', e);
       _isRefreshing = false;
       return false;
     }
@@ -162,7 +162,7 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
       // In production, use flutter_secure_storage or similar
       return _cacheService.token; // Placeholder - implement proper refresh token storage
     } catch (e) {
-      LoggerService.error('TokenInterceptor: Error getting refresh token', e);
+      L.error('TokenInterceptor: Error getting refresh token', e);
       return null;
     }
   }
@@ -170,7 +170,7 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
   /// Call refresh token API
   Future<Map<String, String>?> _refreshTokens(String refreshToken) async {
     try {
-      LoggerService.auth('TokenInterceptor: Calling refresh token API');
+      L.auth('TokenInterceptor: Calling refresh token API');
 
       final refreshTokenUrl = '${AppEnvConfig.apiBaseUrl}$_refreshTokenUrlPath';
       final response = await _dio.post(
@@ -189,7 +189,7 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
         final newRefreshToken = data[_refreshTokenKey] as String?;
 
         if (newAccessToken != null) {
-          LoggerService.auth('TokenInterceptor: New tokens received from server');
+          L.auth('TokenInterceptor: New tokens received from server');
           return {
             _accessTokenKey: newAccessToken,
             if (newRefreshToken != null) _refreshTokenKey: newRefreshToken,
@@ -197,10 +197,10 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
         }
       }
 
-      LoggerService.warning('TokenInterceptor: Invalid response from refresh token API');
+      L.warning('TokenInterceptor: Invalid response from refresh token API');
       return null;
     } catch (e) {
-      LoggerService.error('TokenInterceptor: Refresh token API call failed', e);
+      L.error('TokenInterceptor: Refresh token API call failed', e);
       return null;
     }
   }
@@ -211,24 +211,24 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
       final accessToken = tokens[_accessTokenKey];
       if (accessToken != null) {
         await _cacheService.setToken(accessToken);
-        LoggerService.auth('TokenInterceptor: New access token saved');
+        L.auth('TokenInterceptor: New access token saved');
       }
 
       // TODO: Save refresh token securely if provided
       final refreshToken = tokens[_refreshTokenKey];
       if (refreshToken != null) {
         // Implement secure refresh token storage
-        LoggerService.auth('TokenInterceptor: New refresh token received');
+        L.auth('TokenInterceptor: New refresh token received');
       }
     } catch (e) {
-      LoggerService.error('TokenInterceptor: Error saving tokens', e);
+      L.error('TokenInterceptor: Error saving tokens', e);
     }
   }
 
   /// Process any requests that were queued during token refresh
   Future<void> _processPendingRequests() async {
     try {
-      LoggerService.auth('TokenInterceptor: Processing ${_pendingRequests.length} pending requests');
+      L.auth('TokenInterceptor: Processing ${_pendingRequests.length} pending requests');
 
       for (final request in _pendingRequests) {
         try {
@@ -238,13 +238,13 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
             request.headers[_authHeaderKey] = '$_bearer $newToken';
           }
         } catch (e) {
-          LoggerService.error('TokenInterceptor: Error processing pending request', e);
+          L.error('TokenInterceptor: Error processing pending request', e);
         }
       }
 
       _pendingRequests.clear();
     } catch (e) {
-      LoggerService.error('TokenInterceptor: Error processing pending requests', e);
+      L.error('TokenInterceptor: Error processing pending requests', e);
     }
   }
 
@@ -252,9 +252,9 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
   Future<void> _clearAuthenticationData() async {
     try {
       await _cacheService.clearAll();
-      LoggerService.auth('TokenInterceptor: Authentication data cleared');
+      L.auth('TokenInterceptor: Authentication data cleared');
     } catch (e) {
-      LoggerService.error('TokenInterceptor: Error clearing authentication data', e);
+      L.error('TokenInterceptor: Error clearing authentication data', e);
     }
   }
 
@@ -274,7 +274,7 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
 
   /// Retry the original request with new token
   Future<Response> _retryRequest(RequestOptions options) async {
-    LoggerService.auth('TokenInterceptor: Retrying request to ${options.path}');
+    L.auth('TokenInterceptor: Retrying request to ${options.path}');
     
     // Update token in headers
     final newToken = _cacheService.token;

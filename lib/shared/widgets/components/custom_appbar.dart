@@ -48,16 +48,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   void _handleBackNavigation(BuildContext context) {
     try {
       final currentLocation = GoRouterState.of(context).uri.toString();
-      LoggerService.debug('🔙 Back navigation requested from: $currentLocation');
+      L.debug('🔙 Back navigation requested from: $currentLocation');
       
       if (context.canPop()) {
-        LoggerService.debug('✅ Can pop: Navigating back');
+        L.debug('✅ Can pop: Navigating back');
         context.pop();
       } else {
-        LoggerService.warning('⚠️ Cannot pop: Using intelligent fallback navigation');
+        L.warning('⚠️ Cannot pop: Using intelligent fallback navigation');
       }
     } catch (error, stackTrace) {
-      LoggerService.error(
+      L.error(
         'Error during back navigation, falling back to main screen',
         error,
         stackTrace,

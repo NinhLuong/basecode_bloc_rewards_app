@@ -40,7 +40,7 @@ class CustomLogInterceptor extends Interceptor {
   /// Log printer; defaults logPrint log to console.
   /// In flutter, you'd better use debugPrint.
   /// you can also write log in a file.
-  void Function(Object object) logPrint = (obj) => LoggerService.network(obj.toString());
+  void Function(Object object) logPrint = (obj) => L.network(obj.toString());
 
   CustomLogInterceptor({
     this.request = true,

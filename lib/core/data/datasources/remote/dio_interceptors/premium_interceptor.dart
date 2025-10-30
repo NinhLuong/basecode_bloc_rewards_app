@@ -31,17 +31,17 @@ class PremiumInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     try {
-      LoggerService.info('PremiumInterceptor: Checking request to ${options.path}');
+      L.info('PremiumInterceptor: Checking request to ${options.path}');
 
       // Check if the request is for a premium feature
       if (_isPremiumEndpoint(options.path)) {
-        LoggerService.info('PremiumInterceptor: Premium endpoint detected');
+        L.info('PremiumInterceptor: Premium endpoint detected');
 
         // Validate premium access
         final hasAccess = await _validatePremiumAccess();
         
         if (!hasAccess) {
-          LoggerService.warning('PremiumInterceptor: Premium access denied for ${options.path}');
+          L.warning('PremiumInterceptor: Premium access denied for ${options.path}');
           
           handler.reject(
             DioException(
@@ -61,10 +61,10 @@ class PremiumInterceptor extends Interceptor {
       // Add premium status to request headers for server-side validation
       await _addPremiumHeaders(options);
 
-      LoggerService.info('PremiumInterceptor: Request approved');
+      L.info('PremiumInterceptor: Request approved');
       handler.next(options);
     } catch (e) {
-      LoggerService.error('PremiumInterceptor: Error processing request', e);
+      L.error('PremiumInterceptor: Error processing request', e);
       handler.next(options);
     }
   }
@@ -72,13 +72,13 @@ class PremiumInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
     try {
-      LoggerService.info('PremiumInterceptor: Processing response for ${response.requestOptions.path}');
+      L.info('PremiumInterceptor: Processing response for ${response.requestOptions.path}');
 
       // Check response headers for premium requirements
       final headers = response.headers;
       
       if (_checkPremiumRequiredHeader(headers)) {
-        LoggerService.warning('PremiumInterceptor: Server indicates premium required');
+        L.warning('PremiumInterceptor: Server indicates premium required');
         
         handler.reject(
           DioException(
@@ -99,7 +99,7 @@ class PremiumInterceptor extends Interceptor {
 
       // Check response body for premium-related messages
       if (_checkResponseBodyForPremium(response)) {
-        LoggerService.warning('PremiumInterceptor: Premium requirement found in response body');
+        L.warning('PremiumInterceptor: Premium requirement found in response body');
         
         handler.reject(
           DioException(
@@ -119,10 +119,10 @@ class PremiumInterceptor extends Interceptor {
       // Update premium status if provided in response
       await _updatePremiumStatus(response);
 
-      LoggerService.info('PremiumInterceptor: Response processed successfully');
+      L.info('PremiumInterceptor: Response processed successfully');
       handler.next(response);
     } catch (e) {
-      LoggerService.error('PremiumInterceptor: Error processing response', e);
+      L.error('PremiumInterceptor: Error processing response', e);
       handler.next(response);
     }
   }
@@ -130,11 +130,11 @@ class PremiumInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     try {
-      LoggerService.info('PremiumInterceptor: Processing error for ${err.requestOptions.path}');
+      L.info('PremiumInterceptor: Processing error for ${err.requestOptions.path}');
 
       // Check if error is related to premium access
       if (err.response?.statusCode == 402) { // Payment Required
-        LoggerService.warning('PremiumInterceptor: Payment required error (HTTP 402)');
+        L.warning('PremiumInterceptor: Payment required error (HTTP 402)');
         
         handler.reject(
           DioException(
@@ -156,7 +156,7 @@ class PremiumInterceptor extends Interceptor {
       if (err.response != null) {
         if (_checkPremiumRequiredHeader(err.response!.headers) ||
             _checkResponseBodyForPremium(err.response!)) {
-          LoggerService.warning('PremiumInterceptor: Premium requirement in error response');
+          L.warning('PremiumInterceptor: Premium requirement in error response');
           
           handler.reject(
             DioException(
@@ -175,10 +175,10 @@ class PremiumInterceptor extends Interceptor {
       }
 
       // Pass through non-premium related errors
-      LoggerService.info('PremiumInterceptor: Non-premium error, passing through');
+      L.info('PremiumInterceptor: Non-premium error, passing through');
       handler.next(err);
     } catch (e) {
-      LoggerService.error('PremiumInterceptor: Error in error handler', e);
+      L.error('PremiumInterceptor: Error in error handler', e);
       handler.next(err);
     }
   }
@@ -202,7 +202,7 @@ class PremiumInterceptor extends Interceptor {
       // In a real app, this would be more sophisticated
       return await _hasPremiumSubscription();
     } catch (e) {
-      LoggerService.error('PremiumInterceptor: Error validating premium access', e);
+      L.error('PremiumInterceptor: Error validating premium access', e);
       return false;
     }
   }
@@ -227,7 +227,7 @@ class PremiumInterceptor extends Interceptor {
       
       return false; // Default to non-premium for safety
     } catch (e) {
-      LoggerService.error('PremiumInterceptor: Error checking premium subscription', e);
+      L.error('PremiumInterceptor: Error checking premium subscription', e);
       return false;
     }
   }
@@ -245,9 +245,9 @@ class PremiumInterceptor extends Interceptor {
         // options.headers['X-Subscription-Id'] = subscriptionId;
       }
 
-      LoggerService.info('PremiumInterceptor: Premium headers added - Premium: $isPremium');
+      L.info('PremiumInterceptor: Premium headers added - Premium: $isPremium');
     } catch (e) {
-      LoggerService.error('PremiumInterceptor: Error adding premium headers', e);
+      L.error('PremiumInterceptor: Error adding premium headers', e);
     }
   }
 
@@ -284,7 +284,7 @@ class PremiumInterceptor extends Interceptor {
                error.contains('subscription');
       }
     } catch (e) {
-      LoggerService.error('PremiumInterceptor: Error checking response body', e);
+      L.error('PremiumInterceptor: Error checking response body', e);
     }
     return false;
   }
@@ -322,7 +322,7 @@ class PremiumInterceptor extends Interceptor {
       
       if (premiumStatus != null) {
         // TODO: Update local premium status cache
-        LoggerService.info('PremiumInterceptor: Premium status updated: $premiumStatus');
+        L.info('PremiumInterceptor: Premium status updated: $premiumStatus');
       }
 
       // Check response body for subscription updates
@@ -331,11 +331,11 @@ class PremiumInterceptor extends Interceptor {
         final subscriptionInfo = data['subscription'] ?? data['premium'];
         if (subscriptionInfo != null) {
           // TODO: Update subscription information in local cache
-          LoggerService.info('PremiumInterceptor: Subscription info updated');
+          L.info('PremiumInterceptor: Subscription info updated');
         }
       }
     } catch (e) {
-      LoggerService.error('PremiumInterceptor: Error updating premium status', e);
+      L.error('PremiumInterceptor: Error updating premium status', e);
     }
   }
 }

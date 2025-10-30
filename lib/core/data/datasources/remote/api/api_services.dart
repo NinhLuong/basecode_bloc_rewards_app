@@ -37,7 +37,7 @@ class ApiServices {
   /// Setup all interceptors in the correct order
   /// Order matters: Request interceptors run in order, Response/Error interceptors run in reverse order
   void _setupInterceptors() {
-    LoggerService.network('ApiServices: Setting up interceptors');
+    L.network('ApiServices: Setting up interceptors');
     
     _dio.interceptors.addAll([
       // 1. Header Interceptor - Add headers first (runs first for requests)
@@ -54,7 +54,7 @@ class ApiServices {
       
       // 5. Logging Interceptor - Log requests/responses (should be near the end)
       CustomLogInterceptor(
-        logPrint: (obj) => LoggerService.network(obj.toString()),
+        logPrint: (obj) => L.network(obj.toString()),
         requestBody: true,
         responseBody: true,
         error: true,
@@ -72,7 +72,7 @@ class ApiServices {
     Map<String, dynamic>? headers,
     Object? data,
   }) async {
-    LoggerService.network('POST request to: $url');
+    L.network('POST request to: $url');
     
     return ErrorsHandler.exceptionThrower(
       () => _dio.post(
@@ -89,7 +89,7 @@ class ApiServices {
     Map<String, dynamic>? headers,
     Object? data,
   }) async {
-    LoggerService.network('PUT request to: $url');
+    L.network('PUT request to: $url');
     
     return ErrorsHandler.exceptionThrower(
       () => _dio.put(
@@ -106,7 +106,7 @@ class ApiServices {
     Map<String, dynamic>? headers,
     Object? data,
   }) async {
-    LoggerService.network('DELETE request to: $url');
+    L.network('DELETE request to: $url');
     
     return ErrorsHandler.exceptionThrower(
       () => _dio.delete(
@@ -123,7 +123,7 @@ class ApiServices {
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
   }) async {
-    LoggerService.network('GET request to: $url');
+    L.network('GET request to: $url');
     
     return ErrorsHandler.exceptionThrower(
       () => _dio.get(
@@ -141,19 +141,19 @@ class ApiServices {
   /// Add custom interceptor at runtime if needed
   void addInterceptor(Interceptor interceptor) {
     _dio.interceptors.add(interceptor);
-    LoggerService.network('ApiServices: Custom interceptor added');
+    L.network('ApiServices: Custom interceptor added');
   }
 
   /// Remove all interceptors (useful for testing)
   void clearInterceptors() {
     _dio.interceptors.clear();
-    LoggerService.network('ApiServices: All interceptors cleared');
+    L.network('ApiServices: All interceptors cleared');
   }
 
   /// Reset interceptors to default configuration
   void resetInterceptors() {
     clearInterceptors();
     _setupInterceptors();
-    LoggerService.network('ApiServices: Interceptors reset to default configuration');
+    L.network('ApiServices: Interceptors reset to default configuration');
   }
 }

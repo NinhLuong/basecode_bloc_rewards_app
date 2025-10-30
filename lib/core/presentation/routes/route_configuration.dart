@@ -62,7 +62,7 @@ class RouteConfiguration {
   /// - Type-safe route definitions with proper error handling
   /// - Debug logging for development
   static GoRouter createRouter(BuildContext context) {
-    LoggerService.app('🔧 Creating BLoC-based router configuration');
+    L.app('🔧 Creating BLoC-based router configuration');
 
     try {
       final appConfigBloc = context.read<AppConfigBloc>();
@@ -80,10 +80,10 @@ class RouteConfiguration {
         debugLogDiagnostics: true, // Enable in debug mode for development
       );
 
-      LoggerService.app('✅ BLoC-based router configuration created successfully');
+      L.app('✅ BLoC-based router configuration created successfully');
       return router;
     } catch (error, stackTrace) {
-      LoggerService.error(
+      L.error(
         'Failed to create router configuration:\n'
         'Error: $error\n'
         'This is a critical error that prevents navigation from working.',
@@ -102,7 +102,7 @@ class RouteConfiguration {
   /// - Comprehensive error handling
   /// - Consistent naming conventions
   static List<RouteBase> _buildRoutes() {
-    LoggerService.app('📝 Building application routes');
+    L.app('📝 Building application routes');
 
     return [
       // Auth Routes
@@ -110,7 +110,7 @@ class RouteConfiguration {
       path: AppRoutePaths.splash,
       name: 'splash',
       builder: (context, state) {
-        LoggerService.debug('🚀 Building SplashScreen');
+        L.debug('🚀 Building SplashScreen');
         return SplashScreen();
       },
     ),
@@ -119,7 +119,7 @@ class RouteConfiguration {
       path: AppRoutePaths.login,
       name: 'login',
       builder: (context, state) {
-        LoggerService.debug('🔑 Building LoginScreen with LoginBloc');
+        L.debug('🔑 Building LoginScreen with LoginBloc');
         return BlocProvider(
           create: (context) => getIt<LoginBloc>(),
           child: const LogInScreen(),
@@ -130,7 +130,7 @@ class RouteConfiguration {
       path: AppRoutePaths.register,
       name: 'register',
       builder: (context, state) {
-        LoggerService.debug('📝 Building RegisterScreen with RegisterBloc and CheckEmailBloc');
+        L.debug('📝 Building RegisterScreen with RegisterBloc and CheckEmailBloc');
         return MultiBlocProvider(
           providers: [
             BlocProvider(
@@ -148,7 +148,7 @@ class RouteConfiguration {
       path: AppRoutePaths.main,
       name: 'main',
       builder: (context, state) {
-        LoggerService.debug('🏠 Building MainScreen');
+        L.debug('🏠 Building MainScreen');
         return MainScreen();
       },
     ),
@@ -157,7 +157,7 @@ class RouteConfiguration {
         path: AppRoutePaths.profile,
         name: 'profile',
         builder: (context, state) {
-          LoggerService.debug('👤 Building ProfileScreen with ProfileBloc and DeleteAccountBloc');
+          L.debug('👤 Building ProfileScreen with ProfileBloc and DeleteAccountBloc');
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -176,7 +176,7 @@ class RouteConfiguration {
         path: AppRoutePaths.contactUs,
         name: 'contact-us',
         builder: (context, state) {
-          LoggerService.debug('📞 Building ContactUsScreen');
+          L.debug('📞 Building ContactUsScreen');
           return ContactUsScreen();
         },
       ),
@@ -185,7 +185,7 @@ class RouteConfiguration {
         path: AppRoutePaths.terms,
         name: 'terms',
         builder: (context, state) {
-          LoggerService.debug('📋 Building TermsScreen');
+          L.debug('📋 Building TermsScreen');
           return TermsScreen();
         },
       ),
@@ -195,7 +195,7 @@ class RouteConfiguration {
         path: AppRoutePaths.redeem,
         name: 'redeem',
         builder: (context, state) {
-          LoggerService.debug('🎁 Building RedeemScreen with RedeemBloc, OrdersBloc, and PayoutsBloc');
+          L.debug('🎁 Building RedeemScreen with RedeemBloc, OrdersBloc, and PayoutsBloc');
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -217,7 +217,7 @@ class RouteConfiguration {
         path: AppRoutePaths.transactions,
         name: 'transactions',
         builder: (context, state) {
-          LoggerService.debug('💳 Building TransactionsScreen with TransactionsBloc');
+          L.debug('💳 Building TransactionsScreen with TransactionsBloc');
           return BlocProvider(
             create: (context) => getIt<TransactionsBloc>(),
             child: TransactionsScreen(),
@@ -230,7 +230,7 @@ class RouteConfiguration {
         path: AppRoutePaths.tasks,
         name: 'tasks',
         builder: (context, state) {
-          LoggerService.debug('📋 Building TasksScreen with TasksBloc and TasksOrdersBloc');
+          L.debug('📋 Building TasksScreen with TasksBloc and TasksOrdersBloc');
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -249,7 +249,7 @@ class RouteConfiguration {
         path: AppRoutePaths.taskDetails,
         name: 'task-details',
         builder: (context, state) {
-          LoggerService.debug('📋 Building TaskDetailsScreen');
+          L.debug('📋 Building TaskDetailsScreen');
           
           final task = RouteValidation.validateExtra<TaskEntity>(
             state.extra, 
@@ -257,13 +257,13 @@ class RouteConfiguration {
           );
           
           if (task != null) {
-            LoggerService.debug('✅ Task parameter validated for TaskDetailsScreen');
+            L.debug('✅ Task parameter validated for TaskDetailsScreen');
             return BlocProvider(
               create: (context) => getIt<TasksBloc>(),
               child: TaskDetailsScreen(task: task),
             );
           } else {
-            LoggerService.warning('⚠️ Invalid task parameter, redirecting to TasksScreen');
+            L.warning('⚠️ Invalid task parameter, redirecting to TasksScreen');
             return MultiBlocProvider(
               providers: [
                 BlocProvider(
@@ -283,7 +283,7 @@ class RouteConfiguration {
         path: AppRoutePaths.doTask,
         name: 'do-task',
         builder: (context, state) {
-          LoggerService.debug('🎯 Building DoTaskScreen');
+          L.debug('🎯 Building DoTaskScreen');
           
           final extraMap = RouteValidation.validateMapExtra(
             state.extra,
@@ -303,7 +303,7 @@ class RouteConfiguration {
             );
             
             if (comment != null && taskUrl != null) {
-              LoggerService.debug('✅ All parameters validated for DoTaskScreen');
+              L.debug('✅ All parameters validated for DoTaskScreen');
               return MultiBlocProvider(
                 providers: [
                   BlocProvider(
@@ -318,7 +318,7 @@ class RouteConfiguration {
             }
           }
           
-          LoggerService.warning('⚠️ Invalid parameters for DoTaskScreen, redirecting to TasksScreen');
+          L.warning('⚠️ Invalid parameters for DoTaskScreen, redirecting to TasksScreen');
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -338,7 +338,7 @@ class RouteConfiguration {
         path: AppRoutePaths.liveOffers,
         name: 'live-offers',
         builder: (context, state) {
-          LoggerService.debug('🎯 Building LiveOffersScreen with LiveOffersBloc');
+          L.debug('🎯 Building LiveOffersScreen with LiveOffersBloc');
           return BlocProvider(
             create: (context) => getIt<LiveOffersBloc>(),
             child: LiveOffersScreen(),
@@ -351,7 +351,7 @@ class RouteConfiguration {
         path: AppRoutePaths.leaderboard,
         name: 'leaderboard',
         builder: (context, state) {
-          LoggerService.debug('🏆 Building TopUsersScreen with TopUsersBloc');
+          L.debug('🏆 Building TopUsersScreen with TopUsersBloc');
           return BlocProvider(
             create: (context) => getIt<TopUsersBloc>(),
             child: TopUsersScreen(),
@@ -369,66 +369,66 @@ class RouteConfiguration {
 extension BlocNavigationExtensions on BuildContext {
   // Auth Navigation
   void goToSplash() {
-    LoggerService.debug('🚀 Navigating to splash');
+    L.debug('🚀 Navigating to splash');
     go(AppRoutePaths.splash);
   }
 
   void goToLogin() {
-    LoggerService.debug('🔑 Navigating to login');
+    L.debug('🔑 Navigating to login');
     go(AppRoutePaths.login);
   }
 
   void goToRegister() {
-    LoggerService.debug('📝 Navigating to register');
+    L.debug('📝 Navigating to register');
     go(AppRoutePaths.register);
   }
 
   // Main App Navigation
   void goToMain() {
-    LoggerService.debug('🏠 Navigating to main');
+    L.debug('🏠 Navigating to main');
     go(AppRoutePaths.main);
   }
 
   // Profile Navigation
   void goToProfile() {
-    LoggerService.debug('👤 Navigating to profile');
+    L.debug('👤 Navigating to profile');
     go(AppRoutePaths.profile);
   }
 
   void goToContactUs() {
-    LoggerService.debug('📞 Navigating to contact us');
+    L.debug('📞 Navigating to contact us');
     push(AppRoutePaths.contactUs);
   }
 
   void goToTerms() {
-    LoggerService.debug('📋 Navigating to terms');
+    L.debug('📋 Navigating to terms');
     push(AppRoutePaths.terms);
   }
 
   // Rewards Navigation
   void goToRedeem() {
-    LoggerService.debug('🎁 Navigating to redeem');
+    L.debug('🎁 Navigating to redeem');
     go(AppRoutePaths.redeem);
   }
 
   void goToTransactions() {
-    LoggerService.debug('💳 Navigating to transactions');
+    L.debug('💳 Navigating to transactions');
     push(AppRoutePaths.transactions);
   }
 
   // Tasks Navigation
   void goToTasks() {
-    LoggerService.debug('📋 Navigating to tasks');
+    L.debug('📋 Navigating to tasks');
     go(AppRoutePaths.tasks);
   }
 
   void goToTaskDetails({required TaskEntity task}) {
-    LoggerService.debug('📋 Navigating to task details: ${task.toString()}');
+    L.debug('📋 Navigating to task details: ${task.toString()}');
     push(AppRoutePaths.taskDetails, extra: task);
   }
 
   void goToDoTask({required CommentEntity comment, required String taskUrl}) {
-    LoggerService.debug('🎯 Navigating to do task: $taskUrl');
+    L.debug('🎯 Navigating to do task: $taskUrl');
     push(AppRoutePaths.doTask, extra: {
       'comment': comment,
       'taskUrl': taskUrl,
@@ -437,19 +437,19 @@ extension BlocNavigationExtensions on BuildContext {
 
   // Live Offers Navigation
   void goToLiveOffers() {
-    LoggerService.debug('🎯 Navigating to live offers');
+    L.debug('🎯 Navigating to live offers');
     go(AppRoutePaths.liveOffers);
   }
 
   // Top Users Navigation
   void goToLeaderboard() {
-    LoggerService.debug('🏆 Navigating to leaderboard');
+    L.debug('🏆 Navigating to leaderboard');
     go(AppRoutePaths.leaderboard);
   }
 
   // Utility Navigation Methods
   void goBack() {
-    LoggerService.debug('⬅️ Navigating back');
+    L.debug('⬅️ Navigating back');
     if (canPop()) {
       pop();
     } else {
@@ -459,7 +459,7 @@ extension BlocNavigationExtensions on BuildContext {
   }
 
   void goBackWithResult<T>(T result) {
-    LoggerService.debug('⬅️ Navigating back with result: $result');
+    L.debug('⬅️ Navigating back with result: $result');
     if (canPop()) {
       pop(result);
     } else {

@@ -9,7 +9,7 @@ class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final stackTrace = StackTrace.current;
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Comprehensive DioException Analysis\n'
       '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
       '🔥 EXCEPTION TYPE: ${err.type}\n'
@@ -31,7 +31,7 @@ class ErrorInterceptor extends Interceptor {
         case DioExceptionType.connectionTimeout:
         case DioExceptionType.sendTimeout:
         case DioExceptionType.receiveTimeout:
-          LoggerService.error(
+          L.error(
             'ErrorInterceptor: Connection timeout occurred\n'
             'Timeout Type: ${err.type}\n'
             'URL: ${err.requestOptions.uri}\n'
@@ -50,7 +50,7 @@ class ErrorInterceptor extends Interceptor {
           break;
 
         case DioExceptionType.connectionError:
-          LoggerService.error(
+          L.error(
             'ErrorInterceptor: Connection error occurred\n'
             'URL: ${err.requestOptions.uri}\n'
             'Method: ${err.requestOptions.method}\n'
@@ -73,13 +73,13 @@ class ErrorInterceptor extends Interceptor {
           break;
 
         case DioExceptionType.cancel:
-          LoggerService.info('ErrorInterceptor: Request cancelled for ${err.requestOptions.uri}');
+          L.info('ErrorInterceptor: Request cancelled for ${err.requestOptions.uri}');
           handler.reject(err);
           break;
 
         case DioExceptionType.unknown:
         default:
-          LoggerService.error(
+          L.error(
             'ErrorInterceptor: Unknown error occurred\n'
             'URL: ${err.requestOptions.uri}\n'
             'Method: ${err.requestOptions.method}\n'
@@ -99,7 +99,7 @@ class ErrorInterceptor extends Interceptor {
           break;
       }
     } catch (e, innerStackTrace) {
-      LoggerService.error(
+      L.error(
         'ErrorInterceptor: Critical error in error handling\n'
         'Original Exception: $err\n'
         'Inner Exception: $e',
@@ -115,7 +115,7 @@ class ErrorInterceptor extends Interceptor {
     final response = err.response;
     final statusCode = response?.statusCode ?? 0;
 
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Bad Response Analysis\n'
       '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
       '🔴 BAD RESPONSE DETECTED\n'
@@ -163,7 +163,7 @@ class ErrorInterceptor extends Interceptor {
 
   /// Handle 401 Unauthorized responses
   void _handleUnauthorized(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Unauthorized Access Analysis\n'
       '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
       '🔐 UNAUTHORIZED ACCESS (401)\n'
@@ -181,7 +181,7 @@ class ErrorInterceptor extends Interceptor {
     if (responseData is Map<String, dynamic>) {
       final errorCode = responseData['error_code'];
       if (errorCode == 101) {
-        LoggerService.auth('ErrorInterceptor: Session expired (error code 101)');
+        L.auth('ErrorInterceptor: Session expired (error code 101)');
         handler.reject(
           DioException(
             requestOptions: err.requestOptions,
@@ -209,7 +209,7 @@ class ErrorInterceptor extends Interceptor {
 
   /// Handle 403 Forbidden responses
   void _handleForbidden(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Forbidden Access (403)\n'
       'URL: ${err.requestOptions.uri}\n'
       'Response: ${err.response?.data}',
@@ -229,7 +229,7 @@ class ErrorInterceptor extends Interceptor {
 
   /// Handle 404 Not Found responses
   void _handleNotFound(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Resource Not Found (404)\n'
       'URL: ${err.requestOptions.uri}\n'
       'Method: ${err.requestOptions.method}',
@@ -249,7 +249,7 @@ class ErrorInterceptor extends Interceptor {
 
   /// Handle 422 Validation Error responses
   void _handleValidationError(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Validation Error (422)\n'
       'URL: ${err.requestOptions.uri}\n'
       'Request Data: ${err.requestOptions.data}\n'
@@ -270,7 +270,7 @@ class ErrorInterceptor extends Interceptor {
 
   /// Handle 426 Force Update responses
   void _handleForceUpdate(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Force Update Required (426)\n'
       'URL: ${err.requestOptions.uri}',
       err,
@@ -289,7 +289,7 @@ class ErrorInterceptor extends Interceptor {
 
   /// Handle 503 Service Unavailable (Maintenance Mode) responses
   void _handleMaintenanceMode(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: App Under Maintenance (503)\n'
       'URL: ${err.requestOptions.uri}',
       err,
@@ -308,7 +308,7 @@ class ErrorInterceptor extends Interceptor {
 
   /// Handle 500, 502, 504 Server Error responses
   void _handleServerError(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Server Error Analysis\n'
       '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
       '🔥 SERVER ERROR (${err.response?.statusCode})\n'
@@ -333,7 +333,7 @@ class ErrorInterceptor extends Interceptor {
 
   /// Handle generic bad response errors
   void _handleGenericBadResponse(DioException err, ErrorInterceptorHandler handler, StackTrace stackTrace) {
-    LoggerService.error(
+    L.error(
       'ErrorInterceptor: Generic Bad Response Analysis\n'
       '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
       '❌ GENERIC BAD RESPONSE\n'
@@ -362,7 +362,7 @@ class ErrorInterceptor extends Interceptor {
   ErrorMessageModel _createErrorModel(DioException err) {
     try {
       if (err.response?.data != null) {
-        LoggerService.debug(
+        L.debug(
           'ErrorInterceptor: Creating error model from response data\n'
           'Status Code: ${err.response?.statusCode}\n'
           'Response Data Type: ${err.response?.data.runtimeType}\n'
@@ -371,7 +371,7 @@ class ErrorInterceptor extends Interceptor {
         return ErrorMessageModel.fromJson(err.response!);
       }
     } catch (e, stackTrace) {
-      LoggerService.error(
+      L.error(
         'ErrorInterceptor: Failed to create error model from response\n'
         '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
         '⚠️  ERROR MODEL CREATION FAILED\n'
@@ -391,7 +391,7 @@ class ErrorInterceptor extends Interceptor {
       statusMessage: err.message ?? 'An error occurred',
     );
     
-    LoggerService.debug(
+    L.debug(
       'ErrorInterceptor: Using fallback error model\n'
       'Status Code: ${fallbackModel.statusCode}\n'
       'Status Message: ${fallbackModel.statusMessage}',

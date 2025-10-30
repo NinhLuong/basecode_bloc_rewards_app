@@ -14,27 +14,27 @@ class RouteValidation {
   static T? validateExtra<T>(Object? extra, String routeName) {
     try {
       if (extra == null) {
-        LoggerService.warning(
+        L.warning(
           'RouteValidation: No extra data provided for $routeName route'
         );
         return null;
       }
 
       if (extra is T) {
-        LoggerService.debug(
+        L.debug(
           'RouteValidation: Successfully validated extra data for $routeName route'
         );
         return extra as T;
       }
 
-      LoggerService.error(
+      L.error(
         'RouteValidation: Invalid parameter type for $routeName route\n'
         'Expected: $T\n'
         'Received: ${extra.runtimeType}'
       );
       return null;
     } catch (e, stackTrace) {
-      LoggerService.error(
+      L.error(
         'RouteValidation: Error validating parameters for $routeName route',
         e,
         stackTrace,
@@ -50,7 +50,7 @@ class RouteValidation {
     final result = validateExtra<Map<String, dynamic>>(extra, routeName);
     
     if (result != null) {
-      LoggerService.debug(
+      L.debug(
         'RouteValidation: Map extra validated for $routeName with keys: ${result.keys.toList()}'
       );
     }
@@ -68,14 +68,14 @@ class RouteValidation {
   ) {
     try {
       if (map == null) {
-        LoggerService.warning(
+        L.warning(
           'RouteValidation: Map is null when validating $key for $routeName'
         );
         return null;
       }
 
       if (!map.containsKey(key)) {
-        LoggerService.warning(
+        L.warning(
           'RouteValidation: Missing required parameter $key for $routeName route'
         );
         return null;
@@ -83,20 +83,20 @@ class RouteValidation {
 
       final value = map[key];
       if (value is T) {
-        LoggerService.debug(
+        L.debug(
           'RouteValidation: Successfully validated parameter $key for $routeName route'
         );
         return value;
       }
 
-      LoggerService.error(
+      L.error(
         'RouteValidation: Invalid type for parameter $key in $routeName route\n'
         'Expected: $T\n'
         'Received: ${value.runtimeType}'
       );
       return null;
     } catch (e, stackTrace) {
-      LoggerService.error(
+      L.error(
         'RouteValidation: Error validating parameter $key for $routeName route',
         e,
         stackTrace,
@@ -118,18 +118,18 @@ class RouteValidation {
       final value = queryParams[key] ?? defaultValue;
       
       if (value != null) {
-        LoggerService.debug(
+        L.debug(
           'RouteValidation: Query parameter $key found for $routeName: $value'
         );
       } else {
-        LoggerService.debug(
+        L.debug(
           'RouteValidation: Query parameter $key not found for $routeName'
         );
       }
       
       return value;
     } catch (e, stackTrace) {
-      LoggerService.error(
+      L.error(
         'RouteValidation: Error validating query parameter $key for $routeName',
         e,
         stackTrace,
@@ -151,18 +151,18 @@ class RouteValidation {
       final value = pathParams[key] ?? defaultValue;
       
       if (value != null) {
-        LoggerService.debug(
+        L.debug(
           'RouteValidation: Path parameter $key found for $routeName: $value'
         );
       } else {
-        LoggerService.debug(
+        L.debug(
           'RouteValidation: Path parameter $key not found for $routeName'
         );
       }
       
       return value;
     } catch (e, stackTrace) {
-      LoggerService.error(
+      L.error(
         'RouteValidation: Error validating path parameter $key for $routeName',
         e,
         stackTrace,
@@ -182,19 +182,19 @@ class RouteValidation {
     try {
       for (final key in requiredKeys) {
         if (!params.containsKey(key) || params[key] == null) {
-          LoggerService.error(
+          L.error(
             'RouteValidation: Missing required parameter $key for $routeName route'
           );
           return false;
         }
       }
 
-      LoggerService.debug(
+      L.debug(
         'RouteValidation: All required parameters validated for $routeName route'
       );
       return true;
     } catch (e, stackTrace) {
-      LoggerService.error(
+      L.error(
         'RouteValidation: Error validating required parameters for $routeName',
         e,
         stackTrace,

@@ -21,7 +21,7 @@ class ForceUpdateInterceptor extends Interceptor {
     try {
       // If force update was already triggered, block all new requests
       if (_forceUpdateTriggered) {
-        LoggerService.warning('ForceUpdateInterceptor: Blocking request - Force update required');
+        L.warning('ForceUpdateInterceptor: Blocking request - Force update required');
         handler.reject(
           DioException(
             requestOptions: options,
@@ -37,10 +37,10 @@ class ForceUpdateInterceptor extends Interceptor {
       final appVersion = await _getAppVersion();
       options.headers['App-Version'] = appVersion;
 
-      LoggerService.network('ForceUpdateInterceptor: Added app version $appVersion to request');
+      L.network('ForceUpdateInterceptor: Added app version $appVersion to request');
       handler.next(options);
     } catch (e) {
-      LoggerService.error('ForceUpdateInterceptor: Error in request processing', e);
+      L.error('ForceUpdateInterceptor: Error in request processing', e);
       handler.next(options);
     }
   }
@@ -48,7 +48,7 @@ class ForceUpdateInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
     try {
-      LoggerService.network('ForceUpdateInterceptor: Checking response for update requirements');
+      L.network('ForceUpdateInterceptor: Checking response for update requirements');
 
       // Check response headers for force update indicators
       final headers = response.headers;
@@ -72,10 +72,10 @@ class ForceUpdateInterceptor extends Interceptor {
       }
 
       // No update required, continue normally
-      LoggerService.network('ForceUpdateInterceptor: No update required');
+      L.network('ForceUpdateInterceptor: No update required');
       handler.next(response);
     } catch (e) {
-      LoggerService.error('ForceUpdateInterceptor: Error processing response', e);
+      L.error('ForceUpdateInterceptor: Error processing response', e);
       handler.next(response);
     }
   }
@@ -89,7 +89,7 @@ class ForceUpdateInterceptor extends Interceptor {
         
         // HTTP 426 Upgrade Required - commonly used for force updates
         if (statusCode == 426) {
-          LoggerService.warning('ForceUpdateInterceptor: Force update required (HTTP 426)');
+          L.warning('ForceUpdateInterceptor: Force update required (HTTP 426)');
           _forceUpdateTriggered = true;
           handler.reject(
             DioException(
@@ -128,7 +128,7 @@ class ForceUpdateInterceptor extends Interceptor {
       // No force update required, pass through the error
       handler.next(err);
     } catch (e) {
-      LoggerService.error('ForceUpdateInterceptor: Error processing error response', e);
+      L.error('ForceUpdateInterceptor: Error processing error response', e);
       handler.next(err);
     }
   }
@@ -142,7 +142,7 @@ class ForceUpdateInterceptor extends Interceptor {
                           forceUpdate.toLowerCase() == 'yes';
       
       if (shouldUpdate) {
-        LoggerService.warning('ForceUpdateInterceptor: Force update header detected: $forceUpdate');
+        L.warning('ForceUpdateInterceptor: Force update header detected: $forceUpdate');
         return true;
       }
     }
@@ -161,13 +161,13 @@ class ForceUpdateInterceptor extends Interceptor {
       final isUpdateRequired = _compareVersions(currentVersion, minVersionHeader) < 0;
 
       if (isUpdateRequired) {
-        LoggerService.warning(
+        L.warning(
           'ForceUpdateInterceptor: Current version $currentVersion is below minimum required $minVersionHeader'
         );
         return true;
       }
     } catch (e) {
-      LoggerService.error('ForceUpdateInterceptor: Error comparing versions', e);
+      L.error('ForceUpdateInterceptor: Error comparing versions', e);
     }
 
     return false;
@@ -185,7 +185,7 @@ class ForceUpdateInterceptor extends Interceptor {
                            data['updateRequired'];
 
         if (forceUpdate == true || forceUpdate == 1 || forceUpdate == '1') {
-          LoggerService.warning('ForceUpdateInterceptor: Force update indicator found in response body');
+          L.warning('ForceUpdateInterceptor: Force update indicator found in response body');
           return true;
         }
 
@@ -196,18 +196,18 @@ class ForceUpdateInterceptor extends Interceptor {
         if (appVersion != null && minVersion != null) {
           try {
             if (_compareVersions(appVersion.toString(), minVersion.toString()) < 0) {
-              LoggerService.warning(
+              L.warning(
                 'ForceUpdateInterceptor: Version check failed - Current: $appVersion, Required: $minVersion'
               );
               return true;
             }
           } catch (e) {
-            LoggerService.error('ForceUpdateInterceptor: Error comparing versions from response', e);
+            L.error('ForceUpdateInterceptor: Error comparing versions from response', e);
           }
         }
       }
     } catch (e) {
-      LoggerService.error('ForceUpdateInterceptor: Error checking response body', e);
+      L.error('ForceUpdateInterceptor: Error checking response body', e);
     }
 
     return false;
@@ -219,7 +219,7 @@ class ForceUpdateInterceptor extends Interceptor {
     ResponseInterceptorHandler? handler, {
     bool isError = false,
   }) async {
-    LoggerService.warning('ForceUpdateInterceptor: Force update triggered');
+    L.warning('ForceUpdateInterceptor: Force update triggered');
     _forceUpdateTriggered = true;
 
     final updateMessage = _getUpdateMessage(response.headers) ?? 
@@ -269,7 +269,7 @@ class ForceUpdateInterceptor extends Interceptor {
       _cachedAppVersion = packageInfo.version;
       return _cachedAppVersion!;
     } catch (e) {
-      LoggerService.error('ForceUpdateInterceptor: Error getting app version', e);
+      L.error('ForceUpdateInterceptor: Error getting app version', e);
       return '1.0.0';
     }
   }
@@ -298,7 +298,7 @@ class ForceUpdateInterceptor extends Interceptor {
 
       return 0;
     } catch (e) {
-      LoggerService.error('ForceUpdateInterceptor: Error comparing versions: $version1 vs $version2', e);
+      L.error('ForceUpdateInterceptor: Error comparing versions: $version1 vs $version2', e);
       return 0;
     }
   }
@@ -306,7 +306,7 @@ class ForceUpdateInterceptor extends Interceptor {
   /// Reset force update state (useful for testing or manual override)
   void resetForceUpdateState() {
     _forceUpdateTriggered = false;
-    LoggerService.info('ForceUpdateInterceptor: Force update state reset');
+    L.info('ForceUpdateInterceptor: Force update state reset');
   }
 
   /// Check if force update is currently triggered

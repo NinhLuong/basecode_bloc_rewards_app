@@ -47,19 +47,19 @@ class AppRoutes {
   /// It creates a router that automatically responds to authentication state changes
   /// and handles route protection through the NavigationGuards system.
   static GoRouter createRouter(BuildContext context) {
-    LoggerService.app('🏗️ Creating AppRoutes with BLoC integration');
+    L.app('🏗️ Creating AppRoutes with BLoC integration');
     
     try {
       // Ensure AppConfigBloc is available
       final appConfigBloc = context.read<AppConfigBloc>();
-      LoggerService.app('✅ AppConfigBloc found, current state: ${appConfigBloc.state.appState}');
+      L.app('✅ AppConfigBloc found, current state: ${appConfigBloc.state.appState}');
       
       final router = config.RouteConfiguration.createRouter(context);
-      LoggerService.app('🎯 AppRoutes: Router successfully created with BLoC integration');
+      L.app('🎯 AppRoutes: Router successfully created with BLoC integration');
       
       return router;
     } catch (error, stackTrace) {
-      LoggerService.error(
+      L.error(
         'Failed to create AppRoutes router:\n'
         'Error: $error\n'
         'This is a critical error that prevents the app from functioning properly.',
@@ -79,7 +79,7 @@ class AppRoutes {
   
   static GoRouter get router {
     if (_router == null) {
-      LoggerService.error(
+      L.error(
         'AppRoutes.router accessed before initialization. '
         'Use AppRoutes.createRouter(context) to initialize the router properly.'
       );
@@ -95,7 +95,7 @@ class AppRoutes {
   /// This method is provided for backward compatibility and specific use cases
   /// where a static router instance is required.
   static void initializeStaticRouter(BuildContext context) {
-    LoggerService.app('🔧 Initializing static router instance');
+    L.app('🔧 Initializing static router instance');
     _router = createRouter(context);
   }
 
@@ -103,7 +103,7 @@ class AppRoutes {
   /// 
   /// Call this method when the router is no longer needed to clean up resources
   static void dispose() {
-    LoggerService.app('🗑️ Disposing AppRoutes static router');
+    L.app('🗑️ Disposing AppRoutes static router');
     _router = null;
   }
 }

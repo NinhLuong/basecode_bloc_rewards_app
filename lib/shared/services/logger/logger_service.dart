@@ -30,13 +30,17 @@
 /// - **Error (1000)**: Errors that need attention
 /// - **Verbose (300)**: Very detailed information for deep debugging
 library;
+
 import 'dart:developer' as developer;
 
 /// Centralized logging utility for the Flutter application.
 ///
 /// Provides structured logging with different levels and context-specific
 /// methods for better debugging and monitoring capabilities.
-class LoggerService {
+
+abstract class ILoggerService {}
+
+class L implements ILoggerService {
   /// Default tag used for logging when no specific tag is provided.
   static const String _tag = 'Flutter';
 
@@ -120,20 +124,25 @@ class LoggerService {
   ]) {
     final currentStackTrace = stackTrace ?? StackTrace.current;
     final stackTraceString = currentStackTrace.toString();
-    
+
     // Parse stack trace to extract meaningful information
     final stackLines = stackTraceString.split('\n');
-    final relevantFrames = stackLines.take(10).where((line) => 
-      line.contains('package:magic_rewards') || 
-      line.contains('lib/') || 
-      line.contains('dart:')
-    ).toList();
+    final relevantFrames = stackLines
+        .take(10)
+        .where(
+          (line) =>
+              line.contains('package:magic_rewards') ||
+              line.contains('lib/') ||
+              line.contains('dart:'),
+        )
+        .toList();
 
-    final contextInfo = context != null 
-      ? '\n🔍 Context:\n${context.entries.map((e) => '   • ${e.key}: ${e.value}').join('\n')}'
-      : '';
+    final contextInfo = context != null
+        ? '\n🔍 Context:\n${context.entries.map((e) => '   • ${e.key}: ${e.value}').join('\n')}'
+        : '';
 
-    final detailedMessage = '''
+    final detailedMessage =
+        '''
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🔥 DETAILED ERROR ANALYSIS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -185,7 +194,9 @@ $stackTraceString
 
     // Common parsing error analysis
     String troubleshootingTips = '';
-    if (error.toString().contains("type 'Null' is not a subtype of type 'Map<String, dynamic>'")) {
+    if (error.toString().contains(
+      "type 'Null' is not a subtype of type 'Map<String, dynamic>'",
+    )) {
       troubleshootingTips = '''
 
 🛠️  TROUBLESHOOTING TIPS:

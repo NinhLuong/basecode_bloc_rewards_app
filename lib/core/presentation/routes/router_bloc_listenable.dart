@@ -10,7 +10,7 @@ import 'package:magic_rewards/shared/services/logger/logger_service.dart';
 class RouterBlocListenable extends ChangeNotifier {
   RouterBlocListenable(this._appConfigBloc) {
     _subscription = _appConfigBloc.stream.listen(_onStateChanged);
-    LoggerService.app('🔧 RouterBlocListenable initialized');
+    L.app('🔧 RouterBlocListenable initialized');
   }
 
   final AppConfigBloc _appConfigBloc;
@@ -23,7 +23,7 @@ class RouterBlocListenable extends ChangeNotifier {
     
     // Only notify listeners when authentication state actually changes
     if (_previousAppState != currentAppState) {
-      LoggerService.app(
+      L.app(
         '🔄 App state changed, notifying GoRouter:\n'
         '   Previous: $_previousAppState\n'
         '   Current: $currentAppState\n'
@@ -43,7 +43,7 @@ class RouterBlocListenable extends ChangeNotifier {
 
   @override
   void dispose() {
-    LoggerService.app('🗑️ RouterBlocListenable disposed');
+    L.app('🗑️ RouterBlocListenable disposed');
     _subscription.cancel();
     super.dispose();
   }

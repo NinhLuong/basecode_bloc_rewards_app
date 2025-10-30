@@ -46,7 +46,7 @@ class HeaderInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     try {
-      LoggerService.network('HeaderInterceptor: Adding headers to ${options.method} ${options.path}');
+      L.network('HeaderInterceptor: Adding headers to ${options.method} ${options.path}');
 
       // Get base headers from ApiHeaders
       final baseHeaders = _apiHeaders.baseHeaders;
@@ -63,10 +63,10 @@ class HeaderInterceptor extends Interceptor {
       // Log headers for debugging (excluding sensitive data)
       _logHeaders(options.headers);
 
-      LoggerService.network('HeaderInterceptor: Headers successfully added');
+      L.network('HeaderInterceptor: Headers successfully added');
       handler.next(options);
     } catch (e) {
-      LoggerService.error('HeaderInterceptor: Error adding headers', e);
+      L.error('HeaderInterceptor: Error adding headers', e);
       // Continue with request even if header addition fails
       handler.next(options);
     }
@@ -110,7 +110,7 @@ class HeaderInterceptor extends Interceptor {
         options.headers['User-Name'] = _cacheService.username;
       }
     } catch (e) {
-      LoggerService.error('HeaderInterceptor: Error adding dynamic headers', e);
+      L.error('HeaderInterceptor: Error adding dynamic headers', e);
     }
   }
 
@@ -145,7 +145,7 @@ class HeaderInterceptor extends Interceptor {
       // Add connection keep-alive header
       options.headers['Connection'] = 'keep-alive';
     } catch (e) {
-      LoggerService.error('HeaderInterceptor: Error adding request-specific headers', e);
+      L.error('HeaderInterceptor: Error adding request-specific headers', e);
     }
   }
 
@@ -162,7 +162,7 @@ class HeaderInterceptor extends Interceptor {
       _cachedUserAgent = 'MagicRewards/2.0.1 ($deviceDetails)';
       return _cachedUserAgent!;
     } catch (e) {
-      LoggerService.error('HeaderInterceptor: Error generating user agent', e);
+      L.error('HeaderInterceptor: Error generating user agent', e);
       return 'MagicRewards/2.0.1';
     }
   }
@@ -178,7 +178,7 @@ class HeaderInterceptor extends Interceptor {
       _cachedAppVersion = '2.0.1';
       return _cachedAppVersion!;
     } catch (e) {
-      LoggerService.error('HeaderInterceptor: Error getting app version', e);
+      L.error('HeaderInterceptor: Error getting app version', e);
       return '2.0.1';
     }
   }
@@ -198,7 +198,7 @@ class HeaderInterceptor extends Interceptor {
       _cachedDeviceId = '${platformPrefix}_${timestamp}_${random.nextInt(9999)}';
       return _cachedDeviceId!;
     } catch (e) {
-      LoggerService.error('HeaderInterceptor: Error getting device ID', e);
+      L.error('HeaderInterceptor: Error getting device ID', e);
       return 'unknown-device';
     }
   }
@@ -224,9 +224,9 @@ class HeaderInterceptor extends Interceptor {
         }
       });
 
-      LoggerService.network('HeaderInterceptor: Request headers: $sanitizedHeaders');
+      L.network('HeaderInterceptor: Request headers: $sanitizedHeaders');
     } catch (e) {
-      LoggerService.error('HeaderInterceptor: Error logging headers', e);
+      L.error('HeaderInterceptor: Error logging headers', e);
     }
   }
 

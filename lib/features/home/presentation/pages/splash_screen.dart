@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
       
       // Check if widget is still mounted before proceeding
       if (!mounted) {
-        LoggerService.app('🚫 SplashScreen widget was disposed during delay');
+        L.app('🚫 SplashScreen widget was disposed during delay');
         return;
       }
 
@@ -58,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
       final appConfigState = context.read<AppConfigBloc>().state;
       final isAuthenticated = appConfigState.appState == AppState.loggedIn;
 
-      LoggerService.app(
+      L.app(
         '🚀 Splash navigation decision:\n'
         '🔐 Is Authenticated: $isAuthenticated\n'
         '🎯 App State: ${appConfigState.appState}\n'
@@ -67,19 +67,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
       // Double-check mounted status before navigation
       if (!mounted) {
-        LoggerService.app('🚫 SplashScreen widget was disposed before navigation');
+        L.app('🚫 SplashScreen widget was disposed before navigation');
         return;
       }
 
       if (isAuthenticated) {
-        LoggerService.app('✅ User authenticated, navigating to main screen');
+        L.app('✅ User authenticated, navigating to main screen');
         context.goToMain();
       } else {
-        LoggerService.app('🔑 User not authenticated, navigating to login screen');
+        L.app('🔑 User not authenticated, navigating to login screen');
         context.goToLogin();
       }
     } catch (error, stackTrace) {
-      LoggerService.error(
+      L.error(
         'Error during splash navigation, falling back to login',
         error,
         stackTrace,
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (mounted) {
         context.goToLogin();
       } else {
-        LoggerService.app('🚫 Cannot perform fallback navigation, widget disposed');
+        L.app('🚫 Cannot perform fallback navigation, widget disposed');
       }
     }
   }
