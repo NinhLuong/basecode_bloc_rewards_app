@@ -1,5 +1,5 @@
 import 'package:envied/envied.dart';
-import 'package:magic_rewards/config/env/app_env.dart';
+import 'package:bloc_rewards/config/env/app_env.dart';
 
 part 'local_env.g.dart';
 

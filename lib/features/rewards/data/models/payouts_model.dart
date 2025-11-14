@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/core/data/models/base_model.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
+import 'package:bloc_rewards/core/data/models/base_model.dart';
+import 'package:bloc_rewards/features/rewards/domain/entities/payouts_entity.dart';
 
 part 'payouts_model.freezed.dart';
 part 'payouts_model.g.dart';

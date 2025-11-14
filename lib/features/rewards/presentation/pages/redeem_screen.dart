@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/rewards/presentation/sections/orders_section.dart';
-import 'package:magic_rewards/features/rewards/presentation/sections/redeem_section.dart';
+import 'package:bloc_rewards/config/styles/app_colors.dart';
+import 'package:bloc_rewards/shared/widgets/components/custom_appbar.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/features/rewards/presentation/sections/orders_section.dart';
+import 'package:bloc_rewards/features/rewards/presentation/sections/redeem_section.dart';
 
 class RedeemScreen extends StatelessWidget {
   const RedeemScreen({super.key});

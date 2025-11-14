@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/core/data/models/base_model.dart';
-import 'package:magic_rewards/config/utils/app_date_formatter.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
+import 'package:bloc_rewards/core/data/models/base_model.dart';
+import 'package:bloc_rewards/config/utils/app_date_formatter.dart';
+import 'package:bloc_rewards/features/rewards/domain/entities/transactions_entity.dart';
 
 part 'transactions_model.freezed.dart';
 part 'transactions_model.g.dart';

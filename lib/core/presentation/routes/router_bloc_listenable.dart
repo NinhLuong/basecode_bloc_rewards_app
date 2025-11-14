@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/config/enums/app_state.dart';
-import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/config/enums/app_state.dart';
+import 'package:bloc_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
 
 /// Custom refresh listenable for GoRouter that listens to BLoC state changes
 /// This ensures the router rebuilds when authentication or app state changes

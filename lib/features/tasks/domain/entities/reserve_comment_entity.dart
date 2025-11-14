@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/core/domain/entities/base_entity.dart';
+import 'package:bloc_rewards/core/domain/entities/base_entity.dart';
 
 part 'reserve_comment_entity.freezed.dart';
 

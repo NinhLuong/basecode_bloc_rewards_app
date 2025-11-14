@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
-import 'package:magic_rewards/features/live_offers/presentation/blocs/live_offers_bloc/live_offers_bloc.dart';
-import 'package:magic_rewards/features/live_offers/presentation/widgets/live_offer_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/custom_appbar.dart';
+import 'package:bloc_rewards/shared/widgets/components/empty_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/failure_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:bloc_rewards/config/di/injectable_config.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
+import 'package:bloc_rewards/features/live_offers/presentation/blocs/live_offers_bloc/live_offers_bloc.dart';
+import 'package:bloc_rewards/features/live_offers/presentation/widgets/live_offer_component.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class LiveOffersScreen extends StatelessWidget {

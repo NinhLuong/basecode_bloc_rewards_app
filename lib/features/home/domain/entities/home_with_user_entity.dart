@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/core/domain/entities/base_entity.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:bloc_rewards/core/domain/entities/base_entity.dart';
+import 'package:bloc_rewards/features/home/domain/entities/home_entity.dart';
+import 'package:bloc_rewards/features/auth/domain/entities/user_entity.dart';
 
 part 'home_with_user_entity.freezed.dart';
 

@@ -1,5 +1,5 @@
-import 'package:magic_rewards/features/live_offers/data/models/live_offers_model.dart';
-import 'package:magic_rewards/features/live_offers/domain/parameters/live_offers_parameters.dart';
+import 'package:bloc_rewards/features/live_offers/data/models/live_offers_model.dart';
+import 'package:bloc_rewards/features/live_offers/domain/parameters/live_offers_parameters.dart';
 
 abstract class LiveOffersDataSource {
   Future<LiveOffersModel> getLiveOffers(GetLiveOffersParameters parameters);

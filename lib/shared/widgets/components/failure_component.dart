@@ -5,13 +5,13 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/shared/widgets/components/app_button.dart';
-import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
-import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_button.dart';
+import 'package:bloc_rewards/shared/widgets/components/show_toast.dart';
+import 'package:bloc_rewards/config/errors/failure.dart';
+import 'package:bloc_rewards/config/paths/images_paths.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:bloc_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
 
 /// The [FailureComponent] class is a generic component that takes a [Failure] object and dynamically selects the appropriate
 /// sub-component based on the runtime type of the failure. It uses a switch statement to determine the failure type and

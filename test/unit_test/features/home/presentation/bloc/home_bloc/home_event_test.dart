@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:magic_rewards/features/home/presentation/blocs/home_bloc/home_bloc.dart';
+import 'package:bloc_rewards/features/home/presentation/blocs/home_bloc/home_bloc.dart';
 
 void main() {
   group('HomeEvent', () {

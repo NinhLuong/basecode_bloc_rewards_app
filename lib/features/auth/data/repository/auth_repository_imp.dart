@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:magic_rewards/features/auth/data/models/user_model.dart';
-import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
+import 'package:bloc_rewards/features/auth/data/models/user_model.dart';
+import 'package:bloc_rewards/features/auth/domain/entities/check_email_entity.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/check_email_parameters.dart';
 
 import '../../../../config/errors/errors_handler.dart';
 import '../../../../config/errors/failure.dart';

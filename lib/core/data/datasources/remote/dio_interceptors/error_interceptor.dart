@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:magic_rewards/config/errors/exception.dart';
-import 'package:magic_rewards/core/data/models/error_message_model.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/config/errors/exception.dart';
+import 'package:bloc_rewards/core/data/models/error_message_model.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
 
 /// Error interceptor that transforms DioExceptions into custom app exceptions
 /// This interceptor provides centralized error handling for all API requests

@@ -1,4 +1,4 @@
-import 'package:magic_rewards/core/domain/entities/base_entity.dart';
+import 'package:bloc_rewards/core/domain/entities/base_entity.dart';
 
 class LiveOffersEntity extends BaseEntity {
   final List<LiveOfferEntity> liveOffers;

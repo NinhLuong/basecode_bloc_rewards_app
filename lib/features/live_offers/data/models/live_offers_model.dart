@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:magic_rewards/core/data/models/base_model.dart';
-import 'package:magic_rewards/config/utils/app_date_formatter.dart';
-import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
+import 'package:bloc_rewards/core/data/models/base_model.dart';
+import 'package:bloc_rewards/config/utils/app_date_formatter.dart';
+import 'package:bloc_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
 
 part 'live_offers_model.g.dart';
 

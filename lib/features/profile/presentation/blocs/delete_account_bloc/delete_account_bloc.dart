@@ -3,9 +3,9 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/profile/domain/parameters/delete_account_parameters.dart';
-import 'package:magic_rewards/features/profile/domain/usecases/delete_account_usecase.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/profile/domain/parameters/delete_account_parameters.dart';
+import 'package:bloc_rewards/features/profile/domain/usecases/delete_account_usecase.dart';
 
 part 'delete_account_event.dart';
 

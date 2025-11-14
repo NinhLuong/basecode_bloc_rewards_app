@@ -3,12 +3,12 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_with_user_entity.dart';
-import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart';
-import 'package:magic_rewards/features/home/domain/usecases/get_home_usecase.dart';
-import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:bloc_rewards/config/errors/failure.dart';
+import 'package:bloc_rewards/features/home/domain/entities/home_with_user_entity.dart';
+import 'package:bloc_rewards/features/home/domain/parameters/home_parameters.dart';
+import 'package:bloc_rewards/features/home/domain/usecases/get_home_usecase.dart';
+import 'package:bloc_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
+import 'package:bloc_rewards/features/auth/domain/entities/user_entity.dart';
 import 'home_state.dart';
 
 part 'home_event.dart';

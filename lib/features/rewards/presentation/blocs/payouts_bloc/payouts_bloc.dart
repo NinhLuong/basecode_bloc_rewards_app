@@ -3,10 +3,10 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/usecases/get_payouts_usecase.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/rewards/domain/entities/payouts_entity.dart';
+import 'package:bloc_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
+import 'package:bloc_rewards/features/rewards/domain/usecases/get_payouts_usecase.dart';
 
 part 'payouts_event.dart';
 

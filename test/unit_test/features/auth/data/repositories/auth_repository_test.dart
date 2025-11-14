@@ -1,15 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/auth/data/datasources/remote/auth_datasource.dart';
-import 'package:magic_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
-import 'package:magic_rewards/features/auth/data/models/user_model.dart';
-import 'package:magic_rewards/features/auth/data/repository/auth_repository_imp.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
-import 'package:magic_rewards/features/auth/data/models/check_email_model.dart';
+import 'package:bloc_rewards/config/errors/failure.dart';
+import 'package:bloc_rewards/features/auth/data/datasources/remote/auth_datasource.dart';
+import 'package:bloc_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
+import 'package:bloc_rewards/features/auth/data/models/user_model.dart';
+import 'package:bloc_rewards/features/auth/data/repository/auth_repository_imp.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/login_parameters.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/register_parameters.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/check_email_parameters.dart';
+import 'package:bloc_rewards/features/auth/data/models/check_email_model.dart';
 
 import 'auth_repository_test.mocks.dart';
 import '../../../../../helpers/test_helper.dart';

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_with_user_entity.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
+import 'package:bloc_rewards/config/errors/failure.dart';
+import 'package:bloc_rewards/features/home/domain/entities/home_with_user_entity.dart';
+import 'package:bloc_rewards/features/home/domain/entities/home_entity.dart';
 
 part 'home_state.freezed.dart';
 

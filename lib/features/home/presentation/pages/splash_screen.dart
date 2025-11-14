@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/enums/app_state.dart';
-import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
-import 'package:magic_rewards/core/presentation/routes/app_route_paths.dart';
-import 'package:magic_rewards/shared/constants/app_constants.dart';
-import 'package:magic_rewards/shared/constants/app_duration.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
-import 'package:magic_rewards/shared/widgets/components/app_logo.dart';
-import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:bloc_rewards/config/enums/app_state.dart';
+import 'package:bloc_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
+import 'package:bloc_rewards/core/presentation/routes/app_route_paths.dart';
+import 'package:bloc_rewards/shared/constants/app_constants.dart';
+import 'package:bloc_rewards/shared/constants/app_duration.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_logo.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_scaffold.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/core/presentation/routes/route_configuration.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

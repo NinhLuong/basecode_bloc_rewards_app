@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/config/enums/app_state.dart';
-import 'package:magic_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
-import 'package:magic_rewards/core/presentation/routes/app_route_paths.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/config/enums/app_state.dart';
+import 'package:bloc_rewards/core/presentation/bloc/app_config_bloc/app_config_bloc.dart';
+import 'package:bloc_rewards/core/presentation/routes/app_route_paths.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
 
 /// Handles all routing guards and redirection logic using BLoC state
 /// 

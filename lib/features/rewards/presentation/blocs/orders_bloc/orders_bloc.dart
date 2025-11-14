@@ -3,10 +3,10 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/orders_entity.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/orders_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/usecases/get_orders_usecase.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/rewards/domain/entities/orders_entity.dart';
+import 'package:bloc_rewards/features/rewards/domain/parameters/orders_parameters.dart';
+import 'package:bloc_rewards/features/rewards/domain/usecases/get_orders_usecase.dart';
 
 part 'orders_event.dart';
 

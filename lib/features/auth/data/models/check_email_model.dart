@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:magic_rewards/core/data/models/base_model.dart';
-import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
+import 'package:bloc_rewards/core/data/models/base_model.dart';
+import 'package:bloc_rewards/features/auth/domain/entities/check_email_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'check_email_model.freezed.dart';

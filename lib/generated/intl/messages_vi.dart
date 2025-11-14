@@ -208,7 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Đăng nhập thành công",
     ),
     "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
-    "magic_rewards": MessageLookupByLibrary.simpleMessage(
+    "bloc_rewards": MessageLookupByLibrary.simpleMessage(
       "Phần thưởng kỳ diệu",
     ),
     "male": MessageLookupByLibrary.simpleMessage("Nam"),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/shared/widgets/components/app_animated_container.dart';
-import 'package:magic_rewards/shared/widgets/components/app_avatar.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
+import 'package:bloc_rewards/config/styles/app_colors.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_animated_container.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_avatar.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/features/top_users/domain/entities/top_users_entity.dart';
 
 class RankBar extends StatelessWidget {
   final UserRankEntity userRank;

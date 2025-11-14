@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
-import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart';
-import 'package:magic_rewards/features/home/domain/repository/home_repository.dart';
-import 'package:magic_rewards/features/home/domain/usecases/get_home_usecase.dart';
+import 'package:bloc_rewards/config/errors/failure.dart';
+import 'package:bloc_rewards/features/home/domain/entities/home_entity.dart';
+import 'package:bloc_rewards/features/home/domain/parameters/home_parameters.dart';
+import 'package:bloc_rewards/features/home/domain/repository/home_repository.dart';
+import 'package:bloc_rewards/features/home/domain/usecases/get_home_usecase.dart';
 
 import 'get_home_usecase_test.mocks.dart';
 import '../../../../../helpers/test_helper.dart';

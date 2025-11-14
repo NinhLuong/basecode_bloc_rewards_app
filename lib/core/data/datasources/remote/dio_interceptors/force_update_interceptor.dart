@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:magic_rewards/config/errors/exception.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/config/errors/exception.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 /// Force Update interceptor that handles app version requirements

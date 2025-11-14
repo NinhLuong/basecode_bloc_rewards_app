@@ -1,4 +1,4 @@
-import 'package:magic_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
 
 class AppValidator {
   final int maxLength;

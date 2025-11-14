@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/shared/widgets/components/app_container.dart';
-import 'package:magic_rewards/shared/widgets/components/app_network_image.dart';
-import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/features/home/domain/entities/home_entity.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_container.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_network_image.dart';
+import 'package:bloc_rewards/shared/widgets/components/show_toast.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:bloc_rewards/features/home/domain/entities/home_entity.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OfferWallCard extends StatelessWidget {

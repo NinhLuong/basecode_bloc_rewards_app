@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/features/auth/domain/entities/check_email_entity.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
-import 'package:magic_rewards/features/auth/domain/usecases/check_email_usecase.dart';
+import 'package:bloc_rewards/features/auth/domain/entities/check_email_entity.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/check_email_parameters.dart';
+import 'package:bloc_rewards/features/auth/domain/usecases/check_email_usecase.dart';
 
 import '../../../../../core/presentation/bloc/base/base_state.dart';
 import 'package:injectable/injectable.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
 
 /// Test helper to initialize localization delegate for tests
 class TestHelper {

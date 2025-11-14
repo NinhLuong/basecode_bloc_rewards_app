@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/config/secret/api/apis_urls.dart';
-import 'package:magic_rewards/shared/widgets/components/webview_container.dart';
+import 'package:bloc_rewards/config/secret/api/apis_urls.dart';
+import 'package:bloc_rewards/shared/widgets/components/webview_container.dart';
 
 class TermsScreen extends StatelessWidget {
   const TermsScreen({super.key});

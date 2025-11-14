@@ -131,7 +131,7 @@ class L implements ILoggerService {
         .take(10)
         .where(
           (line) =>
-              line.contains('package:magic_rewards') ||
+              line.contains('package:bloc_rewards') ||
               line.contains('lib/') ||
               line.contains('dart:'),
         )

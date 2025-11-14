@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/config/styles/app_gradient.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/config/styles/app_colors.dart';
+import 'package:bloc_rewards/config/styles/app_gradient.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/config/paths/images_paths.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class BalanceCard extends StatelessWidget {

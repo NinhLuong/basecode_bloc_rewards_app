@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/shared/widgets/components/app_container.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
-import 'package:magic_rewards/features/top_users/presentation/blocs/top_users_bloc/top_users_bloc.dart';
-import 'package:magic_rewards/features/top_users/presentation/widgets/my_rank_card.dart';
-import 'package:magic_rewards/features/top_users/presentation/widgets/rank_bar.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_container.dart';
+import 'package:bloc_rewards/shared/widgets/components/empty_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/failure_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/config/di/injectable_config.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/top_users/domain/entities/top_users_entity.dart';
+import 'package:bloc_rewards/features/top_users/presentation/blocs/top_users_bloc/top_users_bloc.dart';
+import 'package:bloc_rewards/features/top_users/presentation/widgets/my_rank_card.dart';
+import 'package:bloc_rewards/features/top_users/presentation/widgets/rank_bar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TopUsersTap extends StatelessWidget {

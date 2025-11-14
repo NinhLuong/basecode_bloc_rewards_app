@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
-import 'package:magic_rewards/core/presentation/routes/app_route_paths.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
-import 'package:magic_rewards/shared/widgets/components/app_button.dart';
+import 'package:bloc_rewards/config/paths/images_paths.dart';
+import 'package:bloc_rewards/core/presentation/routes/app_route_paths.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_button.dart';
 
 /// Error screen displayed when navigation fails or invalid routes are accessed
 /// 

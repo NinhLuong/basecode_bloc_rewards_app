@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/register_parameters.dart';
-import 'package:magic_rewards/features/auth/domain/usecases/register_usecase.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/register_parameters.dart';
+import 'package:bloc_rewards/features/auth/domain/usecases/register_usecase.dart';
 import 'package:injectable/injectable.dart';
 
 part 'register_event.dart';

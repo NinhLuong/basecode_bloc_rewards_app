@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:magic_rewards/config/styles/app_gradient.dart';
-import 'package:magic_rewards/shared/widgets/components/app_container.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/config/paths/images_paths.dart';
+import 'package:bloc_rewards/config/styles/app_gradient.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_container.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/config/paths/images_paths.dart';
 
 class ProfileTile extends StatelessWidget {
   final String icon;

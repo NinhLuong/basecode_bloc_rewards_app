@@ -1,15 +1,15 @@
 import 'package:injectable/injectable.dart';
-import 'package:magic_rewards/config/secret/api/apis_urls.dart';
-import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
-import 'package:magic_rewards/core/data/repositories/app_response.dart';
-import 'package:magic_rewards/features/rewards/data/datasources/rewards_datasource.dart';
-import 'package:magic_rewards/features/rewards/data/models/orders_model.dart';
-import 'package:magic_rewards/features/rewards/data/models/payouts_model.dart';
-import 'package:magic_rewards/features/rewards/data/models/transactions_model.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/orders_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/redeem_parameters.dart';
-import 'package:magic_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
+import 'package:bloc_rewards/config/secret/api/apis_urls.dart';
+import 'package:bloc_rewards/core/data/datasources/remote/api/api_services.dart';
+import 'package:bloc_rewards/core/data/repositories/app_response.dart';
+import 'package:bloc_rewards/features/rewards/data/datasources/rewards_datasource.dart';
+import 'package:bloc_rewards/features/rewards/data/models/orders_model.dart';
+import 'package:bloc_rewards/features/rewards/data/models/payouts_model.dart';
+import 'package:bloc_rewards/features/rewards/data/models/transactions_model.dart';
+import 'package:bloc_rewards/features/rewards/domain/parameters/orders_parameters.dart';
+import 'package:bloc_rewards/features/rewards/domain/parameters/payouts_parameters.dart';
+import 'package:bloc_rewards/features/rewards/domain/parameters/redeem_parameters.dart';
+import 'package:bloc_rewards/features/rewards/domain/parameters/transactions_parameters.dart';
 
 @LazySingleton(as: RewardsDataSource)
 class RewardsRemoteDataSourceImp extends RewardsDataSource {

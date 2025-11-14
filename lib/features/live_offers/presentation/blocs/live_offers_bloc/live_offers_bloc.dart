@@ -3,10 +3,10 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
-import 'package:magic_rewards/features/live_offers/domain/parameters/live_offers_parameters.dart';
-import 'package:magic_rewards/features/live_offers/domain/usecases/get_live_offers_usecase.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/live_offers/domain/entities/live_offer_entity.dart';
+import 'package:bloc_rewards/features/live_offers/domain/parameters/live_offers_parameters.dart';
+import 'package:bloc_rewards/features/live_offers/domain/usecases/get_live_offers_usecase.dart';
 
 part 'live_offers_event.dart';
 

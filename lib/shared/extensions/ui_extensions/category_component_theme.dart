@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/config/styles/app_shadow.dart';
+import 'package:bloc_rewards/config/styles/app_colors.dart';
+import 'package:bloc_rewards/config/styles/app_shadow.dart';
 
 extension CategoryComponentTheme on ThemeData {
   BoxDecoration get categoryDecoration {

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/shared/widgets/components/app_scaffold.dart';
-import 'package:magic_rewards/shared/widgets/components/custom_appbar.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
-import 'package:magic_rewards/features/rewards/presentation/blocs/transactions_bloc/transactions_bloc.dart';
-import 'package:magic_rewards/features/rewards/presentation/widgets/transaction_card.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_scaffold.dart';
+import 'package:bloc_rewards/shared/widgets/components/custom_appbar.dart';
+import 'package:bloc_rewards/shared/widgets/components/empty_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/failure_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/features/rewards/domain/entities/transactions_entity.dart';
+import 'package:bloc_rewards/features/rewards/presentation/blocs/transactions_bloc/transactions_bloc.dart';
+import 'package:bloc_rewards/features/rewards/presentation/widgets/transaction_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TransactionsScreen extends StatelessWidget {

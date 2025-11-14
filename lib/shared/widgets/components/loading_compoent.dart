@@ -3,7 +3,7 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
+import 'package:bloc_rewards/config/styles/app_colors.dart';
 
 // TODO: customize Loading component view
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:magic_rewards/features/home/data/models/home_model.dart';
+import 'package:bloc_rewards/features/home/data/models/home_model.dart';
 
 void main() {
   group('HomeModel', () {

@@ -3,12 +3,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:magic_rewards/config/errors/failure.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/login_parameters.dart';
-import 'package:magic_rewards/features/auth/domain/usecases/login_usecase.dart';
-import 'package:magic_rewards/features/auth/presentation/blocs/login/login_bloc.dart';
+import 'package:bloc_rewards/config/errors/failure.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/login_parameters.dart';
+import 'package:bloc_rewards/features/auth/domain/usecases/login_usecase.dart';
+import 'package:bloc_rewards/features/auth/presentation/blocs/login/login_bloc.dart';
 
 import 'login_bloc_test.mocks.dart';
 import '../../../../../../helpers/test_helper.dart';

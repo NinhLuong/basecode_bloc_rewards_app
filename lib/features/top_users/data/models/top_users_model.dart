@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/core/data/models/base_model.dart';
-import 'package:magic_rewards/features/top_users/domain/entities/top_users_entity.dart';
+import 'package:bloc_rewards/core/data/models/base_model.dart';
+import 'package:bloc_rewards/features/top_users/domain/entities/top_users_entity.dart';
 
 part 'top_users_model.freezed.dart';
 part 'top_users_model.g.dart';

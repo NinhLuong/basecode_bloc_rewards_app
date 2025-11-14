@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
 
 /// Global BlocObserver for monitoring all Bloc/Cubit state changes in the application.
 /// 

@@ -1,8 +1,8 @@
-import 'package:magic_rewards/config/env/app_env.dart';
-import 'package:magic_rewards/config/env/dev_env.dart';
-import 'package:magic_rewards/config/env/dummy_env.dart';
-import 'package:magic_rewards/config/env/local_env.dart';
-import 'package:magic_rewards/config/env/prod_env.dart';
+import 'package:bloc_rewards/config/env/app_env.dart';
+import 'package:bloc_rewards/config/env/dev_env.dart';
+import 'package:bloc_rewards/config/env/dummy_env.dart';
+import 'package:bloc_rewards/config/env/local_env.dart';
+import 'package:bloc_rewards/config/env/prod_env.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 enum Environment { local, dummy, dev, prod }

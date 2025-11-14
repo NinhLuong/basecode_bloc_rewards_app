@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/shared/widgets/components/empty_component.dart';
-import 'package:magic_rewards/shared/widgets/components/failure_component.dart';
-import 'package:magic_rewards/shared/widgets/components/loading_compoent.dart';
-import 'package:magic_rewards/config/di/injectable_config.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/payouts_entity.dart';
-import 'package:magic_rewards/features/rewards/presentation/blocs/payouts_bloc/payouts_bloc.dart';
-import 'package:magic_rewards/features/rewards/presentation/widgets/balance_card.dart';
-import 'package:magic_rewards/features/rewards/presentation/widgets/payout_card.dart';
+import 'package:bloc_rewards/shared/widgets/components/empty_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/failure_component.dart';
+import 'package:bloc_rewards/shared/widgets/components/loading_compoent.dart';
+import 'package:bloc_rewards/config/di/injectable_config.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/rewards/domain/entities/payouts_entity.dart';
+import 'package:bloc_rewards/features/rewards/presentation/blocs/payouts_bloc/payouts_bloc.dart';
+import 'package:bloc_rewards/features/rewards/presentation/widgets/balance_card.dart';
+import 'package:bloc_rewards/features/rewards/presentation/widgets/payout_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RedeemSection extends StatelessWidget {

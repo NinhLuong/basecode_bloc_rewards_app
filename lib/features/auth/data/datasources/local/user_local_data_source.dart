@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/features/auth/domain/entities/user_entity.dart';
+import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:bloc_rewards/features/auth/domain/entities/user_entity.dart';
 
 /// Abstract class for local data source operations related to user data
 abstract class UserLocalDataSource {

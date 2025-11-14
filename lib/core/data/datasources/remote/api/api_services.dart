@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
-import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/dio_log_interceptor.dart';
-import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/error_interceptor.dart';
-import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/header_interceptor.dart';
-import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/token_interceptor.dart';
-import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/force_update_interceptor.dart';
-// import 'package:magic_rewards/core/data/datasources/remote/dio_interceptors/premium_interceptor.dart';
-import 'package:magic_rewards/core/data/repositories/app_response.dart';
-import 'package:magic_rewards/config/errors/errors_handler.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/core/data/datasources/remote/dio_interceptors/dio_log_interceptor.dart';
+import 'package:bloc_rewards/core/data/datasources/remote/dio_interceptors/error_interceptor.dart';
+import 'package:bloc_rewards/core/data/datasources/remote/dio_interceptors/header_interceptor.dart';
+import 'package:bloc_rewards/core/data/datasources/remote/dio_interceptors/token_interceptor.dart';
+import 'package:bloc_rewards/core/data/datasources/remote/dio_interceptors/force_update_interceptor.dart';
+// import 'package:bloc_rewards/core/data/datasources/remote/dio_interceptors/premium_interceptor.dart';
+import 'package:bloc_rewards/core/data/repositories/app_response.dart';
+import 'package:bloc_rewards/config/errors/errors_handler.dart';
 
 /// This class [ApiServices] represents the basic services for call API services in the application,
 /// so that all requests for Server Side services are through this same service.

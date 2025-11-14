@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:magic_rewards/shared/services/logger/logger_service.dart';
+import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
 import 'dart:io' show Platform;
 import 'dart:math' as math;
 

@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:magic_rewards/features/auth/data/models/check_email_model.dart';
-import 'package:magic_rewards/features/auth/domain/parameters/check_email_parameters.dart';
+import 'package:bloc_rewards/features/auth/data/models/check_email_model.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/check_email_parameters.dart';
 
 import '../../../../../config/secret/api/apis_urls.dart';
 import '../../../../../core/data/datasources/remote/api/api_services.dart';

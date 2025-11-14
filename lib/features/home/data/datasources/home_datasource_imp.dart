@@ -1,12 +1,12 @@
 import 'package:injectable/injectable.dart';
-import 'package:magic_rewards/config/errors/exception.dart';
-import 'package:magic_rewards/config/secret/api/apis_urls.dart';
-import 'package:magic_rewards/core/data/datasources/remote/api/api_services.dart';
-import 'package:magic_rewards/core/data/models/error_message_model.dart';
-import 'package:magic_rewards/core/data/repositories/app_response.dart';
-import 'package:magic_rewards/features/home/data/datasources/home_datasource.dart';
-import 'package:magic_rewards/features/home/data/models/home_model.dart';
-import 'package:magic_rewards/features/home/domain/parameters/home_parameters.dart';
+import 'package:bloc_rewards/config/errors/exception.dart';
+import 'package:bloc_rewards/config/secret/api/apis_urls.dart';
+import 'package:bloc_rewards/core/data/datasources/remote/api/api_services.dart';
+import 'package:bloc_rewards/core/data/models/error_message_model.dart';
+import 'package:bloc_rewards/core/data/repositories/app_response.dart';
+import 'package:bloc_rewards/features/home/data/datasources/home_datasource.dart';
+import 'package:bloc_rewards/features/home/data/models/home_model.dart';
+import 'package:bloc_rewards/features/home/domain/parameters/home_parameters.dart';
 
 @LazySingleton(as: HomeDataSource)
 class HomeRemoteDataSourceImp extends HomeDataSource {

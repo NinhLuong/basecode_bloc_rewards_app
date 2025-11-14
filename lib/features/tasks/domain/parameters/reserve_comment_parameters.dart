@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:magic_rewards/shared/constants/app_constants.dart';
-import 'package:magic_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:bloc_rewards/shared/constants/app_constants.dart';
+import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 
 class ReserveCommentParameters extends Equatable {
   final String accessToken = CacheStorageServices().token;

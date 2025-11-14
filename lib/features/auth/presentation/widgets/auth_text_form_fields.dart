@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
+import 'package:bloc_rewards/config/styles/app_colors.dart';
 
 class AuthTextFormField extends StatefulWidget {
   final TextEditingController? controller;

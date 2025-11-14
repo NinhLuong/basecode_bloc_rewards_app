@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:magic_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
 
 /// The [Failure] expresses failures in the application.
 /// if an [Exception] occurs, the Excerption will be dealt with to turn one or more EXceptions into a Failure based on the application’s logic.

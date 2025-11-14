@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/shared/widgets/components/app_container.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/config/utils/app_date_formatter.dart';
-import 'package:magic_rewards/generated/l10n.dart';
-import 'package:magic_rewards/features/rewards/domain/entities/transactions_entity.dart';
+import 'package:bloc_rewards/config/styles/app_colors.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_container.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/config/utils/app_date_formatter.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/features/rewards/domain/entities/transactions_entity.dart';
 
 class TransactionCard extends StatelessWidget {
   final TransactionEntity transaction;

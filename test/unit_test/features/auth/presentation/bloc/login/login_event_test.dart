@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:magic_rewards/features/auth/presentation/blocs/login/login_bloc.dart';
+import 'package:bloc_rewards/features/auth/presentation/blocs/login/login_bloc.dart';
 
 void main() {
   group('LoginEvent', () {

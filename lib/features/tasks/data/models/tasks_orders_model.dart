@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magic_rewards/shared/extensions/string_extensions/string_to_order_status.dart';
-import 'package:magic_rewards/core/data/models/base_model.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
+import 'package:bloc_rewards/shared/extensions/string_extensions/string_to_order_status.dart';
+import 'package:bloc_rewards/core/data/models/base_model.dart';
+import 'package:bloc_rewards/features/tasks/domain/entities/tasks_orders_entity.dart';
 
 part 'tasks_orders_model.freezed.dart';
 part 'tasks_orders_model.g.dart';

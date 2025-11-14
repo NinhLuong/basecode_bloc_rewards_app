@@ -3,10 +3,10 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:magic_rewards/core/presentation/bloc/base/base_state.dart';
-import 'package:magic_rewards/features/profile/domain/entities/profile_entity.dart';
-import 'package:magic_rewards/features/profile/domain/parameters/profile_parameters.dart';
-import 'package:magic_rewards/features/profile/domain/usecases/get_profile_usecase.dart';
+import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
+import 'package:bloc_rewards/features/profile/domain/entities/profile_entity.dart';
+import 'package:bloc_rewards/features/profile/domain/parameters/profile_parameters.dart';
+import 'package:bloc_rewards/features/profile/domain/usecases/get_profile_usecase.dart';
 
 part 'profile_event.dart';
 

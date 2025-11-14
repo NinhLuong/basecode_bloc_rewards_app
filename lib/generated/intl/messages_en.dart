@@ -117,7 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "donaldTheDuck": MessageLookupByLibrary.simpleMessage("Donald the Duck"),
     "donate": MessageLookupByLibrary.simpleMessage("Donate"),
     "donateFormagic_rewards": MessageLookupByLibrary.simpleMessage(
-      "Donate for magic_rewards",
+      "Donate for bloc_rewards",
     ),
     "donatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "Donated Successfully",
@@ -203,7 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Logged in successfully",
     ),
     "login": MessageLookupByLibrary.simpleMessage("Log in"),
-    "magic_rewards": MessageLookupByLibrary.simpleMessage("magic_rewards"),
+    "bloc_rewards": MessageLookupByLibrary.simpleMessage("bloc_rewards"),
     "male": MessageLookupByLibrary.simpleMessage("Male"),
     "minLengthValidator": m0,
     "minimumPayout": MessageLookupByLibrary.simpleMessage("Minimum Payout"),
@@ -374,7 +374,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "xray": MessageLookupByLibrary.simpleMessage("X-Ray"),
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
     "youAgreeWith": MessageLookupByLibrary.simpleMessage(
-      "I have reviewed and agree to magic_rewards",
+      "I have reviewed and agree to bloc_rewards",
     ),
     "youCanRedeem": MessageLookupByLibrary.simpleMessage("You Can Redeem!"),
     "yourProfileDataUpdated": MessageLookupByLibrary.simpleMessage(

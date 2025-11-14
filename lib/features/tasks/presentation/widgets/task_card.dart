@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:magic_rewards/config/styles/app_colors.dart';
-import 'package:magic_rewards/shared/widgets/components/app_container.dart';
-import 'package:magic_rewards/shared/widgets/components/app_network_image.dart';
-import 'package:magic_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
-import 'package:magic_rewards/features/tasks/domain/entities/tasks_entity.dart';
-import 'package:magic_rewards/core/presentation/routes/route_configuration.dart';
+import 'package:bloc_rewards/config/styles/app_colors.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_container.dart';
+import 'package:bloc_rewards/shared/widgets/components/app_network_image.dart';
+import 'package:bloc_rewards/shared/extensions/theme_extensions/text_theme_extension.dart';
+import 'package:bloc_rewards/features/tasks/domain/entities/tasks_entity.dart';
+import 'package:bloc_rewards/core/presentation/routes/route_configuration.dart';
 
 class TaskCard extends StatelessWidget {
   final TaskEntity task;

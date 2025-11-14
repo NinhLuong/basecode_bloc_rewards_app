@@ -1,7 +1,7 @@
 // make sure to send url with "https://"
 
-import 'package:magic_rewards/shared/widgets/components/show_toast.dart';
-import 'package:magic_rewards/generated/l10n.dart';
+import 'package:bloc_rewards/shared/widgets/components/show_toast.dart';
+import 'package:bloc_rewards/generated/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppLauncher {
