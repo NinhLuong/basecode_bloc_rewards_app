@@ -1,13 +1,14 @@
 import 'dart:convert';
-import 'package:flutter_test/flutter_test.dart';
+
 import 'package:bloc_rewards/features/auth/data/models/user_model.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('UserModel', () {
     const testJsonMap = {
       'error': false,
       'error_code': null,
-      'accessToken': 'test-access-token',
+      'accessToken': 'test-access-accessToken',
       'accountId': 'test-account-id',
       'account': [
         {
@@ -16,7 +17,7 @@ void main() {
           'id': 'account-1',
           'last_access': '2023-01-01 12:00:00',
           'last_ip_addr': '192.168.1.1',
-          'gcm': 'gcm-token',
+          'gcm': 'gcm-accessToken',
           'state': 'active',
           'fullname': 'John Doe',
           'username': 'johndoe',
@@ -36,7 +37,7 @@ void main() {
     const testUserModel = UserModel(
       error: false,
       errorCode: null,
-      accessToken: 'test-access-token',
+      accessToken: 'test-access-accessToken',
       accountId: 'test-account-id',
       account: [
         Account(
@@ -45,7 +46,7 @@ void main() {
           id: 'account-1',
           lastAccess: '2023-01-01 12:00:00',
           lastIpAddr: '192.168.1.1',
-          gcm: 'gcm-token',
+          gcm: 'gcm-accessToken',
           state: 'active',
           fullname: 'John Doe',
           username: 'johndoe',
@@ -71,7 +72,7 @@ void main() {
         expect(result, isA<UserModel>());
         expect(result.error, false);
         expect(result.errorCode, null);
-        expect(result.accessToken, 'test-access-token');
+        expect(result.accessToken, 'test-access-accessToken');
         expect(result.accountId, 'test-account-id');
         expect(result.account, isNotNull);
         expect(result.account!.length, 1);
@@ -86,7 +87,7 @@ void main() {
       test('should handle missing optional fields', () {
         // Arrange
         final minimalJson = {
-          'accessToken': 'token',
+          'accessToken': 'accessToken',
           'accountId': 'account-id',
           'account': [
             {
@@ -102,7 +103,7 @@ void main() {
         final result = UserModel.fromJson(minimalJson);
 
         // Assert
-        expect(result.accessToken, 'token');
+        expect(result.accessToken, 'accessToken');
         expect(result.accountId, 'account-id');
         expect(result.error, null);
         expect(result.errorCode, null);
@@ -144,7 +145,7 @@ void main() {
         expect(jsonMap, isA<Map<String, dynamic>>());
         expect(jsonMap['error'], false);
         expect(jsonMap['error_code'], null);
-        expect(jsonMap['accessToken'], 'test-access-token');
+        expect(jsonMap['accessToken'], 'test-access-accessToken');
         expect(jsonMap['accountId'], 'test-account-id');
         expect(jsonMap['account'], isA<List>());
         final accountList = jsonMap['account'] as List;
@@ -175,7 +176,7 @@ void main() {
         final entity = testUserModel.toEntity();
 
         // Assert
-        expect(entity.accessToken, 'test-access-token');
+        expect(entity.accessToken, 'test-access-accessToken');
         expect(entity.accountId, 'test-account-id');
         expect(entity.email, 'john@example.com');
         expect(entity.fullName, 'John Doe');
@@ -187,7 +188,7 @@ void main() {
       test('should handle null redeemed points with default value', () {
         // Arrange
         const userModelWithNullRedeemed = UserModel(
-          accessToken: 'token',
+          accessToken: 'accessToken',
           accountId: 'account-id',
           account: [
             Account(
@@ -210,7 +211,7 @@ void main() {
       test('should throw when required fields are null', () {
         // Arrange
         const userModelWithNulls = UserModel(
-          accessToken: null, // null access token
+          accessToken: null, // null access accessToken
           accountId: 'account-id',
           account: [
             Account(
@@ -229,7 +230,7 @@ void main() {
       test('should throw when account list is empty', () {
         // Arrange
         const userModelWithEmptyAccount = UserModel(
-          accessToken: 'token',
+          accessToken: 'accessToken',
           accountId: 'account-id',
           account: [], // empty account list
         );
@@ -241,7 +242,7 @@ void main() {
       test('should throw when account is null', () {
         // Arrange
         const userModelWithNullAccount = UserModel(
-          accessToken: 'token',
+          accessToken: 'accessToken',
           accountId: 'account-id',
           account: null, // null account
         );

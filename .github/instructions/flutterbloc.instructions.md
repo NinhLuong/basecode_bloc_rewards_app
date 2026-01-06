@@ -1511,9 +1511,9 @@ class ApiService {
 class _AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    final token = getIt<AuthService>().token;
-    if (token != null) {
-      options.headers['Authorization'] = 'Bearer $token';
+    final accessToken = getIt<AuthService>().accessToken;
+    if (accessToken != null) {
+      options.headers['Authorization'] = 'Bearer $accessToken';
     }
     handler.next(options);
   }
@@ -1521,7 +1521,7 @@ class _AuthInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
-      // Handle token refresh or logout
+      // Handle accessToken refresh or logout
       getIt<AuthService>().logout();
     }
     handler.next(err);

@@ -1,8 +1,9 @@
-import 'package:dio/dio.dart';
-import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
-import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
 import 'dart:io' show Platform;
 import 'dart:math' as math;
+
+import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
+import 'package:dio/dio.dart';
 
 /// This class [ApiHeaders] identifier represents the headers that can be sent to the server side
 /// this class should have all headers in your application
@@ -20,7 +21,7 @@ class ApiHeaders {
 // TODO : customize your Header
   Map<String, String> get baseHeaders => {
         if (CacheStorageServices().hasToken)
-          "Authorization": "Bearer ${CacheStorageServices().token}",
+          "Authorization": "Bearer ${CacheStorageServices().accessToken}",
         "Content-Type": "multipart/form-data",
         //  "language": "en",
         // "app": "android",
@@ -234,9 +235,9 @@ class HeaderInterceptor extends Interceptor {
   bool _isSensitiveHeader(String headerKey) {
     final sensitiveHeaders = [
       'authorization',
-      'token',
+      'accessToken',
       'x-api-key',
-      'x-auth-token',
+      'x-auth-accessToken',
       'cookie',
       'set-cookie',
     ];

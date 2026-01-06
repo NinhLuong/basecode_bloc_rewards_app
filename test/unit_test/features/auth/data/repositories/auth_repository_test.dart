@@ -1,18 +1,18 @@
+import 'package:bloc_rewards/config/errors/failure.dart';
+import 'package:bloc_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
+import 'package:bloc_rewards/features/auth/data/datasources/remote/auth_datasource.dart';
+import 'package:bloc_rewards/features/auth/data/models/check_email_model.dart';
+import 'package:bloc_rewards/features/auth/data/models/user_model.dart';
+import 'package:bloc_rewards/features/auth/data/repository/auth_repository_imp.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/check_email_parameters.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/login_parameters.dart';
+import 'package:bloc_rewards/features/auth/domain/parameters/register_parameters.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:bloc_rewards/config/errors/failure.dart';
-import 'package:bloc_rewards/features/auth/data/datasources/remote/auth_datasource.dart';
-import 'package:bloc_rewards/features/auth/data/datasources/local/user_local_data_source.dart';
-import 'package:bloc_rewards/features/auth/data/models/user_model.dart';
-import 'package:bloc_rewards/features/auth/data/repository/auth_repository_imp.dart';
-import 'package:bloc_rewards/features/auth/domain/parameters/login_parameters.dart';
-import 'package:bloc_rewards/features/auth/domain/parameters/register_parameters.dart';
-import 'package:bloc_rewards/features/auth/domain/parameters/check_email_parameters.dart';
-import 'package:bloc_rewards/features/auth/data/models/check_email_model.dart';
 
-import 'auth_repository_test.mocks.dart';
 import '../../../../../helpers/test_helper.dart';
+import 'auth_repository_test.mocks.dart';
 
 // Generate mocks for dependencies
 @GenerateMocks([
@@ -40,7 +40,7 @@ void main() {
 
   group('AuthRepository', () {
     final testUserModel = UserModel(
-      accessToken: 'test-access-token',
+      accessToken: 'test-access-accessToken',
       accountId: 'test-account-id',
       account: const [
         Account(
@@ -85,7 +85,7 @@ void main() {
         result.fold(
           (failure) => fail('Should return success'),
           (user) {
-            expect(user.accessToken, 'test-access-token');
+            expect(user.accessToken, 'test-access-accessToken');
             expect(user.accountId, 'test-account-id');
             expect(user.email, 'test@example.com');
             expect(user.fullName, 'Test User');
@@ -144,7 +144,7 @@ void main() {
         verify(mockAuthDataSource.login(testLoginParameters)).called(1);
       });
 
-      test('should handle null access token gracefully', () async {
+      test('should handle null access accessToken gracefully', () async {
         // Arrange
         final userModelWithoutToken = UserModel(
           accessToken: null,
@@ -166,7 +166,7 @@ void main() {
         // Act 
         final result = await authRepository.login(testLoginParameters);
 
-        // Assert - Should return a Failure due to null access token
+        // Assert - Should return a Failure due to null access accessToken
         expect(result.isLeft(), true);
         result.fold(
           (failure) => expect(failure, isA<Failure>()),
@@ -189,7 +189,7 @@ void main() {
         result.fold(
           (failure) => fail('Should return success'),
           (user) {
-            expect(user.accessToken, 'test-access-token');
+            expect(user.accessToken, 'test-access-accessToken');
             expect(user.accountId, 'test-account-id');
             expect(user.email, 'test@example.com');
             expect(user.fullName, 'Test User');

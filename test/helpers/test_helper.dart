@@ -1,6 +1,6 @@
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter/material.dart';
 import 'package:bloc_rewards/generated/l10n.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// Test helper to initialize localization delegate for tests
 class TestHelper {
@@ -31,7 +31,7 @@ class TestHelper {
 /// Test constants
 class TestConstants {
   static const testUser = {
-    'accessToken': 'test-access-token',
+    'accessToken': 'test-access-accessToken',
     'accountId': 'test-account-id',
     'account': [
       {

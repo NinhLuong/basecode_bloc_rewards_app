@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:bloc_rewards/shared/constants/app_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:bloc_rewards/shared/constants/app_constants.dart';
-import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 
 class AddTaskOrderParameters extends Equatable {
-  final String accessToken = CacheStorageServices().token;
+  final String accessToken = CacheStorageServices().accessToken;
   final String accountId = CacheStorageServices().accountId;
   final String username = CacheStorageServices().username;
   final int clientId = AppConstants.clientId;

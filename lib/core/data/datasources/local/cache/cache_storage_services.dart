@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:injectable/injectable.dart';
 
@@ -20,25 +21,51 @@ import 'package:injectable/injectable.dart';
 class CacheStorageServices {
   static CacheStorageServices? _instance;
   static SharedPreferences? _preferences;
+  static FlutterSecureStorage? _secureStorage;
+  static String? _cachedToken;
+  static String? _cachedRefreshToken;
 
   CacheStorageServices._();
 
-  factory CacheStorageServices() => _instance ??= CacheStorageServices._();
-
-  // should call init in your main before run app
-  static Future<void> init() async {
-    _preferences = await SharedPreferences.getInstance();
+  factory CacheStorageServices({@factoryParam FlutterSecureStorage? secureStorage}) {
+    _secureStorage ??= secureStorage ?? const FlutterSecureStorage();
+    return _instance ??= CacheStorageServices._();
   }
 
-  // handle store API user token in cache
-  Future<void> setToken(String token) async =>
-      await _preferences?.setString(_Keys.token, token);
+  // should call init in your main before run app
+  static Future<void> init({FlutterSecureStorage? secureStorage}) async {
+    _preferences ??= await SharedPreferences.getInstance();
+    _secureStorage ??= secureStorage ?? const FlutterSecureStorage();
+    _cachedToken = await _secureStorage?.read(key: _Keys.accessToken);
+    _cachedRefreshToken = await _secureStorage?.read(key: _Keys.refreshToken);
+  }
 
-  Future<void> removeToken() async => await _preferences?.remove(_Keys.token);
+  // handle store API user accessToken in cache
+  Future<void> setAccessToken(String accessToken) async {
+    _cachedToken = accessToken;
+    await _secureStorage?.write(key: _Keys.accessToken, value: accessToken);
+  }
 
-  bool get hasToken => _preferences?.containsKey(_Keys.token) ?? false;
+  Future<void> removeAccessToken() async {
+    _cachedToken = null;
+    await _secureStorage?.delete(key: _Keys.accessToken);
+  }
 
-  String get token => _preferences?.getString(_Keys.token) ?? 'no token';
+  bool get hasToken => _cachedToken?.isNotEmpty ?? false;
+
+  String get accessToken => _cachedToken ?? 'no accessToken';
+
+  Future<void> setRefreshToken(String refreshToken) async {
+    _cachedRefreshToken = refreshToken;
+    await _secureStorage?.write(key: _Keys.refreshToken, value: refreshToken);
+  }
+
+  Future<void> removeRefreshToken() async {
+    _cachedRefreshToken = null;
+    await _secureStorage?.delete(key: _Keys.refreshToken);
+  }
+
+  String? get refreshToken => _cachedRefreshToken;
 
   Future<void> setLocale(String locale) async =>
       await _preferences?.setString(_Keys.locale, locale);
@@ -85,20 +112,22 @@ class CacheStorageServices {
   String get email => _preferences?.getString(_Keys.email) ?? 'no email';
 
   Future<void> clearAll() async {
-    await removeToken();
+    await removeAccessToken();
+    await removeRefreshToken();
     await removeUserName();
     await removeAccountId();
     await removeFullName();
     await removeEmail();
   }
 
-// TODO: add your other variables
-// others functions
+  // TODO: add your other variables
+  // others functions
   /// ...
 }
 
 sealed class _Keys {
-  static const String token = 'token';
+  static const String accessToken = 'accessToken';
+  static const String refreshToken = 'refreshToken';
   static const String locale = 'locale';
   static const String avatar = 'avatar';
   static const String username = 'username';

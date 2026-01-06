@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:bloc_rewards/generated/l10n.dart';
+import 'package:equatable/equatable.dart';
 
 /// The [Failure] expresses failures in the application.
 /// if an [Exception] occurs, the Excerption will be dealt with to turn one or more EXceptions into a Failure based on the application’s logic.
@@ -39,7 +39,7 @@ class AppUnderMaintenanceFailure extends Failure {
   AppUnderMaintenanceFailure() : super(S.current.appUnderMaintenance);
 }
 
-//! refresh token is invalid
+//! refresh accessToken is invalid
 class SessionExpiredFailure extends Failure {
   SessionExpiredFailure() : super(S.current.sessionExpired);
 }

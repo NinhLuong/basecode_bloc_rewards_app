@@ -9,42 +9,43 @@ import 'package:bloc_rewards/shared/services/logger/logger_service.dart';
 class TokenInterceptor extends QueuedInterceptorsWrapper {
   final Dio _dio;
   final CacheStorageServices _cacheService;
-  
+
   // Configuration constants
   static const String _authHeaderKey = 'Authorization';
   static const String _bearer = 'Bearer';
   static const String _refreshTokenUrlPath = '/auth/refresh-token';
   static const String _accessTokenKey = 'access_token';
   static const String _refreshTokenKey = 'refresh_token';
-  
+
   // State management
   bool _isRefreshing = false;
   final List<RequestOptions> _pendingRequests = [];
 
-  TokenInterceptor(
-    this._dio, {
-    CacheStorageServices? cacheService,
-  }) : _cacheService = cacheService ?? CacheStorageServices();
+  TokenInterceptor(this._dio, {CacheStorageServices? cacheService})
+    : _cacheService = cacheService ?? CacheStorageServices();
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     try {
       L.auth('TokenInterceptor: Processing request to ${options.path}');
 
-      // Skip token addition for auth endpoints to avoid circular calls
+      // Skip accessToken addition for auth endpoints to avoid circular calls
       if (_isAuthEndpoint(options.path)) {
-        L.auth('TokenInterceptor: Skipping token for auth endpoint');
+        L.auth('TokenInterceptor: Skipping accessToken for auth endpoint');
         handler.next(options);
         return;
       }
 
-      // Add token if available
-      final localToken = _cacheService.token;
-      if (localToken.isNotEmpty && localToken != 'no token') {
+      // Add accessToken if available
+      final localToken = _cacheService.accessToken;
+      if (localToken.isNotEmpty && localToken != 'no accessToken') {
         options.headers[_authHeaderKey] = '$_bearer $localToken';
         L.auth('TokenInterceptor: Token added to request headers');
       } else {
-        L.warning('TokenInterceptor: No valid token available for request');
+        L.warning('TokenInterceptor: No valid accessToken available for request');
       }
 
       handler.next(options);
@@ -62,14 +63,16 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
       // Check if error is due to unauthorized access (401)
       if (err.response?.statusCode == 401) {
         L.auth('TokenInterceptor: 401 Unauthorized - attempting token refresh');
-        
+
         // Try to refresh token and retry request
         final refreshResult = await _handleTokenRefresh(err.requestOptions);
-        
+
         if (refreshResult) {
-          L.auth('TokenInterceptor: Token refreshed successfully, retrying request');
+          L.auth(
+            'TokenInterceptor: Token refreshed successfully, retrying request',
+          );
           try {
-            final retryResponse = await _retryRequest(err.requestOptions); 
+            final retryResponse = await _retryRequest(err.requestOptions);
             handler.resolve(retryResponse);
             return;
           } catch (retryError) {
@@ -82,15 +85,19 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
             return;
           }
         } else {
-          L.auth('TokenInterceptor: Token refresh failed - user needs to re-authenticate');
-          
+          L.auth(
+            'TokenInterceptor: Token refresh failed - user needs to re-authenticate',
+          );
+
           // Clear stored credentials and throw session expired exception
           await _clearAuthenticationData();
-          
+
           handler.reject(
             DioException(
               requestOptions: err.requestOptions,
-              error: SessionExpiredException(message: 'Authentication failed. Please log in again.'),
+              error: SessionExpiredException(
+                message: 'Authentication failed. Please log in again.',
+              ),
               type: err.type,
               response: err.response,
               message: 'Session expired',
@@ -114,7 +121,9 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
     try {
       // If already refreshing, queue the request
       if (_isRefreshing) {
-        L.auth('TokenInterceptor: Token refresh already in progress, queueing request');
+        L.auth(
+          'TokenInterceptor: Token refresh already in progress, queueing request',
+        );
         _pendingRequests.add(failedRequest);
         return false;
       }
@@ -135,10 +144,10 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
       if (newTokens != null) {
         // Save new tokens
         await _saveTokens(newTokens);
-        
+
         // Process any pending requests
         await _processPendingRequests();
-        
+
         L.auth('TokenInterceptor: Token refresh completed successfully');
         _isRefreshing = false;
         return true;
@@ -157,10 +166,11 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
   /// Get refresh token from secure storage
   Future<String?> _getRefreshToken() async {
     try {
-      // TODO: Implement secure refresh token storage
-      // For now, assume refresh token is stored with a specific key
-      // In production, use flutter_secure_storage or similar
-      return _cacheService.token; // Placeholder - implement proper refresh token storage
+      final refreshToken = _cacheService.refreshToken;
+      if (refreshToken?.isNotEmpty ?? false) {
+        return refreshToken;
+      }
+      return null;
     } catch (e) {
       L.error('TokenInterceptor: Error getting refresh token', e);
       return null;
@@ -176,11 +186,7 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
       final response = await _dio.post(
         refreshTokenUrl,
         data: {_refreshTokenKey: refreshToken},
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        ),
+        options: Options(headers: {'Content-Type': 'application/json'}),
       );
 
       if (response.statusCode == 200 && response.data != null) {
@@ -210,14 +216,13 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
     try {
       final accessToken = tokens[_accessTokenKey];
       if (accessToken != null) {
-        await _cacheService.setToken(accessToken);
+        await _cacheService.setAccessToken(accessToken);
         L.auth('TokenInterceptor: New access token saved');
       }
 
-      // TODO: Save refresh token securely if provided
       final refreshToken = tokens[_refreshTokenKey];
       if (refreshToken != null) {
-        // Implement secure refresh token storage
+        await _cacheService.setRefreshToken(refreshToken);
         L.auth('TokenInterceptor: New refresh token received');
       }
     } catch (e) {
@@ -228,13 +233,15 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
   /// Process any requests that were queued during token refresh
   Future<void> _processPendingRequests() async {
     try {
-      L.auth('TokenInterceptor: Processing ${_pendingRequests.length} pending requests');
+      L.auth(
+        'TokenInterceptor: Processing ${_pendingRequests.length} pending requests',
+      );
 
       for (final request in _pendingRequests) {
         try {
           // Add new token to pending request
-          final newToken = _cacheService.token;
-          if (newToken.isNotEmpty && newToken != 'no token') {
+          final newToken = _cacheService.accessToken;
+          if (newToken.isNotEmpty && newToken != 'no accessToken') {
             request.headers[_authHeaderKey] = '$_bearer $newToken';
           }
         } catch (e) {
@@ -272,13 +279,13 @@ class TokenInterceptor extends QueuedInterceptorsWrapper {
     return authEndpoints.any((endpoint) => path.contains(endpoint));
   }
 
-  /// Retry the original request with new token
+  /// Retry the original request with new accessToken
   Future<Response> _retryRequest(RequestOptions options) async {
     L.auth('TokenInterceptor: Retrying request to ${options.path}');
-    
+
     // Update token in headers
-    final newToken = _cacheService.token;
-    if (newToken.isNotEmpty && newToken != 'no token') {
+    final newToken = _cacheService.accessToken;
+    if (newToken.isNotEmpty && newToken != 'no accessToken') {
       options.headers[_authHeaderKey] = '$_bearer $newToken';
     }
 

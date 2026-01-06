@@ -48,8 +48,8 @@ class AppUnderMaintenanceException implements Exception {
   AppUnderMaintenanceException({this.message = 'exception: Maintaenance Mode'});
 }
 
-///! refresh token is invalid
-/// This type of Exception [SessionExpiredException] is thrown if the user's token session expires
+///! refresh accessToken is invalid
+/// This type of Exception [SessionExpiredException] is thrown if the user's accessToken session expires
 class SessionExpiredException implements Exception {
   final String? message;
 

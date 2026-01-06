@@ -1,8 +1,8 @@
+import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
+import 'package:bloc_rewards/shared/constants/app_constants.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:equatable/equatable.dart';
-import 'package:bloc_rewards/shared/constants/app_constants.dart';
-import 'package:bloc_rewards/core/data/datasources/local/cache/cache_storage_services.dart';
 
 part 'delete_account_parameters.g.dart';
 
@@ -23,7 +23,7 @@ class DeleteAccountParameters extends Equatable {
     String? accountId,
     int? clientId,
   })
-      : accessToken = accessToken ?? CacheStorageServices().token,
+      : accessToken = accessToken ?? CacheStorageServices().accessToken,
         accountId = accountId ?? CacheStorageServices().accountId,
         clientId = clientId ?? AppConstants.clientId;
 

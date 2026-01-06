@@ -1,17 +1,17 @@
-import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'package:bloc_rewards/config/errors/failure.dart';
 import 'package:bloc_rewards/core/presentation/bloc/base/base_state.dart';
 import 'package:bloc_rewards/features/auth/domain/entities/user_entity.dart';
 import 'package:bloc_rewards/features/auth/domain/parameters/login_parameters.dart';
 import 'package:bloc_rewards/features/auth/domain/usecases/login_usecase.dart';
 import 'package:bloc_rewards/features/auth/presentation/blocs/login/login_bloc.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
-import 'login_bloc_test.mocks.dart';
 import '../../../../../../helpers/test_helper.dart';
+import 'login_bloc_test.mocks.dart';
 
 // Generate mocks for dependencies
 @GenerateMocks([LoginUseCase])
@@ -40,7 +40,7 @@ void main() {
       points: '100',
       redeemedPoints: '50',
       userName: 'testuser',
-      accessToken: 'test-token',
+      accessToken: 'test-accessToken',
     );
 
     const testUsername = 'testuser';
