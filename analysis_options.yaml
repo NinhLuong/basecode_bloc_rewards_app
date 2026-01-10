@@ -33,3 +33,6 @@ linter:
 analyzer:
   errors:
     invalid_annotation_target: ignore
+  exclude:
+      - "feat_clean_arch/**"
+      - "**/*.bricks/**"
